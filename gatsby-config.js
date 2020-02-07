@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Today on Earth`,
+    description: `Frontend website for TOE API(https://github.com/brookmg/TodayOnEarth_Backend/)`,
+    author: `@abeltesfaye`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
