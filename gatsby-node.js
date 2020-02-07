@@ -4,4 +4,27 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
+
+exports.onCreatePage = async ({ page, actions }) => {
+    const { createPage } = actions
+
+    const dynamicRoutes = [
+        {
+            routeMatchTestRegEx: /^\/mobile\/p/,
+            routeMatchPathRegEx: "/mobile/p/*"
+        },
+        {
+            routeMatchTestRegEx: /^\/mobile\/search/,
+            routeMatchPathRegEx: "/mobile/search/*"
+        },
+    ]
+
+    dynamicRoutes.forEach((e) => {
+        if (page.path.match(e.routeMatchTestRegEx)) {
+            page.matchPath = routeMatchPathRegEx
+            // Update the page.
+            createPage(page)
+        }
+    })
+
+}
