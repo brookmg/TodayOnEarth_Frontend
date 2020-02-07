@@ -15,6 +15,9 @@ import "./layout.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 
+import ThemePalletteContext from "./Contexts/ThemePalletteContext"
+import ColorPalletteDefinition from "./Contexts/ThemePalletteContext/ColorPalletteDefinition"
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -26,24 +29,32 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const theme = React.useContext(ThemePalletteContext)
+
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
+    <ThemePalletteContext.Provider value={ColorPalletteDefinition}>
+      <div style={{
+        color: theme.color_text,
+        backgroundColor: theme.color_background
+      }}>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <div
+          style={{
+            margin: `0 auto`,
+            maxWidth: 960,
+            padding: `0 1.0875rem 1.45rem`,
+          }}
+        >
+          <main>{children}</main>
+          <footer>
+            © {new Date().getFullYear()}, Built with
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+            <a href="https://www.gatsbyjs.org">Gatsby</a>
+          </footer>
+        </div>
       </div>
-    </>
+
+    </ThemePalletteContext.Provider>
   )
 }
 
