@@ -21,7 +21,7 @@ exports.onCreatePage = async ({ page, actions }) => {
 
     dynamicRoutes.forEach((e) => {
         if (page.path.match(e.routeMatchTestRegEx)) {
-            page.matchPath = routeMatchPathRegEx
+            page.matchPath = e.routeMatchPathRegEx
             // Update the page.
             createPage(page)
         }
