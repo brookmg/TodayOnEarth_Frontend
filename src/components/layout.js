@@ -8,15 +8,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-
 import Header from "./header"
 import "./layout.css"
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
-
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
-import ColorPalletteDefinition from "./Contexts/ThemePalletteContext/ColorPalletteDefinition"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -28,33 +24,28 @@ const Layout = ({ children }) => {
       }
     }
   `)
-
   const theme = React.useContext(ThemePalletteContext)
-
   return (
-    <ThemePalletteContext.Provider value={ColorPalletteDefinition}>
-      <div style={{
-        color: theme.color_text,
-        backgroundColor: theme.color_background
-      }}>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0 1.0875rem 1.45rem`,
-          }}
-        >
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
+    <div style={{
+      color: theme.color_text,
+      backgroundColor: theme.color_background
+    }}>
+      <Header siteTitle={data.site.siteMetadata.title} />
+      <div
+        style={{
+          margin: `0 auto`,
+          maxWidth: 960,
+          padding: `0 1.0875rem 1.45rem`,
+        }}
+      >
+        <main>{children}</main>
+        <footer>
+          © {new Date().getFullYear()}, Built with
           {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </div>
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        </footer>
       </div>
-
-    </ThemePalletteContext.Provider>
+    </div>
   )
 }
 
