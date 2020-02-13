@@ -1,0 +1,1 @@
+{"__schema":{"types":[{"kind":"INTERFACE","name":"Metadata","possibleTypes":[{"name":"FacebookMetadata"},{"name":"TwitterMetadata"},{"name":"TelegramMetadata"},{"name":"InstagramMetadata"}]},{"kind":"INTERFACE","name":"PostElement","possibleTypes":[{"name":"FacebookPost"},{"name":"TwitterPost"},{"name":"TelegramPost"},{"name":"InstagramPost"}]}]}}
