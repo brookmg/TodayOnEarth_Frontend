@@ -4,7 +4,7 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import { Tooltip } from "shards-react";
 import ContentLoader from 'react-content-loader'
-import { useMutation } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import AnchorButton from "../../components/UIElements/AnchorButton"
 import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
@@ -13,7 +13,7 @@ import { getIfAvailable, ellipsedSubstring } from "../../utils"
 
 const GET_POST_DETAIL = gql`
 
-mutation fetchPostDetail($postid: Int!) {
+query fetchPostDetail($postid: Int!) {
   getPost(id: $postid) {
     title
     body,
@@ -62,20 +62,15 @@ const PostDetail = withQueryParsedURL((props) => {
     }
 
     const [isShareTooltipOpen, setShareTooltipOpen] = React.useState(false);
-    const [
-        getPostDetail,
-        { data, loading: getPostDetailLoading, error: getPostDetailError },
-    ] = useMutation(GET_POST_DETAIL);
-    const post = (data && data.getPost) || []
+    const { loading, error, data } = useQuery(GET_POST_DETAIL,
+        {
+            variables: {
+                postid: Number(props.queryParsedURL.id)
+            }
+        }
+    );
+    const post = (data && data.getPost) || {}
 
-    React.useEffect(() => {
-        getPostDetail(
-            {
-                variables: {
-                    postid: Number(props.queryParsedURL.id)
-                }
-            })
-    }, [])
     return (
         <div style={{
             position: 'relative',
@@ -117,6 +112,11 @@ const PostDetail = withQueryParsedURL((props) => {
                 display: 'flex',
                 justifyContent: 'center'
             }}>
+
+                {loading && <p>Loading Posts...</p>}
+                {error && <p>Error: {error.message}</p>}
+                {!post.id && <p>That post couldn't be found</p>}
+
                 <Image src={
                     getIfAvailable(post, 'metadata.message.image.src') || // Telegram images
                     getIfAvailable(post, 'metadata.post.thumbnail_image')}
