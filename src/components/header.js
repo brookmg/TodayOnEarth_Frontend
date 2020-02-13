@@ -37,7 +37,7 @@ const Header = ({ siteTitle }) => {
   const handleSearchSubmit = (e) => {
     if (searchBarText !== "") {
       console.log("searching for:", searchBarText)
-      window.location.href = `/mobile/s?search_term=${encodeURIComponent(searchBarText)}`
+      navigate(`/mobile/s?search_term=${encodeURIComponent(searchBarText)}`)
     }
   }
 
@@ -120,6 +120,7 @@ const Header = ({ siteTitle }) => {
               🔍
               </AnchorButton>
             <AnchorButton>≡</AnchorButton>
+            <Link to="/mobile/settings">⚙️</Link>
           </div>
 
 
