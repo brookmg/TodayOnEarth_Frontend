@@ -16,5 +16,5 @@ export default {
 
     color_background: colorPallette.color_1,
     color_text: colorPallette.color_2,
-    color_text_faded: `${colorPallette.color_1}66`, // add alpha to primary text color
+    color_text_faded: `${colorPallette.color_2}66`, // add alpha to primary text color
 }
