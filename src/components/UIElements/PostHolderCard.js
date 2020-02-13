@@ -12,20 +12,9 @@ import {
     Button
 } from "shards-react";
 
-import ContentLoader from 'react-content-loader'
-
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
 import Margin from '../CompoundComponents/Margin';
-
-const ImagePlaceHolder = () =>
-    <ContentLoader style={{
-        minWidth: '100%',
-        minHeight: '100%',
-    }}>
-        <rect x="0" y="0" width="100%" height="100%" />
-    </ContentLoader>
-
-
+import Image from './Image'
 
 export default function PostHolderCard(props) {
     const theme = React.useContext(ThemePalletteContext)
@@ -35,44 +24,55 @@ export default function PostHolderCard(props) {
             <Card style={{
                 backgroundColor: theme.color_background,
                 color: theme.color_text,
+                borderTopLeftRadius: props.imgSrc && '5rem',
+                overflow: 'hidden'
             }}>
-                <CardHeader>Mark Zuckerburg</CardHeader>
-                {
-                    (props.src) ?
-                        <CardImg src="" />
-                        :
-                        <ImagePlaceHolder />
-                }
+                <Link
+                    to={`/mobile/p?id=${props.id}`}
+                    style={{
+                        color: theme.color_text,
+                    }}
+                >
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <Image style={{
+                            minWidth: '100%',
+                            minHeight: '100%',
+                        }} src={props.imgSrc} />
+                    </div>
 
-                <CardBody>
+                    <CardBody>
 
-                    <CardTitle>Main Title</CardTitle>
-                    <p>A lil bit of body (expandable)</p>
+                        {props.title && <CardTitle>{props.title}</CardTitle>}
+                        {props.body &&
+                            <>
+                                <p>{props.body}</p>
 
-                    <Link
-                        to={`/mobile/p?id=${props.id}`}
-                        style={{
-                            color: theme.color_text,
-                        }}
-                    >
-                        <Button theme="dark">Read more &rarr;</Button>
 
-                    </Link>
+                                <Button theme="dark">Read more &rarr;</Button>
 
-                </CardBody>
+                            </>
+                        }
+                    </CardBody>
+                </Link>
+
                 <CardFooter style={{
                     color: theme.color_text_faded,
                 }}>
 
                     <a
-                        href={`https://google.com/${props.source_link}`} // TODO: change this later
+                        href={props.sourceLink}
                         style={{
                             color: theme.color_text_faded,
                         }}
+                        target="_blank"
                     >
-                        source_link
-    
-                </a>
+                        {props.sourceLink}
+
+                    </a>
 
                 </CardFooter>
             </Card>
