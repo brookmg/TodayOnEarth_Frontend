@@ -1,10 +1,12 @@
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import { FormInput, Fade } from "shards-react";
 
+import { isLoggedIn, logout } from "../services/auth"
 
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
+import AuthContext from "./Contexts/AuthContext"
 import AnchorButton from "./UIElements/AnchorButton"
 
 
@@ -35,16 +37,22 @@ const Header = ({ siteTitle }) => {
   const handleSearchSubmit = (e) => {
     if (searchBarText !== "") {
       console.log("searching for:", searchBarText)
-      window.location.href=`/mobile/s?search_term=${encodeURIComponent(searchBarText)}`
+      window.location.href = `/mobile/s?search_term=${encodeURIComponent(searchBarText)}`
     }
   }
 
 
   const theme = React.useContext(ThemePalletteContext)
+  const user = React.useContext(AuthContext)
   const [isSearchBarShowing, setIsSearchBarShowing] = React.useState(false);
   const [searchBarText, setSearchBarText] = React.useState("");
   let searchBarRef = React.createRef();
 
+
+  let content = "You are not logged in"
+  if (isLoggedIn()) {
+    content = `Hello, ${user.first_name}`
+  }
 
   return (
     <header
@@ -52,6 +60,20 @@ const Header = ({ siteTitle }) => {
         marginBottom: `1.45rem`,
       }}
     >
+      <span>{content}</span>
+      <Link to="/app/profile">Profile</Link>
+
+      {isLoggedIn() ? (
+        <a
+          href="/"
+          onClick={event => {
+            event.preventDefault()
+            logout(() => navigate(`/app/login`))
+          }}
+        >
+          Logout
+          </a>
+      ) : null}
       <div
         style={{
           margin: `0 auto`,

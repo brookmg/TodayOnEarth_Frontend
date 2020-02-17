@@ -4,4 +4,13 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-export { wrapRootElement } from './src/apollo/wrapRootElement';
+import React from 'react'
+import { AuthProvider } from "./src/components/Contexts/AuthContext"
+import { ApolloProvider } from '@apollo/react-hooks';
+import { client } from './src/apollo/client';
+
+export const wrapRootElement = ({ element }) => (
+    <ApolloProvider client={client}>
+        <AuthProvider>{element}</AuthProvider>
+    </ApolloProvider>
+)
