@@ -3,10 +3,7 @@ import ColorPalletteDefinition from "./ColorPalletteDefinition"
 
 const ThemePalletteContext = React.createContext({
     ...ColorPalletteDefinition,
-
-    setBackgroundColor: () => { },
-    setTextColor: () => { },
-    setFadedTextColor: () => { }
+    setTheme: () => { }
 })
 
 export const ThemeProvider = (props) => {
