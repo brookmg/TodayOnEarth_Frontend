@@ -1,11 +1,10 @@
 import React from "react"
 import { Link } from "gatsby"
-
+import gql from 'graphql-tag';
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-
+import { useQuery } from '@apollo/react-hooks';
 import PostHolderCard from "../../components/UIElements/PostHolderCard"
-
 import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
 import {
     Collapse, Card,
@@ -16,6 +15,41 @@ import {
     FormCheckbox
 } from "shards-react";
 import Margin from "../../components/CompoundComponents/Margin"
+import { getIfAvailable, ellipsedSubstring } from "../../utils"
+
+const GET_POSTS_FILTERED = gql`
+
+query getPostsFiltered($filter: [FilterQuery!]!){
+  getPostCustomized(
+    jsonQuery: $filter
+  ) {
+    postid
+    title
+    body,
+    provider,
+    source_link
+    published_on
+    metadata{
+      ... on TelegramMetadata{
+        message{
+          image{
+            src
+          }
+        }
+      }
+      ... on InstagramMetadata{
+        post{
+          thumbnail_image
+        }
+      }
+    }
+    keywords{
+      keyword
+    }
+  }
+}
+
+`;
 
 const AdvancedFiltersSection = (props) => {
     const handleAdvancedFilterButtonClick = () => {
@@ -52,12 +86,13 @@ const AdvancedFiltersSection = (props) => {
         catch (e) {
             console.error(e)
         }
+        return -1
     }
     const locations = ['Africa', 'Europe', 'Asia',]
 
     const initialCheckedItems = {}
     if (props.locations)
-        props.locations.split(',').forEach(e => initialCheckedItems[e] = true)
+        props.locations.forEach(e => initialCheckedItems[e] = true)
 
     const [isAdvancedFiltersCollapsed, setAdvancedFiltersCollapsed] = React.useState(props.isAdvancedFilterCollapsed);
     const [searchFilterSearchBar, setFilterSearchBar] = React.useState(props.searchTerm);
@@ -144,21 +179,75 @@ const AdvancedFiltersSection = (props) => {
 
 const SearchPage = withQueryParsedURL((props) => {
     const queryParsedURL = props.queryParsedURL
+
+    const searchTerm = queryParsedURL.search_term
+    const locations = (queryParsedURL.locations || "").split(',')
+    const startTime = queryParsedURL.start_time || 1 // cant be 0
+    const endTime = queryParsedURL.end_time || Date.now()
+
+    const filter = [] // built dynamically, according to params provided by user
+
+    if (searchTerm !== "") {
+        filter.push({ title: searchTerm, connector: "AND" })
+        filter.push({ keyword: searchTerm, connector: "AND" })
+    }
+
+    filter.push({ published_on: startTime, connector: "AND" })
+    filter.push({ _published_on: endTime, connector: "AND" })
+
+    // add search filter for locations
+    locations.forEach(e => (e !== "") && filter.push({ keyword: e, connector: "AND" }))
+
+    const { loading, error, data } = useQuery(GET_POSTS_FILTERED,
+        {
+            variables: {
+                searchTerm,
+                locations,
+                startTime,
+                endTime,
+                filter
+            }
+        }
+    );
+    const posts = (data && data.getPostCustomized) || []
+
+
     return (
         <Layout>
             <SEO title="Home" />
 
             <AdvancedFiltersSection
-                searchTerm={queryParsedURL.search_term}
-                locations={queryParsedURL.locations}
-                startTime={queryParsedURL.start_time}
-                endTime={queryParsedURL.end_time}
+                searchTerm={searchTerm}
+                locations={locations}
+                startTime={startTime}
+                endTime={endTime}
                 isAdvancedFilterCollapsed={!queryParsedURL.expanded}
             />
 
             <Margin top="1em">
                 <h2>Search results for: "{queryParsedURL.search_term}"</h2>
-                <PostHolderCard />
+                {loading && <p>Loading Posts...</p>}
+                {error && <p>Error: ${error.message}</p>}
+
+                {
+                    posts &&
+                    posts.length !== 0 &&
+                    posts.map(
+                        p => <PostHolderCard
+                            key={p.source_link}
+
+                            id={p.postid}
+
+                            title={ellipsedSubstring(p.title, 200)}
+                            body={p.body}
+                            sourceLink={p.source_link}
+                            imgSrc={
+                                getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
+                                getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
+                            }
+
+                        />)
+                }
             </Margin>
 
             <Link to="/page-2/">Go to page 2</Link>
