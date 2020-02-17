@@ -15,6 +15,7 @@ const GET_POST_DETAIL = gql`
 
 query fetchPostDetail($postid: Int!) {
   getPost(id: $postid) {
+    postid
     title
     body,
     provider,
@@ -115,7 +116,7 @@ const PostDetail = withQueryParsedURL((props) => {
 
                 {loading && <p>Loading Posts...</p>}
                 {error && <p>Error: {error.message}</p>}
-                {!post.id && <p>That post couldn't be found</p>}
+                {!post.postid && <p>That post couldn't be found</p>}
 
                 <Image src={
                     getIfAvailable(post, 'metadata.message.image.src') || // Telegram images
