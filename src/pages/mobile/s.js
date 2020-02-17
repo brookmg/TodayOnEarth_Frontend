@@ -66,14 +66,16 @@ const AdvancedFiltersSection = (props) => {
     const handleStartTimeChange = (e) => { setStartTime(e.target.value) }
     const handleEndTimeChange = (e) => { setEndTime(e.target.value) }
     const handleSearchFilterTextChange = (e) => { setFilterSearchBar(e.target.value) }
+    const handleMetadataFilterTextChange = (e) => { setMetadataFilterSearchBar(e.target.value) }
 
     const handleRefineClick = (event) => {
         const selectedCountries = `${Object.keys(checkedItems).filter(e => checkedItems[e])}`
         const startTimeStamp = encodeURIComponent(startTime)
         const endTimeStamp = encodeURIComponent(endTime)
         const searchFilterSearchBarSafe = encodeURIComponent(searchFilterSearchBar || "")
+        const metadataFilterSearchBarSafe = encodeURIComponent(metadataFilterSearchBar || "")
 
-        const searchQuery = `expanded=1&locations=${selectedCountries}&start_time=${startTimeStamp}&end_time=${endTimeStamp}&search_term=${searchFilterSearchBarSafe}`
+        const searchQuery = `expanded=1&metadata_term=${metadataFilterSearchBarSafe}&locations=${selectedCountries}&start_time=${startTimeStamp}&end_time=${endTimeStamp}&search_term=${searchFilterSearchBarSafe}`
         console.log(searchQuery)
         window.open(`s?${searchQuery}`, "_self")
     }
@@ -86,7 +88,6 @@ const AdvancedFiltersSection = (props) => {
         catch (e) {
             console.error(e)
         }
-        return -1
     }
     const locations = ['Africa', 'Europe', 'Asia',]
 
@@ -96,6 +97,7 @@ const AdvancedFiltersSection = (props) => {
 
     const [isAdvancedFiltersCollapsed, setAdvancedFiltersCollapsed] = React.useState(props.isAdvancedFilterCollapsed);
     const [searchFilterSearchBar, setFilterSearchBar] = React.useState(props.searchTerm);
+    const [metadataFilterSearchBar, setMetadataFilterSearchBar] = React.useState(props.metadataTerm || ".*");
     const [checkedItems, setCheckedItems] = React.useState(initialCheckedItems);
     const [startTime, setStartTime] = React.useState(props.startTime);
     const [endTime, setEndTime] = React.useState(props.endTime);
@@ -161,6 +163,19 @@ const AdvancedFiltersSection = (props) => {
 
                                 </div>
                             </Margin>
+                            <Margin bottom="1rem">
+
+                                <div>
+                                    <CardTitle>Metadata search</CardTitle>
+                                    <p>Use something like: <pre>.*"likes"\s*:\s*"?34.*</pre></p>
+                                    <p>The will search for posts with likes starting with 34</p>
+                                    <div>
+                                        <FormInput placeholder={"Search Metadata (Regex is supported)"} value={metadataFilterSearchBar} onChange={handleMetadataFilterTextChange} size="sm" />
+                                    </div>
+
+                                </div>
+                            </Margin>
+
                             <div>
                                 <Margin vertical="1rem">
                                     <Button onClick={handleRefineClick} theme="success">Refine search</Button>
@@ -181,9 +196,10 @@ const SearchPage = withQueryParsedURL((props) => {
     const queryParsedURL = props.queryParsedURL
 
     const searchTerm = queryParsedURL.search_term
+    const metadataTerm = queryParsedURL.metadata_term || ".*"
     const locations = (queryParsedURL.locations || "").split(',')
-    const startTime = queryParsedURL.start_time || 1 // cant be 0
-    const endTime = queryParsedURL.end_time || Date.now()
+    const startTime = queryParsedURL.start_time || 0
+    const endTime = queryParsedURL.end_time || 0
 
     const filter = [] // built dynamically, according to params provided by user
 
@@ -192,8 +208,11 @@ const SearchPage = withQueryParsedURL((props) => {
         filter.push({ keyword: searchTerm, connector: "AND" })
     }
 
-    filter.push({ published_on: startTime, connector: "AND" })
-    filter.push({ _published_on: endTime, connector: "AND" })
+    if (startTime)
+        filter.push({ published_on: startTime, connector: "AND" })
+    if (endTime)
+        filter.push({ _published_on: endTime, connector: "AND" })
+    filter.push({ metadata: metadataTerm, connector: "AND" })
 
     // add search filter for locations
     locations.forEach(e => (e !== "") && filter.push({ keyword: e, connector: "AND" }))
@@ -221,6 +240,7 @@ const SearchPage = withQueryParsedURL((props) => {
                 locations={locations}
                 startTime={startTime}
                 endTime={endTime}
+                metadataTerm={metadataTerm}
                 isAdvancedFilterCollapsed={!queryParsedURL.expanded}
             />
 
@@ -234,7 +254,7 @@ const SearchPage = withQueryParsedURL((props) => {
                     posts.length !== 0 &&
                     posts.map(
                         p => <PostHolderCard
-                            key={p.source_link}
+                            key={p.postid}
 
                             id={p.postid}
 
