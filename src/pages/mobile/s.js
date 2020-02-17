@@ -99,8 +99,8 @@ const AdvancedFiltersSection = (props) => {
     const [searchFilterSearchBar, setFilterSearchBar] = React.useState(props.searchTerm);
     const [metadataFilterSearchBar, setMetadataFilterSearchBar] = React.useState(props.metadataTerm || ".*");
     const [checkedItems, setCheckedItems] = React.useState(initialCheckedItems);
-    const [startTime, setStartTime] = React.useState(props.startTime);
-    const [endTime, setEndTime] = React.useState(props.endTime);
+    const [startTime, setStartTime] = React.useState(convertDateToInputFormat(props.startTime));
+    const [endTime, setEndTime] = React.useState(convertDateToInputFormat(props.endTime || Date.now()));
 
     return (
         <div>
@@ -209,14 +209,14 @@ const SearchPage = withQueryParsedURL((props) => {
     }
 
     if (startTime)
-        filter.push({ published_on: startTime, connector: "AND" })
+        filter.push({ published_on: new Date(startTime).getTime(), connector: "AND" })
     if (endTime)
-        filter.push({ _published_on: endTime, connector: "AND" })
+        filter.push({ _published_on: new Date(endTime).getTime(), connector: "AND" })
     filter.push({ metadata: metadataTerm, connector: "AND" })
 
     // add search filter for locations
     locations.forEach(e => (e !== "") && filter.push({ keyword: e, connector: "AND" }))
-
+    console.log(filter)
     const { loading, error, data } = useQuery(GET_POSTS_FILTERED,
         {
             variables: {
