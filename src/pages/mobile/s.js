@@ -252,22 +252,24 @@ const SearchPage = withQueryParsedURL((props) => {
 
                 {
                     posts &&
-                    posts.length !== 0 &&
-                    posts.map(
-                        p => <PostHolderCard
-                            key={p.postid}
+                        (posts.length === 0 && !loading) ?
+                        <p>Nothing found :(</p>
+                        :
+                        posts.map(
+                            p => <PostHolderCard
+                                key={p.postid}
 
-                            id={p.postid}
+                                id={p.postid}
 
-                            title={ellipsedSubstring(p.title, 200)}
-                            body={p.body}
-                            sourceLink={p.source_link}
-                            imgSrc={
-                                getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
-                                getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
-                            }
+                                title={ellipsedSubstring(p.title, 200)}
+                                body={p.body}
+                                sourceLink={p.source_link}
+                                imgSrc={
+                                    getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
+                                    getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
+                                }
 
-                        />)
+                            />)
                 }
             </Margin>
 
