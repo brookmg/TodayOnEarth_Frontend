@@ -167,7 +167,8 @@ const AdvancedFiltersSection = (props) => {
 
                                 <div>
                                     <CardTitle>Metadata search</CardTitle>
-                                    <p>Use something like: <pre>.*"likes"\s*:\s*"?34.*</pre></p>
+                                    <p>Use something like: </p>
+                                    <pre>.*"likes"\s*:\s*"?34.*</pre>
                                     <p>The will search for posts with likes starting with 34</p>
                                     <div>
                                         <FormInput placeholder={"Search Metadata (Regex is supported)"} value={metadataFilterSearchBar} onChange={handleMetadataFilterTextChange} size="sm" />
