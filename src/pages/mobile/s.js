@@ -210,9 +210,9 @@ const SearchPage = withQueryParsedURL((props) => {
     }
 
     if (startTime)
-        filter.push({ published_on: new Date(startTime).getTime(), connector: "AND" })
+        filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: "AND" })
     if (endTime)
-        filter.push({ _published_on: new Date(endTime).getTime(), connector: "AND" })
+        filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: "AND" })
     filter.push({ metadata: metadataTerm, connector: "AND" })
 
     // add search filter for locations
