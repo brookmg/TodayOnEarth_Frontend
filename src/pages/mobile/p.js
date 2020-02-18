@@ -1,34 +1,53 @@
 import React from "react"
 import { Link } from "gatsby"
-
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-
 import { Tooltip } from "shards-react";
-
 import ContentLoader from 'react-content-loader'
-
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import AnchorButton from "../../components/UIElements/AnchorButton"
-
 import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
+import Image from "../../components/UIElements/Image"
+import { getIfAvailable, ellipsedSubstring } from "../../utils"
 
+const GET_POST_DETAIL = gql`
+
+query fetchPostDetail($postid: Int!) {
+  getPost(id: $postid) {
+    postid
+    title
+    body,
+    provider,
+    source_link
+    published_on
+    metadata{
+      ... on TelegramMetadata{
+        message{
+          image{
+            src
+          }
+        }
+      }
+      ... on InstagramMetadata{
+        post{
+          thumbnail_image
+        }
+      }
+    }
+    keywords{
+      keyword
+    }
+  }
+}
+
+`;
 
 const BackgroundImagePlaceHolder = () => <div>
     <ContentLoader height={200} style={{
         minWidth: '100%',
     }}>
         <rect x="0" y="0" width="100%" height="100%" />
-    </ContentLoader>
-</div>
-
-const PublisherImagePlaceHolder = () => <div>
-    <ContentLoader
-        style={{
-            display: 'block',
-            margin: '0 auto'
-        }}
-        speed={1} width={200} height={200} viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="100" />
     </ContentLoader>
 </div>
 
@@ -44,6 +63,14 @@ const PostDetail = withQueryParsedURL((props) => {
     }
 
     const [isShareTooltipOpen, setShareTooltipOpen] = React.useState(false);
+    const { loading, error, data } = useQuery(GET_POST_DETAIL,
+        {
+            variables: {
+                postid: Number(props.queryParsedURL.id)
+            }
+        }
+    );
+    const post = (data && data.getPost) || {}
 
     return (
         <div style={{
@@ -51,8 +78,25 @@ const PostDetail = withQueryParsedURL((props) => {
             top: `-100px`
         }} >
             <div style={{ textAlign: 'center' }}>
-                <PublisherImagePlaceHolder />
-                <p>Publisher name here</p>
+
+                <div style={{
+                    overflow: 'hidden',
+                    borderRadius: `50%`,
+                    margin: '0 auto',
+                    maxWidth: `200px`,
+                    maxHeight: `200px`,
+                }}>
+
+
+                    <Image
+                        src="https://www.w3schools.com/howto/img_avatar.png"
+                        style={{
+                            height: '200px',
+                            width: '200px',
+                        }}
+                    />
+                </div>
+                <p>{post.provider}</p>
             </div>
             <div>
                 <AnchorButton id="shareButton" onClick={handleShareClick}>Share 🔗</AnchorButton>
@@ -65,18 +109,42 @@ const PostDetail = withQueryParsedURL((props) => {
                     URL copied to clipboard!
         </Tooltip>
             </div>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center'
+            }}>
 
-            <h1>Post id: {props.queryParsedURL.id}</h1>
+                {loading && <p>Loading Posts...</p>}
+                {error && <p>Error: {error.message}</p>}
+                {!post.postid && <p>That post couldn't be found</p>}
 
-            <h1>Post title</h1>
-            <div>
-                <p>Post Body Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-
-“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”
-The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content.
-
-The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it's seen all around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum.</p>
+                <Image src={
+                    getIfAvailable(post, 'metadata.message.image.src') || // Telegram images
+                    getIfAvailable(post, 'metadata.post.thumbnail_image')}
+                />
             </div>
+            {
+                post.body === "" ?
+                    <>
+                        <div>
+                            <p>{
+                                getIfAvailable(post, 'title', "")
+                            }</p>
+                        </div>
+                    </> :
+                    <>
+
+                        <h1>{ellipsedSubstring(
+                            getIfAvailable(post, 'title', "")
+                        )}</h1>
+                        <div>
+                            <p>{post.body}</p>
+                        </div>
+                    </>
+
+            }
+
+
         </div>
 
     );
