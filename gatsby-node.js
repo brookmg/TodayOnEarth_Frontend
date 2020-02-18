@@ -17,6 +17,10 @@ exports.onCreatePage = async ({ page, actions }) => {
             routeMatchTestRegEx: /^\/mobile\/search/,
             routeMatchPathRegEx: "/mobile/search/*"
         },
+        {
+            routeMatchTestRegEx: /^\/app/,
+            routeMatchPathRegEx: "/app/*"
+        },
     ]
 
     dynamicRoutes.forEach((e) => {
