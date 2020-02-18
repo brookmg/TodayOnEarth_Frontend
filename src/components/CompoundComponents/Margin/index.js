@@ -17,7 +17,7 @@ const Margin = (props) => {
 
 
 
-    const childrenWithMargin = React.Children.map(props.children, child =>
+    const childrenWithMargin = React.Children.map(props.children, child => child &&
         React.cloneElement(child, {
             style: {
                 ...child.props.style,
