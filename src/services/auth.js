@@ -38,7 +38,7 @@ query getUserInfo{
 
 `
 
-const sessionCookieName = "sessionToken"
+const sessionCookieName = "userId"
 
 export const isBrowser = () => typeof window !== "undefined"
 
