@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import gql from 'graphql-tag';
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
@@ -77,7 +77,7 @@ const AdvancedFiltersSection = (props) => {
 
         const searchQuery = `expanded=1&metadata_term=${metadataFilterSearchBarSafe}&locations=${selectedCountries}&start_time=${startTimeStamp}&end_time=${endTimeStamp}&search_term=${searchFilterSearchBarSafe}`
         console.log(searchQuery)
-        window.open(`s?${searchQuery}`, "_self")
+        navigate(`mobile/s?${searchQuery}`)
     }
 
     const convertDateToInputFormat = (d) => {
