@@ -22,6 +22,14 @@ mutation signInUser($email:String!, $password:String!){
 
 `
 
+const SIGN_OUT_USER = gql`
+
+mutation signOutUser{
+  signOut
+}
+
+`
+
 const GET_USER = gql`
 
 query getUserInfo{
@@ -74,10 +82,17 @@ export const isLoggedIn = () => {
     return !!getToken()
 }
 
-export const logout = (callback) => {
-    cookie.remove(sessionCookieName, { path: '/' })
-    client.resetStore()
-    callback()
+export const signOut = () => {
+    return new Promise((resolve, reject) => {
+        client
+            .mutate({
+                mutation: SIGN_OUT_USER,
+            }).then(e => {
+                client.resetStore()
+                cookie.remove(sessionCookieName, { path: '/' })
+                resolve(e)
+            }).catch(e => reject(e))
+    })
 }
 
 export const signUp = (user) => {
