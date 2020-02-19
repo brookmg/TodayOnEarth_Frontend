@@ -5,7 +5,9 @@ import { client } from "../apollo/client"
 const SIGN_UP_USER = gql`
 
 mutation signUpUser($user:IUser){
-  signUp(new_user: $user)
+  signUp(new_user: $user){
+    token
+}
 }
 
 `
@@ -44,7 +46,10 @@ export const isBrowser = () => typeof window !== "undefined"
 
 export const getToken = () => !isBrowser() ? "" : cookie.load(sessionCookieName)
 
-export const getUser = () => client.query({query: GET_USER})
+export const getUser = () => client.query({
+    query: GET_USER,
+    fetchPolicy: 'no-cache'
+})
 
 export const handleSignIn = (user) => {
     return new Promise((resolve, reject) => {
