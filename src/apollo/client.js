@@ -8,7 +8,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 });
 
 export const client = new ApolloClient({
-    uri: 'http://localhost:4000/',
+    uri: 'http://localhost:3400/graphql',
     fetch,
     cache: new InMemoryCache({ fragmentMatcher }),
     request: async operation => {
