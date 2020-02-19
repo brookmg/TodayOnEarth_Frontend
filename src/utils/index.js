@@ -23,4 +23,6 @@ export const ellipsedSubstring = (str, maxChars = 50) => {
         str = `${str.substr(0, maxChars)} ...`
 
     return str
- }
+}
+
+export const isBrowser = () => typeof window !== "undefined"

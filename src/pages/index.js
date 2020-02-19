@@ -5,7 +5,6 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import { isLoggedIn } from "../services/auth"
-import SignUp from "../components/SignUp"
 import AuthContext from "../components/Contexts/AuthContext"
 
 const IndexPage = () => {
@@ -35,8 +34,7 @@ const IndexPage = () => {
           )}
       </p>
 
-      <p>sign up</p>
-      <SignUp />
+      <p><Link to="/signup">Sign Up</Link></p>
 
       <Link to="/page-2/">Go to page 2</Link>
       <br />

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import { FormInput, Fade } from "shards-react";
 
-import { isLoggedIn, logout } from "../services/auth"
+import { isLoggedIn, signOut } from "../services/auth"
 
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
 import AuthContext from "./Contexts/AuthContext"
@@ -68,7 +68,11 @@ const Header = ({ siteTitle }) => {
           href="/"
           onClick={event => {
             event.preventDefault()
-            logout(() => navigate(`/app/login`))
+            signOut().then(() => {
+              user.refreshActiveUser(() => {
+                navigate(`/app/login`)
+              })
+            })
           }}
         >
           Logout

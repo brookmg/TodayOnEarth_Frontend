@@ -1,11 +1,13 @@
 import gql from 'graphql-tag';
 import cookie from 'react-cookies'
 import { client } from "../apollo/client"
-
+import { isBrowser } from "../utils"
 const SIGN_UP_USER = gql`
 
 mutation signUpUser($user:IUser){
-  signUp(new_user: $user)
+  signUp(new_user: $user){
+    token
+}
 }
 
 `
@@ -16,6 +18,14 @@ mutation signInUser($email:String!, $password:String!){
   signIn(email: $email, password: $password){
     token
   }
+}
+
+`
+
+const SIGN_OUT_USER = gql`
+
+mutation signOutUser{
+  signOut
 }
 
 `
@@ -38,13 +48,14 @@ query getUserInfo{
 
 `
 
-const sessionCookieName = "sessionToken"
-
-export const isBrowser = () => typeof window !== "undefined"
+const sessionCookieName = "userId"
 
 export const getToken = () => !isBrowser() ? "" : cookie.load(sessionCookieName)
 
-export const getUser = () => client.query({query: GET_USER})
+export const getUser = () => client.query({
+    query: GET_USER,
+    fetchPolicy: 'no-cache'
+})
 
 export const handleSignIn = (user) => {
     return new Promise((resolve, reject) => {
@@ -69,24 +80,36 @@ export const isLoggedIn = () => {
     return !!getToken()
 }
 
-export const logout = (callback) => {
-    cookie.remove(sessionCookieName, { path: '/' })
-    client.resetStore()
-    callback()
+export const signOut = () => {
+    return new Promise((resolve, reject) => {
+        client
+            .mutate({
+                mutation: SIGN_OUT_USER,
+            }).then(e => {
+                client.resetStore()
+                cookie.remove(sessionCookieName, { path: '/' })
+                resolve(e)
+            }).catch(e => reject(e))
+    })
 }
 
 export const signUp = (user) => {
-    return client
-        .mutate({
-            mutation: SIGN_UP_USER,
-            variables: {
-                user: {
-                    email: user.email,
-                    password: user.password,
-                    username: user.username,
-                    first_name: user.first_name,
-                    last_name: user.last_name
+    return new Promise((resolve, reject) => {
+        client
+            .mutate({
+                mutation: SIGN_UP_USER,
+                variables: {
+                    user: {
+                        email: user.email,
+                        password: user.password,
+                        username: user.username,
+                        first_name: user.first_name,
+                        last_name: user.last_name
+                    }
                 }
-            }
-        })
+            }).then(e => {
+                client.resetStore()
+                resolve(e)
+            }).catch(e => reject(e))
+    })
 }
