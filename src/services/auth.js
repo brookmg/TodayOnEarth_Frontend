@@ -96,17 +96,22 @@ export const signOut = () => {
 }
 
 export const signUp = (user) => {
-    return client
-        .mutate({
-            mutation: SIGN_UP_USER,
-            variables: {
-                user: {
-                    email: user.email,
-                    password: user.password,
-                    username: user.username,
-                    first_name: user.first_name,
-                    last_name: user.last_name
+    return new Promise((resolve, reject) => {
+        client
+            .mutate({
+                mutation: SIGN_UP_USER,
+                variables: {
+                    user: {
+                        email: user.email,
+                        password: user.password,
+                        username: user.username,
+                        first_name: user.first_name,
+                        last_name: user.last_name
+                    }
                 }
-            }
-        })
+            }).then(e => {
+                client.resetStore()
+                resolve(e)
+            }).catch(e => reject(e))
+    })
 }
