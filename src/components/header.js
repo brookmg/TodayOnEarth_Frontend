@@ -68,7 +68,7 @@ const Header = ({ siteTitle }) => {
           href="/"
           onClick={event => {
             event.preventDefault()
-            signOut.then(() => {
+            signOut().then(() => {
               navigate(`/app/login`)
             })
           }}

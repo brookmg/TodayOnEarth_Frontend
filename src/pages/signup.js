@@ -20,7 +20,6 @@ const SignUp = ({ email, first_name, last_name, username }) => {
       user
     )
       .then(() => {
-        alert('sign up successful, you may now login using your credentials')
         navigate(`/app/profile`)
       })
       .catch(e => alert(`Error signing up: ${e.message}`))
