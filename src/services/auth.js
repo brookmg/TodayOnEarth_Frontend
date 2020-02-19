@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import cookie from 'react-cookies'
 import { client } from "../apollo/client"
-
+import { isBrowser } from "../utils"
 const SIGN_UP_USER = gql`
 
 mutation signUpUser($user:IUser){
@@ -49,8 +49,6 @@ query getUserInfo{
 `
 
 const sessionCookieName = "userId"
-
-export const isBrowser = () => typeof window !== "undefined"
 
 export const getToken = () => !isBrowser() ? "" : cookie.load(sessionCookieName)
 

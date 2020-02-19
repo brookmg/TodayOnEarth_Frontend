@@ -1,13 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
+import { isBrowser } from "../utils"
 
 const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
   // reset url to remove params
-  window.history.replaceState({}, document.title, "/signup")
+  isBrowser() && window.history.replaceState({}, document.title, "/signup")
 
   return (
     <Layout>

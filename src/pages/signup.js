@@ -5,6 +5,7 @@ import SEO from "../components/seo"
 import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
 import { signUp } from "../services/auth"
 import AuthContext from "../components/Contexts/AuthContext"
+import { isBrowser } from "../utils"
 
 const SignUp = ({ email, first_name, last_name, username }) => {
   const auth = React.useContext(AuthContext)
@@ -102,7 +103,7 @@ const SignUpPage = withQueryParsedURL((props) => {
   const data = JSON.parse(queryParsedURL.data || `{}`).potential_user || {}
 
   // reset url to remove params
-  window.history.replaceState({}, document.title, "/signup")
+  isBrowser() && window.history.replaceState({}, document.title, "/signup")
 
   return (
     <Layout>
