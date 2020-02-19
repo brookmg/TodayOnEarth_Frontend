@@ -1,13 +1,13 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
-
 import { signUp } from "../services/auth"
+import AuthContext from "../components/Contexts/AuthContext"
 
 const SignUp = ({ email, first_name, last_name, username }) => {
+  const auth = React.useContext(AuthContext)
   const [user, setUser] = React.useState({ email, first_name, last_name, username });
 
   const handleUpdate = event => {
@@ -19,9 +19,9 @@ const SignUp = ({ email, first_name, last_name, username }) => {
     signUp(
       user
     )
-      .then(() => {
-        navigate(`/app/profile`)
-      })
+      .then(() => auth.refreshActiveUser(
+        () => navigate(`/app/profile`)
+      ))
       .catch(e => alert(`Error signing up: ${e.message}`))
   }
 
