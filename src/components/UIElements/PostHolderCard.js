@@ -4,9 +4,7 @@ import { Link } from "gatsby"
 
 import {
     Card,
-    CardHeader,
     CardTitle,
-    CardImg,
     CardBody,
     CardFooter,
     Button
@@ -15,10 +13,10 @@ import {
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
 import Margin from '../CompoundComponents/Margin';
 import Image from './Image'
+import PostMetadata from "./PostMetadata"
 
 export default function PostHolderCard(props) {
     const theme = React.useContext(ThemePalletteContext)
-
     return (
         <Margin vertical="1rem">
             <Card style={{
@@ -58,6 +56,12 @@ export default function PostHolderCard(props) {
                         }
                     </CardBody>
                 </Link>
+
+                <Margin left='1rem' bottom='0.5rem'>
+                    <div>
+                        <PostMetadata sourceLink={props.sourceLink} communityInteraction={props.metadata.community_interaction} />
+                    </div>
+                </Margin>
 
                 <CardFooter style={{
                     color: theme.color_text_faded,
