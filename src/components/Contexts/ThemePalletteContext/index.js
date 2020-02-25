@@ -1,13 +1,13 @@
 import React from "react";
-import ColorPalletteDefinition from "./ColorPalletteDefinition"
+import DefaultThemeDefinition from "./DefaultThemeDefinition"
 
 const ThemePalletteContext = React.createContext({
-    ...ColorPalletteDefinition,
+    ...DefaultThemeDefinition,
     setTheme: () => { }
 })
 
 export const ThemeProvider = (props) => {
-    const [theme, setTheme] = React.useState({ ...ColorPalletteDefinition });
+    const [theme, setTheme] = React.useState({ ...DefaultThemeDefinition });
 
     return (
         <ThemePalletteContext.Provider value={{ ...theme, setTheme }}>
