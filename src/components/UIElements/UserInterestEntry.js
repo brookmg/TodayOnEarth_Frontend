@@ -50,6 +50,11 @@ const UserInterestEntry = (props) => {
             e.preventDefault();
         }
     }
+    const handleRevertClicked = () =>
+        alert("TODO: fetch from server, using the same function you'd use for onComponentDidMount")
+
+    const handleUpdateClicked = () =>
+        alert("TODO: send all interests including their scores back to server")
 
     if (!isLoggedIn()) return null
     return (
@@ -125,8 +130,8 @@ const UserInterestEntry = (props) => {
                         </Margin>
                         <div>
                             <Margin horizontal="0.5rem">
-                                <Button theme="dark">Revert Changes</Button>
-                                <Button theme="success">Update Interests</Button>
+                                <Button onClick={handleRevertClicked} theme="dark">Revert Changes</Button>
+                                <Button onClick={handleUpdateClicked} theme="success">Update Interests</Button>
                             </Margin>
                         </div>
                     </CardBody>
