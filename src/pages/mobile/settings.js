@@ -128,11 +128,11 @@ const ThemePreferenceSection = (props) => {
                                 <div>
                                     <Margin right="0.5rem">
                                         <ButtonDark onClick={handleThemePreviewOriginalDayClick}>
-                                            Try Day Theme
+                                            🔆 Try Day Theme
                                         </ButtonDark>
 
                                         <ButtonDark onClick={handleThemePreviewOriginalNightClick}>
-                                            Try Night Theme
+                                            🌙 Try Night Theme
                                         </ButtonDark>
                                     </Margin>
 
