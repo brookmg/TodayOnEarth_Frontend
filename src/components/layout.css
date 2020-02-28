@@ -604,3 +604,4 @@ pre tt:after {
   }
 }
 @import url('https://fonts.googleapis.com/css?family=Roboto|Tangerine|Trade+Winds|Krona+One|Akronim|Inconsolata');
+*{transition: background-color 2s ease;}
