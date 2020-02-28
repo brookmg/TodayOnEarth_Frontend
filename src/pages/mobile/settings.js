@@ -16,7 +16,7 @@ import { availableFonts } from "../../components/Contexts/ThemePalletteContext/D
 import ColorPalletteDefinition from "../../components/Contexts/ThemePalletteContext/ColorPalletteDefinition"
 import ButtonDark from "../../components/UIElements/ButtonDark"
 import ButtonSuccess from "../../components/UIElements/ButtonSuccess"
-
+import { isBrowser } from "../../utils"
 
 const ThemePreferenceSection = (props) => {
     const theme = React.useContext(ThemePalletteContext)
@@ -45,8 +45,10 @@ const ThemePreferenceSection = (props) => {
         })
 
     const handleThemeApplyPermanentlyClick = () => {
-        localStorage.setItem("theme", JSON.stringify(theme))
-        alert("Theme applied successfully")
+        if (isBrowser()) {
+            localStorage.setItem("theme", JSON.stringify(theme))
+            alert("Theme applied successfully")
+        }
     }
 
     return (
