@@ -32,7 +32,7 @@ query getUserInterests{
 const UPDATE_USER_INTERESTS = gql`
 
 mutation updateInterests($interests:[IInterest]!){
-  addInterestList(interests:$interests)
+    cleanUpdateInterestList(interests:$interests)
 }
 
 `;
