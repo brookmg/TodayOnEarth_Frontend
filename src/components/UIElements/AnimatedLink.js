@@ -3,7 +3,7 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 
 const AnimatedLink = (props) => (
-    <AniLink paintDrip duration={0.5} color="rebeccapurple" to={props.to}>
+    <AniLink {...props} paintDrip duration={0.5} color="rebeccapurple">
         {props.children}
     </AniLink>);
 
