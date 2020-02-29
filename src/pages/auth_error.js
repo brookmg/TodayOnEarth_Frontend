@@ -1,9 +1,9 @@
 import React from "react"
-import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
 import { isBrowser } from "../utils"
+import AnimatedLink from "../components/UIElements/AnimatedLink"
 
 const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
   // reset url to remove params
@@ -18,11 +18,11 @@ const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
         {queryParsedURL.error}
       </pre>
 
-      <p><Link to="/signup">Sign Up</Link> | <Link to="/app/login">Log In</Link></p>
+      <p><AnimatedLink to="/signup">Sign Up</AnimatedLink> | <AnimatedLink to="/app/login">Log In</AnimatedLink></p>
 
-      <Link to="/page-2/">Go to page 2</Link>
+      <AnimatedLink to="/page-2/">Go to page 2</AnimatedLink>
       <br />
-      <Link to="/mobile/">Go to mobile site</Link>
+      <AnimatedLink to="/mobile/">Go to mobile site</AnimatedLink>
     </Layout>
   )
 }

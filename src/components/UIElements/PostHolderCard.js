@@ -14,6 +14,7 @@ import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext
 import Margin from '../CompoundComponents/Margin';
 import Image from './Image'
 import PostMetadata from "./PostMetadata"
+import AnimatedLink from "./AnimatedLink"
 
 export default function PostHolderCard(props) {
     const theme = React.useContext(ThemePalletteContext)
@@ -25,7 +26,7 @@ export default function PostHolderCard(props) {
                 borderTopLeftRadius: props.imgSrc && '5rem',
                 overflow: 'hidden'
             }}>
-                <Link
+                <AnimatedLink
                     to={`/mobile/p?id=${props.id}`}
                     style={{
                         color: theme.color_text,
@@ -55,7 +56,7 @@ export default function PostHolderCard(props) {
                             </>
                         }
                     </CardBody>
-                </Link>
+                </AnimatedLink>
 
                 <Margin left='1rem' bottom='0.5rem'>
                     <div>

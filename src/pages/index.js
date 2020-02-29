@@ -1,11 +1,11 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import { isLoggedIn } from "../services/auth"
 import AuthContext from "../components/Contexts/AuthContext"
+import AnimatedLink from "../components/UIElements/AnimatedLink"
+
 
 const IndexPage = () => {
   const user = React.useContext(AuthContext)
@@ -24,21 +24,21 @@ const IndexPage = () => {
         {isLoggedIn() ? (
           <>
             You are logged in, so check your{" "}
-            <Link to="/app/profile">profile</Link>
+            <AnimatedLink to="/app/profile">profile</AnimatedLink>
           </>
         ) : (
             <>
-              You should <Link to="/app/login">log in</Link> to see restricted
+              You should <AnimatedLink to="/app/login">log in</AnimatedLink> to see restricted
               content
         </>
           )}
       </p>
 
-      <p><Link to="/signup">Sign Up</Link></p>
+      <p><AnimatedLink to="/signup">Sign Up</AnimatedLink></p>
 
-      <Link to="/page-2/">Go to page 2</Link>
+      <AnimatedLink to="/page-2/">Go to page 2</AnimatedLink>
       <br />
-      <Link to="/mobile/">Go to mobile site</Link>
+      <AnimatedLink to="/mobile/">Go to mobile site</AnimatedLink>
     </Layout>
   )
 }

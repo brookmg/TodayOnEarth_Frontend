@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SignIn from "../components/SignIn"
@@ -15,9 +14,6 @@ const SignInPage = () => {
 
       <SignIn />
 
-      <Link to="/page-2/">Go to page 2</Link>
-      <br />
-      <Link to="/mobile/">Go to mobile site</Link>
     </Layout>
   )
 }
