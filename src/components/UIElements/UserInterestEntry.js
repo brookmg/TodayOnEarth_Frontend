@@ -12,14 +12,60 @@ import ThemePalletteContext from "../Contexts/ThemePalletteContext"
 import { isLoggedIn } from "../../services/auth"
 import { removeRedundantWhitespace, isBrowser } from "../../utils"
 import ButtonInterest from './ButtonInterest'
+import gql from 'graphql-tag';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+
+
+const GET_USER_INTERESTS = gql`
+
+query getUserInterests{
+  getUser{
+    interests{
+      interest
+      score
+    }
+  }
+}
+
+`;
+
+const UPDATE_USER_INTERESTS = gql`
+
+mutation updateInterests($interests:[IInterest]!){
+  addInterestList(interests:$interests)
+}
+
+`;
+
 
 const UserInterestEntry = (props) => {
     const theme = React.useContext(ThemePalletteContext)
+
+    React.useEffect(() => {
+        getInterests()
+    }, [])
 
     const [interestInputText, setInterestInputText] = React.useState("")
     const [interestScore, setInterestScore] = React.useState(0)
     const [interestMap, setInterestMap] = React.useState({})
     const [selectedInterest, setSelectedInterest] = React.useState("")
+
+    const [getInterests, { loading, error }] = useLazyQuery(GET_USER_INTERESTS,
+        {
+
+            onCompleted: data => {
+                if (data && data.getUser.interests) {
+                    const serverSideInterests = {}
+                    data.getUser.interests.forEach(e => serverSideInterests[e.interest] = e.score)
+                    setInterestMap(serverSideInterests)
+                    if (selectedInterest)
+                        setInterestScore(serverSideInterests[selectedInterest])
+                }
+            },
+
+            fetchPolicy: "network-only"
+        });
+    const [updateInterests, { loading: mutationLoading, error: mutationError }] = useMutation(UPDATE_USER_INTERESTS);
 
     const handleSlide = (e) => {
         const score = parseFloat(e[0])
@@ -50,11 +96,22 @@ const UserInterestEntry = (props) => {
             e.preventDefault();
         }
     }
-    const handleRevertClicked = () =>
-        alert("TODO: fetch from server, using the same function you'd use for onComponentDidMount")
+    const handleRevertClicked = () => getInterests()
+    const handleUpdateClicked = () => {
+        const interests = []
 
-    const handleUpdateClicked = () =>
-        alert("TODO: send all interests including their scores back to server")
+        Object.keys(interestMap).forEach(e => {
+            interests.push({
+                interest: e,
+                score: interestMap[e]
+            })
+        })
+
+        updateInterests(
+            {
+                variables: { interests }
+            });
+    }
 
     if (!isLoggedIn()) return null
     return (
@@ -80,6 +137,7 @@ const UserInterestEntry = (props) => {
                                     {
                                         <Margin vertical="1em">
                                             <div>
+
                                                 {selectedInterest &&
                                                     <div>
                                                         <CardTitle>How interested are you about: "{selectedInterest}"</CardTitle>
@@ -133,6 +191,12 @@ const UserInterestEntry = (props) => {
                                 <Button onClick={handleRevertClicked} theme="dark">Revert Changes</Button>
                                 <Button onClick={handleUpdateClicked} theme="success">Update Interests</Button>
                             </Margin>
+                        </div>
+                        <div>
+                            {loading && <p>Loading Interests...</p>}
+                            {error && <p>Error: {error.message}</p>}
+                            {mutationLoading && <p>Loading...</p>}
+                            {mutationError && <p>Error :( Please try again</p>}
                         </div>
                     </CardBody>
                 </Card>
