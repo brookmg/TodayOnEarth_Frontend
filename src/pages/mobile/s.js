@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
 import gql from 'graphql-tag';
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
@@ -312,8 +312,6 @@ const SearchPage = withQueryParsedURL((props) => {
                             />)
                 }
             </Margin>
-
-            <Link to="/page-2/">Go to page 2</Link>
         </Layout>
     )
 })

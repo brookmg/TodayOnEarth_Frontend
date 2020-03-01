@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
@@ -134,9 +134,6 @@ const SignUpPage = withQueryParsedURL((props) => {
         username={data.username}
       />
 
-      <Link to="/page-2/">Go to page 2</Link>
-      <br />
-      <Link to="/mobile/">Go to mobile site</Link>
     </Layout>
   )
 })
