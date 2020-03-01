@@ -1,11 +1,15 @@
 import React from "react"
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
 import { signUp } from "../services/auth"
 import AuthContext from "../components/Contexts/AuthContext"
 import { isBrowser } from "../utils"
+import ButtonSignInWith from "../components/UIElements/ButtonSignInWith"
+import Margin from "../components/CompoundComponents/Margin"
+import { FormInput, Button } from "shards-react"
+import AnchorButton from "../components/UIElements/AnchorButton"
 
 const SignUp = ({ email, first_name, last_name, username }) => {
   const auth = React.useContext(AuthContext)
@@ -25,6 +29,7 @@ const SignUp = ({ email, first_name, last_name, username }) => {
       ))
       .catch(e => alert(`Error signing up: ${e.message}`))
   }
+  const handleSignIn = () => { navigate(`/app/login`) }
 
   return (
     <>
@@ -37,32 +42,32 @@ const SignUp = ({ email, first_name, last_name, username }) => {
       >
 
         <label>
-          Email
-            <input type="text" name="email" value={user.email} onChange={handleUpdate} />
+          Email<br />
+          <FormInput name="email" value={user.email} onChange={handleUpdate} />
         </label>
         <br />
 
         <label>
-          First Name
-            <input type="text" name="first_name" value={user.first_name} onChange={handleUpdate} />
+          First Name<br />
+          <FormInput name="first_name" value={user.first_name} onChange={handleUpdate} />
         </label>
         <br />
 
         <label>
-          Last Name
-            <input type="text" name="last_name" value={user.last_name} onChange={handleUpdate} />
+          Last Name<br />
+          <FormInput name="last_name" value={user.last_name} onChange={handleUpdate} />
         </label>
         <br />
 
         <label>
-          Username
-            <input type="text" name="username" value={user.username} onChange={handleUpdate} />
+          Username<br />
+          <FormInput name="username" value={user.username} onChange={handleUpdate} />
         </label>
         <br />
 
         <label>
-          Password
-            <input
+          Password<br />
+          <FormInput
             type="password"
             name="password"
             onChange={handleUpdate}
@@ -70,29 +75,42 @@ const SignUp = ({ email, first_name, last_name, username }) => {
         </label>
         <br />
 
-        <a href="http://localhost:3400/auth/twitter">
-          <input
-            type="button"
+        <Margin right="0.5em">
+          <ButtonSignInWith
+            url={"http://localhost:3400/auth/twitter"}
+            borderColor={"#49a0e9"}
+            backgroundColor={"#fff"}
+            color={"#49a0e9"}
+            imgSrc={`https://www.brandeps.com/logo-download/T/Twitter-logo-vector-01.svg`}
             value="Fill with Twitter"
           />
-        </a>
-        <a href="http://localhost:3400/auth/facebook">
-          <input
-            type="button"
+
+          <ButtonSignInWith
+            url={"http://localhost:3400/auth/facebook"}
+            borderColor={"#3b5998"}
+            backgroundColor={"#3b5998"}
+            color={"#fff"}
+            imgSrc={`https://upload.wikimedia.org/wikipedia/commons/4/4d/F_icon_reversed.svg`}
             value="Fill with Facebook"
           />
-        </a>
-        <a href="http://localhost:3400/auth/google">
-          <input
-            type="button"
+
+          <ButtonSignInWith
+            url={"http://localhost:3400/auth/google"}
+            borderColor={"#eee"}
+            backgroundColor={"#fff"}
+            color={"#000"}
+            imgSrc={`https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg`}
             value="Fill with Google"
           />
-        </a>
+        </Margin>
 
         <br />
-        <input type="submit" value="Sign Up" />
-
+        <Margin vertical="1em" right="1em">
+          <Button theme="success" type="submit" >Sign Up</Button><br />
+          <AnchorButton url="/app/login" onClick={handleSignIn}>Already have an account? Log in here</AnchorButton>
+        </Margin>
       </form>
+
     </>
   )
 }
@@ -116,9 +134,6 @@ const SignUpPage = withQueryParsedURL((props) => {
         username={data.username}
       />
 
-      <Link to="/page-2/">Go to page 2</Link>
-      <br />
-      <Link to="/mobile/">Go to mobile site</Link>
     </Layout>
   )
 })

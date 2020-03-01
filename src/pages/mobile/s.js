@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
 import gql from 'graphql-tag';
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
@@ -74,16 +74,16 @@ const AdvancedFiltersSection = (props) => {
     const handleStartTimeChange = (e) => { setStartTime(e.target.value) }
     const handleEndTimeChange = (e) => { setEndTime(e.target.value) }
     const handleSearchFilterTextChange = (e) => { setFilterSearchBar(e.target.value) }
-    const handleMetadataFilterTextChange = (e) => { setMetadataFilterSearchBar(e.target.value) }
+    const handleMetadataFilterTextChange = (e) => { setMetadataFilter({ ...metadataFilter, [e.target.name]: e.target.value }) }
 
     const handleRefineClick = (event) => {
         const selectedCountries = `${Object.keys(checkedItems).filter(e => checkedItems[e])}`
         const startTimeStamp = encodeURIComponent(startTime)
         const endTimeStamp = encodeURIComponent(endTime)
         const searchFilterSearchBarSafe = encodeURIComponent(searchFilterSearchBar || "")
-        const metadataFilterSearchBarSafe = encodeURIComponent(metadataFilterSearchBar || "")
+        const metadataFilterSearchBarSafe = encodeURIComponent(JSON.stringify(metadataFilter))
 
-        const searchQuery = `expanded=1&metadata_term=${metadataFilterSearchBarSafe}&locations=${selectedCountries}&start_time=${startTimeStamp}&end_time=${endTimeStamp}&search_term=${searchFilterSearchBarSafe}`
+        const searchQuery = `expanded=1&locations=${selectedCountries}&start_time=${startTimeStamp}&end_time=${endTimeStamp}&search_term=${searchFilterSearchBarSafe}&metadata_term=${metadataFilterSearchBarSafe}`
         console.log(searchQuery)
         navigate(`mobile/s?${searchQuery}`)
     }
@@ -105,7 +105,7 @@ const AdvancedFiltersSection = (props) => {
 
     const [isAdvancedFiltersCollapsed, setAdvancedFiltersCollapsed] = React.useState(props.isAdvancedFilterCollapsed);
     const [searchFilterSearchBar, setFilterSearchBar] = React.useState(props.searchTerm);
-    const [metadataFilterSearchBar, setMetadataFilterSearchBar] = React.useState(props.metadataTerm || ".*");
+    const [metadataFilter, setMetadataFilter] = React.useState(props.metadataTerm);
     const [checkedItems, setCheckedItems] = React.useState(initialCheckedItems);
     const [startTime, setStartTime] = React.useState(convertDateToInputFormat(props.startTime));
     const [endTime, setEndTime] = React.useState(convertDateToInputFormat(props.endTime || Date.now()));
@@ -174,12 +174,30 @@ const AdvancedFiltersSection = (props) => {
                             <Margin bottom="1rem">
 
                                 <div>
-                                    <CardTitle>Metadata search</CardTitle>
-                                    <p>Use something like: </p>
-                                    <pre>.*"likes"\s*:\s*"?34.*</pre>
-                                    <p>The will search for posts with likes starting with 34</p>
-                                    <div>
-                                        <FormInput placeholder={"Search Metadata (Regex is supported)"} value={metadataFilterSearchBar} onChange={handleMetadataFilterTextChange} size="sm" />
+                                    <CardTitle>Metadata search (Regex is supported)</CardTitle>
+
+                                    <div style={{
+                                        display: 'flex'
+                                    }}>
+                                        <Margin horizontal="0.5em" vertical="0.5em">
+                                            <div style={{ flex: 1 }}>
+                                                Views:<br />
+                                                <FormInput placeholder={"Search views "} name="views" value={metadataFilter.views} onChange={handleMetadataFilterTextChange} size="sm" />
+                                                Likes:<br />
+                                                <FormInput placeholder={"Search likes "} name="likes" value={metadataFilter.likes} onChange={handleMetadataFilterTextChange} size="sm" />
+                                                Replies:<br />
+                                                <FormInput placeholder={"Search replies "} name="replies" value={metadataFilter.replies} onChange={handleMetadataFilterTextChange} size="sm" />
+                                            </div>
+
+                                            <div style={{ flex: 1 }}>
+                                                Retweets:<br />
+                                                <FormInput placeholder={"Search retweets "} name="retweets" value={metadataFilter.retweets} onChange={handleMetadataFilterTextChange} size="sm" />
+                                                Comments:<br />
+                                                <FormInput placeholder={"Search comments "} name="comments" value={metadataFilter.comments} onChange={handleMetadataFilterTextChange} size="sm" />
+                                                Video Views:<br />
+                                                <FormInput placeholder={"Search video views "} name="video_views" value={metadataFilter.video_views} onChange={handleMetadataFilterTextChange} size="sm" />
+                                            </div>
+                                        </Margin>
                                     </div>
 
                                 </div>
@@ -205,7 +223,7 @@ const SearchPage = withQueryParsedURL((props) => {
     const queryParsedURL = props.queryParsedURL
 
     const searchTerm = queryParsedURL.search_term
-    const metadataTerm = queryParsedURL.metadata_term || ".*"
+    const metadataTerm = queryParsedURL.metadata_term || ""
     const locations = (queryParsedURL.locations || "").split(',')
     const startTime = queryParsedURL.start_time || 0
     const endTime = queryParsedURL.end_time || 0
@@ -221,7 +239,20 @@ const SearchPage = withQueryParsedURL((props) => {
         filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: "AND" })
     if (endTime)
         filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: "AND" })
-    filter.push({ metadata: metadataTerm, connector: "AND" })
+
+    if (metadataTerm) {
+        const metadataObj = JSON.parse(metadataTerm);
+
+        Object.keys(metadataObj).forEach((key) => {
+            const value = metadataObj[key]
+
+            if (metadataObj.hasOwnProperty(key) && isNaN(key) && value) {
+                const searchTerm = `.*"${key}"\s*:\s*"?${value}"?`
+                filter.push({ metadata: searchTerm, connector: "AND" })
+            }
+        });
+    }
+
 
     // add search filter for locations
     locations.forEach(e => (e !== "") && filter.push({ keyword: e, connector: "AND" }))
@@ -281,8 +312,6 @@ const SearchPage = withQueryParsedURL((props) => {
                             />)
                 }
             </Margin>
-
-            <Link to="/page-2/">Go to page 2</Link>
         </Layout>
     )
 })

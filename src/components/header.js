@@ -1,4 +1,4 @@
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import { FormInput, Fade } from "shards-react";
@@ -8,6 +8,7 @@ import { isLoggedIn, signOut } from "../services/auth"
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
 import AuthContext from "./Contexts/AuthContext"
 import AnchorButton from "./UIElements/AnchorButton"
+import AnimatedLink from "./UIElements/AnimatedLink"
 
 
 const Header = ({ siteTitle }) => {
@@ -62,7 +63,7 @@ const Header = ({ siteTitle }) => {
       }}
     >
       <span>{content}</span>
-      <Link to="/app/profile">Profile</Link>
+      <AnimatedLink to="/app/profile">Profile</AnimatedLink>
 
       {isLoggedIn() ? (
         <a
@@ -91,7 +92,7 @@ const Header = ({ siteTitle }) => {
         }}>
 
           <h1 style={{ flex: 1, margin: 0, fontFamily: theme.font_family }}>
-            <Link
+            <AnimatedLink
               to="/"
               style={{
                 color: theme.color_text,
@@ -99,7 +100,7 @@ const Header = ({ siteTitle }) => {
               }}
             >
               {siteTitle}
-            </Link>
+            </AnimatedLink>
           </h1>
 
           <div style={{
@@ -125,7 +126,7 @@ const Header = ({ siteTitle }) => {
               🔍
               </AnchorButton>
             <AnchorButton>≡</AnchorButton>
-            <Link to="/mobile/settings">⚙️</Link>
+            <AnimatedLink to="/mobile/settings">⚙️</AnimatedLink>
           </div>
 
 
