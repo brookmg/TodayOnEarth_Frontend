@@ -26,3 +26,7 @@ export const ellipsedSubstring = (str, maxChars = 50) => {
 }
 
 export const isBrowser = () => typeof window !== "undefined"
+
+export const removeRedundantWhitespace = (str) => {
+    return str.replace(/\s+/g, ' ')
+}

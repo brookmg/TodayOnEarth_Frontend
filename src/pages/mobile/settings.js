@@ -8,7 +8,7 @@ import {
     CardTitle,
     CardBody,
     Button,
-    FormCheckbox
+    FormCheckbox,
 } from "shards-react";
 import Margin from "../../components/CompoundComponents/Margin"
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
@@ -16,6 +16,8 @@ import DefaultThemeDefinition, { availableFonts } from "../../components/Context
 import ButtonDark from "../../components/UIElements/ButtonDark"
 import ButtonSuccess from "../../components/UIElements/ButtonSuccess"
 import { isBrowser } from "../../utils"
+import UserInterestEntry from "../../components/UIElements/UserInterestEntry"
+
 
 const ThemePreferenceSection = (props) => {
     const theme = React.useContext(ThemePalletteContext)
@@ -203,9 +205,13 @@ const ContentSourceSection = (props) => {
 
 }
 
+const UserInterestEntrySection = () => <UserInterestEntry />
+
 const SearchPage = withQueryParsedURL((props) => (
     <Layout>
         <SEO title="Home" />
+
+        <UserInterestEntrySection />
 
         <ThemePreferenceSection />
 
