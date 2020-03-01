@@ -10,6 +10,7 @@ import AnchorButton from "../../components/UIElements/AnchorButton"
 import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
 import Image from "../../components/UIElements/Image"
 import { getIfAvailable, ellipsedSubstring } from "../../utils"
+import PostMetadata from "../../components/UIElements/PostMetadata"
 
 const GET_POST_DETAIL = gql`
 
@@ -22,6 +23,14 @@ query fetchPostDetail($postid: Int!) {
     source_link
     published_on
     metadata{
+      community_interaction {
+        views
+        likes
+        replies
+        retweets
+        comments
+        video_views
+      }
       ... on TelegramMetadata{
         message{
           image{
@@ -99,6 +108,18 @@ const PostDetail = withQueryParsedURL((props) => {
                 <p>{post.provider}</p>
             </div>
             <div>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    margin:'1rem'
+                }}>
+                    <PostMetadata
+                        sourceLink={post.source_link}
+                        communityInteraction={
+                            getIfAvailable(post, `metadata.community_interaction`)
+                        } />
+                </div>
+
                 <AnchorButton id="shareButton" onClick={handleShareClick}>Share 🔗</AnchorButton>
                 <Tooltip
                     trigger="click"
