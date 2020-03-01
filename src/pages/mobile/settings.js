@@ -12,8 +12,7 @@ import {
 } from "shards-react";
 import Margin from "../../components/CompoundComponents/Margin"
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
-import { availableFonts } from "../../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
-import ColorPalletteDefinition from "../../components/Contexts/ThemePalletteContext/ColorPalletteDefinition"
+import DefaultThemeDefinition, { availableFonts } from "../../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
 import ButtonDark from "../../components/UIElements/ButtonDark"
 import ButtonSuccess from "../../components/UIElements/ButtonSuccess"
 import { isBrowser } from "../../utils"
@@ -34,14 +33,14 @@ const ThemePreferenceSection = (props) => {
         theme.setTheme({ ...theme, font_family: e.target.value })
         
     const handleThemePreviewOriginalDayClick = () =>
-        theme.setTheme({ ...ColorPalletteDefinition })
+        theme.setTheme({ ...DefaultThemeDefinition })
 
     const handleThemePreviewOriginalNightClick = () =>
         theme.setTheme({
-            ...ColorPalletteDefinition,
-            color_background: ColorPalletteDefinition.color_text,
-            color_text: ColorPalletteDefinition.color_background,
-            color_text_faded: `${ColorPalletteDefinition.color_background}66`,
+            ...DefaultThemeDefinition,
+            color_background: DefaultThemeDefinition.color_text,
+            color_text: DefaultThemeDefinition.color_background,
+            color_text_faded: `${DefaultThemeDefinition.color_background}66`,
         })
 
     const handleThemeApplyPermanentlyClick = () => {
