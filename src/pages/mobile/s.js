@@ -30,6 +30,14 @@ query getPostsFiltered($filter: [FilterQuery!]!){
     source_link
     published_on
     metadata{
+      community_interaction {
+        views
+        likes
+        replies
+        retweets
+        comments
+        video_views
+      }
       ... on TelegramMetadata{
         message{
           image{
@@ -268,6 +276,7 @@ const SearchPage = withQueryParsedURL((props) => {
                                     getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
                                     getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
                                 }
+                                metadata={p.metadata}
 
                             />)
                 }
