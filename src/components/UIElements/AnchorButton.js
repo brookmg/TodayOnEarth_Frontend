@@ -8,7 +8,7 @@ export function AnchorButton(props) {
         <span onClick={props.onClick}>
             <a
                 {...props}
-                href=""
+                href={props.url || ""}
                 onClick={handleShareClick}
                 style={{
                     textDecoration: `none`,
