@@ -12,6 +12,7 @@ import {
 } from "shards-react";
 import Margin from "../../components/CompoundComponents/Margin"
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
+import { availableFonts } from "../../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
 
 const ThemePreferenceSection = (props) => {
     const theme = React.useContext(ThemePalletteContext)
@@ -25,6 +26,9 @@ const ThemePreferenceSection = (props) => {
     const handleTextFadedColorChange = (e) =>
         theme.setTheme({ ...theme, color_text_faded: e.target.value })
 
+    const handleFontChange = (e) =>
+        theme.setTheme({ ...theme, font_family: e.target.value })
+
     return (
         <div>
             <Margin vertical="1rem">
@@ -36,11 +40,15 @@ const ThemePreferenceSection = (props) => {
                                 <CardTitle>Site Theme</CardTitle>
                                 <div>
 
-                                    <select>
-                                        <option>font 1</option>
-                                        <option>font 2</option>
-                                        <option>font 3</option>
-                                        <option>font 4</option>
+                                    <select onChange={handleFontChange}>
+                                        {
+                                            availableFonts.map((font) => {
+                                                return (
+                                                    <option style={{ fontFamily: font }} key={font}>{font}</option>
+                                                )
+                                            })
+
+                                        }
                                     </select>
                                     <Margin left="0.5rem">
                                         <span>Font Style</span>

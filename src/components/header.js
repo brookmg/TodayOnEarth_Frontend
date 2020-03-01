@@ -58,6 +58,7 @@ const Header = ({ siteTitle }) => {
     <header
       style={{
         marginBottom: `1.45rem`,
+        fontFamily: theme.font_family
       }}
     >
       <span>{content}</span>
@@ -89,7 +90,7 @@ const Header = ({ siteTitle }) => {
           display: 'flex'
         }}>
 
-          <h1 style={{ flex: 1, margin: 0 }}>
+          <h1 style={{ flex: 1, margin: 0, fontFamily: theme.font_family }}>
             <Link
               to="/"
               style={{
