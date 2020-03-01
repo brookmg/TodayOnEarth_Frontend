@@ -12,7 +12,10 @@ import {
 } from "shards-react";
 import Margin from "../../components/CompoundComponents/Margin"
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
-import { availableFonts } from "../../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
+import DefaultThemeDefinition, { availableFonts } from "../../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
+import ButtonDark from "../../components/UIElements/ButtonDark"
+import ButtonSuccess from "../../components/UIElements/ButtonSuccess"
+import { isBrowser } from "../../utils"
 
 const ThemePreferenceSection = (props) => {
     const theme = React.useContext(ThemePalletteContext)
@@ -28,11 +31,31 @@ const ThemePreferenceSection = (props) => {
 
     const handleFontChange = (e) =>
         theme.setTheme({ ...theme, font_family: e.target.value })
+        
+    const handleThemePreviewOriginalDayClick = () =>
+        theme.setTheme({ ...DefaultThemeDefinition })
+
+    const handleThemePreviewOriginalNightClick = () =>
+        theme.setTheme({
+            ...DefaultThemeDefinition,
+            color_background: DefaultThemeDefinition.color_text,
+            color_text: DefaultThemeDefinition.color_background,
+            color_text_faded: `${DefaultThemeDefinition.color_background}66`,
+        })
+
+    const handleThemeApplyPermanentlyClick = () => {
+        if (isBrowser()) {
+            localStorage.setItem("theme", JSON.stringify(theme))
+            alert("Theme applied successfully")
+        }
+    }
 
     return (
         <div>
             <Margin vertical="1rem">
-                <Card>
+                <Card style={{
+                    backgroundColor: theme.color_background
+                }}>
                     <CardBody>
                         <Margin bottom="1rem">
 
@@ -91,7 +114,33 @@ const ThemePreferenceSection = (props) => {
 
                         </div>
 
+                        <Margin vertical="0.5em">
+                            <div style={{ color: theme.color_text_faded }}>
+                                <i>
+                                    Note: Theme will not be permanent till you apply the changes.
+                                </i>
+                            </div>
+                        </Margin>
 
+                        <div>
+                            <Margin horizontal="0.5rem" vertical="0.5rem">
+                                <div>
+                                    <Margin right="0.5rem">
+                                        <ButtonDark onClick={handleThemePreviewOriginalDayClick}>
+                                            🔆 Try Day Theme
+                                        </ButtonDark>
+
+                                        <ButtonDark onClick={handleThemePreviewOriginalNightClick}>
+                                            🌙 Try Night Theme
+                                        </ButtonDark>
+                                    </Margin>
+
+                                </div>
+                                <ButtonSuccess onClick={handleThemeApplyPermanentlyClick}>
+                                    Apply Permanently
+                                </ButtonSuccess>
+                            </Margin>
+                        </div>
 
                     </CardBody>
                 </Card>
