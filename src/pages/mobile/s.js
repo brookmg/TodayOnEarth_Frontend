@@ -7,8 +7,7 @@ import { useQuery } from '@apollo/react-hooks';
 import PostHolderCard from "../../components/UIElements/PostHolderCard"
 import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
 import {
-    Collapse, Card,
-    CardTitle,
+    Collapse,
     CardBody,
     Button,
     FormInput,
@@ -16,6 +15,8 @@ import {
 } from "shards-react";
 import Margin from "../../components/CompoundComponents/Margin"
 import { getIfAvailable, ellipsedSubstring } from "../../utils"
+import ThemedCard from "../../components/UIElements/ThemedCard";
+import ThemedCardTitle from "../../components/UIElements/ThemedCardTitle";
 
 const GET_POSTS_FILTERED = gql`
 
@@ -121,12 +122,12 @@ const AdvancedFiltersSection = (props) => {
 
                 <Collapse open={!isAdvancedFiltersCollapsed}>
 
-                    <Card>
+                    <ThemedCard>
                         <CardBody>
                             <Margin bottom="1rem">
 
                                 <div>
-                                    <CardTitle>Including the words</CardTitle>
+                                    <ThemedCardTitle>Including the words</ThemedCardTitle>
                                     <div>
                                         <FormInput value={searchFilterSearchBar} onChange={handleSearchFilterTextChange} size="sm" />
                                     </div>
@@ -136,7 +137,7 @@ const AdvancedFiltersSection = (props) => {
                             <Margin bottom="1rem">
 
                                 <div>
-                                    <CardTitle>Location</CardTitle>
+                                    <ThemedCardTitle>Location</ThemedCardTitle>
                                     <div>
 
                                         {
@@ -161,7 +162,7 @@ const AdvancedFiltersSection = (props) => {
                             <Margin vertical="1rem">
 
                                 <div>
-                                    <CardTitle>Time Period</CardTitle>
+                                    <ThemedCardTitle>Time Period</ThemedCardTitle>
                                     <div>
 
                                         Starting From: <FormInput value={convertDateToInputFormat(startTime)} onChange={handleStartTimeChange} type="date" size="sm" />
@@ -174,7 +175,7 @@ const AdvancedFiltersSection = (props) => {
                             <Margin bottom="1rem">
 
                                 <div>
-                                    <CardTitle>Metadata search (Regex is supported)</CardTitle>
+                                    <ThemedCardTitle>Metadata search (Regex is supported)</ThemedCardTitle>
 
                                     <div style={{
                                         display: 'flex'
@@ -209,7 +210,7 @@ const AdvancedFiltersSection = (props) => {
                                 </Margin>
                             </div>
                         </CardBody>
-                    </Card>
+                    </ThemedCard>
 
                 </Collapse>
             </Margin>
