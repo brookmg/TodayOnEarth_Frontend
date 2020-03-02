@@ -16,8 +16,8 @@ const ParseLinks = (props) => {
         const cleanUrlLeft = splitUrl[0];
         const cleanUrlRight = splitUrl[1];
         const cleanUrl = cleanUrlRight ? cleanUrlRight : cleanUrlLeft;
-        urlParts[i] = <span> {cleanUrlRight && `${cleanUrlLeft}://`}
-            <AnchorButton key={i} url={`http://${cleanUrl}`}>{cleanUrl}</AnchorButton>;
+        urlParts[i] = <span key={i}> {cleanUrlRight && `${cleanUrlLeft}://`}
+            <AnchorButton url={`http://${cleanUrl}`}>{cleanUrl}</AnchorButton>;
         </span>;
     }
 
