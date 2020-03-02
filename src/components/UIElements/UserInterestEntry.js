@@ -1,7 +1,5 @@
 import React from "react"
 import {
-    Card,
-    CardTitle,
     CardBody,
     Button,
     Slider,
@@ -14,7 +12,8 @@ import { removeRedundantWhitespace, isBrowser } from "../../utils"
 import ButtonInterest from './ButtonInterest'
 import gql from 'graphql-tag';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
-
+import ThemedCard from './ThemedCard';
+import ThemedCardTitle from "./ThemedCardTitle";
 
 const GET_USER_INTERESTS = gql`
 
@@ -117,12 +116,12 @@ const UserInterestEntry = (props) => {
     return (
         <div>
             <Margin vertical="1rem">
-                <Card>
+                <ThemedCard>
                     <CardBody>
                         <Margin bottom="1rem">
 
                             <div>
-                                <CardTitle>Your interests</CardTitle>
+                                <ThemedCardTitle>Your interests</ThemedCardTitle>
                                 <div>
 
                                     <FormInput placeholder={"Add Interest"}
@@ -140,7 +139,7 @@ const UserInterestEntry = (props) => {
 
                                                 {selectedInterest &&
                                                     <div>
-                                                        <CardTitle>How interested are you about: "{selectedInterest}"</CardTitle>
+                                                        <ThemedCardTitle>How interested are you about: "{selectedInterest}"</ThemedCardTitle>
 
                                                         <Margin horizontal="0.5em" vertical="1em">
                                                             <div>
@@ -199,7 +198,7 @@ const UserInterestEntry = (props) => {
                             {mutationError && <p>Error :( Please try again</p>}
                         </div>
                     </CardBody>
-                </Card>
+                </ThemedCard>
 
             </Margin>
         </div>
