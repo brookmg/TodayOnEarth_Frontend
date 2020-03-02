@@ -47,12 +47,12 @@ export default function PostHolderCard(props) {
                     <CardBody>
 
                         {props.title && <CardTitle>
-                            <ParseLinks>{props.title}</ParseLinks>
+                            <ParseLinks sourceLink={props.sourceLink}>{props.title}</ParseLinks>
                         </CardTitle>}
                         {props.body &&
                             <>
                                 <p>
-                                    <ParseLinks>
+                                    <ParseLinks sourceLink={props.sourceLink}>
                                         {props.body}
                                     </ParseLinks>
                                 </p>
