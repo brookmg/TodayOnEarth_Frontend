@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
 import { isBrowser } from "../utils"
-import AnimatedLink from "../components/UIElements/AnimatedLink"
+import { Link } from "gatsby"
 
 const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
   // reset url to remove params
@@ -18,11 +18,11 @@ const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
         {queryParsedURL.error}
       </pre>
 
-      <p><AnimatedLink to="/signup">Sign Up</AnimatedLink> | <AnimatedLink to="/app/login">Log In</AnimatedLink></p>
+      <p><Link to="/signup">Sign Up</Link> | <Link to="/app/login">Log In</Link></p>
 
-      <AnimatedLink to="/page-2/">Go to page 2</AnimatedLink>
+      <Link to="/page-2/">Go to page 2</Link>
       <br />
-      <AnimatedLink to="/mobile/">Go to mobile site</AnimatedLink>
+      <Link to="/mobile/">Go to mobile site</Link>
     </Layout>
   )
 }

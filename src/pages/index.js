@@ -4,7 +4,7 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 import { isLoggedIn } from "../services/auth"
 import AuthContext from "../components/Contexts/AuthContext"
-import AnimatedLink from "../components/UIElements/AnimatedLink"
+import { Link } from "gatsby"
 
 
 const IndexPage = () => {
@@ -24,21 +24,21 @@ const IndexPage = () => {
         {isLoggedIn() ? (
           <>
             You are logged in, so check your{" "}
-            <AnimatedLink to="/app/profile">profile</AnimatedLink>
+            <Link to="/app/profile">profile</Link>
           </>
         ) : (
             <>
-              You should <AnimatedLink to="/app/login">log in</AnimatedLink> to see restricted
+              You should <Link to="/app/login">log in</Link> to see restricted
               content
         </>
           )}
       </p>
 
-      <p><AnimatedLink to="/signup">Sign Up</AnimatedLink></p>
+      <p><Link to="/signup">Sign Up</Link></p>
 
-      <AnimatedLink to="/page-2/">Go to page 2</AnimatedLink>
+      <Link to="/page-2/">Go to page 2</Link>
       <br />
-      <AnimatedLink to="/mobile/">Go to mobile site</AnimatedLink>
+      <Link to="/mobile/">Go to mobile site</Link>
     </Layout>
   )
 }
