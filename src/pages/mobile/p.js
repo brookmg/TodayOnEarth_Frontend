@@ -10,6 +10,7 @@ import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
 import Image from "../../components/UIElements/Image"
 import { getIfAvailable, ellipsedSubstring } from "../../utils"
 import PostMetadata from "../../components/UIElements/PostMetadata"
+import ParseLinks from "../../components/UIElements/ParseLinks";
 
 const GET_POST_DETAIL = gql`
 
@@ -110,7 +111,7 @@ const PostDetail = withQueryParsedURL((props) => {
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    margin:'1rem'
+                    margin: '1rem'
                 }}>
                     <PostMetadata
                         sourceLink={post.source_link}
@@ -147,18 +148,29 @@ const PostDetail = withQueryParsedURL((props) => {
                 post.body === "" ?
                     <>
                         <div>
-                            <p>{
-                                getIfAvailable(post, 'title', "")
-                            }</p>
+                            <p>
+                                <ParseLinks sourceLink={post.source_link}>
+                                    {
+                                        getIfAvailable(post, 'title', "")
+                                    }
+                                </ParseLinks>
+                            </p>
                         </div>
                     </> :
                     <>
 
-                        <h1>{ellipsedSubstring(
-                            getIfAvailable(post, 'title', "")
-                        )}</h1>
+                        <h1>
+                            <ParseLinks sourceLink={post.source_link}>{ellipsedSubstring(
+                                getIfAvailable(post, 'title', "")
+                            )}
+                            </ParseLinks>
+                        </h1>
                         <div>
-                            <p>{post.body}</p>
+                            <p>
+                                <ParseLinks sourceLink={post.source_link}>
+                                    {post.body}
+                                </ParseLinks>
+                            </p>
                         </div>
                     </>
 
