@@ -15,6 +15,7 @@ import Margin from '../CompoundComponents/Margin';
 import Image from './Image'
 import PostMetadata from "./PostMetadata"
 import AnimatedLink from "./AnimatedLink"
+import ParseLinks from './ParseLinks';
 
 export default function PostHolderCard(props) {
     const theme = React.useContext(ThemePalletteContext)
@@ -45,10 +46,16 @@ export default function PostHolderCard(props) {
 
                     <CardBody>
 
-                        {props.title && <CardTitle>{props.title}</CardTitle>}
+                        {props.title && <CardTitle>
+                            <ParseLinks>{props.title}</ParseLinks>
+                        </CardTitle>}
                         {props.body &&
                             <>
-                                <p>{props.body}</p>
+                                <p>
+                                    <ParseLinks>
+                                        {props.body}
+                                    </ParseLinks>
+                                </p>
 
 
                                 <Button theme="dark">Read more &rarr;</Button>
