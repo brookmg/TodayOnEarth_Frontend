@@ -3,8 +3,6 @@ import React from 'react';
 import { Link } from "gatsby"
 
 import {
-    Card,
-    CardTitle,
     CardBody,
     CardFooter,
     Button
@@ -15,14 +13,15 @@ import Margin from '../CompoundComponents/Margin';
 import Image from './Image'
 import PostMetadata from "./PostMetadata"
 import ParseLinks from './ParseLinks';
+import ThemedCard from './ThemedCard';
+import ThemedCardTitle from './ThemedCardTitle';
+import ButtonDark from './ButtonDark';
 
 export default function PostHolderCard(props) {
     const theme = React.useContext(ThemePalletteContext)
     return (
         <Margin vertical="1rem">
-            <Card style={{
-                backgroundColor: theme.color_background,
-                color: theme.color_text,
+            <ThemedCard style={{
                 borderTopLeftRadius: props.imgSrc && '5rem',
                 overflow: 'hidden'
             }}>
@@ -45,9 +44,9 @@ export default function PostHolderCard(props) {
 
                     <CardBody>
 
-                        {props.title && <CardTitle>
+                        {props.title && <ThemedCardTitle>
                             <ParseLinks sourceLink={props.sourceLink}>{props.title}</ParseLinks>
-                        </CardTitle>}
+                        </ThemedCardTitle>}
                         {props.body &&
                             <>
                                 <p>
@@ -57,7 +56,7 @@ export default function PostHolderCard(props) {
                                 </p>
 
 
-                                <Button theme="dark">Read more &rarr;</Button>
+                                <ButtonDark>Read more &rarr;</ButtonDark>
 
                             </>
                         }
@@ -86,7 +85,7 @@ export default function PostHolderCard(props) {
                     </a>
 
                 </CardFooter>
-            </Card>
+            </ThemedCard>
         </Margin>
     );
 }

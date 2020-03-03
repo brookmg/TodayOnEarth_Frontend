@@ -3,8 +3,6 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
 import {
-    Card,
-    CardTitle,
     CardBody,
     Button,
     FormCheckbox,
@@ -16,6 +14,10 @@ import ButtonDark from "../../components/UIElements/ButtonDark"
 import ButtonSuccess from "../../components/UIElements/ButtonSuccess"
 import { isBrowser } from "../../utils"
 import UserInterestEntry from "../../components/UIElements/UserInterestEntry"
+import ThemedCard from "../../components/UIElements/ThemedCard";
+import ThemedCardTitle from "../../components/UIElements/ThemedCardTitle";
+import NightsStayIcon from '@material-ui/icons/NightsStay';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
 
 const ThemePreferenceSection = (props) => {
@@ -32,7 +34,7 @@ const ThemePreferenceSection = (props) => {
 
     const handleFontChange = (e) =>
         theme.setTheme({ ...theme, font_family: e.target.value })
-        
+
     const handleThemePreviewOriginalDayClick = () =>
         theme.setTheme({ ...DefaultThemeDefinition })
 
@@ -54,14 +56,14 @@ const ThemePreferenceSection = (props) => {
     return (
         <div>
             <Margin vertical="1rem">
-                <Card style={{
-                    backgroundColor: theme.color_background
-                }}>
+                <ThemedCard>
                     <CardBody>
                         <Margin bottom="1rem">
 
                             <div>
-                                <CardTitle>Site Theme</CardTitle>
+                                <ThemedCardTitle style={{
+                                    color: theme.color_text
+                                }}>Site Theme</ThemedCardTitle>
                                 <div>
 
                                     <select onChange={handleFontChange}>
@@ -128,11 +130,11 @@ const ThemePreferenceSection = (props) => {
                                 <div>
                                     <Margin right="0.5rem">
                                         <ButtonDark onClick={handleThemePreviewOriginalDayClick}>
-                                            🔆 Try Day Theme
+                                            <WbSunnyIcon /> Try Day Theme
                                         </ButtonDark>
 
                                         <ButtonDark onClick={handleThemePreviewOriginalNightClick}>
-                                            🌙 Try Night Theme
+                                            <NightsStayIcon /> Try Night Theme
                                         </ButtonDark>
                                     </Margin>
 
@@ -144,7 +146,7 @@ const ThemePreferenceSection = (props) => {
                         </div>
 
                     </CardBody>
-                </Card>
+                </ThemedCard>
 
             </Margin>
         </div>
@@ -168,12 +170,12 @@ const ContentSourceSection = (props) => {
     return (
         <div>
             <Margin vertical="1rem">
-                <Card>
+                <ThemedCard>
                     <CardBody>
                         <Margin bottom="1rem">
 
                             <div>
-                                <CardTitle>Content sources</CardTitle>
+                                <ThemedCardTitle>Content sources</ThemedCardTitle>
                                 <div>
 
                                     {
@@ -195,7 +197,7 @@ const ContentSourceSection = (props) => {
                             </div>
                         </Margin>
                     </CardBody>
-                </Card>
+                </ThemedCard>
 
             </Margin>
         </div>
@@ -218,8 +220,8 @@ const SearchPage = withQueryParsedURL((props) => (
 
         <div>
             <Margin all="0.5rem">
-                <Button theme="dark">Revert Changes</Button>
-                <Button theme="success">Apply Changes</Button>
+                <ButtonDark>Revert Changes</ButtonDark>
+                <ButtonSuccess>Apply Changes</ButtonSuccess>
             </Margin>
         </div>
     </Layout>

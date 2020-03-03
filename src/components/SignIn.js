@@ -6,6 +6,7 @@ import Margin from "./CompoundComponents/Margin"
 import { Button, FormInput } from "shards-react"
 import AnchorButton from "./UIElements/AnchorButton"
 import ButtonSignInWith from "./UIElements/ButtonSignInWith"
+import ButtonSuccess from "./UIElements/ButtonSuccess"
 
 
 const SignIn = (props) => {
@@ -48,7 +49,7 @@ const SignIn = (props) => {
             name="password"
             onChange={handleUpdate}
           />
-          <Button theme="success" type="submit"> Log In </Button>
+          <ButtonSuccess type="submit"> Log In </ButtonSuccess>
           <AnchorButton url="/signup" onClick={handleSignUp}>Dont have an account? Sign up here</AnchorButton>
 
         </Margin>
