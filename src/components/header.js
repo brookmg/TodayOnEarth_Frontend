@@ -2,13 +2,14 @@ import { navigate } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import { FormInput, Fade } from "shards-react";
-
 import { isLoggedIn, signOut } from "../services/auth"
-
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
 import AuthContext from "./Contexts/AuthContext"
 import AnchorButton from "./UIElements/AnchorButton"
 import AnimatedLink from "./UIElements/AnimatedLink"
+import SettingsIcon from '@material-ui/icons/Settings';
+import SearchIcon from '@material-ui/icons/Search';
+import MenuIcon from '@material-ui/icons/Menu';
 
 
 const Header = ({ siteTitle }) => {
@@ -123,10 +124,16 @@ const Header = ({ siteTitle }) => {
             <AnchorButton
               onMouseEnter={handleSearchButtonMouseEnter}
               onClick={handleSearchButtonClick}>
-              🔍
-              </AnchorButton>
-            <AnchorButton>≡</AnchorButton>
-            <AnimatedLink to="/mobile/settings">⚙️</AnimatedLink>
+              <SearchIcon htmlColor={theme.color_text} />
+            </AnchorButton>
+
+            <AnimatedLink to="/mobile/settings">
+              <SettingsIcon htmlColor={theme.color_text} />
+            </AnimatedLink>
+
+            <AnchorButton>
+              <MenuIcon htmlColor={theme.color_text} />
+            </AnchorButton>
           </div>
 
 

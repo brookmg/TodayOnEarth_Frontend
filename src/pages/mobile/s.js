@@ -17,6 +17,7 @@ import Margin from "../../components/CompoundComponents/Margin"
 import { getIfAvailable, ellipsedSubstring } from "../../utils"
 import ThemedCard from "../../components/UIElements/ThemedCard";
 import ThemedCardTitle from "../../components/UIElements/ThemedCardTitle";
+import ButtonSuccess from "../../components/UIElements/ButtonSuccess";
 
 const GET_POSTS_FILTERED = gql`
 
@@ -206,7 +207,7 @@ const AdvancedFiltersSection = (props) => {
 
                             <div>
                                 <Margin vertical="1rem">
-                                    <Button onClick={handleRefineClick} theme="success">Refine search</Button>
+                                    <ButtonSuccess onClick={handleRefineClick}>Refine search</ButtonSuccess>
                                 </Margin>
                             </div>
                         </CardBody>

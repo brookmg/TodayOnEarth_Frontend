@@ -9,9 +9,9 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
-import "./layout.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
+import "./layout.css"
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
 
 const Layout = ({ children }) => {

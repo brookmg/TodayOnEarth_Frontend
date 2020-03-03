@@ -10,6 +10,7 @@ import ButtonSignInWith from "../components/UIElements/ButtonSignInWith"
 import Margin from "../components/CompoundComponents/Margin"
 import { FormInput, Button } from "shards-react"
 import AnchorButton from "../components/UIElements/AnchorButton"
+import ButtonSuccess from "../components/UIElements/ButtonSuccess"
 
 const SignUp = ({ email, first_name, last_name, username }) => {
   const auth = React.useContext(AuthContext)
@@ -106,7 +107,7 @@ const SignUp = ({ email, first_name, last_name, username }) => {
 
         <br />
         <Margin vertical="1em" right="1em">
-          <Button theme="success" type="submit" >Sign Up</Button><br />
+          <ButtonSuccess type="submit" >Sign Up</ButtonSuccess><br />
           <AnchorButton url="/app/login" onClick={handleSignIn}>Already have an account? Log in here</AnchorButton>
         </Margin>
       </form>

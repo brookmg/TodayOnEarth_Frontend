@@ -14,6 +14,8 @@ import gql from 'graphql-tag';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import ThemedCard from './ThemedCard';
 import ThemedCardTitle from "./ThemedCardTitle";
+import ButtonDark from "./ButtonDark";
+import ButtonSuccess from "./ButtonSuccess";
 
 const GET_USER_INTERESTS = gql`
 
@@ -187,8 +189,8 @@ const UserInterestEntry = (props) => {
                         </Margin>
                         <div>
                             <Margin horizontal="0.5rem">
-                                <Button onClick={handleRevertClicked} theme="dark">Revert Changes</Button>
-                                <Button onClick={handleUpdateClicked} theme="success">Update Interests</Button>
+                                <ButtonDark onClick={handleRevertClicked}>Revert Changes</ButtonDark>
+                                <ButtonSuccess onClick={handleUpdateClicked}>Update Interests</ButtonSuccess>
                             </Margin>
                         </div>
                         <div>

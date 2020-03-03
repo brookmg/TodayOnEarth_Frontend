@@ -16,6 +16,8 @@ import { isBrowser } from "../../utils"
 import UserInterestEntry from "../../components/UIElements/UserInterestEntry"
 import ThemedCard from "../../components/UIElements/ThemedCard";
 import ThemedCardTitle from "../../components/UIElements/ThemedCardTitle";
+import NightsStayIcon from '@material-ui/icons/NightsStay';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
 
 const ThemePreferenceSection = (props) => {
@@ -128,11 +130,11 @@ const ThemePreferenceSection = (props) => {
                                 <div>
                                     <Margin right="0.5rem">
                                         <ButtonDark onClick={handleThemePreviewOriginalDayClick}>
-                                            🔆 Try Day Theme
+                                            <WbSunnyIcon /> Try Day Theme
                                         </ButtonDark>
 
                                         <ButtonDark onClick={handleThemePreviewOriginalNightClick}>
-                                            🌙 Try Night Theme
+                                            <NightsStayIcon /> Try Night Theme
                                         </ButtonDark>
                                     </Margin>
 
@@ -218,8 +220,8 @@ const SearchPage = withQueryParsedURL((props) => (
 
         <div>
             <Margin all="0.5rem">
-                <Button theme="dark">Revert Changes</Button>
-                <Button theme="success">Apply Changes</Button>
+                <ButtonDark>Revert Changes</ButtonDark>
+                <ButtonSuccess>Apply Changes</ButtonSuccess>
             </Margin>
         </div>
     </Layout>
