@@ -220,8 +220,8 @@ const SearchPage = withQueryParsedURL((props) => (
 
         <div>
             <Margin all="0.5rem">
-                <Button theme="dark">Revert Changes</Button>
-                <Button theme="success">Apply Changes</Button>
+                <ButtonDark>Revert Changes</ButtonDark>
+                <ButtonSuccess>Apply Changes</ButtonSuccess>
             </Margin>
         </div>
     </Layout>

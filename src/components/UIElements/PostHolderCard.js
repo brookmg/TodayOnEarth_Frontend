@@ -15,6 +15,7 @@ import PostMetadata from "./PostMetadata"
 import ParseLinks from './ParseLinks';
 import ThemedCard from './ThemedCard';
 import ThemedCardTitle from './ThemedCardTitle';
+import ButtonDark from './ButtonDark';
 
 export default function PostHolderCard(props) {
     const theme = React.useContext(ThemePalletteContext)
@@ -55,7 +56,7 @@ export default function PostHolderCard(props) {
                                 </p>
 
 
-                                <Button theme="dark">Read more &rarr;</Button>
+                                <ButtonDark>Read more &rarr;</ButtonDark>
 
                             </>
                         }
