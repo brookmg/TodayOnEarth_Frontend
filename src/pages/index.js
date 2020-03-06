@@ -39,6 +39,8 @@ const IndexPage = () => {
       <Link to="/page-2/">Go to page 2</Link>
       <br />
       <Link to="/mobile/">Go to mobile site</Link>
+      <br />
+      <Link to="/mobile/latest">Go to latest page</Link>
     </Layout>
   )
 }
