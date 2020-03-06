@@ -10,9 +10,14 @@ import AnimatedLink from "./UIElements/AnimatedLink"
 import SettingsIcon from '@material-ui/icons/Settings';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useMediaQuery } from 'react-responsive'
 
 
 const Header = ({ siteTitle }) => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-device-width: 1224px)'
+  })
+
   const handleSearchButtonClick = (e) => {
     if (searchBarText === "") {
       searchBarRef.current.focus()
@@ -89,7 +94,8 @@ const Header = ({ siteTitle }) => {
         }}
       >
         <div style={{
-          display: 'flex'
+          display: 'flex',
+          flexDirection: isDesktopOrLaptop ? "" : "column-reverse"
         }}>
 
           <h1 style={{ flex: 1, margin: 0, fontFamily: theme.font_family }}>
@@ -109,6 +115,7 @@ const Header = ({ siteTitle }) => {
             alignItems: 'center'
           }}>
             <Fade
+              style={{ flex: 1 }}
               onMouseEnter={handleSearchButtonMouseEnter}
               in={isSearchBarShowing}>
 
@@ -121,21 +128,25 @@ const Header = ({ siteTitle }) => {
                 size="sm" placeholder="Search for keywords" />
 
             </Fade>
-            <AnchorButton
-              onMouseEnter={handleSearchButtonMouseEnter}
-              onClick={handleSearchButtonClick}>
-              <SearchIcon htmlColor={theme.color_text} />
-            </AnchorButton>
+            <div>
+              <AnchorButton
+                onMouseEnter={handleSearchButtonMouseEnter}
+                onClick={handleSearchButtonClick}>
+                <SearchIcon htmlColor={theme.color_text} />
+              </AnchorButton>
 
-            <AnimatedLink to="/mobile/settings">
-              <SettingsIcon htmlColor={theme.color_text} />
-            </AnimatedLink>
+              <AnimatedLink to="/mobile/settings">
+                <SettingsIcon htmlColor={theme.color_text} />
+              </AnimatedLink>
 
-            <AnchorButton>
-              <MenuIcon htmlColor={theme.color_text} />
-            </AnchorButton>
+              {
+                !isDesktopOrLaptop &&
+                <AnchorButton>
+                  <MenuIcon htmlColor={theme.color_text} />
+                </AnchorButton>
+              }
+            </div>
           </div>
-
 
         </div>
 
