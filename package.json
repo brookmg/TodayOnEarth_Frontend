@@ -28,6 +28,7 @@
     "react-cookies": "^0.1.1",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
+    "react-toastify": "^5.5.0",
     "shards-react": "^1.0.3",
     "subscriptions-transport-ws": "^0.9.16"
   },
