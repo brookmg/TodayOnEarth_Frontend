@@ -185,7 +185,7 @@ const UserInterestEntry = (props) => {
 
                         </Margin>
                         <div>
-                            <Margin horizontal="0.5rem">
+                            <Margin horizontal="0.5rem" vertical="0.5em" >
                                 <ButtonDark onClick={handleRevertClicked}>Revert Changes</ButtonDark>
                                 <ButtonSuccess onClick={handleUpdateClicked}>Update Interests</ButtonSuccess>
                             </Margin>
