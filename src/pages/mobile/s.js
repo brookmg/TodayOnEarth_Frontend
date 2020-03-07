@@ -20,6 +20,8 @@ import ThemedCard from "../../components/UIElements/ThemedCard";
 import ThemedCardTitle from "../../components/UIElements/ThemedCardTitle";
 import ButtonSuccess from "../../components/UIElements/ButtonSuccess";
 import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
+import { convertDateToInputFormat } from "../../utils"
+
 
 const GET_POSTS_FILTERED = gql`
 
@@ -103,15 +105,6 @@ const AdvancedFiltersSection = (props) => {
         navigate(`mobile/s?${searchQuery}`)
     }
 
-    const convertDateToInputFormat = (d) => {
-        const date = new Date(d)
-        try {
-            return date.toISOString().split('T')[0]
-        }
-        catch (e) {
-            console.error(e)
-        }
-    }
     const locations = ['Africa', 'Europe', 'Asia',]
 
     const initialCheckedItems = {}
