@@ -2,9 +2,7 @@ import { navigate } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import { FormInput, Fade } from "shards-react";
-import { isLoggedIn, signOut } from "../services/auth"
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
-import AuthContext from "./Contexts/AuthContext"
 import AnchorButton from "./UIElements/AnchorButton"
 import AnimatedLink from "./UIElements/AnimatedLink"
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -50,16 +48,9 @@ const Header = ({ siteTitle }) => {
 
 
   const theme = React.useContext(ThemePalletteContext)
-  const user = React.useContext(AuthContext)
   const [isSearchBarShowing, setIsSearchBarShowing] = React.useState(false);
   const [searchBarText, setSearchBarText] = React.useState("");
   let searchBarRef = React.createRef();
-
-
-  let content = "You are not logged in"
-  if (isLoggedIn()) {
-    content = `Hello, ${user.first_name}`
-  }
 
   return (
     <header
@@ -68,24 +59,6 @@ const Header = ({ siteTitle }) => {
         fontFamily: theme.font_family
       }}
     >
-      <span>{content}</span>
-      <AnimatedLink to="/app/profile">Profile</AnimatedLink>
-
-      {isLoggedIn() ? (
-        <a
-          href="/"
-          onClick={event => {
-            event.preventDefault()
-            signOut().then(() => {
-              user.refreshActiveUser(() => {
-                navigate(`/app/login`)
-              })
-            })
-          }}
-        >
-          Logout
-          </a>
-      ) : null}
       <div
         style={{
           margin: `0 auto`,

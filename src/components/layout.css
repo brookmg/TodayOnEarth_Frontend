@@ -605,3 +605,54 @@ pre tt:after {
 }
 @import url('https://fonts.googleapis.com/css?family=Roboto|Tangerine|Trade+Winds|Krona+One|Akronim|Inconsolata');
 *{transition: background-color 2s ease;}
+
+.navbar {
+  width: 64px;
+  height: 100%;
+  z-index: 10000;
+  left:0;
+  right:0;
+  padding: 0;
+  box-shadow: -10px 0 20px;
+  display: 'flex';
+  flex-direction: column;
+  white-space: nowrap;
+  overflow: hidden;
+  position: fixed;
+  text-align: left;
+  align-items: flex-start;
+  transition: width 0.2s;
+  transition-timing-function: ease-in;
+}
+.navbar:hover {
+  width: 200px;
+}
+.navbarBtnText{
+  display: none;
+}
+.navbar:hover .navbarBtnText {
+  display: unset;
+}
+.navbar:hover .navbarTop {
+  white-space: normal;
+}
+
+.navbarShownOnHover {
+  display: none;
+}
+
+.navbar:hover .navbarShownOnHover {
+  display: unset;
+}
+
+.navbar:hover .navbarHiddenOnHover {
+  display: none;
+}
+
+.navbarAccountIcon {
+  margin-bottom: 0;
+}
+
+.navbar:hover .navbarAccountIcon {
+  margin-bottom: 1em;
+}
