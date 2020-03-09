@@ -185,7 +185,6 @@ textarea {
 html {
   font: 112.5%/1.45em georgia, serif;
   box-sizing: border-box;
-  overflow-y: scroll;
 }
 * {
   box-sizing: inherit;
@@ -625,7 +624,7 @@ pre tt:after {
   transition-timing-function: ease-in;
 }
 .navbar:hover {
-  width: 200px;
+  width: 256px;
 }
 .navbarBtnText{
   display: none;
@@ -655,4 +654,9 @@ pre tt:after {
 
 .navbar:hover .navbarAccountIcon {
   margin-bottom: 1em;
+}
+
+.navbar:hover .navbarLinkButton {
+  text-align: left;
+  padding: 0.5em;
 }

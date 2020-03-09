@@ -26,7 +26,7 @@ export default function PostHolderCard(props) {
                 overflow: 'hidden'
             }}>
                 <Link
-                    to={`/mobile/p?id=${props.id}`}
+                    to={`/p?id=${props.id}`}
                     style={{
                         color: theme.color_text,
                     }}

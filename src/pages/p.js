@@ -1,18 +1,18 @@
 import React from "react"
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { Tooltip } from "shards-react";
 import ContentLoader from 'react-content-loader'
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import AnchorButton from "../../components/UIElements/AnchorButton"
-import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
-import Image from "../../components/UIElements/Image"
-import { getIfAvailable, ellipsedSubstring } from "../../utils"
-import PostMetadata from "../../components/UIElements/PostMetadata"
-import ParseLinks from "../../components/UIElements/ParseLinks";
+import AnchorButton from "../components/UIElements/AnchorButton"
+import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
+import Image from "../components/UIElements/Image"
+import { getIfAvailable, ellipsedSubstring } from "../utils"
+import PostMetadata from "../components/UIElements/PostMetadata"
+import ParseLinks from "../components/UIElements/ParseLinks";
 import { Radar } from 'react-chartjs-2';
-import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
+import ThemePalletteContext from "../components/Contexts/ThemePalletteContext"
 
 const GET_POST_DETAIL = gql`
 
@@ -231,9 +231,9 @@ const PostDetail = withQueryParsedURL((props) => {
                 justifyContent: 'center'
             }}>
 
-                {loading && <p>Loading Posts...</p>}
+                {loading && <p>Loading Post...</p>}
                 {error && <p>Error: {error.message}</p>}
-                {!post.postid && <p>That post couldn't be found</p>}
+                {!loading && !post.postid && <p>That post couldn't be found</p>}
 
                 <Image src={
                     getIfAvailable(post, 'metadata.message.image.src') || // Telegram images

@@ -26,6 +26,9 @@ import ButtonCustom from "./UIElements/ButtonCustom"
 import Margin from "./CompoundComponents/Margin"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
 
 
 const POSTS_SUBSCRIPTION = gql`
@@ -42,7 +45,12 @@ const NavigationBar = (props) => {
   const user = React.useContext(AuthContext)
 
   const links = [
-    { text: "Settings", url: "/mobile/settings", icon: <SettingsIcon /> }
+    { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
+    { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
+
+    { text: "Advanced Search", url: "/s?expanded=1", icon: <FindInPageIcon /> },
+    { text: "Settings", url: "/settings", icon: <SettingsIcon /> },
+
   ]
   return (
     <div className={"navbar"}
@@ -119,6 +127,7 @@ const NavigationBar = (props) => {
               <div>
                 <Margin vertical="0.5em">
                   <ButtonCustom
+                    className="navbarLinkButton"
                     borderColor={theme.color_background}
                     backgroundColor={theme.color_background}
                     color={theme.color_text}
@@ -133,7 +142,7 @@ const NavigationBar = (props) => {
                       <span style={{
                         width: "16px",
                         height: "16px",
-                        margin: 0,
+                        margin: '0.5em',
                       }}>
                         {e.icon}
                       </span>
@@ -187,7 +196,7 @@ const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent 
       }}>
         {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
         <div style={{
-          flex: 1,
+          flex: 3,
           marginLeft: isDesktopOrLaptop ? '100px' : 0,
           overflowY: 'auto',
           height: '100vh'

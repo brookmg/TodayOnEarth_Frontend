@@ -42,7 +42,7 @@ const Header = ({ siteTitle }) => {
   const handleSearchSubmit = (e) => {
     if (searchBarText !== "") {
       console.log("searching for:", searchBarText)
-      navigate(`/mobile/s?search_term=${encodeURIComponent(searchBarText)}`)
+      navigate(`/s?search_term=${encodeURIComponent(searchBarText)}`)
     }
   }
 
@@ -108,7 +108,7 @@ const Header = ({ siteTitle }) => {
                 <SearchIcon htmlColor={theme.color_text} />
               </AnchorButton>
 
-              <AnimatedLink to="/mobile/settings">
+              <AnimatedLink to="/settings">
                 <SettingsIcon htmlColor={theme.color_text} />
               </AnimatedLink>
 

@@ -1,11 +1,11 @@
 import React from "react"
 import { navigate } from "gatsby"
 import gql from 'graphql-tag';
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { useQuery } from '@apollo/react-hooks';
-import PostHolderCard from "../../components/UIElements/PostHolderCard"
-import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
+import PostHolderCard from "../components/UIElements/PostHolderCard"
+import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
 import {
     Collapse,
     CardBody,
@@ -14,13 +14,13 @@ import {
     FormCheckbox,
     FormSelect
 } from "shards-react";
-import Margin from "../../components/CompoundComponents/Margin"
-import { getIfAvailable, ellipsedSubstring, isBrowser } from "../../utils"
-import ThemedCard from "../../components/UIElements/ThemedCard";
-import ThemedCardTitle from "../../components/UIElements/ThemedCardTitle";
-import ButtonSuccess from "../../components/UIElements/ButtonSuccess";
+import Margin from "../components/CompoundComponents/Margin"
+import { getIfAvailable, ellipsedSubstring, isBrowser } from "../utils"
+import ThemedCard from "../components/UIElements/ThemedCard";
+import ThemedCardTitle from "../components/UIElements/ThemedCardTitle";
+import ButtonSuccess from "../components/UIElements/ButtonSuccess";
 import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
-import { convertDateToInputFormat } from "../../utils"
+import { convertDateToInputFormat } from "../utils"
 
 
 const GET_POSTS_FILTERED = gql`
@@ -102,7 +102,7 @@ const AdvancedFiltersSection = (props) => {
 
         const searchQuery = `expanded=1&locations=${selectedCountries}&start_time=${startTimeStamp}&end_time=${endTimeStamp}&search_term=${searchFilterSearchBarSafe}&metadata_term=${metadataFilterSearchBarSafe}`
         console.log(searchQuery)
-        navigate(`mobile/s?${searchQuery}`)
+        navigate(`s?${searchQuery}`)
     }
 
     const locations = ['Africa', 'Europe', 'Asia',]

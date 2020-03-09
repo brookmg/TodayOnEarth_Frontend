@@ -10,12 +10,12 @@ exports.onCreatePage = async ({ page, actions }) => {
 
     const dynamicRoutes = [
         {
-            routeMatchTestRegEx: /^\/mobile\/p/,
-            routeMatchPathRegEx: "/mobile/p/*"
+            routeMatchTestRegEx: /^\/p/,
+            routeMatchPathRegEx: "/p/*"
         },
         {
-            routeMatchTestRegEx: /^\/mobile\/search/,
-            routeMatchPathRegEx: "/mobile/search/*"
+            routeMatchTestRegEx: /^\/search/,
+            routeMatchPathRegEx: "/search/*"
         },
         {
             routeMatchTestRegEx: /^\/app/,
