@@ -41,8 +41,6 @@ const IndexPage = () => {
       <Link to="/mobile/">Go to mobile site</Link>
       <br />
       <Link to="/mobile/latest">Go to latest page</Link>
-      <br />
-      <Link to="/mobile/create">Go to create post</Link>
     </Layout>
   )
 }

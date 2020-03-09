@@ -127,7 +127,7 @@ const PostsLatest = (props) => {
       postsPerPage: postsPerPage,
       filter,
       orderBy: 'published_on',
-      order: 'DESC'
+      order: 'ASC'
     },
     onCompleted: handleNewData,
     notifyOnNetworkStatusChange: true,
@@ -143,7 +143,7 @@ const PostsLatest = (props) => {
         postsPerPage: postsPerPage,
         filter,
         orderBy: 'published_on',
-        order: 'DESC'
+        order: 'ASC'
       },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
@@ -282,7 +282,7 @@ const PostsLatest = (props) => {
   )
 };
 
-const IndexPage = () => {
+const LatestPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
@@ -291,4 +291,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default LatestPage
