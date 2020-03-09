@@ -9,6 +9,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useMediaQuery } from 'react-responsive'
+import NavigationBar from "./NavigationBar";
 
 
 const Header = ({ siteTitle }) => {
@@ -45,12 +46,20 @@ const Header = ({ siteTitle }) => {
       navigate(`/s?search_term=${encodeURIComponent(searchBarText)}`)
     }
   }
+  const handleNavBarBtnClick = () => {
+    setIsNavBarShowing(!isNavbarShowing)
+  }
+  const handleOverlayClick = () => {
+    setIsNavBarShowing(false)
+  }
 
 
   const theme = React.useContext(ThemePalletteContext)
   const [isSearchBarShowing, setIsSearchBarShowing] = React.useState(false);
   const [searchBarText, setSearchBarText] = React.useState("");
+  const [isNavbarShowing, setIsNavBarShowing] = React.useState(false);
   let searchBarRef = React.createRef();
+  let navbarRef = React.createRef();
 
   return (
     <header
@@ -59,6 +68,19 @@ const Header = ({ siteTitle }) => {
         fontFamily: theme.font_family
       }}
     >
+      <NavigationBar
+        className="navbarExpanded"
+        ref={navbarRef}
+        style={{
+          left: isNavbarShowing ? 'calc(100% - 256px)' : '100%',
+          boxShadow: 'none'
+        }}
+      />
+      <div className={isNavbarShowing ? "navbarOverlayShowing" : "navbarOverlay"}
+        onClick={handleOverlayClick}
+      >
+      </div>
+
       <div
         style={{
           margin: `0 auto`,
@@ -115,7 +137,7 @@ const Header = ({ siteTitle }) => {
               {
                 !isDesktopOrLaptop &&
                 <AnchorButton>
-                  <MenuIcon htmlColor={theme.color_text} />
+                  <MenuIcon htmlColor={theme.color_text} onClick={handleNavBarBtnClick} />
                 </AnchorButton>
               }
             </div>
