@@ -128,7 +128,7 @@ const ThemePreferenceSection = (props) => {
                         <div>
                             <Margin horizontal="0.5rem" vertical="0.5rem">
                                 <div>
-                                    <Margin right="0.5rem">
+                                    <Margin right="0.5rem" vertical="0.5em">
                                         <ButtonDark onClick={handleThemePreviewOriginalDayClick}>
                                             <WbSunnyIcon /> Try Day Theme
                                         </ButtonDark>
