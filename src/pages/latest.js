@@ -1,14 +1,14 @@
 import React from "react"
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-import { getIfAvailable, ellipsedSubstring, isBrowser } from '../../utils'
-import PostHolderCard from '../../components/UIElements/PostHolderCard'
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import { getIfAvailable, ellipsedSubstring, isBrowser } from '../utils'
+import PostHolderCard from '../components/UIElements/PostHolderCard'
 import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
 import { FormSelect, FormCheckbox } from "shards-react";
-import Margin from "../../components/CompoundComponents/Margin"
-import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
+import Margin from "../components/CompoundComponents/Margin"
+import ThemePalletteContext from "../components/Contexts/ThemePalletteContext"
 
 
 const LATEST_POSTS_QUERY = gql`

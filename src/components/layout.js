@@ -9,15 +9,17 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"
 import "shards-ui/dist/css/shards.min.css"
 import "./layout.css"
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
-import gql from 'graphql-tag';
-import { useSubscription } from '@apollo/react-hooks';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import gql from 'graphql-tag'
+import { useSubscription } from '@apollo/react-hooks'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { useMediaQuery } from 'react-responsive'
+import NavigationBar from "./NavigationBar"
+
 
 const POSTS_SUBSCRIPTION = gql`
 
@@ -27,7 +29,6 @@ subscription{
   }
 }
 `;
-
 
 const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
   const isDesktopOrLaptop = useMediaQuery({
@@ -64,9 +65,12 @@ const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent 
         display: isDesktopOrLaptop ? "flex" : "block",
         flexDirection: 'row'
       }}>
-        {isDesktopOrLaptop && leftSideDesktopComponent}
+        {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
         <div style={{
-          flex: 1
+          flex: 3,
+          marginLeft: isDesktopOrLaptop ? '100px' : 0,
+          overflowY: 'auto',
+          height: '100vh'
         }}>
           <Header siteTitle={data.site.siteMetadata.title} />
           <div

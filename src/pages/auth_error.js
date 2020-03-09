@@ -19,10 +19,6 @@ const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
       </pre>
 
       <p><Link to="/signup">Sign Up</Link> | <Link to="/app/login">Log In</Link></p>
-
-      <Link to="/page-2/">Go to page 2</Link>
-      <br />
-      <Link to="/mobile/">Go to mobile site</Link>
     </Layout>
   )
 }
