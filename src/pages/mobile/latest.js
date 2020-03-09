@@ -127,7 +127,7 @@ const PostsLatest = (props) => {
       postsPerPage: postsPerPage,
       filter,
       orderBy: 'published_on',
-      order: 'ASC'
+      order: 'DESC'
     },
     onCompleted: handleNewData,
     notifyOnNetworkStatusChange: true,
@@ -143,7 +143,7 @@ const PostsLatest = (props) => {
         postsPerPage: postsPerPage,
         filter,
         orderBy: 'published_on',
-        order: 'ASC'
+        order: 'DESC'
       },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;

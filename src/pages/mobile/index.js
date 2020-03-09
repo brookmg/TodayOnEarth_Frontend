@@ -3,10 +3,12 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import { getIfAvailable, ellipsedSubstring, isBrowser } from '../../utils'
+import { getIfAvailable, ellipsedSubstring, isBrowser, removeRedundantWhitespace } from '../../utils'
 import PostHolderCard from '../../components/UIElements/PostHolderCard'
 import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
 import { FormSelect, FormCheckbox } from "shards-react";
+import Margin from "../../components/CompoundComponents/Margin";
+import ParseLinks from "../../components/UIElements/ParseLinks";
 
 
 const TRENDING_TODAY_QUERY = gql`
@@ -204,9 +206,88 @@ const PostsTrendingToday = (props) => {
   )
 };
 
+
+const GET_TODAYS_TRENDING_KEYWORDS = gql`
+
+query getTodaysTrendingKeywords($semantics: Boolean){
+  getTodaysTrendingKeywords(semantics:$semantics, page:0, range: 20){
+    interest
+    score
+  }
+}
+
+`;
+
+const TrendingKeywords = (props) => {
+  const [semanticEnabled, setSemanticEnabled] = React.useState(false)
+  const { loading, error, data } = useQuery(GET_TODAYS_TRENDING_KEYWORDS, {
+    variables: {
+      semantics: semanticEnabled
+    }
+  });
+
+  const handleSemanticsChange = () => setSemanticEnabled(!semanticEnabled)
+
+  const keywords = data && data.getTodaysTrendingKeywords
+  return (
+    <>
+      <Margin horizontal="2em">
+        <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
+          <h3>Today's trending keywords</h3>
+          <div style={{ textAlign: 'left' }}>
+            <FormCheckbox
+              toggle
+              small
+              checked={semanticEnabled}
+              onChange={handleSemanticsChange}>
+              Enable Semantic Analysis
+      </FormCheckbox>
+
+          </div>
+          <div>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error.message}</p>}
+          </div>
+
+
+          <div>
+            {
+              !loading && keywords && keywords.filter(e => e.interest).slice(0, 20).map((e, i) => <div>
+                <p style={{
+                  margin: 0,
+                  textAlign: 'left',
+                }}>
+                  No {i + 1}: <ParseLinks>{e.interest}</ParseLinks>
+                </p>
+              </div>)
+            }
+          </div>
+        </div>
+      </Margin>
+    </>
+  )
+}
+
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout
+      rightSideDesktopComponent={(
+        <div style={{
+          flex: 1,
+          marginTop: '15em'
+        }}
+        >
+          <TrendingKeywords />
+        </div>
+      )}
+
+      leftSideDesktopComponent={(<div style={{
+        backgroundColor: 'red',
+        flex: 1
+      }}
+      >
+        asdf
+      </div>)}>
       <SEO title="Home" />
       <PostsTrendingToday />
     </Layout>

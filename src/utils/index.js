@@ -30,3 +30,13 @@ export const isBrowser = () => typeof window !== "undefined"
 export const removeRedundantWhitespace = (str) => {
     return str.replace(/\s+/g, ' ')
 }
+
+export const convertDateToInputFormat = (d) => {
+    const date = new Date(d)
+    try {
+        return date.toISOString().split('T')[0]
+    }
+    catch (e) {
+        console.error(e)
+    }
+}
