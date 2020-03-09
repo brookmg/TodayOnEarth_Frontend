@@ -41,26 +41,25 @@ export default function PostHolderCard(props) {
                             minHeight: '100%',
                         }} src={props.imgSrc} />
                     </div>
-
-                    <CardBody>
-
-                        {props.title && <ThemedCardTitle>
-                            <ParseLinks sourceLink={props.sourceLink}>{props.title}</ParseLinks>
-                        </ThemedCardTitle>}
-                        {props.body &&
-                            <>
-                                <p>
-                                    <ParseLinks sourceLink={props.sourceLink}>
-                                        {props.body}
-                                    </ParseLinks>
-                                </p>
-
-
-                                <ButtonDark>Read more &rarr;</ButtonDark>
-
-                            </>
-                        }
-                    </CardBody>
+                    {
+                        (props.title || props.body) &&
+                        <CardBody>
+                            {props.title && <ThemedCardTitle>
+                                <ParseLinks sourceLink={props.sourceLink}>{props.title}</ParseLinks>
+                            </ThemedCardTitle>}
+                            {props.body &&
+                                <>
+                                    <p>
+                                        <ParseLinks sourceLink={props.sourceLink}>
+                                            {props.body}
+                                        </ParseLinks>
+                                    </p>
+                                    
+                                    <ButtonDark>Read more &rarr;</ButtonDark>
+                                </>
+                            }
+                        </CardBody>
+                    }
                 </Link>
 
                 <Margin left='1rem' bottom='0.5rem'>
