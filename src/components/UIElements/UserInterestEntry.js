@@ -11,7 +11,7 @@ import { isLoggedIn } from "../../services/auth"
 import { removeRedundantWhitespace, isBrowser } from "../../utils"
 import ButtonInterest from './ButtonInterest'
 import gql from 'graphql-tag';
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import ThemedCard from './ThemedCard';
 import ThemedCardTitle from "./ThemedCardTitle";
 import ButtonDark from "./ButtonDark";
@@ -42,20 +42,16 @@ mutation updateInterests($interests:[IInterest]!){
 const UserInterestEntry = (props) => {
     const theme = React.useContext(ThemePalletteContext)
 
-    React.useEffect(() => {
-        getInterests()
-    }, [])
 
     const [interestInputText, setInterestInputText] = React.useState("")
     const [interestScore, setInterestScore] = React.useState(0)
     const [interestMap, setInterestMap] = React.useState({})
     const [selectedInterest, setSelectedInterest] = React.useState("")
 
-    const [getInterests, { loading, error }] = useLazyQuery(GET_USER_INTERESTS,
+    const { loading, error, refetch } = useQuery(GET_USER_INTERESTS,
         {
-
             onCompleted: data => {
-                if (data && data.getUser.interests) {
+                if (isLoggedIn() && data && data.getUser.interests) {
                     const serverSideInterests = {}
                     data.getUser.interests.forEach(e => serverSideInterests[e.interest] = e.score)
                     setInterestMap(serverSideInterests)
@@ -64,7 +60,8 @@ const UserInterestEntry = (props) => {
                 }
             },
 
-            fetchPolicy: "network-only"
+            notifyOnNetworkStatusChange: true,
+            fetchPolicy: 'no-cache'
         });
     const [updateInterests, { loading: mutationLoading, error: mutationError }] = useMutation(UPDATE_USER_INTERESTS);
 
@@ -97,7 +94,7 @@ const UserInterestEntry = (props) => {
             e.preventDefault();
         }
     }
-    const handleRevertClicked = () => getInterests()
+    const handleRevertClicked = () => isLoggedIn() && refetch()
     const handleUpdateClicked = () => {
         const interests = []
 
@@ -188,7 +185,7 @@ const UserInterestEntry = (props) => {
 
                         </Margin>
                         <div>
-                            <Margin horizontal="0.5rem">
+                            <Margin horizontal="0.5rem" vertical="0.5em" >
                                 <ButtonDark onClick={handleRevertClicked}>Revert Changes</ButtonDark>
                                 <ButtonSuccess onClick={handleUpdateClicked}>Update Interests</ButtonSuccess>
                             </Margin>

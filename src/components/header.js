@@ -2,17 +2,21 @@ import { navigate } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import { FormInput, Fade } from "shards-react";
-import { isLoggedIn, signOut } from "../services/auth"
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
-import AuthContext from "./Contexts/AuthContext"
 import AnchorButton from "./UIElements/AnchorButton"
 import AnimatedLink from "./UIElements/AnimatedLink"
 import SettingsIcon from '@material-ui/icons/Settings';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useMediaQuery } from 'react-responsive'
+import NavigationBar from "./NavigationBar";
 
 
 const Header = ({ siteTitle }) => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-device-width: 1224px)'
+  })
+
   const handleSearchButtonClick = (e) => {
     if (searchBarText === "") {
       searchBarRef.current.focus()
@@ -39,22 +43,23 @@ const Header = ({ siteTitle }) => {
   const handleSearchSubmit = (e) => {
     if (searchBarText !== "") {
       console.log("searching for:", searchBarText)
-      navigate(`/mobile/s?search_term=${encodeURIComponent(searchBarText)}`)
+      navigate(`/s?search_term=${encodeURIComponent(searchBarText)}`)
     }
+  }
+  const handleNavBarBtnClick = () => {
+    setIsNavBarShowing(!isNavbarShowing)
+  }
+  const handleOverlayClick = () => {
+    setIsNavBarShowing(false)
   }
 
 
   const theme = React.useContext(ThemePalletteContext)
-  const user = React.useContext(AuthContext)
   const [isSearchBarShowing, setIsSearchBarShowing] = React.useState(false);
   const [searchBarText, setSearchBarText] = React.useState("");
+  const [isNavbarShowing, setIsNavBarShowing] = React.useState(false);
   let searchBarRef = React.createRef();
-
-
-  let content = "You are not logged in"
-  if (isLoggedIn()) {
-    content = `Hello, ${user.first_name}`
-  }
+  let navbarRef = React.createRef();
 
   return (
     <header
@@ -63,24 +68,19 @@ const Header = ({ siteTitle }) => {
         fontFamily: theme.font_family
       }}
     >
-      <span>{content}</span>
-      <AnimatedLink to="/app/profile">Profile</AnimatedLink>
+      <NavigationBar
+        className="navbarExpanded"
+        ref={navbarRef}
+        style={{
+          left: isNavbarShowing ? 'calc(100% - 256px)' : '100%',
+          boxShadow: 'none'
+        }}
+      />
+      <div className={isNavbarShowing ? "navbarOverlayShowing" : "navbarOverlay"}
+        onClick={handleOverlayClick}
+      >
+      </div>
 
-      {isLoggedIn() ? (
-        <a
-          href="/"
-          onClick={event => {
-            event.preventDefault()
-            signOut().then(() => {
-              user.refreshActiveUser(() => {
-                navigate(`/app/login`)
-              })
-            })
-          }}
-        >
-          Logout
-          </a>
-      ) : null}
       <div
         style={{
           margin: `0 auto`,
@@ -89,7 +89,8 @@ const Header = ({ siteTitle }) => {
         }}
       >
         <div style={{
-          display: 'flex'
+          display: 'flex',
+          flexDirection: isDesktopOrLaptop ? "" : "column-reverse"
         }}>
 
           <h1 style={{ flex: 1, margin: 0, fontFamily: theme.font_family }}>
@@ -109,6 +110,7 @@ const Header = ({ siteTitle }) => {
             alignItems: 'center'
           }}>
             <Fade
+              style={{ flex: 1 }}
               onMouseEnter={handleSearchButtonMouseEnter}
               in={isSearchBarShowing}>
 
@@ -121,21 +123,25 @@ const Header = ({ siteTitle }) => {
                 size="sm" placeholder="Search for keywords" />
 
             </Fade>
-            <AnchorButton
-              onMouseEnter={handleSearchButtonMouseEnter}
-              onClick={handleSearchButtonClick}>
-              <SearchIcon htmlColor={theme.color_text} />
-            </AnchorButton>
+            <div>
+              <AnchorButton
+                onMouseEnter={handleSearchButtonMouseEnter}
+                onClick={handleSearchButtonClick}>
+                <SearchIcon htmlColor={theme.color_text} />
+              </AnchorButton>
 
-            <AnimatedLink to="/mobile/settings">
-              <SettingsIcon htmlColor={theme.color_text} />
-            </AnimatedLink>
+              <AnimatedLink to="/settings">
+                <SettingsIcon htmlColor={theme.color_text} />
+              </AnimatedLink>
 
-            <AnchorButton>
-              <MenuIcon htmlColor={theme.color_text} />
-            </AnchorButton>
+              {
+                !isDesktopOrLaptop &&
+                <AnchorButton>
+                  <MenuIcon htmlColor={theme.color_text} onClick={handleNavBarBtnClick} />
+                </AnchorButton>
+              }
+            </div>
           </div>
-
 
         </div>
 

@@ -3,22 +3,24 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { getIfAvailable, ellipsedSubstring, isBrowser, removeRedundantWhitespace } from '../utils'
+import { getIfAvailable, ellipsedSubstring, isBrowser } from '../utils'
 import PostHolderCard from '../components/UIElements/PostHolderCard'
 import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
 import { FormSelect, FormCheckbox } from "shards-react";
-import Margin from "../components/CompoundComponents/Margin";
-import ParseLinks from "../components/UIElements/ParseLinks";
+import Margin from "../components/CompoundComponents/Margin"
+import ThemePalletteContext from "../components/Contexts/ThemePalletteContext"
 
 
-const TRENDING_TODAY_QUERY = gql`
+const LATEST_POSTS_QUERY = gql`
 
-query getPaginatedPosts(
+query getLatestPaginatedPosts(
   $page: Int
   $postsPerPage: Int
-  $filter: [FilterQuery!]!
+  $filter: [FilterQuery!]!,
+  $orderBy: String,
+  $order: String
 ) {
-  getPostCustomized(page: $page, range: $postsPerPage, jsonQuery: $filter) {
+  getPostCustomized(page: $page, range: $postsPerPage, jsonQuery: $filter, orderBy: $orderBy, order: $order) {
     postid,
     title,
     provider,
@@ -52,6 +54,42 @@ query getPaginatedPosts(
 }
 `;
 
+const POST_SUBSCRIPTION = gql`
+
+subscription getNewPosts{
+  postAdded{
+    postid,
+    title,
+    provider,
+    source_link,
+    published_on,
+    metadata {
+      community_interaction {
+        views
+        likes
+        replies
+        retweets
+        comments
+        video_views
+      }
+    
+      ... on TelegramMetadata{
+        message{
+          image{
+            src
+          }
+        }
+      }
+       ... on InstagramMetadata{
+        post{
+          thumbnail_image
+        }
+      }
+    },
+  }
+}
+
+`
 
 const DEFAULT_POST_COUNT_PER_PAGE = 5
 const DEFAULT_POST_SOURCES = {
@@ -61,7 +99,9 @@ const DEFAULT_POST_SOURCES = {
   "twitter.com": true
 }
 
-const PostsTrendingToday = (props) => {
+const PostsLatest = (props) => {
+  const theme = React.useContext(ThemePalletteContext)
+
   const [pageNumber, setPageNumber] = React.useState(0)
   const [postsPerPage, setPostsPerPage] = React.useState(DEFAULT_POST_COUNT_PER_PAGE)
   const [hasMorePosts, setHasMorePosts] = React.useState(true)
@@ -81,16 +121,43 @@ const PostsTrendingToday = (props) => {
   const filter = []
   Object.keys(postSources).forEach((e) => postSources[e] && filter.push({ source: e, connector: "OR" }))
 
-  const { loading, error } = useQuery(TRENDING_TODAY_QUERY, {
+  const { subscribeToMore, loading, error } = useQuery(LATEST_POSTS_QUERY, {
     variables: {
       page: pageNumber,
       postsPerPage: postsPerPage,
-      filter
+      filter,
+      orderBy: 'published_on',
+      order: 'ASC'
     },
     onCompleted: handleNewData,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: "cache-and-network"
   });
+
+  React.useEffect(() => {
+
+    subscribeToMore({
+      document: POST_SUBSCRIPTION,
+      variables: {
+        page: pageNumber,
+        postsPerPage: postsPerPage,
+        filter,
+        orderBy: 'published_on',
+        order: 'ASC'
+      },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const newFeedItem = subscriptionData.data.postAdded[0];
+
+        setPosts([newFeedItem, ...posts])
+
+        return Object.assign({}, prev, {
+          getPostCustomized: [newFeedItem, ...prev.getPostCustomized]
+        });
+      }
+    })
+
+  }, [])
 
   const handleScroll = (e) => {
     if (posts.length && (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -143,7 +210,7 @@ const PostsTrendingToday = (props) => {
 
   return (
     <div>
-      <h2>Trending Today</h2>
+      <h2>Latest Posts</h2>
       <div style={{ display: "flex" }}>
         <span style={{ flex: 1, alignSelf: 'center' }}>
           <div>
@@ -178,6 +245,15 @@ const PostsTrendingToday = (props) => {
           </label>
         </div>
       </div>
+      <Margin top="1em">
+        <p style={{
+          textAlign: "center",
+          color: theme.color_text_faded
+        }}>
+          - New posts will be displayed here in real-time -
+        </p>
+      </Margin>
+
       {posts && posts.length !== 0 &&
         posts.map(
           p => <PostHolderCard
@@ -206,84 +282,13 @@ const PostsTrendingToday = (props) => {
   )
 };
 
-
-const GET_TODAYS_TRENDING_KEYWORDS = gql`
-
-query getTodaysTrendingKeywords($semantics: Boolean){
-  getTodaysTrendingKeywords(semantics:$semantics, page:0, range: 20){
-    interest
-    score
-  }
-}
-
-`;
-
-const TrendingKeywords = (props) => {
-  const [semanticEnabled, setSemanticEnabled] = React.useState(false)
-  const { loading, error, data } = useQuery(GET_TODAYS_TRENDING_KEYWORDS, {
-    variables: {
-      semantics: semanticEnabled
-    }
-  });
-
-  const handleSemanticsChange = () => setSemanticEnabled(!semanticEnabled)
-
-  const keywords = data && data.getTodaysTrendingKeywords
+const LatestPage = () => {
   return (
-    <>
-      <Margin horizontal="2em">
-        <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
-          <h3>Today's trending keywords</h3>
-          <div style={{ textAlign: 'left' }}>
-            <FormCheckbox
-              toggle
-              small
-              checked={semanticEnabled}
-              onChange={handleSemanticsChange}>
-              Enable Semantic Analysis
-      </FormCheckbox>
-
-          </div>
-          <div>
-            {loading && <p>Loading...</p>}
-            {error && <p>Error: {error.message}</p>}
-          </div>
-
-
-          <div>
-            {
-              !loading && keywords && keywords.filter(e => e.interest).slice(0, 20).map((e, i) => <div>
-                <p style={{
-                  margin: 0,
-                  textAlign: 'left',
-                }}>
-                  No {i + 1}: <ParseLinks>{e.interest}</ParseLinks>
-                </p>
-              </div>)
-            }
-          </div>
-        </div>
-      </Margin>
-    </>
-  )
-}
-
-const IndexPage = () => {
-  return (
-    <Layout
-      rightSideDesktopComponent={(
-        <div style={{
-          flex: 1,
-          marginTop: '15em'
-        }}
-        >
-          <TrendingKeywords />
-        </div>
-      )}>
+    <Layout>
       <SEO title="Home" />
-      <PostsTrendingToday />
+      <PostsLatest />
     </Layout>
   )
 }
 
-export default IndexPage
+export default LatestPage

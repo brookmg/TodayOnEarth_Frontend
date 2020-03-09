@@ -1,21 +1,21 @@
 import React from "react"
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-import withQueryParsedURL from "../../components/HOCs/withQueryParsedURL"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
 import {
     CardBody,
     Button,
     FormCheckbox,
 } from "shards-react";
-import Margin from "../../components/CompoundComponents/Margin"
-import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
-import DefaultThemeDefinition, { availableFonts } from "../../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
-import ButtonDark from "../../components/UIElements/ButtonDark"
-import ButtonSuccess from "../../components/UIElements/ButtonSuccess"
-import { isBrowser } from "../../utils"
-import UserInterestEntry from "../../components/UIElements/UserInterestEntry"
-import ThemedCard from "../../components/UIElements/ThemedCard";
-import ThemedCardTitle from "../../components/UIElements/ThemedCardTitle";
+import Margin from "../components/CompoundComponents/Margin"
+import ThemePalletteContext from "../components/Contexts/ThemePalletteContext"
+import DefaultThemeDefinition, { availableFonts } from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
+import ButtonDark from "../components/UIElements/ButtonDark"
+import ButtonSuccess from "../components/UIElements/ButtonSuccess"
+import { isBrowser } from "../utils"
+import UserInterestEntry from "../components/UIElements/UserInterestEntry"
+import ThemedCard from "../components/UIElements/ThemedCard";
+import ThemedCardTitle from "../components/UIElements/ThemedCardTitle";
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
@@ -128,7 +128,7 @@ const ThemePreferenceSection = (props) => {
                         <div>
                             <Margin horizontal="0.5rem" vertical="0.5rem">
                                 <div>
-                                    <Margin right="0.5rem">
+                                    <Margin right="0.5rem" vertical="0.5em">
                                         <ButtonDark onClick={handleThemePreviewOriginalDayClick}>
                                             <WbSunnyIcon /> Try Day Theme
                                         </ButtonDark>

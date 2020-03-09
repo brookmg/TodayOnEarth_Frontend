@@ -9,12 +9,32 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"
 import "shards-ui/dist/css/shards.min.css"
 import "./layout.css"
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
+import gql from 'graphql-tag'
+import { useSubscription } from '@apollo/react-hooks'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useMediaQuery } from 'react-responsive'
+import NavigationBar from "./NavigationBar"
 
-const Layout = ({ children }) => {
+
+const POSTS_SUBSCRIPTION = gql`
+
+subscription{
+  postAdded{
+    title
+  }
+}
+`;
+
+const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-device-width: 1224px)'
+  })
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -25,28 +45,53 @@ const Layout = ({ children }) => {
     }
   `)
   const theme = React.useContext(ThemePalletteContext)
+
+  const { data: postData, loading } = useSubscription(
+    POSTS_SUBSCRIPTION,
+  );
+
+  if (postData) {
+    const postAdded = postData.postAdded[0]
+
+    if (postAdded.title && !loading) toast(postAdded.title)
+  }
+
   return (
-    <div style={{
-      color: theme.color_text,
-      backgroundColor: theme.color_background
-    }}>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-          fontFamily: theme.font_family
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
+    <>
+      <ToastContainer hideProgressBar={true} />
+      <div style={{
+        color: theme.color_text,
+        backgroundColor: theme.color_background,
+        display: isDesktopOrLaptop ? "flex" : "block",
+        flexDirection: 'row'
+      }}>
+        {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
+        <div style={{
+          flex: 3,
+          marginLeft: isDesktopOrLaptop ? '100px' : 0,
+          overflowY: 'auto',
+          height: '100vh'
+        }}>
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <div
+            style={{
+              margin: `0 auto`,
+              maxWidth: 960,
+              padding: `0 1.0875rem 1.45rem`,
+              fontFamily: theme.font_family
+            }}
+          >
+            <main>{children}</main>
+            <footer>
+              © {new Date().getFullYear()}, Built with
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+              <a href="https://www.gatsbyjs.org">Gatsby</a>
+            </footer>
+          </div>
+        </div>
+        {isDesktopOrLaptop && rightSideDesktopComponent}
       </div>
-    </div>
+    </>
   )
 }
 
