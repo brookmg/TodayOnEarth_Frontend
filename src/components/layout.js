@@ -13,6 +13,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 import "./layout.css"
 import ThemePalletteContext from "./Contexts/ThemePalletteContext"
+import gql from 'graphql-tag';
+import { useSubscription } from '@apollo/react-hooks';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const POSTS_SUBSCRIPTION = gql`
+
+subscription{
+  postAdded{
+    title
+  }
+}
+`;
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -25,11 +39,23 @@ const Layout = ({ children }) => {
     }
   `)
   const theme = React.useContext(ThemePalletteContext)
+
+  const { data: postData, loading } = useSubscription(
+    POSTS_SUBSCRIPTION,
+  );
+
+  if (postData) {
+    const postAdded = postData.postAdded[0]
+
+    if (postAdded.title && !loading) toast(postAdded.title)
+  }
+
   return (
     <div style={{
       color: theme.color_text,
       backgroundColor: theme.color_background
     }}>
+      <ToastContainer hideProgressBar={true} />
       <Header siteTitle={data.site.siteMetadata.title} />
       <div
         style={{
