@@ -273,7 +273,9 @@ const IndexPage = () => {
       rightSideDesktopComponent={(
         <div style={{
           flex: 1,
-          marginTop: '15em'
+          paddingTop: '15em',
+          height: '100vh',
+          overflow: 'auto'
         }}
         >
           <TrendingKeywords />
