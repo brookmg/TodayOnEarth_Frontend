@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "ToE-Frontend",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A frontend client for Today on Earth",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Abel Tesfaye <abeltesfaye45@gmail.com>",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
     "@material-ui/core": "^4.9.5",
