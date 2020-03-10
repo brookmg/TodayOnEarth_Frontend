@@ -94,9 +94,7 @@ const PostsTrendingToday = ({ scrollValue, height }) => {
     fetchPolicy: "cache-and-network"
   });
 
-  if (posts.length && scrollValue !== 0 && scrollValue >= height) {
-    if (!hasMorePosts) return
-
+  if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
     if (prevScrollValue !== scrollValue)
       setPageNumber(pageNumber + 1)
 

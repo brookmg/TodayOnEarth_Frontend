@@ -313,9 +313,7 @@ const PostsSearch = withQueryParsedURL((props) => {
     const scrollValue = props.scrollValue
     const height = props.height
 
-    if (posts.length && scrollValue !== 0 && scrollValue >= height) {
-        if (!hasMorePosts) return
-
+    if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
         if (prevScrollValue !== scrollValue)
             setPageNumber(pageNumber + 1)
 
