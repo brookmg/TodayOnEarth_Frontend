@@ -99,7 +99,9 @@ const DEFAULT_POST_SOURCES = {
   "twitter.com": true
 }
 
-const PostsLatest = (props) => {
+let prevScrollValue = -1
+
+const PostsLatest = ({ scrollValue, height }) => {
   const theme = React.useContext(ThemePalletteContext)
 
   const [pageNumber, setPageNumber] = React.useState(0)
@@ -159,13 +161,15 @@ const PostsLatest = (props) => {
 
   }, [])
 
-  const handleScroll = (e) => {
-    if (posts.length && (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      if (!hasMorePosts) return
+  if (posts.length && scrollValue !== 0 && scrollValue >= height) {
+    if (!hasMorePosts) return
 
+    if (prevScrollValue !== scrollValue)
       setPageNumber(pageNumber + 1)
-    }
+
+    prevScrollValue = scrollValue
   }
+
 
   const resetPosts = () => {
     setPageNumber(0)
@@ -204,9 +208,6 @@ const PostsLatest = (props) => {
     resetPosts()
     setPostSources(newSources);
   }
-
-  if (isBrowser())
-    window.onscroll = (e) => handleScroll(e)
 
   return (
     <div>
@@ -284,9 +285,16 @@ const PostsLatest = (props) => {
 
 const LatestPage = () => {
   return (
-    <Layout>
-      <SEO title="Home" />
-      <PostsLatest />
+    <Layout render={
+      ({ scrollValue, height }) => {
+        return (
+          <>
+            <SEO title="Home" />
+            <PostsLatest scrollValue={scrollValue} height={height} />
+          </>
+        )
+      }}>
+
     </Layout>
   )
 }

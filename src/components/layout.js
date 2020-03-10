@@ -30,7 +30,7 @@ subscription{
 }
 `;
 
-const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
+const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-device-width: 1224px)'
   })
@@ -45,6 +45,15 @@ const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent 
     }
   `)
   const theme = React.useContext(ThemePalletteContext)
+  const scrollDivRef = React.createRef()
+  const [scrollDivState, setScrollDivState] = React.useState({ scrollValue: 0, height: 0 })
+
+  const handleOnScroll = () => {
+    setScrollDivState({
+      scrollValue: scrollDivRef.current.scrollTop + scrollDivRef.current.offsetHeight,
+      height: scrollDivRef.current.scrollHeight
+    })
+  }
 
   const { data: postData, loading } = useSubscription(
     POSTS_SUBSCRIPTION,
@@ -66,12 +75,15 @@ const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent 
         flexDirection: 'row'
       }}>
         {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
-        <div style={{
-          flex: 3,
-          marginLeft: isDesktopOrLaptop ? '100px' : 0,
-          overflowY: 'auto',
-          height: '100vh'
-        }}>
+        <div
+          onScroll={handleOnScroll}
+          ref={scrollDivRef}
+          style={{
+            flex: 3,
+            marginLeft: isDesktopOrLaptop ? '100px' : 0,
+            overflowY: 'auto',
+            height: '100vh'
+          }}>
           <Header siteTitle={data.site.siteMetadata.title} />
           <div
             style={{
@@ -81,7 +93,15 @@ const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent 
               fontFamily: theme.font_family
             }}
           >
-            <main>{children}</main>
+            <main>
+              {
+                (
+                  render &&
+                  render(scrollDivState)
+                ) ||
+                children
+              }
+            </main>
             <footer>
               © {new Date().getFullYear()}, Built with
           {` `}
@@ -93,10 +113,6 @@ const Layout = ({ children, rightSideDesktopComponent, leftSideDesktopComponent 
       </div>
     </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout

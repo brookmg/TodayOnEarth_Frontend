@@ -54,7 +54,7 @@ export default function PostHolderCard(props) {
                                             {props.body}
                                         </ParseLinks>
                                     </p>
-                                    
+
                                     <ButtonDark>Read more &rarr;</ButtonDark>
                                 </>
                             }
@@ -70,6 +70,7 @@ export default function PostHolderCard(props) {
 
                 <CardFooter style={{
                     color: theme.color_text_faded,
+                    backgroundColor: theme.color_background
                 }}>
 
                     <a
