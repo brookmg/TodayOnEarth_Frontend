@@ -11,6 +11,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 
 const NavigationBar = React.forwardRef((props, ref) => {
@@ -19,6 +20,7 @@ const NavigationBar = React.forwardRef((props, ref) => {
     const links = [
         { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
         { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
+        { text: "Topic Posts", url: "/trendsByTopic", icon: <VisibilityIcon /> },
         { text: "Advanced Search", url: "/s?expanded=1", icon: <FindInPageIcon /> },
         { text: "Settings", url: "/settings", icon: <SettingsIcon /> },
     ];
