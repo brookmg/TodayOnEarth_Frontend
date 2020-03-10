@@ -227,7 +227,9 @@ const AdvancedFiltersSection = (props) => {
 
 }
 
-const SearchPage = withQueryParsedURL((props) => {
+let prevScrollValue = -1
+
+const PostsSearch = withQueryParsedURL((props) => {
     const queryParsedURL = props.queryParsedURL
 
     const searchTerm = queryParsedURL.search_term
@@ -308,13 +310,18 @@ const SearchPage = withQueryParsedURL((props) => {
         }
     );
 
-    const handleScroll = (e) => {
-        if (posts.length && (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            if (!hasMorePosts) return
+    const scrollValue = props.scrollValue
+    const height = props.height
 
+    if (posts.length && scrollValue !== 0 && scrollValue >= height) {
+        if (!hasMorePosts) return
+
+        if (prevScrollValue !== scrollValue)
             setPageNumber(pageNumber + 1)
-        }
+
+        prevScrollValue = scrollValue
     }
+
 
     const resetPosts = () => {
         setPosts([])
@@ -354,13 +361,8 @@ const SearchPage = withQueryParsedURL((props) => {
         setPostSources(newSources);
     }
 
-    if (isBrowser())
-        window.onscroll = (e) => handleScroll(e)
-
     return (
-        <Layout>
-            <SEO title="Home" />
-
+        <div scrollValue={scrollValue} height={height} >
             <AdvancedFiltersSection
                 searchTerm={searchTerm}
                 locations={locations}
@@ -376,7 +378,7 @@ const SearchPage = withQueryParsedURL((props) => {
                         <span style={{ flex: 1, alignSelf: 'center' }}>
                             <div>
                                 Feed sources
-          </div>
+                                            </div>
                             <span>
                                 {
                                     Object.keys(postSources).map(
@@ -396,7 +398,7 @@ const SearchPage = withQueryParsedURL((props) => {
                         <div>
                             <label>
                                 Posts per page:
-            <FormSelect size="sm" onChange={handlePostsPerPageChange}>
+<FormSelect size="sm" onChange={handlePostsPerPageChange}>
                                     {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (
                                         <option key={i} value={e}>
                                             {e}
@@ -441,8 +443,24 @@ const SearchPage = withQueryParsedURL((props) => {
                     }
                 </div>
             </Margin>
-        </Layout>
+        </div>
     )
 })
 
-export default SearchPage
+const SearchPage = () => {
+    return (
+        <Layout render={
+            ({ scrollValue, height }) => {
+                return (
+                    <>
+                        <SEO title="Home" />
+                        <PostsSearch scrollValue={scrollValue} height={height} />
+                    </>
+                )
+            }}>
+
+        </Layout>
+    )
+}
+
+export default SearchPage;

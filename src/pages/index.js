@@ -61,7 +61,9 @@ const DEFAULT_POST_SOURCES = {
   "twitter.com": true
 }
 
-const PostsTrendingToday = (props) => {
+let prevScrollValue = -1
+
+const PostsTrendingToday = ({ scrollValue, height }) => {
   const [pageNumber, setPageNumber] = React.useState(0)
   const [postsPerPage, setPostsPerPage] = React.useState(DEFAULT_POST_COUNT_PER_PAGE)
   const [hasMorePosts, setHasMorePosts] = React.useState(true)
@@ -92,13 +94,15 @@ const PostsTrendingToday = (props) => {
     fetchPolicy: "cache-and-network"
   });
 
-  const handleScroll = (e) => {
-    if (posts.length && (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      if (!hasMorePosts) return
+  if (posts.length && scrollValue !== 0 && scrollValue >= height) {
+    if (!hasMorePosts) return
 
+    if (prevScrollValue !== scrollValue)
       setPageNumber(pageNumber + 1)
-    }
+
+    prevScrollValue = scrollValue
   }
+
 
   const resetPosts = () => {
     setPageNumber(0)
@@ -137,9 +141,6 @@ const PostsTrendingToday = (props) => {
     resetPosts()
     setPostSources(newSources);
   }
-
-  if (isBrowser())
-    window.onscroll = (e) => handleScroll(e)
 
   return (
     <div>
@@ -204,7 +205,7 @@ const PostsTrendingToday = (props) => {
       }
     </div>
   )
-};
+}
 
 
 const GET_TODAYS_TRENDING_KEYWORDS = gql`
@@ -279,9 +280,16 @@ const IndexPage = () => {
         >
           <TrendingKeywords />
         </div>
-      )}>
-      <SEO title="Home" />
-      <PostsTrendingToday />
+      )}
+      render={
+        ({ scrollValue, height }) => {
+          return (
+            <>
+              <SEO title="Home" />
+              <PostsTrendingToday scrollValue={scrollValue} height={height} />
+            </>
+          )
+        }}>
     </Layout>
   )
 }
