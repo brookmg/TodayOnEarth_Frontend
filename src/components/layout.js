@@ -90,7 +90,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
 
   return (
     <>
-      <ToastContainer hideProgressBar={true} />
+      <ToastContainer hideProgressBar={true} style={{ height: '100vh' }} />
       <div style={{
         color: theme.color_text,
         backgroundColor: theme.color_background,
