@@ -9,8 +9,8 @@ import { getMainDefinition } from 'apollo-utilities';
 import ws from "ws"
 import { isBrowser } from '../utils/index.js';
 
-const HTTP_LINK_URI = `http://localhost:3400/graphql`
-const WS_LINK_URI = `ws://localhost:3400/graphql`
+const HTTP_LINK_URI = process.env.GATSBY_GQL_ENDPOINT
+const WS_LINK_URI = process.env.GATSBY_SUBSCRIPTIONS_ENDPOINT
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData

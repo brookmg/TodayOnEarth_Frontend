@@ -9,6 +9,13 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 
+const gqlEndpoint = process.env.SCHEME_DOWNLOADER_GQL_ENDPOINT
+
+if (!gqlEndpoint) {
+  console.log("[WARNING]:", "No SCHEME_DOWNLOADER_GQL_ENDPOINT environment variable provided, will not update apollo schema definitions!")
+  return
+}
+
 fetch(`http://localhost:3400/graphql`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },

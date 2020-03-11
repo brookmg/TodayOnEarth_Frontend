@@ -30,7 +30,8 @@ const SignIn = (props) => {
     navigate(`/app/profile`)
   }
 
-
+  const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
+  
   return (
     <>
       <h1>Log in</h1>
@@ -57,7 +58,7 @@ const SignIn = (props) => {
       <div>
         <Margin horizontal="0.5em">
           <ButtonSignInWith
-            url={"http://localhost:3400/auth/twitter"}
+            url={`${authEndpoint}/twitter`}
             borderColor={"#49a0e9"}
             backgroundColor={"#fff"}
             color={"#49a0e9"}
@@ -66,7 +67,7 @@ const SignIn = (props) => {
           />
 
           <ButtonSignInWith
-            url={"http://localhost:3400/auth/facebook"}
+            url={`${authEndpoint}/facebook`}
             borderColor={"#3b5998"}
             backgroundColor={"#3b5998"}
             color={"#fff"}
@@ -75,7 +76,7 @@ const SignIn = (props) => {
           />
 
           <ButtonSignInWith
-            url={"http://localhost:3400/auth/google"}
+            url={`${authEndpoint}/google`}
             borderColor={"#eee"}
             backgroundColor={"#fff"}
             color={"#000"}
