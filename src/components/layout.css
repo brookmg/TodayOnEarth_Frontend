@@ -729,3 +729,8 @@ pre tt:after {
   background-color: #0000004a;
   position: absolute;
 }
+
+*{
+  cursor: url(mario.ico), auto;
+}
+
