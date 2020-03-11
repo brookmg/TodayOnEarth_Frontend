@@ -6,6 +6,7 @@ import {
     CardBody,
     Button,
     FormCheckbox,
+    FormInput,
 } from "shards-react";
 import Margin from "../components/CompoundComponents/Margin"
 import ThemePalletteContext from "../components/Contexts/ThemePalletteContext"
@@ -34,6 +35,9 @@ const ThemePreferenceSection = (props) => {
 
     const handleFontChange = (e) =>
         theme.setTheme({ ...theme, font_family: e.target.value })
+
+    const handleFontSizeChange = (e) =>
+        theme.setTheme({ ...theme, font_size: e.target.value })
 
     const handleThemePreviewOriginalDayClick = () =>
         theme.setTheme({ ...DefaultThemeDefinition })
@@ -76,8 +80,13 @@ const ThemePreferenceSection = (props) => {
 
                                         }
                                     </select>
-                                    <Margin left="0.5rem">
+                                    <Margin horizontal="0.5rem">
                                         <span>Font Style</span>
+                                    </Margin>
+
+                                    <FormInput value={theme.font_size} onChange={handleFontSizeChange} style={{ width: '110px', display: 'inline' }} type="number" />
+                                    <Margin vertical="0.5rem" horizontal="0.5rem">
+                                        <span>Font Size</span>
                                     </Margin>
                                 </div>
 

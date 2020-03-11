@@ -15,6 +15,7 @@ export const availableFonts = ['Roboto', 'Tangerine', 'Trade Winds',
 
 export default {
     font_family: availableFonts[0],
+    font_size: 18,
     color_background: colorPallette.color_1,
     color_text: colorPallette.color_2,
     color_text_faded: `${colorPallette.color_2}66`, // add alpha to primary text color
