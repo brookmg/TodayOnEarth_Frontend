@@ -734,3 +734,14 @@ pre tt:after {
   cursor: url(mario.ico), auto;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #387bfe; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #68abff; 
+}
