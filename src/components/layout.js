@@ -62,7 +62,30 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
   if (postData) {
     const postAdded = postData.postAdded[0]
 
-    if (postAdded.title && !loading) toast(postAdded.title)
+    const notificationTitle = 'New Post Found'
+    const notificationBody = { body: postAdded.title }
+    if (postAdded.title && !loading) {
+      if (!("Notification" in window)) {
+        toast(postAdded.title)
+      }
+      else if (Notification.permission === "granted") {
+        // if it's okay then create a notification
+        new Notification(notificationTitle, notificationBody);
+      }
+      else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(function (permission) {
+          // if the user accepts, then create a notification
+          if (permission === "granted") {
+            new Notification(notificationTitle, notificationBody);
+          } else {
+            toast(postAdded.title)
+          }
+        });
+      }
+      else {
+        toast(postAdded.title)
+      }
+    }
   }
 
   return (
