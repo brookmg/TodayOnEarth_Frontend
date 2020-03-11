@@ -12,9 +12,18 @@ import FindInPageIcon from '@material-ui/icons/FindInPage';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import { useMediaQuery } from 'react-responsive'
+import NightsStayIcon from '@material-ui/icons/NightsStay';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import { isColorDark } from "../utils";
+import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
 
 
 const NavigationBar = React.forwardRef((props, ref) => {
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-device-width: 1224px)'
+    })
+
     const theme = React.useContext(ThemePalletteContext);
     const user = React.useContext(AuthContext);
     const links = [
@@ -24,12 +33,40 @@ const NavigationBar = React.forwardRef((props, ref) => {
         { text: "Advanced Search", url: "/s?expanded=1", icon: <FindInPageIcon /> },
         { text: "Settings", url: "/settings", icon: <SettingsIcon /> },
     ];
+
+    const handleNightModeClick = () => theme.setTheme({
+        ...DefaultThemeDefinition,
+        color_background: DefaultThemeDefinition.color_text,
+        color_text: DefaultThemeDefinition.color_background,
+        color_text_faded: `${DefaultThemeDefinition.color_background}66`,
+    })
+    const handleLightModeClick = () => theme.setTheme({ ...DefaultThemeDefinition })
+
     return (<div className={"navbar"} {...props} ref={ref} style={{
         ...props.style,
         backgroundColor: theme.color_background,
         fontFamily: theme.font_family,
     }}>
         <div style={{ width: '100%', padding: "0.5em" }}>
+            <div style={{ display: 'flex', justifyContent: isDesktopOrLaptop ? 'flex-start' : 'flex-end' }}>
+                <ButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text} style={{
+                    overflow: 'hidden',
+                    padding: 0,
+                    margin: "0.5em",
+                }}>
+                    {isColorDark(theme.color_background) ?
+                        <WbSunnyIcon onClick={handleLightModeClick} style={{
+                            width: "28px",
+                            height: "28px",
+                        }} /> :
+                        <NightsStayIcon onClick={handleNightModeClick} style={{
+                            width: "28px",
+                            height: "28px",
+                        }} />
+                    }
+                </ButtonCustom>
+
+            </div>
             <ButtonCustom borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text} style={{
                 width: '100%',
                 overflow: 'hidden',
