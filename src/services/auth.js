@@ -104,7 +104,13 @@ export const signUp = (user) => {
                         password: user.password,
                         username: user.username,
                         first_name: user.first_name,
-                        last_name: user.last_name
+                        last_name: user.last_name,
+                        google_id: user.google_id,
+                        facebook_id: user.facebook_id,
+                        twitter_id: user.twitter_id,
+                        github_id: user.github_id,
+                        linkedin_id: user.linkedin_id,
+                        telegram_id: user.telegram_id
                     }
                 }
             }).then(e => {
