@@ -6,7 +6,6 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -19,6 +18,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useMediaQuery } from 'react-responsive'
 import NavigationBar from "./NavigationBar"
+import { intializeClickEffect } from "./UIElements/ClickEffect"
 
 
 const POSTS_SUBSCRIPTION = gql`
@@ -46,7 +46,13 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
   `)
   const theme = React.useContext(ThemePalletteContext)
   const scrollDivRef = React.createRef()
+  const canvasRef = React.createRef()
   const [scrollDivState, setScrollDivState] = React.useState({ scrollValue: 0, height: 0 })
+  const [mouseClickPosition, setMouseClickPosition] = React.useState({ x: 0, y: 0 })
+
+  React.useEffect(() => {
+    intializeClickEffect(canvasRef, mouseClickPosition)
+  }, [mouseClickPosition])
 
   const handleOnScroll = () => {
     setScrollDivState({
@@ -87,16 +93,31 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
       }
     }
   }
-
   return (
     <>
       <ToastContainer hideProgressBar={true} style={{ height: '100vh' }} />
+      <canvas ref={canvasRef} style={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+      }}
+      />
       <div style={{
         color: theme.color_text,
         backgroundColor: theme.color_background,
         display: isDesktopOrLaptop ? "flex" : "block",
         flexDirection: 'row'
-      }}>
+      }}
+
+        onClick={(ev) => setMouseClickPosition({
+          x: ev.nativeEvent.clientX,
+          y: ev.nativeEvent.clientY,
+        })}>
         {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
         <div
           onScroll={handleOnScroll}
