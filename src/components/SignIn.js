@@ -31,7 +31,7 @@ const SignIn = (props) => {
   }
 
   const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
-  
+
   return (
     <>
       <h1>Log in</h1>
@@ -62,7 +62,7 @@ const SignIn = (props) => {
             borderColor={"#49a0e9"}
             backgroundColor={"#fff"}
             color={"#49a0e9"}
-            imgSrc={`https://www.brandeps.com/logo-download/T/Twitter-logo-vector-01.svg`}
+            imgSrc={`https://abs.twimg.com/favicons/twitter.ico`}
             value="Sign in with Twitter"
           />
 
@@ -82,6 +82,23 @@ const SignIn = (props) => {
             color={"#000"}
             imgSrc={`https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg`}
             value="Sign in with Google"
+          />
+          <ButtonSignInWith
+            url={`${authEndpoint}/github`}
+            borderColor={"#24292e"}
+            backgroundColor={"#fff"}
+            color={"#24292e"}
+            imgSrc={`https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg`}
+            value="Sign in with GitHub"
+          />
+
+          <ButtonSignInWith
+            url={`${authEndpoint}/linkedin`}
+            borderColor={"#3577b5"}
+            backgroundColor={"#3577b5"}
+            color={"#fff"}
+            imgSrc={`https://static-exp1.licdn.com/scds/common/u/images/logos/favicons/v1/favicon.ico`}
+            value="Sign in with LinkedIn"
           />
         </Margin>
       </div>
