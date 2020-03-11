@@ -12,9 +12,9 @@ import { FormInput, Button } from "shards-react"
 import AnchorButton from "../components/UIElements/AnchorButton"
 import ButtonSuccess from "../components/UIElements/ButtonSuccess"
 
-const SignUp = ({ email, first_name, last_name, username }) => {
+const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id, twitter_id, github_id, linkedin_id, telegram_id }) => {
   const auth = React.useContext(AuthContext)
-  const [user, setUser] = React.useState({ email, first_name, last_name, username });
+  const [user, setUser] = React.useState({ email, first_name, last_name, username, google_id, facebook_id, twitter_id, github_id, linkedin_id, telegram_id });
 
   const handleUpdate = event => {
     setUser({ ...user, [event.target.name]: event.target.value })
@@ -84,7 +84,7 @@ const SignUp = ({ email, first_name, last_name, username }) => {
             borderColor={"#49a0e9"}
             backgroundColor={"#fff"}
             color={"#49a0e9"}
-            imgSrc={`https://www.brandeps.com/logo-download/T/Twitter-logo-vector-01.svg`}
+            imgSrc={`https://abs.twimg.com/favicons/twitter.ico`}
             value="Fill with Twitter"
           />
 
@@ -104,6 +104,24 @@ const SignUp = ({ email, first_name, last_name, username }) => {
             color={"#000"}
             imgSrc={`https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg`}
             value="Fill with Google"
+          />
+         
+          <ButtonSignInWith
+            url={`${authEndpoint}/github`}
+            borderColor={"#24292e"}
+            backgroundColor={"#fff"}
+            color={"#24292e"}
+            imgSrc={`https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg`}
+            value="Fill with GitHub"
+          />
+
+          <ButtonSignInWith
+            url={`${authEndpoint}/linkedin`}
+            borderColor={"#3577b5"}
+            backgroundColor={"#3577b5"}
+            color={"#fff"}
+            imgSrc={`https://static-exp1.licdn.com/scds/common/u/images/logos/favicons/v1/favicon.ico`}
+            value="Fill with LinkedIn"
           />
         </Margin>
 
@@ -135,6 +153,12 @@ const SignUpPage = withQueryParsedURL((props) => {
         first_name={data.first_name}
         last_name={data.last_name}
         username={data.username}
+        google_id={data.google_id}
+        facebook_id={data.facebook_id}
+        twitter_id={data.twitter_id}
+        github_id={data.github_id}
+        linkedin_id={data.linkedin_id}
+        telegram_id={data.telegram_id}
       />
 
     </Layout>
