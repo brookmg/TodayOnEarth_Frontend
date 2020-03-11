@@ -32,6 +32,8 @@ const SignUp = ({ email, first_name, last_name, username }) => {
   }
   const handleSignIn = () => { navigate(`/app/login`) }
 
+  const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
+
   return (
     <>
       <h1>Sign up</h1>
@@ -78,7 +80,7 @@ const SignUp = ({ email, first_name, last_name, username }) => {
 
         <Margin right="0.5em">
           <ButtonSignInWith
-            url={"http://localhost:3400/auth/twitter"}
+            url={`${authEndpoint}/twitter`}
             borderColor={"#49a0e9"}
             backgroundColor={"#fff"}
             color={"#49a0e9"}
@@ -87,7 +89,7 @@ const SignUp = ({ email, first_name, last_name, username }) => {
           />
 
           <ButtonSignInWith
-            url={"http://localhost:3400/auth/facebook"}
+            url={`${authEndpoint}/facebook`}
             borderColor={"#3b5998"}
             backgroundColor={"#3b5998"}
             color={"#fff"}
@@ -96,7 +98,7 @@ const SignUp = ({ email, first_name, last_name, username }) => {
           />
 
           <ButtonSignInWith
-            url={"http://localhost:3400/auth/google"}
+            url={`${authEndpoint}/google`}
             borderColor={"#eee"}
             backgroundColor={"#fff"}
             color={"#000"}

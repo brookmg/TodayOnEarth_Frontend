@@ -31,7 +31,7 @@ const ParseLinks = (props) => {
                 const usernameWithoutAt = username.match(/@([a-zA-Z0-9_.]+)/i)[1]
                 const url = getUserNameUrl(usernameWithoutAt)
 
-                usernameParts[i] = <AnchorButton onClick={handleUsernameClick} url={url}>{username}</AnchorButton>;
+                usernameParts[i] = <AnchorButton isPreviewable={true} onClick={handleUsernameClick} url={url}>{username}</AnchorButton>;
             }
             parts[i] = usernameParts
         }
@@ -54,7 +54,7 @@ const ParseLinks = (props) => {
                 const cleanUrlRight = splitUrl[1];
                 const cleanUrl = cleanUrlRight ? cleanUrlRight : cleanUrlLeft;
                 urlParts[i] = <span key={i}> {cleanUrlRight && `${cleanUrlLeft}://`}
-                    <AnchorButton onClick={handleURLClick} url={`http://${cleanUrl}`}>{cleanUrl}</AnchorButton>;
+                    <AnchorButton isPreviewable={true} onClick={handleURLClick} url={`http://${cleanUrl}`}>{cleanUrl}</AnchorButton>;
                     </span>;
             }
             parts[i] = urlParts
@@ -73,7 +73,7 @@ const ParseLinks = (props) => {
             // parse hashtags
             for (let i = 1; i < hashTagParts.length; i += 2) {
                 const hashtag = hashTagParts[i];
-                hashTagParts[i] = <AnchorButton onClick={handleHashTagClick} url={`https://www.twitter.com/hashtag/${hashtag.match(/#([a-z\d-]+)/i)[1]}`}>{hashtag}</AnchorButton>;
+                hashTagParts[i] = <AnchorButton isPreviewable={true} onClick={handleHashTagClick} url={`https://www.twitter.com/hashtag/${hashtag.match(/#([a-z\d-]+)/i)[1]}`}>{hashtag}</AnchorButton>;
             }
             parts[i] = hashTagParts
         }
