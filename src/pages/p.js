@@ -256,10 +256,9 @@ const PostDetail = withQueryParsedURL((props) => {
                     <>
 
                         <h1>
-                            <ParseLinks sourceLink={post.source_link}>{ellipsedSubstring(
+                            {ellipsedSubstring(
                                 getIfAvailable(post, 'title', "")
                             )}
-                            </ParseLinks>
                         </h1>
                         <div>
                             <p>
