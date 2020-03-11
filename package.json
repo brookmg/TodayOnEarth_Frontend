@@ -33,6 +33,7 @@
     "react-responsive": "^8.0.3",
     "react-toastify": "^5.5.0",
     "shards-react": "^1.0.3",
+    "styled-components": "^5.0.1",
     "subscriptions-transport-ws": "^0.9.16"
   },
   "devDependencies": {
