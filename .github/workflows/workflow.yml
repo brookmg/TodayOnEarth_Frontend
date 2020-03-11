@@ -17,4 +17,9 @@ jobs:
         run: npm install
 
       - name: Build
+        env:
+            GATSBY_LINK_PREVIEWER_API: ${{ secrets.GATSBY_LINK_PREVIEWER_API }}
+            GATSBY_AUTH_ENDPOINT: ${{ secrets.GATSBY_AUTH_ENDPOINT }}
+            GATSBY_GQL_ENDPOINT: ${{ secrets.GATSBY_GQL_ENDPOINT }}
+            GATSBY_SUBSCRIPTIONS_ENDPOINT: ${{ secrets.GATSBY_SUBSCRIPTIONS_ENDPOINT }}
         run: npm run build
