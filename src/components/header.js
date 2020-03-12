@@ -69,14 +69,30 @@ const Header = ({ siteTitle }) => {
       }}
     >
       <NavigationBar
-        className="navbarExpanded"
         ref={navbarRef}
+        isMobileNavbarShowing={isNavbarShowing && !isDesktopOrLaptop}
         style={{
           left: isNavbarShowing ? 'calc(100% - 256px)' : '100%',
-          boxShadow: 'none'
+          boxShadow: 'none',
+          width: '256px',
+          transition: 'left 0.2s linear',
         }}
       />
-      <div className={isNavbarShowing ? "navbarOverlayShowing" : "navbarOverlay"}
+      <div
+        style={{
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          zIndex: 11,
+          display: 'unset',
+
+          ...(isNavbarShowing ?
+            { backgroundColor: '#0000004a', position: 'absolute' } :
+            { backgroundColor: '#00000000', display: 'unset' }
+          )
+        }}
+        className={isNavbarShowing ? "navbarOverlayShowing" : "navbarOverlayHidden"}
         onClick={handleOverlayClick}
       >
       </div>
@@ -147,7 +163,7 @@ const Header = ({ siteTitle }) => {
 
 
       </div>
-    </header>
+    </header >
   )
 }
 
