@@ -1,20 +1,46 @@
 import React from "react"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import { FormTextarea, FormCheckbox } from "shards-react";
+import { FormTextarea, FormCheckbox, FormInput } from "shards-react";
 import ButtonSuccess from "../../components/UIElements/ButtonSuccess";
 import Margin from "../../components/CompoundComponents/Margin"
 import { isLoggedIn } from "../../services/auth"
 import AuthContext from "../../components/Contexts/AuthContext"
 import { navigate } from "gatsby"
 import { isBrowser } from "../../utils"
+import { gql } from "apollo-boost";
+import { useMutation } from '@apollo/react-hooks';
 
+//TODO: remove un-needed console.log()
 
+const CREATE_POST_MUTATION = gql`
+
+mutation createPost(
+  $text: String!
+  $upload: Upload
+  $telegram: Boolean
+  $linkedin: Boolean
+  $twitter: Boolean
+  $channel: String
+) {
+  postOnToSocials(
+    text: $text
+    upload: $upload
+    telegram: $telegram
+    linkedin: $linkedin
+    twitter: $twitter
+    channel: $channel
+  ){
+    text
+  }
+}
+`
 const DEFAULT_PLATFORMS_TO_POST_ON = {
-  "t.me": true,
-  "facebook.com": true,
-  "instagram.com": true,
-  "twitter.com": true
+  "Telegram": true,
+  "Facebook": true,
+  "Instagram": true,
+  "LinkedIn": true,
+  "Twitter": true,
 }
 
 const PostsLatest = (props) => {
@@ -22,9 +48,26 @@ const PostsLatest = (props) => {
 
   const [platformToPostOn, setPlatformToPostOn] = React.useState(DEFAULT_PLATFORMS_TO_POST_ON)
   const [postText, setPostText] = React.useState("")
+  const [telegramChannel, setTelegramChannel] = React.useState("")
+  const [fileToUpload, setFileToUpload] = React.useState(null)
+  const [createPost, { data }] = useMutation(CREATE_POST_MUTATION)
 
   const handlePostTextChange = (e) => setPostText(e.target.value)
-  const handlePostClick = () => alert("TODO: implement this")
+  const handleTelegramChannelChange = (e) => setTelegramChannel(e.target.value)
+  const handlePostClick = () => {
+
+    createPost({
+      variables: {
+        text: postText,
+        upload: fileToUpload,
+        telegram: platformToPostOn.Telegram,
+        linkedin: platformToPostOn.LinkedIn,
+        twitter: platformToPostOn.Twitter,
+        //TODO: Instagram and Facebook remain
+        channel: telegramChannel,
+      }
+    });
+  }
 
   const handlePostSourceChange = (ev, name) => {
     const isChecked = platformToPostOn[name]
@@ -53,6 +96,7 @@ const PostsLatest = (props) => {
 
   if (isBrowser() && !isLoggedIn()) navigate(`/app/login`)
 
+  console.log("GQL response", data)
   return (
     <div>
       <h2>Create Post</h2>
@@ -76,11 +120,22 @@ const PostsLatest = (props) => {
                 </FormCheckbox>
               )
             }
+            {
+              platformToPostOn.Telegram &&
+              <FormInput
+                placeholder={"Telegram channel"}
+                onChange={handleTelegramChannelChange} />
+            }
           </span>
         </div>
         <div style={{ display: 'flex', flexDirection: "column", flex: 3 }}>
-          <Margin horzontal="0.5em" vertical="0.5em">
+          <Margin horizontal="0.5em" vertical="0.5em">
             <FormTextarea placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`} rows={8} onChange={handlePostTextChange} />
+            <span>Image or file to upload: <FormInput type="file" onChange={({ target: { files } }) => {
+              const file = files[0]
+              console.log(file)
+              file && setFileToUpload(file)
+            }} /></span>
             <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
               <ButtonSuccess onClick={handlePostClick}>Create Post</ButtonSuccess>
             </div>
