@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from './schemaQuery/fragmentTypes.json';
 import { split } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
+import { createUploadLink } from 'apollo-upload-client'
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import ws from "ws"
@@ -20,7 +20,7 @@ const fetchOptions = {
     credentials: 'include'
 }
 
-const httpLink = new HttpLink({
+const httpLink = new createUploadLink({
     uri: HTTP_LINK_URI,
     fetch,
     fetchOptions

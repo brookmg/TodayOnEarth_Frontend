@@ -8,7 +8,7 @@ import { isLoggedIn } from "../../services/auth"
 import AuthContext from "../../components/Contexts/AuthContext"
 import { navigate } from "gatsby"
 import { isBrowser } from "../../utils"
-import { gql } from "apollo-boost";
+import gql from "graphql-tag"
 import { useMutation } from '@apollo/react-hooks';
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
@@ -41,8 +41,8 @@ mutation createPost(
 `
 const DEFAULT_PLATFORMS_TO_POST_ON = {
   "Telegram": true,
-  "Facebook": true,
-  "Instagram": true,
+  "Facebook": false,
+  "Instagram": false,
   "LinkedIn": true,
   "Twitter": true,
 }
