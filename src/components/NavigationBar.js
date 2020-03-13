@@ -18,6 +18,7 @@ import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { isColorDark } from "../utils";
 import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
 import styled from "styled-components";
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 
 const UnStyledNavigationBar = React.forwardRef((props, ref) => {
@@ -28,6 +29,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const theme = React.useContext(ThemePalletteContext);
     const user = React.useContext(AuthContext);
     const links = [
+        { text: "Create a Post", url: "/create", icon: <PostAddIcon /> },
         { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
         { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
         { text: "Topic Posts", url: "/trendsByTopic", icon: <VisibilityIcon /> },
