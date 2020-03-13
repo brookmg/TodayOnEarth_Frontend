@@ -141,7 +141,7 @@ const PostsLatest = (props) => {
             <div style={{ display: 'flex' }}>
               <FormTextarea
                 style={{
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif'
+                  fontFamily: 'emoji'
                 }}
                 value={postText}
                 placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`}

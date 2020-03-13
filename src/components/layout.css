@@ -620,3 +620,8 @@ pre tt:after {
 ::-webkit-scrollbar-thumb:hover {
   background: #68abff; 
 }
+
+@font-face {
+  font-family: 'emoji';
+  src: url('fonts/EmojiOneColor.otf') format("opentype");
+}
