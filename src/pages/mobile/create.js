@@ -37,8 +37,8 @@ mutation createPost(
 `
 const DEFAULT_PLATFORMS_TO_POST_ON = {
   "Telegram": true,
-  "Facebook": true,
-  "Instagram": true,
+  "Facebook": false,
+  "Instagram": false,
   "LinkedIn": true,
   "Twitter": true,
 }
