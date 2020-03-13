@@ -8,7 +8,7 @@ import { isLoggedIn } from "../../services/auth"
 import AuthContext from "../../components/Contexts/AuthContext"
 import { navigate } from "gatsby"
 import { isBrowser } from "../../utils"
-import { gql } from "apollo-boost";
+import gql from "graphql-tag"
 import { useMutation } from '@apollo/react-hooks';
 
 //TODO: remove un-needed console.log()
