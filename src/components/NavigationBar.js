@@ -17,9 +17,10 @@ import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { isColorDark } from "../utils";
 import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
+import styled from "styled-components";
 
 
-const NavigationBar = React.forwardRef((props, ref) => {
+const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-device-width: 1224px)'
     })
@@ -42,7 +43,9 @@ const NavigationBar = React.forwardRef((props, ref) => {
     })
     const handleLightModeClick = () => theme.setTheme({ ...DefaultThemeDefinition })
 
-    return (<div className={"navbar"} {...props} ref={ref} style={{
+    const isMobileNavbarShowingStyle = props.isMobileNavbarShowing ? { display: 'unset' } : {}
+
+    return (<div {...props} ref={ref} style={{
         ...props.style,
         backgroundColor: theme.color_background,
         fontFamily: theme.font_family,
@@ -84,11 +87,11 @@ const NavigationBar = React.forwardRef((props, ref) => {
                         }} />
                     </p>
                     {isLoggedIn() ?
-                        <div className="navbarShownOnHover">
+                        <div className="navbarShownOnHover" style={isMobileNavbarShowingStyle}>
                             <p>Hello, {user.first_name}</p>
                         </div>
                         : <>
-                            <p className="navbarShownOnHover">
+                            <p className="navbarShownOnHover" style={isMobileNavbarShowingStyle}>
                                 You should <AnimatedLink to="/app/login">log in</AnimatedLink> to see restricted
                                       content
                   </p>
@@ -96,7 +99,7 @@ const NavigationBar = React.forwardRef((props, ref) => {
                         </>}
                 </div>
 
-                <div className="navbarShownOnHover">
+                <div className="navbarShownOnHover" style={isMobileNavbarShowingStyle}>
                     {isLoggedIn() ? (<>
                         <AnimatedLink to="/app/profile">Profile</AnimatedLink> | <a href="/" onClick={event => {
                             event.preventDefault();
@@ -132,7 +135,7 @@ const NavigationBar = React.forwardRef((props, ref) => {
                             }}>
                                 {e.icon}
                             </span>
-                            <span className="navbarBtnText">
+                            <span className="navbarBtnText" style={isMobileNavbarShowingStyle}>
                                 {e.text}
                             </span>
                         </AnimatedLink>
@@ -143,5 +146,69 @@ const NavigationBar = React.forwardRef((props, ref) => {
 
     </div>);
 });
+
+const NavigationBar = styled(UnStyledNavigationBar)`
+    width: 64px;
+    height: 100%;
+    z-index: 10000;
+    left:0;
+    right:0;
+    padding: 0;
+    box-shadow: -10px 0 20px;
+    display: 'flex';
+    flex-direction: column;
+    white-space: nowrap;
+    overflow: hidden;
+    position: fixed;
+    text-align: left;
+    align-items: flex-start;
+    transition: width 0.2s;
+    transition-timing-function: ease-in;
+
+    .navbarAccountIcon {
+        margin-bottom: 1em;
+    }
+    .navbarLinkButton {
+        text-align: left;
+        padding: 0.5em;
+    }
+    .navbarShownOnHover {
+        display: none;
+        white-space: normal;
+    }
+    .navbarHiddenOnHover {
+        display: unset;
+    }
+    .navbarShownOnHover {
+        display: none;
+    }
+    .navbarBtnText {
+        display: none;
+    }
+
+    &:hover {
+        width: 256px;
+
+        .navbarBtnText {
+            display: unset;
+        }
+        .navbarTop {
+            white-space: normal;
+        }
+        .navbarShownOnHover {
+            display: unset;
+        }
+        .navbarHiddenOnHover {
+            display: none;
+        }
+        .navbarAccountIcon {
+            margin-bottom: 1em;
+        }
+        .navbarLinkButton {
+            text-align: left;
+            padding: 0.5em;
+        }
+    }
+`;
 
 export default NavigationBar;

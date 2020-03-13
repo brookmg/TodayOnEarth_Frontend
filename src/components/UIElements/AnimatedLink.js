@@ -1,10 +1,19 @@
 import React from "react";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import styled from 'styled-components'
+
+
+const StyledAniLink = styled(AniLink)`
+    color: #007bff;
+    &:hover {
+        color: inherit;
+    }
+`;
 
 
 const AnimatedLink = (props) => (
-    <AniLink {...props} paintDrip duration={0.5} color="rebeccapurple">
+    <StyledAniLink paintDrip duration={0.5} hex="#326fe6" {...props}>
         {props.children}
-    </AniLink>);
+    </StyledAniLink>);
 
 export default AnimatedLink;
