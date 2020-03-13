@@ -10,6 +10,10 @@ import { navigate } from "gatsby"
 import { isBrowser } from "../../utils"
 import { gql } from "apollo-boost";
 import { useMutation } from '@apollo/react-hooks';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
+import { useMediaQuery } from 'react-responsive'
+
 
 //TODO: remove un-needed console.log()
 
@@ -45,6 +49,9 @@ const DEFAULT_PLATFORMS_TO_POST_ON = {
 
 const PostsLatest = (props) => {
   const user = React.useContext(AuthContext)
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-device-width: 1224px)'
+  })
 
   const [platformToPostOn, setPlatformToPostOn] = React.useState(DEFAULT_PLATFORMS_TO_POST_ON)
   const [postText, setPostText] = React.useState("")
@@ -68,6 +75,7 @@ const PostsLatest = (props) => {
       }
     });
   }
+  const handleEmojiSelect = (emoji) => setPostText(`${postText}${emoji.native}`)
 
   const handlePostSourceChange = (ev, name) => {
     const isChecked = platformToPostOn[name]
@@ -130,7 +138,23 @@ const PostsLatest = (props) => {
         </div>
         <div style={{ display: 'flex', flexDirection: "column", flex: 3 }}>
           <Margin horizontal="0.5em" vertical="0.5em">
-            <FormTextarea placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`} rows={8} onChange={handlePostTextChange} />
+            <div style={{ display: 'flex' }}>
+              <FormTextarea
+                style={{
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif'
+                }}
+                value={postText}
+                placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`}
+                rows={8}
+                onChange={handlePostTextChange} />
+              {isDesktopOrLaptop &&
+                <Picker
+                  title=""
+                  showPreview={true}
+                  set='emojione'
+                  onSelect={handleEmojiSelect} />
+              }
+            </div>
             <span>Image or file to upload: <FormInput type="file" onChange={({ target: { files } }) => {
               const file = files[0]
               console.log(file)
