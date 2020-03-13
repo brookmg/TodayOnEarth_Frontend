@@ -1,13 +1,13 @@
 import React from "react"
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { FormTextarea, FormCheckbox, FormInput } from "shards-react";
-import ButtonSuccess from "../../components/UIElements/ButtonSuccess";
-import Margin from "../../components/CompoundComponents/Margin"
-import { isLoggedIn } from "../../services/auth"
-import AuthContext from "../../components/Contexts/AuthContext"
+import ButtonSuccess from "../components/UIElements/ButtonSuccess";
+import Margin from "../components/CompoundComponents/Margin"
+import { isLoggedIn } from "../services/auth"
+import AuthContext from "../components/Contexts/AuthContext"
 import { navigate } from "gatsby"
-import { isBrowser } from "../../utils"
+import { isBrowser } from "../utils"
 import gql from "graphql-tag"
 import { useMutation } from '@apollo/react-hooks';
 import 'emoji-mart/css/emoji-mart.css'
