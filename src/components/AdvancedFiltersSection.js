@@ -6,7 +6,16 @@ import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
 import ButtonSuccess from "./UIElements/ButtonSuccess";
 import { convertDateToInputFormat } from "../utils";
+import styled from "styled-components";
 
+
+const StyledDisplayFlexDiv = styled.div`
+    display: flex;
+`
+
+const StyledFlex1Div = styled.div`
+    flex: 1;
+`
 
 const AdvancedFiltersSection = (props) => {
     const handleAdvancedFilterButtonClick = () => {
@@ -94,29 +103,27 @@ const AdvancedFiltersSection = (props) => {
                             <div>
                                 <ThemedCardTitle>Metadata search (Regex is supported)</ThemedCardTitle>
 
-                                <div style={{
-                                    display: 'flex'
-                                }}>
+                                <StyledDisplayFlexDiv>
                                     <Margin horizontal="0.5em" vertical="0.5em">
-                                        <div style={{ flex: 1 }}>
+                                        <StyledFlex1Div>
                                             Views:<br />
                                             <FormInput placeholder={"Search views "} name="views" value={metadataFilter.views} onChange={handleMetadataFilterTextChange} size="sm" />
                                             Likes:<br />
                                             <FormInput placeholder={"Search likes "} name="likes" value={metadataFilter.likes} onChange={handleMetadataFilterTextChange} size="sm" />
                                             Replies:<br />
                                             <FormInput placeholder={"Search replies "} name="replies" value={metadataFilter.replies} onChange={handleMetadataFilterTextChange} size="sm" />
-                                        </div>
+                                        </StyledFlex1Div>
 
-                                        <div style={{ flex: 1 }}>
+                                        <StyledFlex1Div>
                                             Retweets:<br />
                                             <FormInput placeholder={"Search retweets "} name="retweets" value={metadataFilter.retweets} onChange={handleMetadataFilterTextChange} size="sm" />
                                             Comments:<br />
                                             <FormInput placeholder={"Search comments "} name="comments" value={metadataFilter.comments} onChange={handleMetadataFilterTextChange} size="sm" />
                                             Video Views:<br />
                                             <FormInput placeholder={"Search video views "} name="video_views" value={metadataFilter.video_views} onChange={handleMetadataFilterTextChange} size="sm" />
-                                        </div>
+                                        </StyledFlex1Div>
                                     </Margin>
-                                </div>
+                                </StyledDisplayFlexDiv>
 
                             </div>
                         </Margin>
