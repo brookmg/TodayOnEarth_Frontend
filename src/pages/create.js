@@ -56,11 +56,13 @@ const PostsLatest = (props) => {
   const [platformToPostOn, setPlatformToPostOn] = React.useState(DEFAULT_PLATFORMS_TO_POST_ON)
   const [postText, setPostText] = React.useState("")
   const [telegramChannel, setTelegramChannel] = React.useState("")
+  const [facebookPageURL, setFacebookPageURL] = React.useState("")
   const [fileToUpload, setFileToUpload] = React.useState(null)
   const [createPost, { data }] = useMutation(CREATE_POST_MUTATION)
 
   const handlePostTextChange = (e) => setPostText(e.target.value)
   const handleTelegramChannelChange = (e) => setTelegramChannel(e.target.value)
+  const handleFacebookPageURLChange = (e) => setFacebookPageURL(e.target.value)
   const handlePostClick = () => {
 
     createPost({
@@ -72,6 +74,7 @@ const PostsLatest = (props) => {
         twitter: platformToPostOn.Twitter,
         //TODO: Instagram and Facebook remain
         channel: telegramChannel,
+        pageUrl: facebookPageURL,
       }
     });
   }
@@ -128,12 +131,20 @@ const PostsLatest = (props) => {
                 </FormCheckbox>
               )
             }
-            {
-              platformToPostOn.Telegram &&
-              <FormInput
-                placeholder={"Telegram channel"}
-                onChange={handleTelegramChannelChange} />
-            }
+            <Margin vertical="0.25em">
+              {
+                platformToPostOn.Telegram &&
+                <FormInput
+                  placeholder={"Telegram channel"}
+                  onChange={handleTelegramChannelChange} />
+              }
+              {
+                platformToPostOn.Facebook &&
+                <FormInput
+                  placeholder={"Facebook page URL"}
+                  onChange={handleFacebookPageURLChange} />
+              }
+            </Margin>
           </span>
         </div>
         <div style={{ display: 'flex', flexDirection: "column", flex: 3 }}>
