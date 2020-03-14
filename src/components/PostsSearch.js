@@ -8,6 +8,7 @@ import Margin from "./CompoundComponents/Margin";
 import { getIfAvailable, ellipsedSubstring } from "../utils";
 import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
 import AdvancedFiltersSection from "./AdvancedFiltersSection";
+import styled from "styled-components";
 
 
 const GET_POSTS_FILTERED = gql`
@@ -61,6 +62,21 @@ const DEFAULT_POST_SOURCES = {
     "twitter.com": true
 };
 let prevScrollValue = -1;
+
+
+const StyledDisplayFlexDiv = styled.div`
+    display: flex;
+`
+
+const StyledFlex1CenterSpan = styled.span`
+    flex: 1;
+    align-self: center;
+`
+
+const StyledP = styled.p`
+    text-align: center;
+`
+
 const PostsSearch = withQueryParsedURL((props) => {
     const queryParsedURL = props.queryParsedURL;
     const searchTerm = queryParsedURL.search_term;
@@ -172,29 +188,29 @@ const PostsSearch = withQueryParsedURL((props) => {
 
         <Margin top="1em">
             <div>
-                <div style={{ display: "flex" }}>
-                    <span style={{ flex: 1, alignSelf: 'center' }}>
+                <StyledDisplayFlexDiv>
+                    <StyledFlex1CenterSpan>
                         <div>
                             Feed sources
-                                            </div>
+                        </div>
                         <span>
                             {Object.keys(postSources).map(e => <FormCheckbox inline key={e} checked={!!postSources[e]} onChange={ev => handlePostSourceChange(ev, e)}>
                                 {e}
                             </FormCheckbox>)}
                         </span>
-                    </span>
+                    </StyledFlex1CenterSpan>
 
                     <div>
                         <label>
                             Posts per page:
-    <FormSelect size="sm" onChange={handlePostsPerPageChange}>
+                            <FormSelect size="sm" onChange={handlePostsPerPageChange}>
                                 {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (<option key={i} value={e}>
                                     {e}
                                 </option>))}
                             </FormSelect>
                         </label>
                     </div>
-                </div>
+                </StyledDisplayFlexDiv>
                 <h2>Search results for: "{queryParsedURL.search_term}"</h2>
                 {posts &&
                     (posts.length === 0 && !loading && !hasMorePosts) ?
@@ -206,11 +222,10 @@ const PostsSearch = withQueryParsedURL((props) => {
                 {loading && <p>Loading Posts...</p>}
                 {error && <p>Error: ${error.message}</p>}
                 {!hasMorePosts &&
-                    <p style={{
-                        textAlign: "center"
-                    }}>
+                    <StyledP>
                         You have seen all the posts <EmojiEmotionsSharpIcon />
-                    </p>}
+                    </StyledP>
+                }
             </div>
         </Margin>
     </div>);
