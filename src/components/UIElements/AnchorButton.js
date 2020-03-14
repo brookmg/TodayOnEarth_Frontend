@@ -1,7 +1,35 @@
 import React from "react"
 import Image from "./Image";
+import styled from "styled-components";
 
-export function AnchorButton(props) {
+
+const StyledA = styled.a`
+    text-decoration: none;
+`
+
+const StyledPaddedDiv = styled.div`
+    padding: 1em;
+`
+
+const StyledDisplayFlexDiv = styled.div`
+    display: flex;
+`
+
+const StyledDisplayFlex1Div = styled(StyledDisplayFlexDiv)`
+    display: flex;
+    flex: 1;
+`
+
+const StyledImage = styled(Image)`
+    margin: 0;
+`
+
+const StyledFlex3Div = styled.div`
+    padding: 0.5em;
+    flex: 3;
+`
+
+const AnchorButton = (props) => {
     const handleShareClick = (e) => {
         e.preventDefault();
     }
@@ -29,32 +57,28 @@ export function AnchorButton(props) {
 
     return (
         <span onClick={props.onClick}>
-            <a
+            <StyledA
                 onMouseEnter={handleOnMouseEnter}
                 onMouseLeave={handleOnMouseLeave}
 
                 {...props}
                 href={props.url || ""}
                 onClick={handleShareClick}
-                style={{
-                    textDecoration: `none`,
-                }}>
+            >
                 {props.children}
-            </a>
+            </StyledA>
             {isPreviewable &&
-                <div style={{
-                    padding: "1em"
-                }}>
-                    <div style={{ display: 'flex' }}>
-                        <div style={{ flex: 1, display: 'flex' }}>
-                            <Image src={linkPreviewData.image} style={{ margin: 0 }} />
-                        </div>
-                        <div style={{ flex: 3, padding: '0.5em' }}>
+                <StyledPaddedDiv>
+                    <StyledDisplayFlexDiv>
+                        <StyledDisplayFlex1Div>
+                            <StyledImage src={linkPreviewData.image} />
+                        </StyledDisplayFlex1Div>
+                        <StyledFlex3Div>
                             <div>{!isHovered ? "Hover on url to preview" : linkPreviewData.title || (isLoading ? "Loading..." : "Error loading url preview")}</div>
                             <div>{linkPreviewData.description}</div>
-                        </div>
-                    </div>
-                </div>}
+                        </StyledFlex3Div>
+                    </StyledDisplayFlexDiv>
+                </StyledPaddedDiv>}
         </span>
     );
 }
