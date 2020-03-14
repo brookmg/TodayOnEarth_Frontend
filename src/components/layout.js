@@ -1,10 +1,3 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
@@ -19,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import NavigationBar from "./NavigationBar"
 import { intializeClickEffect } from "./UIElements/ClickEffect"
 import ScreenSizeContext from "./Contexts/ScreenSizeContext"
+import styled from "styled-components"
 
 
 const POSTS_SUBSCRIPTION = gql`
@@ -30,10 +24,41 @@ subscription{
 }
 `;
 
-const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
-  const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+const StyledToastContainer = styled(ToastContainer)`
+  height: 100vh;
+`
 
-  const data = useStaticQuery(graphql`
+const StyledCanvas = styled.canvas`
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+`
+
+const StyledFlexDirectionRowDiv = styled.div`
+    flex-direction: row;
+`
+
+const StyledFlex3OverflowYDiv = styled.div`
+    flex: 3;
+    overflow-y: auto;
+    height: 100vh;
+`
+
+const StyledHeaderDiv = styled.div`
+    margin: 0 auto;
+    maxWidth: 960;
+    padding: 0 1.0875rem 1.45rem;
+`
+
+const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+
+    const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -42,120 +67,103 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
       }
     }
   `)
-  const theme = React.useContext(ThemePalletteContext)
-  const scrollDivRef = React.createRef()
-  const canvasRef = React.createRef()
-  const [scrollDivState, setScrollDivState] = React.useState({ scrollValue: 0, height: 0 })
-  const [mouseClickPosition, setMouseClickPosition] = React.useState({ x: 0, y: 0 })
+    const theme = React.useContext(ThemePalletteContext)
+    const scrollDivRef = React.createRef()
+    const canvasRef = React.createRef()
+    const [scrollDivState, setScrollDivState] = React.useState({ scrollValue: 0, height: 0 })
+    const [mouseClickPosition, setMouseClickPosition] = React.useState({ x: 0, y: 0 })
 
-  React.useEffect(() => {
-    intializeClickEffect(canvasRef, mouseClickPosition)
-  }, [mouseClickPosition])
+    React.useEffect(() => {
+        intializeClickEffect(canvasRef, mouseClickPosition)
+    }, [mouseClickPosition])
 
-  const handleOnScroll = () => {
-    setScrollDivState({
-      scrollValue: scrollDivRef.current.scrollTop + scrollDivRef.current.offsetHeight,
-      height: scrollDivRef.current.scrollHeight
-    })
-  }
-
-  const { data: postData, loading } = useSubscription(
-    POSTS_SUBSCRIPTION,
-  );
-
-  if (postData) {
-    const postAdded = postData.postAdded[0]
-
-    const notificationTitle = 'New Post Found'
-    const notificationBody = { body: postAdded.title }
-    if (postAdded.title && !loading) {
-      if (!("Notification" in window)) {
-        toast(postAdded.title)
-      }
-      else if (Notification.permission === "granted") {
-        // if it's okay then create a notification
-        new Notification(notificationTitle, notificationBody);
-      }
-      else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(function (permission) {
-          // if the user accepts, then create a notification
-          if (permission === "granted") {
-            new Notification(notificationTitle, notificationBody);
-          } else {
-            toast(postAdded.title)
-          }
-        });
-      }
-      else {
-        toast(postAdded.title)
-      }
+    const handleOnScroll = () => {
+        setScrollDivState({
+            scrollValue: scrollDivRef.current.scrollTop + scrollDivRef.current.offsetHeight,
+            height: scrollDivRef.current.scrollHeight
+        })
     }
-  }
-  return (
-    <>
-      <ToastContainer hideProgressBar={true} style={{ height: '100vh' }} />
-      <canvas ref={canvasRef} style={{
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        left: 0,
-        bottom: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-      }}
-      />
-      <div style={{
-        color: theme.color_text,
-        backgroundColor: theme.color_background,
-        display: isDesktopOrLaptop ? "flex" : "block",
-        flexDirection: 'row'
-      }}
 
-        onClick={(ev) => setMouseClickPosition({
-          x: ev.nativeEvent.clientX,
-          y: ev.nativeEvent.clientY,
-        })}>
-        {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
-        <div
-          onScroll={handleOnScroll}
-          ref={scrollDivRef}
-          style={{
-            flex: 3,
-            marginLeft: isDesktopOrLaptop ? '64px' : 0,
-            overflowY: 'auto',
-            height: '100vh'
-          }}>
-          <Header siteTitle={data.site.siteMetadata.title} />
-          <div
-            style={{
-              margin: `0 auto`,
-              maxWidth: 960,
-              padding: `0 1.0875rem 1.45rem`,
-              fontFamily: theme.font_family,
-              fontSize: `${theme.font_size}px`
+    const { data: postData, loading } = useSubscription(
+        POSTS_SUBSCRIPTION,
+    );
+
+    if (postData) {
+        const postAdded = postData.postAdded[0]
+
+        const notificationTitle = 'New Post Found'
+        const notificationBody = { body: postAdded.title }
+        if (postAdded.title && !loading) {
+            if (!("Notification" in window)) {
+                toast(postAdded.title)
+            }
+            else if (Notification.permission === "granted") {
+                // if it's okay then create a notification
+                new Notification(notificationTitle, notificationBody);
+            }
+            else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(function (permission) {
+                    // if the user accepts, then create a notification
+                    if (permission === "granted") {
+                        new Notification(notificationTitle, notificationBody);
+                    } else {
+                        toast(postAdded.title)
+                    }
+                });
+            }
+            else {
+                toast(postAdded.title)
+            }
+        }
+    }
+    return (
+        <>
+            <StyledToastContainer hideProgressBar={true} />
+            <StyledCanvas ref={canvasRef} />
+            <StyledFlexDirectionRowDiv style={{
+                color: theme.color_text,
+                backgroundColor: theme.color_background,
+                display: isDesktopOrLaptop ? "flex" : "block",
             }}
-          >
-            <main>
-              {
-                (
-                  render &&
-                  render(scrollDivState)
-                ) ||
-                children
-              }
-            </main>
-            <footer>
-              © {new Date().getFullYear()}, Built with
+
+                onClick={(ev) => setMouseClickPosition({
+                    x: ev.nativeEvent.clientX,
+                    y: ev.nativeEvent.clientY,
+                })}>
+                {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
+                <StyledFlex3OverflowYDiv
+                    onScroll={handleOnScroll}
+                    ref={scrollDivRef}
+                    style={{
+                        marginLeft: isDesktopOrLaptop ? '64px' : 0,
+                    }}>
+                    <Header siteTitle={data.site.siteMetadata.title} />
+                    <StyledHeaderDiv
+                        style={{
+                            fontFamily: theme.font_family,
+                            fontSize: `${theme.font_size}px`
+                        }}
+                    >
+                        <main>
+                            {
+                                (
+                                    render &&
+                                    render(scrollDivState)
+                                ) ||
+                                children
+                            }
+                        </main>
+                        <footer>
+                            © {new Date().getFullYear()}, Built with
           {` `}
-              <a href="https://www.gatsbyjs.org">Gatsby</a>
-            </footer>
-          </div>
-        </div>
-        {isDesktopOrLaptop && rightSideDesktopComponent}
-      </div>
-    </>
-  )
+                            <a href="https://www.gatsbyjs.org">Gatsby</a>
+                        </footer>
+                    </StyledHeaderDiv>
+                </StyledFlex3OverflowYDiv>
+                {isDesktopOrLaptop && rightSideDesktopComponent}
+            </StyledFlexDirectionRowDiv>
+        </>
+    )
 }
 
 export default Layout
