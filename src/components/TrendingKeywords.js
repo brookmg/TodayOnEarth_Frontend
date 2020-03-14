@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { FormCheckbox } from "shards-react";
 import Margin from "./CompoundComponents/Margin";
 import ParseLinks from "./UIElements/ParseLinks";
+import styled from "styled-components";
 const GET_TODAYS_TRENDING_KEYWORDS = gql`
 
 query getTodaysTrendingKeywords($semantics: Boolean){
@@ -14,6 +15,21 @@ query getTodaysTrendingKeywords($semantics: Boolean){
 }
 
 `;
+
+const StyledBoldCenterDiv = styled.div`
+    text-align: center; 
+    font-weight: bold;
+`
+
+const StyledLeftDiv = styled.div`
+    text-align: left; 
+`
+
+const StyledLeftP = styled.div`
+    text-align: left; 
+    margin: 0;
+`
+
 const TrendingKeywords = (props) => {
     const [semanticEnabled, setSemanticEnabled] = React.useState(false);
     const { loading, error, data } = useQuery(GET_TODAYS_TRENDING_KEYWORDS, {
@@ -25,31 +41,25 @@ const TrendingKeywords = (props) => {
     const keywords = data && data.getTodaysTrendingKeywords;
     return (<>
         <Margin horizontal="2em">
-            <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
+            <StyledBoldCenterDiv>
                 <h3>Today's trending keywords</h3>
-                <div style={{ textAlign: 'left' }}>
+                <StyledLeftDiv>
                     <FormCheckbox toggle small checked={semanticEnabled} onChange={handleSemanticsChange}>
                         Enable Semantic Analysis
-      </FormCheckbox>
-
-                </div>
+                    </FormCheckbox>
+                </StyledLeftDiv>
                 <div>
                     {loading && <p>Loading...</p>}
                     {error && <p>Error: {error.message}</p>}
                 </div>
-
-
                 <div>
                     {!loading && keywords && keywords.filter(e => e.interest).slice(0, 20).map((e, i) => <div>
-                        <p style={{
-                            margin: 0,
-                            textAlign: 'left',
-                        }}>
+                        <StyledLeftP>
                             No {i + 1}: <ParseLinks>{e.interest}</ParseLinks>
-                        </p>
+                        </StyledLeftP>
                     </div>)}
                 </div>
-            </div>
+            </StyledBoldCenterDiv>
         </Margin>
     </>);
 };
