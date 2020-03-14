@@ -4,7 +4,10 @@ import Margin from "../CompoundComponents/Margin";
 
 
 const ButtonSignInWith = (props) => {
-    return (<a {...props} href={props.url}>
+    return (<a
+        {...props}
+        style={{ ...props.style, display: 'inline-block' }}
+        href={props.url}>
         <ButtonCustom borderColor={props.borderColor} backgroundColor={props.backgroundColor} color={props.color}>
             <Margin vertical="0" horizontal="0.25em">
                 <img style={{
