@@ -122,7 +122,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
           ref={scrollDivRef}
           style={{
             flex: 3,
-            marginLeft: isDesktopOrLaptop ? '100px' : 0,
+            marginLeft: isDesktopOrLaptop ? '64px' : 0,
             overflowY: 'auto',
             height: '100vh'
           }}>
