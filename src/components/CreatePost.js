@@ -10,6 +10,7 @@ import gql from "graphql-tag";
 import { useMutation } from '@apollo/react-hooks';
 import { Picker } from 'emoji-mart';
 import ScreenSizeContext from "./Contexts/ScreenSizeContext";
+import styled from "styled-components";
 
 
 //TODO: remove un-needed console.log()
@@ -42,6 +43,33 @@ const DEFAULT_PLATFORMS_TO_POST_ON = {
     "LinkedIn": true,
     "Twitter": true,
 };
+
+const StyledDisplayFlexDiv = styled.div`
+    display: flex;
+`
+
+const StyledFlex1Div = styled.div`
+    flex: 1;
+`
+
+const StyledDisplayFlex1Div = styled(StyledDisplayFlexDiv)`
+    flex: 1;
+`
+
+const StyledFlexColumn3Div = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+`
+
+const StyledFormTextarea = styled(FormTextarea)`
+    font-family: emoji
+`
+
+const StyledFlexRowReverseDiv = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+`
 
 const CreatePost = () => {
     const user = React.useContext(AuthContext);
@@ -95,12 +123,12 @@ const CreatePost = () => {
     console.log("GQL response", data);
     return (<div>
         <h2>Create Post</h2>
-        <div style={{ display: "flex" }}>
-            <div style={{ flex: 1 }}>
+        <StyledDisplayFlexDiv>
+            <StyledFlex1Div>
                 <Margin vertical="1em">
                     <div>
                         Platforms to post on:
-          </div>
+                    </div>
                 </Margin>
                 <span>
                     {Object.keys(platformToPostOn).map(e => <FormCheckbox inline key={e} checked={!!platformToPostOn[e]} onChange={ev => handlePostSourceChange(ev, e)}>
@@ -113,27 +141,25 @@ const CreatePost = () => {
                             <FormInput placeholder={"Facebook page URL"} onChange={handleFacebookPageURLChange} />}
                     </Margin>
                 </span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: "column", flex: 3 }}>
+            </StyledFlex1Div>
+            <StyledFlexColumn3Div>
                 <Margin horizontal="0.5em" vertical="0.5em">
-                    <div style={{ display: 'flex' }}>
-                        <FormTextarea style={{
-                            fontFamily: 'emoji'
-                        }} value={postText} placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`} rows={8} onChange={handlePostTextChange} />
+                    <StyledDisplayFlex1Div>
+                        <StyledFormTextarea value={postText} placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`} rows={8} onChange={handlePostTextChange} />
                         {isDesktopOrLaptop &&
                             <Picker title="" showPreview={true} set='emojione' onSelect={handleEmojiSelect} />}
-                    </div>
+                    </StyledDisplayFlex1Div>
                     <span>Image or file to upload: <FormInput type="file" onChange={({ target: { files } }) => {
                         const file = files[0];
                         console.log(file);
                         file && setFileToUpload(file);
                     }} /></span>
-                    <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                    <StyledFlexRowReverseDiv>
                         <ButtonSuccess onClick={handlePostClick}>Create Post</ButtonSuccess>
-                    </div>
+                    </StyledFlexRowReverseDiv>
                 </Margin>
-            </div>
-        </div>
+            </StyledFlexColumn3Div>
+        </StyledDisplayFlexDiv>
 
     </div>);
 };
