@@ -7,13 +7,11 @@ import { FormInput } from "shards-react"
 import AnchorButton from "./UIElements/AnchorButton"
 import ButtonSignInWith from "./UIElements/ButtonSignInWith"
 import ButtonSuccess from "./UIElements/ButtonSuccess"
-import { useMediaQuery } from 'react-responsive'
+import ScreenSizeContext from "./Contexts/ScreenSizeContext"
 
 
 const SignIn = (props) => {
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-device-width: 1224px)'
-  })
+  const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
 
   const auth = React.useContext(AuthContext)
   const [user, setUser] = React.useState({})

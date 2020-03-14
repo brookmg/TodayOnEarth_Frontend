@@ -8,16 +8,15 @@ import AuthContext from "../components/Contexts/AuthContext"
 import { isBrowser } from "../utils"
 import ButtonSignInWith from "../components/UIElements/ButtonSignInWith"
 import Margin from "../components/CompoundComponents/Margin"
-import { FormInput, Button } from "shards-react"
+import { FormInput } from "shards-react"
 import AnchorButton from "../components/UIElements/AnchorButton"
 import ButtonSuccess from "../components/UIElements/ButtonSuccess"
-import { useMediaQuery } from 'react-responsive'
+import ScreenSizeContext from "../components/Contexts/ScreenSizeContext"
 
 
 const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id, twitter_id, github_id, linkedin_id, telegram_id }) => {
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-device-width: 1224px)'
-  })
+  const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+  
   const auth = React.useContext(AuthContext)
   const [user, setUser] = React.useState({ email, first_name, last_name, username, google_id, facebook_id, twitter_id, github_id, linkedin_id, telegram_id });
 

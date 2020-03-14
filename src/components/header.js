@@ -8,14 +8,12 @@ import AnimatedLink from "./UIElements/AnimatedLink"
 import SettingsIcon from '@material-ui/icons/Settings';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
-import { useMediaQuery } from 'react-responsive'
 import NavigationBar from "./NavigationBar";
+import ScreenSizeContext from "./Contexts/ScreenSizeContext";
 
 
 const Header = ({ siteTitle }) => {
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-device-width: 1224px)'
-  })
+  const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
 
   const handleSearchButtonClick = (e) => {
     if (searchBarText === "") {
@@ -163,7 +161,7 @@ const Header = ({ siteTitle }) => {
 
 
       </div>
-    </header >
+    </header>
   )
 }
 
