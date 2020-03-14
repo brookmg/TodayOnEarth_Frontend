@@ -18,6 +18,7 @@ import { isColorDark } from "../utils";
 import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
 import styled from "styled-components";
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ScreenSizeContext from "./Contexts/ScreenSizeContext";
 
 
@@ -28,6 +29,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const user = React.useContext(AuthContext);
     const links = [
         { text: "Create a Post", url: "/create", icon: <PostAddIcon /> },
+        { text: "Today", url: "/", icon: <CalendarTodayIcon /> },
         { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
         { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
         { text: "Topic Posts", url: "/trendsByTopic", icon: <VisibilityIcon /> },
