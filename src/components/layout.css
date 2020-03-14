@@ -606,7 +606,7 @@ pre tt:after {
 *{transition: background-color 2s ease;}
 
 *{
-  cursor: url(mario.ico), auto;
+  cursor: url('../images/mario.ico'), auto;
 }
 
 ::-webkit-scrollbar {
@@ -623,5 +623,5 @@ pre tt:after {
 
 @font-face {
   font-family: 'emoji';
-  src: url('fonts/EmojiOneColor.otf') format("opentype");
+  src: url('../fonts/EmojiOneColor.otf') format("opentype");
 }
