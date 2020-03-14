@@ -9,6 +9,7 @@ import { getIfAvailable, ellipsedSubstring } from "../utils";
 import PostMetadata from "./UIElements/PostMetadata";
 import ParseLinks from "./UIElements/ParseLinks";
 import ThemedTopicChart from "./ThemedTopicChart";
+import styled from "styled-components";
 
 
 const GET_POST_DETAIL = gql`
@@ -50,6 +51,40 @@ query fetchPostDetail($postid: Int!) {
 }
 
 `;
+
+const StyledRelativeDiv = styled.div`
+    position: relative;
+    top: -100px;
+`
+
+const StyledCenterTextDiv = styled.div`
+    text-align: center;
+`
+
+const StyledRoundDiv = styled.div`
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+    max-width: 200px;
+    max-height: 200px;
+`
+
+const StyledImage = styled(Image)`
+    height: 200px;
+    width: 200px;
+`
+
+const StyledDisplayFlex = styled.div`
+    display: flex;
+    justify-content: center;
+`
+
+const StyledDisplayMarginFlex = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+`
+
 const PostDetail = withQueryParsedURL((props) => {
     const handleShareClick = (e) => {
         navigator.clipboard.writeText(window.location.href);
@@ -65,46 +100,27 @@ const PostDetail = withQueryParsedURL((props) => {
     });
     const post = (data && data.getPost) || {};
     return (
-        <div style={{
-            position: 'relative',
-            top: `-100px`
-        }}>
-            <div style={{ textAlign: 'center' }}>
-                <div style={{
-                    overflow: 'hidden',
-                    borderRadius: `50%`,
-                    margin: '0 auto',
-                    maxWidth: `200px`,
-                    maxHeight: `200px`,
-                }}>
-                    <Image src="https://www.w3schools.com/howto/img_avatar.png" style={{
-                        height: '200px',
-                        width: '200px',
-                    }} />
-                </div>
+        <StyledRelativeDiv>
+            <StyledCenterTextDiv>
+                <StyledRoundDiv>
+                    <StyledImage src="https://www.w3schools.com/howto/img_avatar.png" />
+                </StyledRoundDiv>
                 <p>{post.provider}</p>
-            </div>
+            </StyledCenterTextDiv>
             <div>
                 <div>
                     <ThemedTopicChart postId={Number(props.queryParsedURL.id)} />
                 </div>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    margin: '1rem'
-                }}>
+                <StyledDisplayMarginFlex>
                     <PostMetadata sourceLink={post.source_link} communityInteraction={getIfAvailable(post, `metadata.community_interaction`)} />
-                </div>
+                </StyledDisplayMarginFlex>
 
                 <AnchorButton id="shareButton" onClick={handleShareClick}>Share 🔗</AnchorButton>
                 <Tooltip trigger="click" open={isShareTooltipOpen} target="#shareButton" toggle={toggleShareTooltipOpen}>
                     URL copied to clipboard!
         </Tooltip>
             </div>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'center'
-            }}>
+            <StyledDisplayFlex>
 
                 {loading && <p>Loading Post...</p>}
                 {error && <p>Error: {error.message}</p>}
@@ -112,7 +128,7 @@ const PostDetail = withQueryParsedURL((props) => {
 
                 <Image src={getIfAvailable(post, 'metadata.message.image.src') || // Telegram images
                     getIfAvailable(post, 'metadata.post.thumbnail_image')} />
-            </div>
+            </StyledDisplayFlex>
             {post.body === "" ?
                 <>
                     <div>
@@ -136,7 +152,7 @@ const PostDetail = withQueryParsedURL((props) => {
                         </p>
                     </div>
                 </>}
-        </div>
+        </StyledRelativeDiv>
     );
 });
 
