@@ -12,19 +12,17 @@ import FindInPageIcon from '@material-ui/icons/FindInPage';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import { useMediaQuery } from 'react-responsive'
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { isColorDark } from "../utils";
 import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
 import styled from "styled-components";
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import ScreenSizeContext from "./Contexts/ScreenSizeContext";
 
 
 const UnStyledNavigationBar = React.forwardRef((props, ref) => {
-    const isDesktopOrLaptop = useMediaQuery({
-        query: '(min-device-width: 1224px)'
-    })
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
 
     const theme = React.useContext(ThemePalletteContext);
     const user = React.useContext(AuthContext);

@@ -16,9 +16,9 @@ import gql from 'graphql-tag'
 import { useSubscription } from '@apollo/react-hooks'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useMediaQuery } from 'react-responsive'
 import NavigationBar from "./NavigationBar"
 import { intializeClickEffect } from "./UIElements/ClickEffect"
+import ScreenSizeContext from "./Contexts/ScreenSizeContext"
 
 
 const POSTS_SUBSCRIPTION = gql`
@@ -31,9 +31,7 @@ subscription{
 `;
 
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-device-width: 1224px)'
-  })
+  const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {

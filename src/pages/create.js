@@ -12,7 +12,7 @@ import gql from "graphql-tag"
 import { useMutation } from '@apollo/react-hooks';
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
-import { useMediaQuery } from 'react-responsive'
+import ScreenSizeContext from "../components/Contexts/ScreenSizeContext";
 
 
 //TODO: remove un-needed console.log()
@@ -49,9 +49,7 @@ const DEFAULT_PLATFORMS_TO_POST_ON = {
 
 const PostsLatest = (props) => {
   const user = React.useContext(AuthContext)
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-device-width: 1224px)'
-  })
+  const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
 
   const [platformToPostOn, setPlatformToPostOn] = React.useState(DEFAULT_PLATFORMS_TO_POST_ON)
   const [postText, setPostText] = React.useState("")
