@@ -3,7 +3,9 @@ import { CardBody, FormCheckbox } from "shards-react";
 import Margin from "./CompoundComponents/Margin";
 import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
-const ContentSourceSection = (props) => {
+
+
+const ContentSourceSection = () => {
     const handleCheckBoxChange = (event, name) => {
         const isChecked = checkedItems[name];
         setCheckedItems({ ...checkedItems, [name]: !isChecked });
