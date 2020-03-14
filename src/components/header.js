@@ -54,6 +54,10 @@ const StyledFade = styled(Fade)`
     flex: 1
 `
 
+const StyledAnimatedLink = styled(AnimatedLink)`
+    text-decoration: none;
+`
+
 const Header = ({ siteTitle }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
 
@@ -130,15 +134,14 @@ const Header = ({ siteTitle }) => {
                 }}>
 
                     <StyledFlex1Margin0H1 style={{ fontFamily: theme.font_family }}>
-                        <AnimatedLink
+                        <StyledAnimatedLink
                             to="/"
                             style={{
                                 color: theme.color_text,
-                                textDecoration: `none`,
                             }}
                         >
                             {siteTitle}
-                        </AnimatedLink>
+                        </StyledAnimatedLink>
                     </StyledFlex1Margin0H1>
 
                     <StyledDisplayFlexCenterTextDiv>
