@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Radar } from 'react-chartjs-2';
 import ThemePalletteContext from "./Contexts/ThemePalletteContext";
 import gql from 'graphql-tag';
+import styled from "styled-components";
 
 const GET_POST_TOPICS = gql`
 
@@ -14,6 +15,10 @@ query getPostTopics($postId:Int){
 }
 
 `;
+
+const StyledDiv = styled.div`
+    text-align: center;
+`
 
 const ThemedTopicChart = ({ postId }) => {
     const theme = React.useContext(ThemePalletteContext);
@@ -41,7 +46,7 @@ const ThemedTopicChart = ({ postId }) => {
     if (!score.length || !topics.length)
         return null;
     return (<>
-        <div style={{ textAlign: 'center' }}>
+        <StyledDiv>
             Topics
                 <div>
                 {loading && <p>Loading...</p>}
@@ -82,7 +87,7 @@ const ThemedTopicChart = ({ postId }) => {
                     data: score
                 }]
             }} />
-        </div>
+        </StyledDiv>
     </>);
 };
 
