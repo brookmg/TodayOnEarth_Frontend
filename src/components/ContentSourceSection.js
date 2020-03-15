@@ -1,5 +1,5 @@
 import React from "react";
-import { CardBody, FormCheckbox, FormInput } from "shards-react";
+import { CardBody, FormCheckbox, FormInput, FormSelect } from "shards-react";
 import Margin from "./CompoundComponents/Margin";
 import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
@@ -10,7 +10,6 @@ import ThemePalletteContext from "./Contexts/ThemePalletteContext";
 import styled from "styled-components"
 import { toast } from "react-toastify"
 import AddIcon from '@material-ui/icons/Add';
-import { isValidUrl } from "../utils"
 import AnchorButton from "./UIElements/AnchorButton"
 
 
@@ -26,8 +25,8 @@ const GET_USER_PROVIDERS = gql`
 
 const ADD_PROVIDER = gql`
 
-mutation addProvider($sourceLink: String!){
-  addProvider(provider: { provider: $sourceLink, source: $sourceLink, frequency: "" }) {
+mutation addProvider($source: String!,$provider: String!){
+  addProvider(provider: { provider: $provider, source: $source, frequency: "" }) {
     provider
   }
 }
@@ -35,10 +34,10 @@ mutation addProvider($sourceLink: String!){
 
 const REMOVE_PROVIDER = gql`
 
-mutation removeProvider($provider: String!){
+mutation removeProvider($provider: String!, $source: String!){
   removeProvider(provider:{
     provider:$provider,
-    source:"",
+    source:$source,
     frequency:""
   })
 }
@@ -118,15 +117,28 @@ const StyledHiddenIcon = styled.span`
     display: none;
 `
 
+const StyledFlex1Div = styled.div`
+    flex: 1;
+`
+
+const StyledSelect = styled(FormSelect)`
+    width: auto;
+`
+
+const AVAILABLE_SOURCES = ['Facebook', 'Instagram', 'Telegram', 'Twitter']
+
 const ContentSourceSection = () => {
     const theme = React.useContext(ThemePalletteContext)
-    const handleCheckBoxChange = (event, name) => {
-        const isChecked = checkedItems[name];
+    const handleCheckBoxChange = (event, provider) => {
+        const providerName = provider.provider
+        const providerSource = provider.source
+
+        const isChecked = checkedItems[providerName];
         const checkedResult = !isChecked
-        setCheckedItems({ ...checkedItems, [name]: checkedResult });
+        setCheckedItems({ ...checkedItems, [providerName]: checkedResult });
 
         if (!checkedResult) {
-            removeProvider({ variables: { provider: name } })
+            removeProvider({ variables: { provider: providerName, source: providerSource } })
         }
     };
 
@@ -149,9 +161,11 @@ const ContentSourceSection = () => {
         onCompleted: (data) => {
             if (data.addProvider) {
                 toast("Added provider successfully", {
-                    type: toast.TYPE.SUCCESS
+                    type: toast.TYPE.SUCCESS,
+                    delay: 1000
                 })
-                setInsertUrlText("")
+                setInsertProviderText("")
+                setInsertSourceText("")
                 refetch()
             }
         }
@@ -173,11 +187,13 @@ const ContentSourceSection = () => {
         }
     });
 
-    const handleUrlChange = (ev) => setInsertUrlText(ev.target.value)
+    const handleSourceChange = (ev) => setInsertSourceText(ev.target.value)
+    const handleProviderChange = (ev) => setInsertProviderText(ev.target.value)
+
     const handleSearchPhraseChange = (ev) => setSearchPhrase(ev.target.value)
     const handleAddClick = (ev) => {
-        if (!isValidUrl(insertUrlText)) {
-            toast("Please insert a valid URL", {
+        if (insertSourceText === "" || insertProviderText === "") {
+            toast("Can not insert, check if values are valid", {
                 type: toast.TYPE.ERROR
             })
             return
@@ -185,7 +201,8 @@ const ContentSourceSection = () => {
 
         addProvider({
             variables: {
-                sourceLink: insertUrlText
+                source: insertSourceText,
+                provider: insertProviderText,
             }
         })
     }
@@ -194,7 +211,7 @@ const ContentSourceSection = () => {
     const handleProviderClicked = (provider) => addProvider({
         variables: {
             provider: provider.provider,
-            sourceLink: provider.source,
+            source: provider.source,
         }
     })
 
@@ -203,7 +220,8 @@ const ContentSourceSection = () => {
     userContentSources.forEach((e) =>
         (typeof checkedItems[e.provider] === "undefined") &&
         (checkedItems[e.provider] = true))
-    const [insertUrlText, setInsertUrlText] = React.useState("");
+    const [insertSourceText, setInsertSourceText] = React.useState("");
+    const [insertProviderText, setInsertProviderText] = React.useState("");
     const [isInsertUrlShowing, setIsInsertUrlShowing] = React.useState(false);
 
     const allProviders = allProviderData ? allProviderData.getProviders : []
@@ -218,7 +236,7 @@ const ContentSourceSection = () => {
                             {mutationLoading && <p>Adding provider...</p>}
                             {mutationError && <p>Error adding provider: {mutationError.message}</p>}
                             {removeMutationLoading && <p>Removing provider...</p>}
-                            {removeMutationError && <p>Error removing provider: {mutationError.message}</p>}
+                            {removeMutationError && <p>Error removing provider: {removeMutationError.message}</p>}
                             <div>
                                 <Margin vertical="0.5em">
 
@@ -239,7 +257,11 @@ const ContentSourceSection = () => {
                                                     allProviders.map(e =>
                                                         <StyledP onClick={handleProviderClicked.bind(this, e)}>
                                                             <StyledDisplayAlignCenterFlexDiv>
-                                                                <StyledHiddenIcon className="pIcon"><AddIcon /></StyledHiddenIcon>{e.provider}
+                                                                <StyledHiddenIcon className="pIcon"><AddIcon /></StyledHiddenIcon>
+                                                                <div>
+                                                                    <div>{e.provider}</div>
+                                                                    <div style={{ color: theme.color_text_faded }}>{e.source}</div>
+                                                                </div>
                                                             </StyledDisplayAlignCenterFlexDiv>
                                                         </StyledP>)
                                                 }
@@ -261,7 +283,20 @@ const ContentSourceSection = () => {
                                                 <AnchorButton onClick={handleGoToSearchClick}> Back to Search </AnchorButton>
                                             </StyledDisplayCenterFlexDiv>
                                             <StyledDisplayFlexDiv>
-                                                <FormInput value={insertUrlText} onChange={handleUrlChange} size="sm" placeholder="Insert URL" />
+                                                <StyledFlex1Div>
+                                                    <StyledDisplayAlignCenterFlexDiv>
+                                                        <Margin horizontal="0.25em">
+                                                            <StyledSelect onChange={handleSourceChange}>
+                                                                {
+                                                                    AVAILABLE_SOURCES.map((source) => {
+                                                                        return (<option key={source}>{source}</option>);
+                                                                    })
+                                                                }
+                                                            </StyledSelect>
+                                                            <FormInput value={insertProviderText} onChange={handleProviderChange} size="sm" placeholder="Insert Provider" />
+                                                        </Margin>
+                                                    </StyledDisplayAlignCenterFlexDiv>
+                                                </StyledFlex1Div>
                                                 <StyledMarginButtonCustom
                                                     onClick={handleAddClick}
                                                     borderColor={theme.color_background}
@@ -277,8 +312,11 @@ const ContentSourceSection = () => {
                                         {userContentSources.length === 0 ?
                                             <StyledDisplayCenterFlexDiv><p>Nothing found</p></StyledDisplayCenterFlexDiv>
                                             :
-                                            userContentSources.map(e => (<FormCheckbox inline key={e.provider} checked={checkedItems[e.provider]} onChange={ev => handleCheckBoxChange(ev, e.provider)}>
-                                                {e.provider}
+                                            userContentSources.map(e => (<FormCheckbox inline key={e.provider} checked={checkedItems[e.provider]} onChange={ev => handleCheckBoxChange(ev, e)}>
+                                                <div>
+                                                    <div>{e.provider}</div>
+                                                    <div style={{ color: theme.color_text_faded }}>{e.source}</div>
+                                                </div>
                                             </FormCheckbox>))}
                                     </div>
                                 </Margin>
