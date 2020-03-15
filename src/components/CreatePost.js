@@ -106,7 +106,6 @@ const CreatePost = () => {
                 linkedin: platformToPostOn.LinkedIn,
                 twitter: platformToPostOn.Twitter,
                 facebook: platformToPostOn.Facebook,
-                //TODO: Instagram and Facebook remain
                 channel: telegramChannel,
                 pageUrl: facebookPageURL,
             }
