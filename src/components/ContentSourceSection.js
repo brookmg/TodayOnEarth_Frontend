@@ -220,7 +220,7 @@ const ContentSourceSection = () => {
     userContentSources.forEach((e) =>
         (typeof checkedItems[e.provider] === "undefined") &&
         (checkedItems[e.provider] = true))
-    const [insertSourceText, setInsertSourceText] = React.useState("");
+    const [insertSourceText, setInsertSourceText] = React.useState(AVAILABLE_SOURCES[0]);
     const [insertProviderText, setInsertProviderText] = React.useState("");
     const [isInsertUrlShowing, setIsInsertUrlShowing] = React.useState(false);
 
