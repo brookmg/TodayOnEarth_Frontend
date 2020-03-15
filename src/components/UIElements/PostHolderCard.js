@@ -16,14 +16,30 @@ import ParseLinks from './ParseLinks';
 import ThemedCard from './ThemedCard';
 import ThemedCardTitle from './ThemedCardTitle';
 import ButtonDark from './ButtonDark';
+import styled from 'styled-components';
 
-export default function PostHolderCard(props) {
+
+const StyledThemedCard = styled(ThemedCard)`
+    overflow: hidden;
+`
+
+const StyledDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const StyledImage = styled(Image)`
+    min-width: 100%;
+    min-height: 100%;
+`
+
+const PostHolderCard = (props) => {
     const theme = React.useContext(ThemePalletteContext)
     return (
         <Margin vertical="1rem">
-            <ThemedCard style={{
+            <StyledThemedCard style={{
                 borderTopLeftRadius: props.imgSrc && '5rem',
-                overflow: 'hidden'
             }}>
                 <Link
                     to={`/p?id=${props.id}`}
@@ -31,16 +47,9 @@ export default function PostHolderCard(props) {
                         color: theme.color_text,
                     }}
                 >
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}>
-                        <Image style={{
-                            minWidth: '100%',
-                            minHeight: '100%',
-                        }} src={props.imgSrc} />
-                    </div>
+                    <StyledDiv>
+                        <StyledImage src={props.imgSrc} />
+                    </StyledDiv>
                     {
                         (props.title || props.body) &&
                         <CardBody>
@@ -85,7 +94,9 @@ export default function PostHolderCard(props) {
                     </a>
 
                 </CardFooter>
-            </ThemedCard>
+            </StyledThemedCard>
         </Margin>
     );
 }
+
+export default PostHolderCard

@@ -1,6 +1,20 @@
 import React from "react"
 import { Button, } from "shards-react";
 import ThemePalletteContext from "../Contexts/ThemePalletteContext"
+import styled from "styled-components";
+
+const StyledXButton = styled.input`
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    background: transparent;
+    border: none;
+`
+
+const StyledInterestButton = styled(Button)`
+    padding-right: 0.5em;
+    position: relative;
+`
 
 const ButtonInterest = (props) => {
     const theme = React.useContext(ThemePalletteContext)
@@ -25,14 +39,8 @@ const ButtonInterest = (props) => {
 
     return (
         <span>
-
-            <Button
+            <StyledInterestButton
                 {...props}
-                style={{
-                    ...props.style,
-                    paddingRight: "0.5em",
-                    position: 'relative',
-                }}
                 theme={isXButtonHovered ? "danger" : "primary"}
                 outline
                 pill
@@ -43,22 +51,15 @@ const ButtonInterest = (props) => {
             >
                 {props.children}
 
-                <input type="button" style={{
-                    borderRadius: "50%",
-                    height: "24px",
-                    width: "24px",
-                    background: 'transparent',
+                <StyledXButton type="button" style={{
                     color: (isXButtonHovered || isButtonHovered) ? theme.color_text : '#007bff',
-                    border: "none"
-
                 }}
                     value="x"
                     onMouseEnter={handleXMouseEnter}
                     onMouseLeave={handleXMouseLeave}
                     onClick={handleClick}
                 />
-            </Button>
-
+            </StyledInterestButton>
         </span>
     )
 

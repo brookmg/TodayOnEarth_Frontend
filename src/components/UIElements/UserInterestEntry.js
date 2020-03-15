@@ -16,6 +16,7 @@ import ThemedCard from './ThemedCard';
 import ThemedCardTitle from "./ThemedCardTitle";
 import ButtonDark from "./ButtonDark";
 import ButtonSuccess from "./ButtonSuccess";
+import styled from "styled-components";
 
 const GET_USER_INTERESTS = gql`
 
@@ -38,6 +39,9 @@ mutation updateInterests($interests:[IInterest]!){
 
 `;
 
+const StyledDiv = styled.div`
+    text-align: center;
+`
 
 const UserInterestEntry = (props) => {
     const theme = React.useContext(ThemePalletteContext)
@@ -154,13 +158,13 @@ const UserInterestEntry = (props) => {
                                                                 />
 
 
-                                                                <div style={{ textAlign: 'center', color: theme.color_text_faded }}>
+                                                                <StyledDiv style={{ color: theme.color_text_faded }}>
                                                                     {
                                                                         interestScore < 0 ? "Never show me posts about this topic" :
                                                                             interestScore === 1 ? "Always show me posts about this topic" :
                                                                                 "I'm somewhat interested in this topic"
                                                                     }
-                                                                </div>
+                                                                </StyledDiv>
                                                             </div>
                                                         </Margin>
 

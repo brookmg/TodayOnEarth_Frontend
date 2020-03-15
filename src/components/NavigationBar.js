@@ -18,8 +18,59 @@ import { isColorDark } from "../utils";
 import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
 import styled from "styled-components";
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ScreenSizeContext from "./Contexts/ScreenSizeContext";
 
+
+const StyledWidthPaddingDiv = styled.div`
+    width: 100%;
+    padding: 0.5em;
+`
+
+const StyledDisplayFlexDiv = styled.div`
+    display: flex
+`
+
+const StyledMarginButtonCustom = styled(ButtonCustom)`
+    overflow: hidden;
+    padding: 0;
+    margin: 0.5em;
+`
+
+const StyledNoHorizontalPaddingButtonCustom = styled(ButtonCustom)`
+    width: 100%;
+    overflow: hidden;
+    padding-right: 0;
+    padding-left: 0;
+`
+
+const StyledWbSunnyIcon = styled(WbSunnyIcon)`
+    width: 28px;
+    height: 28px;
+`
+
+const StyledNightsStayIcon = styled(NightsStayIcon)`
+    width: 28px;
+    height: 28px;
+`
+
+const StyledAccountCircleIcon = styled(AccountCircleIcon)`
+    width: 16px;
+    height: 16px;
+    margin: 0;
+`
+
+const StyledFlex1Div = styled.div`
+    flex: 1;
+    width: 100%;
+    padding: 0.5em;
+`
+
+const StyledSpan = styled.span`
+    width: 16px;
+    height: 16px;
+    margin: 0.5em;
+`
 
 const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
@@ -28,6 +79,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const user = React.useContext(AuthContext);
     const links = [
         { text: "Create a Post", url: "/create", icon: <PostAddIcon /> },
+        { text: "Today", url: "/", icon: <CalendarTodayIcon /> },
         { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
         { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
         { text: "Topic Posts", url: "/trendsByTopic", icon: <VisibilityIcon /> },
@@ -50,41 +102,20 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
         backgroundColor: theme.color_background,
         fontFamily: theme.font_family,
     }}>
-        <div style={{ width: '100%', padding: "0.5em" }}>
-            <div style={{ display: 'flex', justifyContent: isDesktopOrLaptop ? 'flex-start' : 'flex-end' }}>
-                <ButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text} style={{
-                    overflow: 'hidden',
-                    padding: 0,
-                    margin: "0.5em",
-                }}>
+        <StyledWidthPaddingDiv>
+            <StyledDisplayFlexDiv style={{ justifyContent: isDesktopOrLaptop ? 'flex-start' : 'flex-end' }}>
+                <StyledMarginButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
                     {isColorDark(theme.color_background) ?
-                        <WbSunnyIcon onClick={handleLightModeClick} style={{
-                            width: "28px",
-                            height: "28px",
-                        }} /> :
-                        <NightsStayIcon onClick={handleNightModeClick} style={{
-                            width: "28px",
-                            height: "28px",
-                        }} />
+                        <StyledWbSunnyIcon onClick={handleLightModeClick} /> :
+                        <StyledNightsStayIcon onClick={handleNightModeClick} />
                     }
-                </ButtonCustom>
+                </StyledMarginButtonCustom>
 
-            </div>
-            <ButtonCustom borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text} style={{
-                width: '100%',
-                overflow: 'hidden',
-                paddingRight: 0,
-                paddingLeft: 0,
-            }}>
-
-
+            </StyledDisplayFlexDiv>
+            <StyledNoHorizontalPaddingButtonCustom borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
                 <div className="navbarTop">
                     <p className="navbarAccountIcon">
-                        <AccountCircleIcon style={{
-                            width: "16px",
-                            height: "16px",
-                            margin: 0,
-                        }} />
+                        <StyledAccountCircleIcon />
                     </p>
                     {isLoggedIn() ?
                         <div className="navbarShownOnHover" style={isMobileNavbarShowingStyle}>
@@ -114,35 +145,24 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
                     </>) :
                         null}
                 </div>
-            </ButtonCustom>
+            </StyledNoHorizontalPaddingButtonCustom>
 
-        </div>
+        </StyledWidthPaddingDiv>
 
-        <div style={{ flex: 1, width: '100%', padding: "0.5em" }}>
+        <StyledFlex1Div>
             {links.map(e => <div>
                 <Margin vertical="0.5em">
-                    <ButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text} style={{
-                        width: '100%',
-                        overflow: 'hidden',
-                        paddingRight: 0,
-                        paddingLeft: 0,
-                    }}>
+                    <StyledNoHorizontalPaddingButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
                         <AnimatedLink to={e.url}>
-                            <span style={{
-                                width: "16px",
-                                height: "16px",
-                                margin: '0.5em',
-                            }}>
-                                {e.icon}
-                            </span>
+                            <StyledSpan>{e.icon}</StyledSpan>
                             <span className="navbarBtnText" style={isMobileNavbarShowingStyle}>
                                 {e.text}
                             </span>
                         </AnimatedLink>
-                    </ButtonCustom>
+                    </StyledNoHorizontalPaddingButtonCustom>
                 </Margin>
             </div>)}
-        </div>
+        </StyledFlex1Div>
 
     </div>);
 });
@@ -150,6 +170,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
 const NavigationBar = styled(UnStyledNavigationBar)`
     width: 64px;
     height: 100%;
+    overflow-y: auto;
     z-index: 10000;
     left:0;
     right:0;
@@ -170,7 +191,6 @@ const NavigationBar = styled(UnStyledNavigationBar)`
     }
     .navbarLinkButton {
         text-align: left;
-        padding: 0.5em;
     }
     .navbarShownOnHover {
         display: none;
@@ -206,9 +226,8 @@ const NavigationBar = styled(UnStyledNavigationBar)`
         }
         .navbarLinkButton {
             text-align: left;
-            padding: 0.5em;
         }
     }
-`;
+`
 
 export default NavigationBar;

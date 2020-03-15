@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from "shards-react";
-
 import Margin from '../CompoundComponents/Margin';
+
 
 const PostMetadata = (props) => {
     const communityInteraction = props.communityInteraction
