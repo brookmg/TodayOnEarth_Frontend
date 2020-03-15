@@ -10,6 +10,7 @@ import PostMetadata from "./UIElements/PostMetadata";
 import ParseLinks from "./UIElements/ParseLinks";
 import ThemedTopicChart from "./ThemedTopicChart";
 import styled from "styled-components";
+import PostInteraction from "./UIElements/PostInteraction";
 
 
 const GET_POST_DETAIL = gql`
@@ -165,7 +166,9 @@ const PostDetail = withQueryParsedURL((props) => {
                             </ParseLinks>
                         </p>
                     </div>
-                </>}
+                </>
+            }
+            {post.postid && <PostInteraction postid={post.postid} />}
         </StyledRelativeDiv>
     );
 });
