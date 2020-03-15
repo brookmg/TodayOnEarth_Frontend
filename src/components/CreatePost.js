@@ -23,22 +23,36 @@ mutation createPost(
   $linkedin: Boolean
   $twitter: Boolean
   $channel: String
+  $facebook: Boolean
+  $pageUrl: String  
 ) {
   postOnToSocials(
     text: $text
     upload: $upload
     telegram: $telegram
     linkedin: $linkedin
+    facebook: $facebook
+    pageUrl: $pageUrl  
     twitter: $twitter
     channel: $channel
   ){
     text
+    facebook
+    telegram
+    linkedin
+    twitter
+    errors {
+        facebook
+        telegram
+        linkedin
+        twitter
+    }  
   }
 }
 `;
 const DEFAULT_PLATFORMS_TO_POST_ON = {
     "Telegram": true,
-    "Facebook": false,
+    "Facebook": true,
     "Instagram": false,
     "LinkedIn": true,
     "Twitter": true,
@@ -91,7 +105,7 @@ const CreatePost = () => {
                 telegram: platformToPostOn.Telegram,
                 linkedin: platformToPostOn.LinkedIn,
                 twitter: platformToPostOn.Twitter,
-                //TODO: Instagram and Facebook remain
+                facebook: platformToPostOn.Facebook,
                 channel: telegramChannel,
                 pageUrl: facebookPageURL,
             }
