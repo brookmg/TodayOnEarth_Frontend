@@ -5,7 +5,6 @@ import { Link } from "gatsby"
 import {
     CardBody,
     CardFooter,
-    Button
 } from "shards-react";
 
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
@@ -17,6 +16,7 @@ import ThemedCard from './ThemedCard';
 import ThemedCardTitle from './ThemedCardTitle';
 import ButtonDark from './ButtonDark';
 import styled from 'styled-components';
+import PostInteraction from './PostInteraction';
 
 
 const StyledThemedCard = styled(ThemedCard)`
@@ -70,6 +70,8 @@ const PostHolderCard = (props) => {
                         </CardBody>
                     }
                 </Link>
+
+                <PostInteraction postid={props.id} />
 
                 <Margin left='1rem' bottom='0.5rem'>
                     <div>

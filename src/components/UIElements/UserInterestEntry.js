@@ -17,6 +17,7 @@ import ThemedCardTitle from "./ThemedCardTitle";
 import ButtonDark from "./ButtonDark";
 import ButtonSuccess from "./ButtonSuccess";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const GET_USER_INTERESTS = gql`
 
@@ -67,7 +68,13 @@ const UserInterestEntry = (props) => {
             notifyOnNetworkStatusChange: true,
             fetchPolicy: 'no-cache'
         });
-    const [updateInterests, { loading: mutationLoading, error: mutationError }] = useMutation(UPDATE_USER_INTERESTS);
+    const [updateInterests, { loading: mutationLoading, error: mutationError }] = useMutation(UPDATE_USER_INTERESTS, {
+        onCompleted: (data) =>
+            data.cleanUpdateInterestList &&
+            toast("Applied changes successfully", {
+                type: toast.TYPE.SUCCESS
+            })
+    });
 
     const handleSlide = (e) => {
         const score = parseFloat(e[0])
