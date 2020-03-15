@@ -1,6 +1,6 @@
 import React from "react";
 import { Tooltip } from "shards-react";
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import AnchorButton from "./UIElements/AnchorButton";
 import withQueryParsedURL from "./HOCs/withQueryParsedURL";
@@ -52,6 +52,14 @@ query fetchPostDetail($postid: Int!) {
 
 `;
 
+const POST_OPENED_MUTATION = gql`
+
+mutation setPostOpened($postid: Int){
+  postOpened(postId:$postid)
+}
+
+`;
+
 const StyledRelativeDiv = styled.div`
     position: relative;
     top: -100px;
@@ -93,9 +101,15 @@ const PostDetail = withQueryParsedURL((props) => {
         setShareTooltipOpen(!isShareTooltipOpen);
     };
     const [isShareTooltipOpen, setShareTooltipOpen] = React.useState(false);
+    const [postOpened] = useMutation(POST_OPENED_MUTATION)
     const { loading, error, data } = useQuery(GET_POST_DETAIL, {
         variables: {
             postid: Number(props.queryParsedURL.id)
+        },
+        onCompleted: (data) => {
+            const post = data.getPost
+            if (post.postid)
+                postOpened({ variables: { postid: post.postid } })
         }
     });
     const post = (data && data.getPost) || {};
