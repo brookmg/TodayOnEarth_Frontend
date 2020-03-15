@@ -278,7 +278,7 @@ const ContentSourceSection = () => {
                                             <StyledDisplayCenterFlexDiv><p>Nothing found</p></StyledDisplayCenterFlexDiv>
                                             :
                                             userContentSources.map(e => (<FormCheckbox inline key={e.provider} checked={checkedItems[e.provider]} onChange={ev => handleCheckBoxChange(ev, e.provider)}>
-                                                {e.source}
+                                                {e.provider}
                                             </FormCheckbox>))}
                                     </div>
                                 </Margin>
