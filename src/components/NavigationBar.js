@@ -170,7 +170,6 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
 const NavigationBar = styled(UnStyledNavigationBar)`
     width: 64px;
     height: 100%;
-    overflow-y: auto;
     z-index: 10000;
     left:0;
     right:0;
@@ -179,7 +178,8 @@ const NavigationBar = styled(UnStyledNavigationBar)`
     display: 'flex';
     flex-direction: column;
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: fixed;
     text-align: left;
     align-items: flex-start;
