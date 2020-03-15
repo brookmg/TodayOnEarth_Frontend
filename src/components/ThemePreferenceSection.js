@@ -1,5 +1,5 @@
 import React from "react";
-import { CardBody, FormInput } from "shards-react";
+import { CardBody, FormInput, FormSelect } from "shards-react";
 import Margin from "./CompoundComponents/Margin";
 import ThemePalletteContext from "./Contexts/ThemePalletteContext";
 import DefaultThemeDefinition, { availableFonts } from "./Contexts/ThemePalletteContext/DefaultThemeDefinition";
@@ -10,7 +10,12 @@ import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import styled from "styled-components";
 
+
+const StyledSelect = styled(FormSelect)`
+    width: auto;
+`
 
 const ThemePreferenceSection = (props) => {
     const theme = React.useContext(ThemePalletteContext);
@@ -44,11 +49,11 @@ const ThemePreferenceSection = (props) => {
                             }}>Site Theme</ThemedCardTitle>
                             <div>
 
-                                <select onChange={handleFontChange}>
+                                <StyledSelect onChange={handleFontChange}>
                                     {availableFonts.map((font) => {
                                         return (<option style={{ fontFamily: font }} key={font}>{font}</option>);
                                     })}
-                                </select>
+                                </StyledSelect>
                                 <Margin horizontal="0.5rem">
                                     <span>Font Style</span>
                                 </Margin>
