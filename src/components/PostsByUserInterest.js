@@ -8,7 +8,7 @@ import { FormSelect } from "shards-react";
 import styled from "styled-components";
 
 
-const TRENDING_TODAY_QUERY = gql`
+const POSTS_BY_USER_INTEREST_QUERY = gql`
 
 query getUserInterestsPosts(
   $page: Int,
@@ -56,7 +56,7 @@ const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
 let prevScrollValue = -1;
 const TIME_NOW = Date.now();
-const TIME_24_HOURS_AGO = TIME_NOW - (1 * 24 * 60 * 60 * 1000);
+const TIME_A_WEEK_AGO = TIME_NOW - (7 * 24 * 60 * 60 * 1000);
 
 const StyledDisplayFlexDiv = styled.div`
     display: flex;
@@ -81,9 +81,9 @@ export const PostsByUserInterest = ({ scrollValue, height }) => {
         }
     };
     const filter = [];
-    filter.push({ published_on: `${TIME_24_HOURS_AGO}`, connector: "AND" });
+    filter.push({ published_on: `${TIME_A_WEEK_AGO}`, connector: "AND" });
     filter.push({ _published_on: `${TIME_NOW}`, connector: "AND" });
-    const { loading, error } = useQuery(TRENDING_TODAY_QUERY, {
+    const { loading, error } = useQuery(POSTS_BY_USER_INTEREST_QUERY, {
         variables: {
             page: pageNumber,
             range: postsPerPage,
@@ -127,7 +127,7 @@ export const PostsByUserInterest = ({ scrollValue, height }) => {
                 </div>
             </StyledDisplayFlexDiv>
             {posts && posts.length !== 0 &&
-                posts.map(p => <PostHolderCard showRelevance={true} key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
+                posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
                     getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
                 } metadata={p.metadata} />)}
             {loading && <p>Loading Posts...</p>}

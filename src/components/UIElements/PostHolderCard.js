@@ -17,6 +17,7 @@ import ThemedCardTitle from './ThemedCardTitle';
 import ButtonDark from './ButtonDark';
 import styled from 'styled-components';
 import PostInteraction from './PostInteraction';
+import ThemedRelevanceChart from '../ThemedRelevanceChart';
 
 
 const StyledThemedCard = styled(ThemedCard)`
@@ -29,6 +30,14 @@ const StyledDiv = styled.div`
     justify-content: center;
 `
 
+const StyledFlexDiv = styled.div`
+    display: flex;
+`
+
+const StyledA = styled.a`
+    flex: 1;
+`
+
 const StyledImage = styled(Image)`
     min-width: 100%;
     min-height: 100%;
@@ -36,6 +45,7 @@ const StyledImage = styled(Image)`
 
 const PostHolderCard = (props) => {
     const theme = React.useContext(ThemePalletteContext)
+
     return (
         <Margin vertical="1rem">
             <StyledThemedCard style={{
@@ -83,18 +93,18 @@ const PostHolderCard = (props) => {
                     color: theme.color_text_faded,
                     backgroundColor: theme.color_background
                 }}>
-
-                    <a
-                        href={props.sourceLink}
-                        style={{
-                            color: theme.color_text_faded,
-                        }}
-                        target="_blank"
-                    >
-                        {props.sourceLink}
-
-                    </a>
-
+                    <StyledFlexDiv>
+                        <StyledA
+                            href={props.sourceLink}
+                            style={{
+                                color: theme.color_text_faded,
+                            }}
+                            target="_blank"
+                        >
+                            {props.sourceLink}
+                        </StyledA>
+                        
+                    </StyledFlexDiv>
                 </CardFooter>
             </StyledThemedCard>
         </Margin>
