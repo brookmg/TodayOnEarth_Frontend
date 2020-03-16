@@ -87,7 +87,7 @@ const StyledFlexRowReverseDiv = styled.div`
 
 const CreatePost = () => {
     const user = React.useContext(AuthContext);
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop;
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const [platformToPostOn, setPlatformToPostOn] = React.useState(DEFAULT_PLATFORMS_TO_POST_ON);
     const [postText, setPostText] = React.useState("");
     const [telegramChannel, setTelegramChannel] = React.useState("");

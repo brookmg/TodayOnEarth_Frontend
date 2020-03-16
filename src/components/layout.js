@@ -56,7 +56,7 @@ const StyledHeaderDiv = styled.div`
 `
 
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const data = useStaticQuery(graphql`
     query SiteTitleQuery {

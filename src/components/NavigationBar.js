@@ -75,7 +75,7 @@ const StyledSpan = styled.span`
 `
 
 const UnStyledNavigationBar = React.forwardRef((props, ref) => {
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const theme = React.useContext(ThemePalletteContext);
     const user = React.useContext(AuthContext);

@@ -2,10 +2,7 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 
 
-const ScreenSizeContext = React.createContext({
-    isDesktopOrLaptop: true
-})
-
+const ScreenSizeContext = React.createContext(true)
 
 export const ScreenSizeProvider = (props) => {
     const isDesktopOrLaptop = useMediaQuery({
@@ -13,7 +10,7 @@ export const ScreenSizeProvider = (props) => {
     })
 
     return (
-        <ScreenSizeContext.Provider value={{ isDesktopOrLaptop }}>
+        <ScreenSizeContext.Provider value={isDesktopOrLaptop}>
             {props.children}
         </ScreenSizeContext.Provider>
     )

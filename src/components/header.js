@@ -59,7 +59,7 @@ const StyledAnimatedLink = styled(AnimatedLink)`
 `
 
 const Header = ({ siteTitle }) => {
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const handleSearchButtonClick = (e) => {
         if (searchBarText === "") {
