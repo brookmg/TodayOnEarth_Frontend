@@ -7,7 +7,7 @@ import BackgroundImagePlaceHolder from "../components/BackgroundImagePlaceHolder
 
 const PostDetailPage = () => (
     <Layout>
-        <SEO title="Home" />
+        <SEO title="Post Detail" />
         <div>
             <BackgroundImagePlaceHolder />
             <PostDetail />

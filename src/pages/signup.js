@@ -16,7 +16,7 @@ const SignUpPage = withQueryParsedURL((props) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Sign Up" />
 
       <SignUp
         email={data.email}

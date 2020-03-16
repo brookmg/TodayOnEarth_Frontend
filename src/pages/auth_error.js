@@ -12,7 +12,7 @@ const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Auth: Error" />
       <AuthError error={queryParsedURL.error}></AuthError>
     </Layout>
   )

@@ -10,7 +10,7 @@ const SearchPage = () => {
             ({ scrollValue, height }) => {
                 return (
                     <>
-                        <SEO title="Home" />
+                        <SEO title="Search Post" />
                         <PostsSearch scrollValue={scrollValue} height={height} />
                     </>
                 )

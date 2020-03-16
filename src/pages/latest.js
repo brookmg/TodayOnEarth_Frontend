@@ -10,7 +10,7 @@ const LatestPage = () => {
       ({ scrollValue, height }) => {
         return (
           <>
-            <SEO title="Home" />
+            <SEO title="Latest Posts" />
             <PostsLatest scrollValue={scrollValue} height={height} />
           </>
         )
