@@ -1,14 +1,18 @@
 import React from "react";
-import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { getIfAvailable, ellipsedSubstring, removeRedundantWhitespace } from '../utils';
+import styled from "styled-components";
 import PostHolderCard from './UIElements/PostHolderCard';
-import { FormCheckbox, FormInput } from "shards-react";
 import Margin from "./CompoundComponents/Margin";
-import { convertDateToInputFormat } from "../utils";
 import ButtonInterest from "./UIElements/ButtonInterest";
 import ThemePalletteContext from "./Contexts/ThemePalletteContext";
-import styled from "styled-components";
+import { useQuery } from '@apollo/react-hooks';
+import { FormCheckbox, FormInput } from "shards-react";
+import {
+    getIfAvailable,
+    ellipsedSubstring,
+    removeRedundantWhitespace,
+    convertDateToInputFormat
+} from '../utils';
 
 
 const GET_POSTS_BY_TOPIC_QUERY = gql`

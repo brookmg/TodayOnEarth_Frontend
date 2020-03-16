@@ -1,10 +1,12 @@
 import React from "react";
-import { useQuery } from '@apollo/react-hooks';
+import styled from "styled-components";
 import gql from 'graphql-tag';
-import { FormCheckbox } from "shards-react";
 import Margin from "./CompoundComponents/Margin";
 import ParseLinks from "./UIElements/ParseLinks";
-import styled from "styled-components";
+import { FormCheckbox } from "shards-react";
+import { useQuery } from '@apollo/react-hooks';
+
+
 const GET_TODAYS_TRENDING_KEYWORDS = gql`
 
 query getTodaysTrendingKeywords($semantics: Boolean){

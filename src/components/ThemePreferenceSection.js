@@ -1,16 +1,17 @@
 import React from "react";
-import { CardBody, FormInput, FormSelect } from "shards-react";
-import Margin from "./CompoundComponents/Margin";
-import ThemePalletteContext from "./Contexts/ThemePalletteContext";
-import DefaultThemeDefinition, { availableFonts } from "./Contexts/ThemePalletteContext/DefaultThemeDefinition";
-import ButtonDark from "./UIElements/ButtonDark";
-import ButtonSuccess from "./UIElements/ButtonSuccess";
-import { isBrowser } from "../utils";
-import ThemedCard from "./UIElements/ThemedCard";
-import ThemedCardTitle from "./UIElements/ThemedCardTitle";
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import styled from "styled-components";
+import Margin from "./CompoundComponents/Margin";
+import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import ButtonDark from "./UIElements/ButtonDark";
+import ButtonSuccess from "./UIElements/ButtonSuccess";
+import ThemedCard from "./UIElements/ThemedCard";
+import ThemedCardTitle from "./UIElements/ThemedCardTitle";
+import { CardBody, FormInput, FormSelect } from "shards-react";
+import { isBrowser } from "../utils";
+import DefaultThemeDefinition, { availableFonts } from "./Contexts/ThemePalletteContext/DefaultThemeDefinition";
+
 
 
 const StyledSelect = styled(FormSelect)`

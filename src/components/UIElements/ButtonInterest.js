@@ -1,7 +1,8 @@
-import React from "react"
-import { Button, } from "shards-react";
-import ThemePalletteContext from "../Contexts/ThemePalletteContext"
+import React from "react";
+import ThemePalletteContext from "../Contexts/ThemePalletteContext";
 import styled from "styled-components";
+import { Button, } from "shards-react";
+
 
 const StyledXButton = styled.input`
     border-radius: 50%;

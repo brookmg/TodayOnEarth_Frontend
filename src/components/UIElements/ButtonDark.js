@@ -1,6 +1,6 @@
 import React from "react";
+import ThemePalletteContext from "../Contexts/ThemePalletteContext";
 import { Button } from "shards-react";
-import ThemePalletteContext from "../Contexts/ThemePalletteContext"
 
 
 const ButtonDark = (props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Badge } from "shards-react";
 import Margin from '../CompoundComponents/Margin';
+import { Badge } from "shards-react";
 
 
 const PostMetadata = (props) => {

@@ -1,11 +1,11 @@
 import React from "react";
-import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { getIfAvailable, ellipsedSubstring } from '../utils';
-import PostHolderCard from './UIElements/PostHolderCard';
-import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
-import { FormSelect } from "shards-react";
 import styled from "styled-components";
+import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
+import PostHolderCard from './UIElements/PostHolderCard';
+import { FormSelect } from "shards-react";
+import { useQuery } from '@apollo/react-hooks';
+import { getIfAvailable, ellipsedSubstring } from '../utils';
 
 
 const POSTS_BY_USER_INTEREST_QUERY = gql`

@@ -1,4 +1,3 @@
-
 const colorPallette = {
     // colors here need to be in 6 letter hex form,
     // else 'color_text_faded' will break (see below)

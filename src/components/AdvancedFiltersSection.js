@@ -1,12 +1,12 @@
 import React from "react";
-import { navigate } from "gatsby";
-import { Collapse, CardBody, Button, FormInput, FormCheckbox } from "shards-react";
+import styled from "styled-components";
 import Margin from "./CompoundComponents/Margin";
 import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
 import ButtonSuccess from "./UIElements/ButtonSuccess";
+import { navigate } from "gatsby";
+import { Collapse, CardBody, Button, FormInput, FormCheckbox } from "shards-react";
 import { convertDateToInputFormat } from "../utils";
-import styled from "styled-components";
 
 
 const StyledDisplayFlexDiv = styled.div`

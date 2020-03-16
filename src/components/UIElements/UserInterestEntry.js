@@ -1,23 +1,24 @@
-import React from "react"
+import React from "react";
+import gql from 'graphql-tag';
+import styled from "styled-components";
+import Margin from "../CompoundComponents/Margin";
+import ThemePalletteContext from "../Contexts/ThemePalletteContext";
+import ButtonInterest from './ButtonInterest';
+import ThemedCard from './ThemedCard';
+import ThemedCardTitle from "./ThemedCardTitle";
+import ButtonDark from "./ButtonDark";
+import ButtonSuccess from "./ButtonSuccess";
+import { toast } from "react-toastify";
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { isLoggedIn } from "../../services/auth"
+import { removeRedundantWhitespace, isBrowser } from "../../utils"
 import {
     CardBody,
     Button,
     Slider,
     FormInput
 } from "shards-react";
-import Margin from "../CompoundComponents/Margin"
-import ThemePalletteContext from "../Contexts/ThemePalletteContext"
-import { isLoggedIn } from "../../services/auth"
-import { removeRedundantWhitespace, isBrowser } from "../../utils"
-import ButtonInterest from './ButtonInterest'
-import gql from 'graphql-tag';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import ThemedCard from './ThemedCard';
-import ThemedCardTitle from "./ThemedCardTitle";
-import ButtonDark from "./ButtonDark";
-import ButtonSuccess from "./ButtonSuccess";
-import styled from "styled-components";
-import { toast } from "react-toastify";
+
 
 const GET_USER_INTERESTS = gql`
 

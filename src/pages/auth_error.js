@@ -1,9 +1,9 @@
-import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
-import { isBrowser } from "../utils"
-import AuthError from "../components/AuthError"
+import React from "react";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import withQueryParsedURL from "../components/HOCs/withQueryParsedURL";
+import AuthError from "../components/AuthError";
+import { isBrowser } from "../utils";
 
 
 const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {

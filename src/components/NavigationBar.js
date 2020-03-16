@@ -1,11 +1,5 @@
 import React from "react";
-import ThemePalletteContext from "./Contexts/ThemePalletteContext";
-import { isLoggedIn, signOut } from "../services/auth";
-import AuthContext from "./Contexts/AuthContext";
-import AnimatedLink from "./UIElements/AnimatedLink";
-import { navigate } from "gatsby";
-import ButtonCustom from "./UIElements/ButtonCustom";
-import Margin from "./CompoundComponents/Margin";
+import styled from "styled-components";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
@@ -14,14 +8,20 @@ import AnnouncementIcon from '@material-ui/icons/Announcement';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
-import { isColorDark } from "../utils";
-import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition"
-import styled from "styled-components";
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import ScreenSizeContext from "./Contexts/ScreenSizeContext";
 import ExploreIcon from '@material-ui/icons/Explore';
 import HomeIcon from '@material-ui/icons/Home';
+import ScreenSizeContext from "./Contexts/ScreenSizeContext";
+import DefaultThemeDefinition from "../components/Contexts/ThemePalletteContext/DefaultThemeDefinition";
+import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import AuthContext from "./Contexts/AuthContext";
+import AnimatedLink from "./UIElements/AnimatedLink";
+import ButtonCustom from "./UIElements/ButtonCustom";
+import Margin from "./CompoundComponents/Margin";
+import { navigate } from "gatsby";
+import { isLoggedIn, signOut } from "../services/auth";
+import { isColorDark } from "../utils";
 
 
 const StyledWidthPaddingDiv = styled.div`

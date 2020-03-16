@@ -1,12 +1,12 @@
 import React from 'react';
-import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext";
+import styled from "styled-components";
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import AddAlertIcon from '@material-ui/icons/AddAlert';
-import ButtonCustom from "./ButtonCustom";
-import styled from "styled-components"
-import { toast } from 'react-toastify';
-import AnchorButton from './AnchorButton';
 import gql from 'graphql-tag';
+import ButtonCustom from "./ButtonCustom";
+import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext";
+import AnchorButton from './AnchorButton';
+import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/react-hooks';
 
 
