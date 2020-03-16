@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
     flex: 1;
-    paddingTop: 15em;
+    padding-top: 15em;
     height: 100vh;
     overflow: auto;
 `
