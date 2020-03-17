@@ -156,14 +156,16 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
         <StyledFlex1Div>
             {links.map(e => <div>
                 <Margin vertical="0.5em">
-                    <StyledNoHorizontalPaddingButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
+                    <div>
                         <AnimatedLink to={e.url}>
-                            <StyledSpan>{e.icon}</StyledSpan>
-                            <span className="navbarBtnText" style={isMobileNavbarShowingStyle}>
-                                {e.text}
-                            </span>
+                            <StyledNoHorizontalPaddingButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
+                                <StyledSpan>{e.icon}</StyledSpan>
+                                <span className="navbarBtnText" style={isMobileNavbarShowingStyle}>
+                                    {e.text}
+                                </span>
+                            </StyledNoHorizontalPaddingButtonCustom>
                         </AnimatedLink>
-                    </StyledNoHorizontalPaddingButtonCustom>
+                    </div>
                 </Margin>
             </div>)}
         </StyledFlex1Div>
