@@ -11,6 +11,7 @@ import AnchorButton from "./UIElements/AnchorButton";
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CardBody, FormCheckbox, FormInput, FormSelect } from "shards-react";
 import { toast } from "react-toastify";
+import { isLoggedIn } from "../services/auth";
 
 
 const GET_USER_PROVIDERS = gql`
@@ -208,7 +209,7 @@ const ContentSourceSection = () => {
     }
     const handleAddProviderClick = () => setIsInsertUrlShowing(true)
     const handleGoToSearchClick = () => setIsInsertUrlShowing(false)
-    const handleProviderClicked = (provider) => addProvider({
+    const handleProviderMouseDown = (provider) => addProvider({
         variables: {
             provider: provider.provider,
             source: provider.source,
@@ -225,6 +226,8 @@ const ContentSourceSection = () => {
     const [isInsertUrlShowing, setIsInsertUrlShowing] = React.useState(false);
 
     const allProviders = allProviderData ? allProviderData.getProviders : []
+
+    if (!isLoggedIn()) return null
     return (
         <div>
             <Margin vertical="1rem">
@@ -255,7 +258,7 @@ const ContentSourceSection = () => {
                                                 </StyledDisplayCenterFlexDiv>
                                                 {
                                                     allProviders.map(e =>
-                                                        <StyledP onClick={handleProviderClicked.bind(this, e)}>
+                                                        <StyledP onMouseDown={handleProviderMouseDown.bind(this, e)}>
                                                             <StyledDisplayAlignCenterFlexDiv>
                                                                 <StyledHiddenIcon className="pIcon"><AddIcon /></StyledHiddenIcon>
                                                                 <div>
@@ -266,12 +269,7 @@ const ContentSourceSection = () => {
                                                         </StyledP>)
                                                 }
                                                 <StyledDisplayCenterFlexDiv>
-                                                    {
-                                                        searchPhrase ?
-                                                            <span>Can't find a provider? <AnchorButton onClick={handleAddProviderClick}> Add provider </AnchorButton></span>
-                                                            :
-                                                            <span>Type above to search</span>
-                                                    }
+                                                    <span>Can't find a provider? <AnchorButton onClick={handleAddProviderClick}> Add provider </AnchorButton></span>
                                                 </StyledDisplayCenterFlexDiv>
                                             </StyledFloatingDiv>
                                         </StyledRelativeDiv>
