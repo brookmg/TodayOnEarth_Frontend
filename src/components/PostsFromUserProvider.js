@@ -72,9 +72,9 @@ export const PostsFromUserProvider = ({ scrollValue, height }) => {
     const [posts, setPosts] = React.useState([]);
     const handleNewData = (data) => {
         setHasMorePosts(true);
-        if (data && data.getPostsSortedByUserInterest) {
-            if (data.getPostsSortedByUserInterest.length !== 0)
-                setPosts([...posts, ...data.getPostsSortedByUserInterest]);
+        if (data && data.getPostsForUser) {
+            if (data.getPostsForUser.length !== 0)
+                setPosts([...posts, ...data.getPostsForUser]);
             else
                 setHasMorePosts(false);
         }
