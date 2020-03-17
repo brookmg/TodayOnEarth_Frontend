@@ -13,6 +13,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import { ToastContainer, toast } from 'react-toastify';
 import { useSubscription } from '@apollo/react-hooks';
 import { intializeClickEffect } from "./UIElements/ClickEffect";
+import { isBrowser } from "../utils";
 
 
 const POSTS_SUBSCRIPTION = gql`
@@ -130,7 +131,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                     x: ev.nativeEvent.clientX,
                     y: ev.nativeEvent.clientY,
                 })}>
-                {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
+                {(isDesktopOrLaptop || !isBrowser()) && (leftSideDesktopComponent || <NavigationBar />)}
                 <StyledFlex3OverflowYDiv
                     onScroll={handleOnScroll}
                     ref={scrollDivRef}

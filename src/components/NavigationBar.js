@@ -179,7 +179,7 @@ const NavigationBar = styled(UnStyledNavigationBar)`
     right:0;
     padding: 0;
     box-shadow: -10px 0 20px;
-    display: 'flex';
+    display: flex;
     flex-direction: column;
     white-space: nowrap;
     overflow-x: hidden;
