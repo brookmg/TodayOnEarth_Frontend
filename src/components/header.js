@@ -1,15 +1,15 @@
-import { navigate } from "gatsby"
-import React from "react"
-import { FormInput, Fade } from "shards-react";
-import ThemePalletteContext from "./Contexts/ThemePalletteContext"
-import AnchorButton from "./UIElements/AnchorButton"
-import AnimatedLink from "./UIElements/AnimatedLink"
+import React from "react";
 import SettingsIcon from '@material-ui/icons/Settings';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
+import styled from "styled-components";
+import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import AnchorButton from "./UIElements/AnchorButton";
+import AnimatedLink from "./UIElements/AnimatedLink";
 import NavigationBar from "./NavigationBar";
 import ScreenSizeContext from "./Contexts/ScreenSizeContext";
-import styled from "styled-components";
+import { navigate } from "gatsby";
+import { FormInput, Fade } from "shards-react";
 
 
 const StyledHeader = styled.header`

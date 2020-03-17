@@ -1,14 +1,14 @@
-import React from "react"
-import { navigate } from "gatsby"
-import { handleSignIn, isLoggedIn } from "../services/auth"
-import AuthContext from "./Contexts/AuthContext"
-import Margin from "./CompoundComponents/Margin"
-import { FormInput } from "shards-react"
-import AnchorButton from "./UIElements/AnchorButton"
-import ButtonSignInWith from "./UIElements/ButtonSignInWith"
-import ButtonSuccess from "./UIElements/ButtonSuccess"
-import ScreenSizeContext from "./Contexts/ScreenSizeContext"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
+import AuthContext from "./Contexts/AuthContext";
+import Margin from "./CompoundComponents/Margin";
+import AnchorButton from "./UIElements/AnchorButton";
+import ButtonSignInWith from "./UIElements/ButtonSignInWith";
+import ButtonSuccess from "./UIElements/ButtonSuccess";
+import ScreenSizeContext from "./Contexts/ScreenSizeContext";
+import { handleSignIn, isLoggedIn } from "../services/auth";
+import { FormInput } from "shards-react";
+import { navigate } from "gatsby";
 
 
 const StyledDisplayFlexDiv = styled.div`

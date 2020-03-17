@@ -1,7 +1,9 @@
 import gql from 'graphql-tag';
-import cookie from 'react-cookies'
-import { client } from "../apollo/client"
-import { isBrowser } from "../utils"
+import cookie from 'react-cookies';
+import { client } from "../apollo/client";
+import { isBrowser } from "../utils";
+
+
 const SIGN_UP_USER = gql`
 
 mutation signUpUser($user:IUser){

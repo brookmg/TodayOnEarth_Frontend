@@ -1,6 +1,7 @@
-import React from 'react'
-import { Location } from '@reach/router'
-import queryString from 'query-string'
+import React from 'react';
+import queryString from 'query-string';
+import { Location } from '@reach/router';
+
 
 const withQueryParsedURL = ComponentToWrap => props => (
   <Location>

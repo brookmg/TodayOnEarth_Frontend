@@ -1,6 +1,6 @@
-import React from "react"
-import ImagePlaceHolder from "./ImagePlaceHolder"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
+import ImagePlaceHolder from "./ImagePlaceHolder";
 
 
 const StyledImg = styled.img`

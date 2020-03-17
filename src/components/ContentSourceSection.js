@@ -1,16 +1,16 @@
 import React from "react";
-import { CardBody, FormCheckbox, FormInput, FormSelect } from "shards-react";
+import styled from "styled-components";
+import gql from 'graphql-tag';
+import AddIcon from '@material-ui/icons/Add';
 import Margin from "./CompoundComponents/Margin";
 import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import ButtonCustom from "./UIElements/ButtonCustom";
 import ThemePalletteContext from "./Contexts/ThemePalletteContext";
-import styled from "styled-components"
-import { toast } from "react-toastify"
-import AddIcon from '@material-ui/icons/Add';
-import AnchorButton from "./UIElements/AnchorButton"
+import AnchorButton from "./UIElements/AnchorButton";
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { CardBody, FormCheckbox, FormInput, FormSelect } from "shards-react";
+import { toast } from "react-toastify";
 
 
 const GET_USER_PROVIDERS = gql`

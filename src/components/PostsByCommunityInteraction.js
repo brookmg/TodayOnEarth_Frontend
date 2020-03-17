@@ -1,12 +1,12 @@
 import React from "react";
-import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { getIfAvailable, ellipsedSubstring } from '../utils';
-import PostHolderCard from './UIElements/PostHolderCard';
-import { FormCheckbox, FormInput } from "shards-react";
-import Margin from "./CompoundComponents/Margin";
-import { convertDateToInputFormat } from "../utils";
 import styled from "styled-components";
+import PostHolderCard from './UIElements/PostHolderCard';
+import Margin from "./CompoundComponents/Margin";
+import { FormCheckbox, FormInput } from "shards-react";
+import { useQuery } from '@apollo/react-hooks';
+import { convertDateToInputFormat } from "../utils";
+import { getIfAvailable, ellipsedSubstring } from '../utils';
 
 
 const ABSOLUTE_COMMUNITY_INTERACTION_QUERY = gql`

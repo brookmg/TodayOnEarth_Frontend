@@ -1,9 +1,9 @@
-import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import withQueryParsedURL from "../components/HOCs/withQueryParsedURL"
-import { isBrowser } from "../utils"
-import SignUp from "../components/SignUp"
+import React from "react";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import withQueryParsedURL from "../components/HOCs/withQueryParsedURL";
+import SignUp from "../components/SignUp";
+import { isBrowser } from "../utils";
 
 
 const SignUpPage = withQueryParsedURL((props) => {

@@ -1,16 +1,16 @@
 import React from "react";
-import { Tooltip } from "shards-react";
-import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import styled from "styled-components";
 import AnchorButton from "./UIElements/AnchorButton";
 import withQueryParsedURL from "./HOCs/withQueryParsedURL";
 import Image from "./UIElements/Image";
-import { getIfAvailable, ellipsedSubstring } from "../utils";
 import PostMetadata from "./UIElements/PostMetadata";
 import ParseLinks from "./UIElements/ParseLinks";
 import ThemedRelevanceChart from "./ThemedRelevanceChart";
-import styled from "styled-components";
 import PostInteraction from "./UIElements/PostInteraction";
+import { Tooltip } from "shards-react";
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { getIfAvailable, ellipsedSubstring } from "../utils";
 
 
 const GET_POST_DETAIL = gql`

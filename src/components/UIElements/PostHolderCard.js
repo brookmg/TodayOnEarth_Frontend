@@ -1,23 +1,21 @@
 
 import React from 'react';
-import { Link } from "gatsby"
-
-import {
-    CardBody,
-    CardFooter,
-} from "shards-react";
-
-import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext"
+import styled from 'styled-components';
+import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext";
 import Margin from '../CompoundComponents/Margin';
-import Image from './Image'
-import PostMetadata from "./PostMetadata"
+import Image from './Image';
+import PostMetadata from "./PostMetadata";
 import ParseLinks from './ParseLinks';
 import ThemedCard from './ThemedCard';
 import ThemedCardTitle from './ThemedCardTitle';
 import ButtonDark from './ButtonDark';
-import styled from 'styled-components';
 import PostInteraction from './PostInteraction';
 import ThemedRelevanceChart from '../ThemedRelevanceChart';
+import { Link } from "gatsby";
+import {
+    CardBody,
+    CardFooter,
+} from "shards-react";
 
 
 const StyledThemedCard = styled(ThemedCard)`

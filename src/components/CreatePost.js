@@ -1,16 +1,16 @@
 import React from "react";
-import { FormTextarea, FormCheckbox, FormInput } from "shards-react";
+import styled from "styled-components";
+import gql from "graphql-tag";
 import ButtonSuccess from "./UIElements/ButtonSuccess";
 import Margin from "./CompoundComponents/Margin";
-import { isLoggedIn } from "../services/auth";
 import AuthContext from "./Contexts/AuthContext";
-import { navigate } from "gatsby";
-import { isBrowser } from "../utils";
-import gql from "graphql-tag";
-import { useMutation } from '@apollo/react-hooks';
-import { Picker } from 'emoji-mart';
 import ScreenSizeContext from "./Contexts/ScreenSizeContext";
-import styled from "styled-components";
+import { FormTextarea, FormCheckbox, FormInput } from "shards-react";
+import { Picker } from 'emoji-mart';
+import { useMutation } from '@apollo/react-hooks';
+import { navigate } from "gatsby";
+import { isLoggedIn } from "../services/auth";
+import { isBrowser } from "../utils";
 
 
 //TODO: remove un-needed console.log()

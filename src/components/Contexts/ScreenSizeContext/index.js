@@ -1,6 +1,7 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 
+
 const ScreenSizeContext = React.createContext({
     isDesktopOrLaptop: true
 })

@@ -1,18 +1,18 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Header from "./header"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "shards-ui/dist/css/shards.min.css"
-import "./layout.css"
-import ThemePalletteContext from "./Contexts/ThemePalletteContext"
-import gql from 'graphql-tag'
-import { useSubscription } from '@apollo/react-hooks'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import NavigationBar from "./NavigationBar"
-import { intializeClickEffect } from "./UIElements/ClickEffect"
-import ScreenSizeContext from "./Contexts/ScreenSizeContext"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
+import gql from 'graphql-tag';
+import Header from "./header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css";
+import "./layout.css";
+import 'react-toastify/dist/ReactToastify.css';
+import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import NavigationBar from "./NavigationBar";
+import ScreenSizeContext from "./Contexts/ScreenSizeContext";
+import { useStaticQuery, graphql } from "gatsby";
+import { ToastContainer, toast } from 'react-toastify';
+import { useSubscription } from '@apollo/react-hooks';
+import { intializeClickEffect } from "./UIElements/ClickEffect";
 
 
 const POSTS_SUBSCRIPTION = gql`

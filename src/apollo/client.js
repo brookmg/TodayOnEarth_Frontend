@@ -1,13 +1,14 @@
 import ApolloClient from 'apollo-client';
 import fetch from 'isomorphic-fetch';
-import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
+import ws from "ws";
 import introspectionQueryResultData from './schemaQuery/fragmentTypes.json';
+import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import { split } from 'apollo-link';
-import { createUploadLink } from 'apollo-upload-client'
+import { createUploadLink } from 'apollo-upload-client';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-import ws from "ws"
 import { isBrowser } from '../utils/index.js';
+
 
 const HTTP_LINK_URI = process.env.GATSBY_GQL_ENDPOINT
 const WS_LINK_URI = process.env.GATSBY_SUBSCRIPTIONS_ENDPOINT
