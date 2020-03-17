@@ -85,38 +85,43 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
         })
     }
 
-    const { data: postData, loading } = useSubscription(
-        POSTS_SUBSCRIPTION,
-    );
+    useSubscription(
+        POSTS_SUBSCRIPTION, {
+        onSubscriptionData: (subData) => {
+            const postData = subData.subscriptionData.data
+            if (postData) {
+                const postAdded = postData.postAdded[0]
 
-    if (postData) {
-        const postAdded = postData.postAdded[0]
-
-        const notificationTitle = 'New Post Found'
-        const notificationBody = { body: postAdded.title }
-        if (postAdded.title && !loading) {
-            if (!("Notification" in window)) {
-                toast(postAdded.title)
-            }
-            else if (Notification.permission === "granted") {
-                // if it's okay then create a notification
-                new Notification(notificationTitle, notificationBody);
-            }
-            else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(function (permission) {
-                    // if the user accepts, then create a notification
-                    if (permission === "granted") {
-                        new Notification(notificationTitle, notificationBody);
-                    } else {
+                const notificationTitle = 'New Post Found'
+                const notificationBody = { body: postAdded.title }
+                if (postAdded.title) {
+                    if (!("Notification" in window)) {
                         toast(postAdded.title)
                     }
-                });
-            }
-            else {
-                toast(postAdded.title)
+                    else if (Notification.permission === "granted") {
+                        // if it's okay then create a notification
+                        new Notification(notificationTitle, notificationBody);
+                    }
+                    else if (Notification.permission !== "denied") {
+                        Notification.requestPermission().then(function (permission) {
+                            // if the user accepts, then create a notification
+                            if (permission === "granted") {
+                                new Notification(notificationTitle, notificationBody);
+                            } else {
+                                toast(postAdded.title)
+                            }
+                        });
+                    }
+                    else {
+                        toast(postAdded.title)
+                    }
+                }
             }
         }
     }
+    );
+
+
     return (
         <>
             <StyledToastContainer hideProgressBar={true} />
