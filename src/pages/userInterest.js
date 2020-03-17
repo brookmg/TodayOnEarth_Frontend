@@ -1,10 +1,10 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import PostsFromUserProvider from "../components/PostsFromUserProvider";
+import PostsByUserInterest from "../components/PostsByUserInterest";
 
 
-const IndexPage = () => {
+const UserInterestPage = () => {
     return (
         <Layout
             render={
@@ -12,7 +12,7 @@ const IndexPage = () => {
                     return (
                         <>
                             <SEO title="Home" />
-                            <PostsFromUserProvider scrollValue={scrollValue} height={height} />
+                            <PostsByUserInterest scrollValue={scrollValue} height={height} />
                         </>
                     )
                 }}>
@@ -20,4 +20,4 @@ const IndexPage = () => {
     )
 }
 
-export default IndexPage
+export default UserInterestPage

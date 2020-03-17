@@ -8,7 +8,7 @@ import Image from "./UIElements/Image";
 import { getIfAvailable, ellipsedSubstring } from "../utils";
 import PostMetadata from "./UIElements/PostMetadata";
 import ParseLinks from "./UIElements/ParseLinks";
-import ThemedTopicChart from "./ThemedTopicChart";
+import ThemedRelevanceChart from "./ThemedRelevanceChart";
 import styled from "styled-components";
 import PostInteraction from "./UIElements/PostInteraction";
 
@@ -124,7 +124,7 @@ const PostDetail = withQueryParsedURL((props) => {
             </StyledCenterTextDiv>
             <div>
                 <div>
-                    <ThemedTopicChart postId={Number(props.queryParsedURL.id)} />
+                    <ThemedRelevanceChart postId={Number(props.queryParsedURL.id)} />
                 </div>
                 <StyledDisplayMarginFlex>
                     <PostMetadata sourceLink={post.source_link} communityInteraction={getIfAvailable(post, `metadata.community_interaction`)} />

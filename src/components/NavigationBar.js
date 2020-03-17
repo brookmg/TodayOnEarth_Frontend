@@ -20,6 +20,8 @@ import styled from "styled-components";
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ScreenSizeContext from "./Contexts/ScreenSizeContext";
+import ExploreIcon from '@material-ui/icons/Explore';
+import HomeIcon from '@material-ui/icons/Home';
 
 
 const StyledWidthPaddingDiv = styled.div`
@@ -78,8 +80,10 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const theme = React.useContext(ThemePalletteContext);
     const user = React.useContext(AuthContext);
     const links = [
+        { text: "Home", url: "/", icon: <HomeIcon /> },
+        { text: "Discover", url: "/userInterest", icon: <ExploreIcon /> },
         { text: "Create a Post", url: "/create", icon: <PostAddIcon /> },
-        { text: "Today", url: "/", icon: <CalendarTodayIcon /> },
+        { text: "Today", url: "/today", icon: <CalendarTodayIcon /> },
         { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
         { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
         { text: "Topic Posts", url: "/trendsByTopic", icon: <VisibilityIcon /> },
