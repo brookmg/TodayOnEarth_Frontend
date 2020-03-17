@@ -10,6 +10,7 @@ import NavigationBar from "./NavigationBar";
 import ScreenSizeContext from "./Contexts/ScreenSizeContext";
 import { navigate } from "gatsby";
 import { FormInput, Fade } from "shards-react";
+import { isBrowser } from "../utils";
 
 
 const StyledHeader = styled.header`
@@ -130,7 +131,7 @@ const Header = ({ siteTitle }) => {
 
             <StyledTitleDiv>
                 <StyledDisplayFlexDiv style={{
-                    flexDirection: isDesktopOrLaptop ? "" : "column-reverse"
+                    flexDirection: (isDesktopOrLaptop || !isBrowser()) ? "" : "column-reverse"
                 }}>
 
                     <StyledFlex1Margin0H1 style={{ fontFamily: theme.font_family }}>
@@ -168,7 +169,7 @@ const Header = ({ siteTitle }) => {
                             <AnimatedLink to="/settings">
                                 <SettingsIcon htmlColor={theme.color_text} />
                             </AnimatedLink>
-                            
+
                             {
                                 !isDesktopOrLaptop &&
                                 <AnchorButton>
