@@ -99,7 +99,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     })
     const handleLightModeClick = () => theme.setTheme({ ...DefaultThemeDefinition })
 
-    const isMobileNavbarShowingStyle = props.isMobileNavbarShowing ? { display: 'unset' } : {}
+    const isMobileNavbarShowingStyle = props.isMobileNavbarShowing ? { display: 'unset', visibility: 'unset' } : {}
 
     return (<div {...props} ref={ref} style={{
         ...props.style,
@@ -196,15 +196,11 @@ const NavigationBar = styled(UnStyledNavigationBar)`
     .navbarLinkButton {
         text-align: left;
     }
-    .navbarShownOnHover {
-        display: none;
-        white-space: normal;
-    }
     .navbarHiddenOnHover {
         display: unset;
     }
     .navbarShownOnHover {
-        display: none;
+        visibility: hidden;
     }
     .navbarBtnText {
         display: none;
@@ -220,7 +216,7 @@ const NavigationBar = styled(UnStyledNavigationBar)`
             white-space: normal;
         }
         .navbarShownOnHover {
-            display: unset;
+            visibility: unset;
         }
         .navbarHiddenOnHover {
             display: none;
