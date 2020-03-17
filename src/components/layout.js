@@ -141,7 +141,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                     onScroll={handleOnScroll}
                     ref={scrollDivRef}
                     style={{
-                        marginLeft: isDesktopOrLaptop ? '64px' : 0,
+                        marginLeft: (isDesktopOrLaptop || !isBrowser()) ? '64px' : 0,
                     }}>
                     <Header siteTitle={data.site.siteMetadata.title} />
                     <StyledHeaderDiv
