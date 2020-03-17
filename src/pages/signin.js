@@ -10,7 +10,7 @@ const SignInPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Sign In" />
 
       <SignIn />
 

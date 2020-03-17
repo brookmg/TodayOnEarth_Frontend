@@ -7,7 +7,7 @@ import PostsByTopic from "../components/PostsByTopic";
 const TrendsByTopicPage = () => {
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Post trends by topic" />
       <PostsByTopic />
     </Layout>
   )
