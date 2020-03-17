@@ -25,7 +25,7 @@ const StyledFlex1MarginDiv = styled.div`
 `
 
 const SignIn = () => {
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const auth = React.useContext(AuthContext)
     const [user, setUser] = React.useState({})

@@ -75,7 +75,7 @@ const StyledSpan = styled.span`
 `
 
 const UnStyledNavigationBar = React.forwardRef((props, ref) => {
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const theme = React.useContext(ThemePalletteContext);
     const user = React.useContext(AuthContext);
@@ -156,14 +156,16 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
         <StyledFlex1Div>
             {links.map(e => <div>
                 <Margin vertical="0.5em">
-                    <StyledNoHorizontalPaddingButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
+                    <div>
                         <AnimatedLink to={e.url}>
-                            <StyledSpan>{e.icon}</StyledSpan>
-                            <span className="navbarBtnText" style={isMobileNavbarShowingStyle}>
-                                {e.text}
-                            </span>
+                            <StyledNoHorizontalPaddingButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
+                                <StyledSpan>{e.icon}</StyledSpan>
+                                <span className="navbarBtnText" style={isMobileNavbarShowingStyle}>
+                                    {e.text}
+                                </span>
+                            </StyledNoHorizontalPaddingButtonCustom>
                         </AnimatedLink>
-                    </StyledNoHorizontalPaddingButtonCustom>
+                    </div>
                 </Margin>
             </div>)}
         </StyledFlex1Div>
@@ -179,7 +181,7 @@ const NavigationBar = styled(UnStyledNavigationBar)`
     right:0;
     padding: 0;
     box-shadow: -10px 0 20px;
-    display: 'flex';
+    display: flex;
     flex-direction: column;
     white-space: nowrap;
     overflow-x: hidden;

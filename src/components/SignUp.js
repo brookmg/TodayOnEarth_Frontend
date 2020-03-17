@@ -20,7 +20,7 @@ const StyledFlex1Div = styled.div`
 `
 
 const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id, twitter_id, github_id, linkedin_id, telegram_id }) => {
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop;
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const auth = React.useContext(AuthContext);
     const [user, setUser] = React.useState({ email, first_name, last_name, username, google_id, facebook_id, twitter_id, github_id, linkedin_id, telegram_id });
     const handleUpdate = event => {

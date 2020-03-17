@@ -13,6 +13,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import { ToastContainer, toast } from 'react-toastify';
 import { useSubscription } from '@apollo/react-hooks';
 import { intializeClickEffect } from "./UIElements/ClickEffect";
+import { isBrowser } from "../utils";
 
 
 const POSTS_SUBSCRIPTION = gql`
@@ -51,12 +52,12 @@ const StyledFlex3OverflowYDiv = styled.div`
 
 const StyledHeaderDiv = styled.div`
     margin: 0 auto;
-    maxWidth: 960;
+    max-width: 960;
     padding: 0 1.0875rem 1.45rem;
 `
 
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
-    const isDesktopOrLaptop = React.useContext(ScreenSizeContext).isDesktopOrLaptop
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -84,38 +85,43 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
         })
     }
 
-    const { data: postData, loading } = useSubscription(
-        POSTS_SUBSCRIPTION,
-    );
+    useSubscription(
+        POSTS_SUBSCRIPTION, {
+        onSubscriptionData: (subData) => {
+            const postData = subData.subscriptionData.data
+            if (postData) {
+                const postAdded = postData.postAdded[0]
 
-    if (postData) {
-        const postAdded = postData.postAdded[0]
-
-        const notificationTitle = 'New Post Found'
-        const notificationBody = { body: postAdded.title }
-        if (postAdded.title && !loading) {
-            if (!("Notification" in window)) {
-                toast(postAdded.title)
-            }
-            else if (Notification.permission === "granted") {
-                // if it's okay then create a notification
-                new Notification(notificationTitle, notificationBody);
-            }
-            else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(function (permission) {
-                    // if the user accepts, then create a notification
-                    if (permission === "granted") {
-                        new Notification(notificationTitle, notificationBody);
-                    } else {
+                const notificationTitle = 'New Post Found'
+                const notificationBody = { body: postAdded.title }
+                if (postAdded.title) {
+                    if (!("Notification" in window)) {
                         toast(postAdded.title)
                     }
-                });
-            }
-            else {
-                toast(postAdded.title)
+                    else if (Notification.permission === "granted") {
+                        // if it's okay then create a notification
+                        new Notification(notificationTitle, notificationBody);
+                    }
+                    else if (Notification.permission !== "denied") {
+                        Notification.requestPermission().then(function (permission) {
+                            // if the user accepts, then create a notification
+                            if (permission === "granted") {
+                                new Notification(notificationTitle, notificationBody);
+                            } else {
+                                toast(postAdded.title)
+                            }
+                        });
+                    }
+                    else {
+                        toast(postAdded.title)
+                    }
+                }
             }
         }
     }
+    );
+
+
     return (
         <>
             <StyledToastContainer hideProgressBar={true} />
@@ -130,7 +136,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                     x: ev.nativeEvent.clientX,
                     y: ev.nativeEvent.clientY,
                 })}>
-                {isDesktopOrLaptop && (leftSideDesktopComponent || <NavigationBar />)}
+                {(isDesktopOrLaptop || !isBrowser()) && (leftSideDesktopComponent || <NavigationBar />)}
                 <StyledFlex3OverflowYDiv
                     onScroll={handleOnScroll}
                     ref={scrollDivRef}
