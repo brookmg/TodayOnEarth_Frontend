@@ -51,7 +51,7 @@ const StyledFlex3OverflowYDiv = styled.div`
 
 const StyledHeaderDiv = styled.div`
     margin: 0 auto;
-    maxWidth: 960;
+    max-width: 960;
     padding: 0 1.0875rem 1.45rem;
 `
 
