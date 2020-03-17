@@ -79,10 +79,14 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
 
     const theme = React.useContext(ThemePalletteContext);
     const user = React.useContext(AuthContext);
-    const links = [
+
+    const linksThatNeedAuth = [
         { text: "Home", url: "/", icon: <HomeIcon /> },
-        { text: "Discover", url: "/userInterest", icon: <ExploreIcon /> },
         { text: "Create a Post", url: "/create", icon: <PostAddIcon /> },
+        { text: "Discover", url: "/userInterest", icon: <ExploreIcon /> },
+    ]
+    const links = [
+        ...(isLoggedIn() ? linksThatNeedAuth : []),
         { text: "Today", url: "/today", icon: <CalendarTodayIcon /> },
         { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
         { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
