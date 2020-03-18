@@ -79,7 +79,7 @@ const Header = ({ siteTitle }) => {
         setSearchBarText(value)
     }
     const handleSearchBarKeyPress = (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === `Enter`) {
             handleSearchSubmit()
         }
     }
@@ -114,14 +114,14 @@ const Header = ({ siteTitle }) => {
                 ref={navbarRef}
                 isMobileNavbarShowing={isNavbarShowing && !isDesktopOrLaptop}
                 style={{
-                    left: isNavbarShowing ? 'calc(100% - 256px)' : '100%',
+                    left: isNavbarShowing ? `calc(100% - 256px)` : `100%`,
                 }}
             />
             <StyledOverlayDiv
                 style={{
                     ...(isNavbarShowing ?
-                        { backgroundColor: '#0000004a', position: 'absolute' } :
-                        { backgroundColor: '#00000000', display: 'unset' }
+                        { backgroundColor: `#0000004a`, position: `absolute` } :
+                        { backgroundColor: `#00000000`, display: `unset` }
                     )
                 }}
                 className={isNavbarShowing ? "navbarOverlayShowing" : "navbarOverlayHidden"}

@@ -67,7 +67,7 @@ const UserInterestEntry = (props) => {
             },
 
             notifyOnNetworkStatusChange: true,
-            fetchPolicy: 'no-cache'
+            fetchPolicy: `no-cache`
         });
     const [updateInterests, { loading: mutationLoading, error: mutationError }] = useMutation(UPDATE_USER_INTERESTS, {
         onCompleted: (data) =>
@@ -96,7 +96,7 @@ const UserInterestEntry = (props) => {
         setInterestInputText(e.target.value)
     }
     const handleInterestKeyDown = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === `Enter` || e.key === ` `) {
             removeRedundantWhitespace(interestInputText).
                 split(" ").forEach((e) => {
                     if (!interestMap[e]) interestMap[e] = 0

@@ -126,7 +126,7 @@ const StyledSelect = styled(FormSelect)`
     width: auto;
 `
 
-const AVAILABLE_SOURCES = ['Facebook', 'Instagram', 'Telegram', 'Twitter']
+const AVAILABLE_SOURCES = [`Facebook`, `Instagram`, `Telegram`, `Twitter`]
 
 const ContentSourceSection = () => {
     const theme = React.useContext(ThemePalletteContext)
@@ -269,7 +269,7 @@ const ContentSourceSection = () => {
                                                         </StyledP>)
                                                 }
                                                 <StyledDisplayCenterFlexDiv>
-                                                    <span>Can't find a provider? <AnchorButton onClick={handleAddProviderClick}> Add provider </AnchorButton></span>
+                                                    <span>Can`t find a provider? <AnchorButton onClick={handleAddProviderClick}> Add provider </AnchorButton></span>
                                                 </StyledDisplayCenterFlexDiv>
                                             </StyledFloatingDiv>
                                         </StyledRelativeDiv>

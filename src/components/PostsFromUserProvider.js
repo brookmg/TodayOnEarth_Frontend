@@ -128,8 +128,8 @@ export const PostsFromUserProvider = ({ scrollValue, height }) => {
                 </div>
             </StyledDisplayFlexDiv>
             {posts && posts.length !== 0 &&
-                posts.map(p => <PostHolderCard showRelevance={true} key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
-                    getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
+                posts.map(p => <PostHolderCard showRelevance={true} key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
+                    getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
                 } metadata={p.metadata} />)}
             {(!loading && posts.length === 0) && <StyledP>No posts found, try adding more content sources ( Settings > Content Sources ) </StyledP>}
             {loading && <p>Loading Posts...</p>}

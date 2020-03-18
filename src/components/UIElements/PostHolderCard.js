@@ -47,7 +47,7 @@ const PostHolderCard = (props) => {
     return (
         <Margin vertical="1rem">
             <StyledThemedCard style={{
-                borderTopLeftRadius: props.imgSrc && '5rem',
+                borderTopLeftRadius: props.imgSrc && `5rem`,
             }}>
                 <Link
                     to={`/p?id=${props.id}`}
@@ -81,7 +81,7 @@ const PostHolderCard = (props) => {
 
                 <PostInteraction postid={props.id} />
 
-                <Margin left='1rem' bottom='0.5rem'>
+                <Margin left={`1rem`} bottom={`0.5rem`}>
                     <div>
                         <PostMetadata sourceLink={props.sourceLink} communityInteraction={props.metadata.community_interaction} />
                     </div>

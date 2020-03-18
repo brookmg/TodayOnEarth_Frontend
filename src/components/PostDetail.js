@@ -141,15 +141,15 @@ const PostDetail = withQueryParsedURL((props) => {
                 {error && <p>Error: {error.message}</p>}
                 {!loading && !post.postid && <p>That post couldn't be found</p>}
 
-                <Image src={getIfAvailable(post, 'metadata.message.image.src') || // Telegram images
-                    getIfAvailable(post, 'metadata.post.thumbnail_image')} />
+                <Image src={getIfAvailable(post, `metadata.message.image.src`) || // Telegram images
+                    getIfAvailable(post, `metadata.post.thumbnail_image`)} />
             </StyledDisplayFlex>
             {post.body === "" ?
                 <>
                     <div>
                         <p>
                             <ParseLinks sourceLink={post.source_link}>
-                                {getIfAvailable(post, 'title', "")}
+                                {getIfAvailable(post, `title`, "")}
                             </ParseLinks>
                         </p>
                     </div>
@@ -157,7 +157,7 @@ const PostDetail = withQueryParsedURL((props) => {
                 <>
 
                     <h1>
-                        {ellipsedSubstring(getIfAvailable(post, 'title', ""))}
+                        {ellipsedSubstring(getIfAvailable(post, `title`, ""))}
                     </h1>
                     <div>
                         <p>

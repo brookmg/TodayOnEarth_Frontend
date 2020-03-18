@@ -52,7 +52,7 @@ const SignIn = () => {
     return (
         <>
             <h1>Log in</h1>
-            <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? 'row' : 'column' }}>
+            <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? `row` : `column` }}>
                 <StyledForm
                     method="post"
                     onSubmit={event => handleSubmit(event)

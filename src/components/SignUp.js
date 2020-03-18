@@ -39,7 +39,7 @@ const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id
         <form method="post" onSubmit={event => {
             handleSubmit(event);
         }}>
-            <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? 'row' : 'column' }}>
+            <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? `row` : `column` }}>
                 <StyledFlex1Div>
                     <Margin horizontal="0.5em" vertical="0.25em">
                         <ButtonSignInWith url={`${authEndpoint}/twitter`} borderColor={"#49a0e9"} backgroundColor={"#fff"} color={"#49a0e9"} imgSrc={`https://abs.twimg.com/favicons/twitter.ico`} value="Fill with Twitter" />

@@ -59,7 +59,7 @@ const ThemePreferenceSection = (props) => {
                                     <span>Font Style</span>
                                 </Margin>
 
-                                <FormInput value={theme.font_size} onChange={handleFontSizeChange} style={{ width: '110px', display: 'inline' }} type="number" />
+                                <FormInput value={theme.font_size} onChange={handleFontSizeChange} style={{ width: `110px`, display: `inline` }} type="number" />
                                 <Margin vertical="0.5rem" horizontal="0.5rem">
                                     <span>Font Size</span>
                                 </Margin>

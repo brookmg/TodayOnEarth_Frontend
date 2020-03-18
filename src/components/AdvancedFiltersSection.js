@@ -39,7 +39,7 @@ const AdvancedFiltersSection = (props) => {
         console.log(searchQuery);
         navigate(`s?${searchQuery}`);
     };
-    const locations = ['Africa', 'Europe', 'Asia',];
+    const locations = [`Africa`, `Europe`, `Asia`,];
     const initialCheckedItems = {};
     if (props.locations)
         props.locations.forEach(e => initialCheckedItems[e] = true);

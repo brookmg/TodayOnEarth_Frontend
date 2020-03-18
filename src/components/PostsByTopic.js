@@ -114,7 +114,7 @@ const PostsByTopic = (props) => {
         setNewTopic(e.target.value);
     };
     const handleNewTopicKeyDown = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === `Enter` || e.key === ` `) {
             removeRedundantWhitespace(newTopic).
                 split(" ").forEach((e) => {
                     if (!monitoredTopics[e])
@@ -197,8 +197,8 @@ const PostsByTopic = (props) => {
             {loading && <p>Loading Posts...</p>}
             {error && <p>Error: ${error.message}</p>}
 
-            {!loading && posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
-                getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
+            {!loading && posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
+                getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
             } metadata={p.metadata} />)}
 
         </div>

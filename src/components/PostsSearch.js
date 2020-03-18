@@ -81,7 +81,7 @@ const PostsSearch = withQueryParsedURL((props) => {
     const queryParsedURL = props.queryParsedURL;
     const searchTerm = queryParsedURL.search_term;
     const metadataTerm = queryParsedURL.metadata_term || "";
-    const locations = (queryParsedURL.locations || "").split(',');
+    const locations = (queryParsedURL.locations || "").split(`,`);
     const startTime = queryParsedURL.start_time || 0;
     const endTime = queryParsedURL.end_time || 0;
     const [pageNumber, setPageNumber] = React.useState(0);
@@ -216,8 +216,8 @@ const PostsSearch = withQueryParsedURL((props) => {
                     (posts.length === 0 && !loading && !hasMorePosts) ?
                     <p>Nothing found :(</p>
                     :
-                    posts.map(p => <PostHolderCard key={p.postid} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
-                        getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
+                    posts.map(p => <PostHolderCard key={p.postid} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
+                        getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
                     } metadata={p.metadata} />)}
                 {loading && <p>Loading Posts...</p>}
                 {error && <p>Error: ${error.message}</p>}

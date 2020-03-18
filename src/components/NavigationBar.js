@@ -103,7 +103,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     })
     const handleLightModeClick = () => theme.setTheme({ ...DefaultThemeDefinition })
 
-    const isMobileNavbarShowingStyle = props.isMobileNavbarShowing ? { display: 'unset', visibility: 'unset' } : {}
+    const isMobileNavbarShowingStyle = props.isMobileNavbarShowing ? { display: `unset`, visibility: `unset` } : {}
 
     return (<div {...props} ref={ref} style={{
         ...props.style,
@@ -111,7 +111,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
         fontFamily: theme.font_family,
     }}>
         <StyledWidthPaddingDiv>
-            <StyledDisplayFlexDiv style={{ justifyContent: isDesktopOrLaptop ? 'flex-start' : 'flex-end' }}>
+            <StyledDisplayFlexDiv style={{ justifyContent: isDesktopOrLaptop ? `flex-start` : `flex-end` }}>
                 <StyledMarginButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
                     {isColorDark(theme.color_background) ?
                         <StyledWbSunnyIcon onClick={handleLightModeClick} /> :

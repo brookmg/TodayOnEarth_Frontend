@@ -71,11 +71,11 @@ const ThemedRelevanceChart = ({ postId }) => {
                 },
                 elements: {
                     line: {
-                        backgroundColor: '#ec628333',
-                        borderColor: '#ec6283',
+                        backgroundColor: `#ec628333`,
+                        borderColor: `#ec6283`,
                     },
                     point: {
-                        borderColor: '#ec6283',
+                        borderColor: `#ec6283`,
                         hoverRadius: 1,
                         hoverBorderWidth: 1,
                         borderWidth: 1,

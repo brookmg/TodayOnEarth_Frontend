@@ -133,8 +133,8 @@ const PostsLatest = ({ scrollValue, height }) => {
             page: pageNumber,
             postsPerPage: postsPerPage,
             filter,
-            orderBy: 'published_on',
-            order: 'DESC'
+            orderBy: `published_on`,
+            order: `DESC`
         },
         onCompleted: handleNewData,
         notifyOnNetworkStatusChange: true,
@@ -147,8 +147,8 @@ const PostsLatest = ({ scrollValue, height }) => {
                 page: pageNumber,
                 postsPerPage: postsPerPage,
                 filter,
-                orderBy: 'published_on',
-                order: 'DESC'
+                orderBy: `published_on`,
+                order: `DESC`
             },
             updateQuery: (prev, { subscriptionData }) => {
                 if (!subscriptionData.data)
@@ -230,8 +230,8 @@ const PostsLatest = ({ scrollValue, height }) => {
         </Margin>
 
         {posts && posts.length !== 0 &&
-            posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, 'metadata.message.image.src') || // Telegram images
-                getIfAvailable(p, 'metadata.post.thumbnail_image') // Instagram images
+            posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
+                getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
             } metadata={p.metadata} />)}
         {loading && <p>Loading Posts...</p>}
         {error && <p>Error: ${error.message}</p>}

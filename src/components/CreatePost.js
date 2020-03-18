@@ -161,7 +161,7 @@ const CreatePost = () => {
                     <StyledDisplayFlex1Div>
                         <StyledFormTextarea value={postText} placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`} rows={8} onChange={handlePostTextChange} />
                         {isDesktopOrLaptop &&
-                            <Picker title="" showPreview={true} set='emojione' onSelect={handleEmojiSelect} />}
+                            <Picker title="" showPreview={true} set={`emojione`} onSelect={handleEmojiSelect} />}
                     </StyledDisplayFlex1Div>
                     <span>Image or file to upload: <FormInput type="file" onChange={({ target: { files } }) => {
                         const file = files[0];

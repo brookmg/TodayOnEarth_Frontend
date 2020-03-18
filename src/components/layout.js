@@ -92,7 +92,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
             if (postData) {
                 const postAdded = postData.postAdded[0]
 
-                const notificationTitle = 'New Post Found'
+                const notificationTitle = `New Post Found`
                 const notificationBody = { body: postAdded.title }
                 if (postAdded.title) {
                     if (!("Notification" in window)) {
@@ -141,7 +141,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                     onScroll={handleOnScroll}
                     ref={scrollDivRef}
                     style={{
-                        marginLeft: (isDesktopOrLaptop || !isBrowser()) ? '64px' : 0,
+                        marginLeft: (isDesktopOrLaptop || !isBrowser()) ? `64px` : 0,
                     }}>
                     <Header siteTitle={data.site.siteMetadata.title} />
                     <StyledHeaderDiv

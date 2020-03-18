@@ -1,6 +1,6 @@
 const colorPallette = {
     // colors here need to be in 6 letter hex form,
-    // else 'color_text_faded' will break (see below)
+    // else `color_text_faded` will break (see below)
 
     color_1: "#ffffff",
     color_2: "#212529",
@@ -9,8 +9,8 @@ const colorPallette = {
     color_5: "#fbeceb",
     color_6: "#feb249",
 }
-export const availableFonts = ['Roboto', 'Tangerine', 'Trade Winds',
-    'Krona One', 'Akronim', 'Inconsolata']
+export const availableFonts = [`Roboto`, `Tangerine`, `Trade Winds`,
+    `Krona One`, `Akronim`, `Inconsolata`]
 
 export default {
     font_family: availableFonts[0],

@@ -69,11 +69,11 @@ const ThemedTopicChart = ({ postId }) => {
                 },
                 elements: {
                     line: {
-                        backgroundColor: '#ec628333',
-                        borderColor: '#ec6283',
+                        backgroundColor: `#ec628333`,
+                        borderColor: `#ec6283`,
                     },
                     point: {
-                        borderColor: '#ec6283',
+                        borderColor: `#ec6283`,
                         hoverRadius: 5,
                         hoverBorderWidth: 10,
                         borderWidth: 3,

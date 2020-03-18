@@ -53,7 +53,7 @@ const ButtonInterest = (props) => {
                 {props.children}
 
                 <StyledXButton type="button" style={{
-                    color: (isXButtonHovered || isButtonHovered) ? theme.color_text : '#007bff',
+                    color: (isXButtonHovered || isButtonHovered) ? theme.color_text : `#007bff`,
                 }}
                     value="x"
                     onMouseEnter={handleXMouseEnter}
