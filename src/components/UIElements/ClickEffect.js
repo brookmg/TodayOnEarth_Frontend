@@ -6,7 +6,7 @@ export const intializeClickEffect = (canvasRef, mouseClickPosition) => {
     const canvas = canvasRef && canvasRef.current
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const c = canvas.getContext("2d");
+    const c = canvas.getContext(`2d`);
 
     const colors = [
         `#f44336`, `#e91e63`, `#9c27b0`, `#673ab7`, `#3f51b5`,

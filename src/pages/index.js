@@ -11,7 +11,7 @@ const IndexPage = () => {
                 ({ scrollValue, height }) => {
                     return (
                         <>
-                            <SEO title="Home" />
+                            <SEO title={`Home`} />
                             <PostsFromUserProvider scrollValue={scrollValue} height={height} />
                         </>
                     )

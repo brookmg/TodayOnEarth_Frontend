@@ -50,9 +50,9 @@ query getUserInfo{
 
 `
 
-const sessionCookieName = "userId"
+const sessionCookieName = `userId`
 
-export const getToken = () => !isBrowser() ? "" : cookie.load(sessionCookieName)
+export const getToken = () => !isBrowser() ? `` : cookie.load(sessionCookieName)
 
 export const getUser = () => client.query({
     query: GET_USER,

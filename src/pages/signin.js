@@ -6,11 +6,11 @@ import { isBrowser } from "../utils"
 
 const SignInPage = () => {
   // reset url to remove params
-  isBrowser() && window.history.replaceState({}, document.title, "/signin")
+  isBrowser() && window.history.replaceState({}, document.title, `/signin`)
 
   return (
     <Layout>
-      <SEO title="Sign In" />
+      <SEO title={`Sign In`} />
 
       <SignIn />
 

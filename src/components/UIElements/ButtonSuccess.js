@@ -11,7 +11,7 @@ const ButtonSuccess = (props) => {
             style={{
                 ...props.style,
                 color: theme.color_background,
-            }} theme="success"> {props.children} </Button>
+            }} theme={`success`}> {props.children} </Button>
     );
 }
 

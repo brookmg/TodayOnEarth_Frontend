@@ -67,7 +67,7 @@ const StyledDiv = styled.div`
 const PostInteraction = ({ postid }) => {
     const theme = React.useContext(ThemePalletteContext);
 
-    const undoSuccessful = () => toast("Undo was successful", {
+    const undoSuccessful = () => toast(`Undo was successful`, {
         type: toast.TYPE.SUCCESS
     })
 
@@ -99,14 +99,14 @@ const PostInteraction = ({ postid }) => {
     }
     const handleLike = (data) => {
         if (data.postLiked)
-            toast(<UndoMessage text="Added post to your interests" onUndo={handleLikeUndo} />, {
+            toast(<UndoMessage text={`Added post to your interests`} onUndo={handleLikeUndo} />, {
                 hideProgressBar: false,
             })
     }
 
     const handleDisLike = (data) => {
         if (data.postDisLiked)
-            toast(<UndoMessage text="Will not show you posts like this" onUndo={handleDisLikeUndo} />, {
+            toast(<UndoMessage text={`Will not show you posts like this`} onUndo={handleDisLikeUndo} />, {
                 hideProgressBar: false,
             })
     }
@@ -125,7 +125,7 @@ const PostInteraction = ({ postid }) => {
                 postid
             }
         })
-        console.log("not interested clicked on:", postid)
+        console.log(`not interested clicked on:`, postid)
 
     };
     const handleInterestedClick = () => {
@@ -135,7 +135,7 @@ const PostInteraction = ({ postid }) => {
             }
         })
 
-        console.log("interested clicked on:", postid)
+        console.log(`interested clicked on:`, postid)
     };
     return (
         <StyledDiv>

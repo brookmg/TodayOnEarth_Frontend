@@ -8,7 +8,7 @@ const Profile = () => {
 
     return (
         <div>
-            <SEO title="User Profile" />
+            <SEO title={`User Profile`} />
             <h1>Your profile</h1>
             <ul>
                 <li>Name: {user.first_name}</li>

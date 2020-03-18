@@ -45,7 +45,7 @@ const PostHolderCard = (props) => {
     const theme = React.useContext(ThemePalletteContext)
 
     return (
-        <Margin vertical="1rem">
+        <Margin vertical={`1rem`}>
             <StyledThemedCard style={{
                 borderTopLeftRadius: props.imgSrc && `5rem`,
             }}>
@@ -97,7 +97,7 @@ const PostHolderCard = (props) => {
                             style={{
                                 color: theme.color_text_faded,
                             }}
-                            target="_blank"
+                            target={`_blank`}
                         >
                             {props.sourceLink}
                         </StyledA>

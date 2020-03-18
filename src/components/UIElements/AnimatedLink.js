@@ -12,7 +12,7 @@ const StyledAniLink = styled(AniLink)`
 
 
 const AnimatedLink = (props) => (
-    <StyledAniLink paintDrip duration={0.5} hex="#326fe6" {...props}>
+    <StyledAniLink paintDrip duration={0.5} hex={`#326fe6`} {...props}>
         {props.children}
     </StyledAniLink>);
 

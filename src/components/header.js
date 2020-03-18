@@ -63,7 +63,7 @@ const Header = ({ siteTitle }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const handleSearchButtonClick = (e) => {
-        if (searchBarText === "") {
+        if (searchBarText === ``) {
             searchBarRef.current.focus()
         } else {
             handleSearchSubmit()
@@ -84,8 +84,8 @@ const Header = ({ siteTitle }) => {
         }
     }
     const handleSearchSubmit = (e) => {
-        if (searchBarText !== "") {
-            console.log("searching for:", searchBarText)
+        if (searchBarText !== ``) {
+            console.log(`searching for:`, searchBarText)
             navigate(`/s?search_term=${encodeURIComponent(searchBarText)}`)
         }
     }
@@ -99,7 +99,7 @@ const Header = ({ siteTitle }) => {
 
     const theme = React.useContext(ThemePalletteContext)
     const [isSearchBarShowing, setIsSearchBarShowing] = React.useState(false);
-    const [searchBarText, setSearchBarText] = React.useState("");
+    const [searchBarText, setSearchBarText] = React.useState(``);
     const [isNavbarShowing, setIsNavBarShowing] = React.useState(false);
     let searchBarRef = React.createRef();
     let navbarRef = React.createRef();
@@ -124,19 +124,19 @@ const Header = ({ siteTitle }) => {
                         { backgroundColor: `#00000000`, display: `unset` }
                     )
                 }}
-                className={isNavbarShowing ? "navbarOverlayShowing" : "navbarOverlayHidden"}
+                className={isNavbarShowing ? `navbarOverlayShowing` : `navbarOverlayHidden`}
                 onClick={handleOverlayClick}
             >
             </StyledOverlayDiv>
 
             <StyledTitleDiv>
                 <StyledDisplayFlexDiv style={{
-                    flexDirection: (isDesktopOrLaptop || !isBrowser()) ? "" : "column-reverse"
+                    flexDirection: (isDesktopOrLaptop || !isBrowser()) ? `` : `column-reverse`
                 }}>
 
                     <StyledFlex1Margin0H1 style={{ fontFamily: theme.font_family }}>
                         <StyledAnimatedLink
-                            to="/"
+                            to={`/`}
                             style={{
                                 color: theme.color_text,
                             }}
@@ -156,7 +156,7 @@ const Header = ({ siteTitle }) => {
                                 onChange={handleSearchBarChange}
                                 onKeyPress={handleSearchBarKeyPress}
 
-                                size="sm" placeholder="Search for keywords" />
+                                size={`sm`} placeholder={`Search for keywords`} />
 
                         </StyledFade>
                         <div>
@@ -166,7 +166,7 @@ const Header = ({ siteTitle }) => {
                                 <SearchIcon htmlColor={theme.color_text} />
                             </AnchorButton>
 
-                            <AnimatedLink to="/settings">
+                            <AnimatedLink to={`/settings`}>
                                 <SettingsIcon htmlColor={theme.color_text} />
                             </AnimatedLink>
 

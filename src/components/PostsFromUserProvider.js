@@ -52,6 +52,7 @@ query getPostsFromUserProvider(
     }
 }
 `;
+
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
 let prevScrollValue = -1;
@@ -88,7 +89,7 @@ export const PostsFromUserProvider = ({ scrollValue, height }) => {
         },
         onCompleted: handleNewData,
         notifyOnNetworkStatusChange: true,
-        fetchPolicy: "cache-and-network"
+        fetchPolicy: `cache-and-network`
     });
     if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
         if (prevScrollValue !== scrollValue)
@@ -112,7 +113,7 @@ export const PostsFromUserProvider = ({ scrollValue, height }) => {
                 <div>
                     <label>
                         Posts per page:
-                        <FormSelect size="sm" onChange={handlePostsPerPageChange}>
+                        <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
                             {
                                 [DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (
                                     <option key={i} value={e}>

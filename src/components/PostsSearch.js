@@ -54,12 +54,13 @@ query getPaginatedPostsFiltered(
 }
 
 `;
+
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 const DEFAULT_POST_SOURCES = {
-    "t.me": true,
-    "facebook.com": true,
-    "instagram.com": true,
-    "twitter.com": true
+    't.me': true,
+    'facebook.com': true,
+    'instagram.com': true,
+    'twitter.com': true
 };
 let prevScrollValue = -1;
 
@@ -80,8 +81,8 @@ const StyledP = styled.p`
 const PostsSearch = withQueryParsedURL((props) => {
     const queryParsedURL = props.queryParsedURL;
     const searchTerm = queryParsedURL.search_term;
-    const metadataTerm = queryParsedURL.metadata_term || "";
-    const locations = (queryParsedURL.locations || "").split(`,`);
+    const metadataTerm = queryParsedURL.metadata_term || ``;
+    const locations = (queryParsedURL.locations || ``).split(`,`);
     const startTime = queryParsedURL.start_time || 0;
     const endTime = queryParsedURL.end_time || 0;
     const [pageNumber, setPageNumber] = React.useState(0);
@@ -90,28 +91,28 @@ const PostsSearch = withQueryParsedURL((props) => {
     const [posts, setPosts] = React.useState([]);
     const [postSources, setPostSources] = React.useState(DEFAULT_POST_SOURCES);
     const filter = []; // built dynamically, according to params provided by user
-    if (searchTerm !== "") {
-        filter.push({ title: searchTerm, connector: "AND" });
-        filter.push({ keyword: searchTerm, connector: "AND" });
+    if (searchTerm !== ``) {
+        filter.push({ title: searchTerm, connector: `AND` });
+        filter.push({ keyword: searchTerm, connector: `AND` });
     }
     if (startTime)
-        filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: "AND" });
+        filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: `AND` });
     if (endTime)
-        filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: "AND" });
+        filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: `AND` });
     if (metadataTerm) {
         const metadataObj = JSON.parse(metadataTerm);
         Object.keys(metadataObj).forEach((key) => {
             const value = metadataObj[key];
             if (metadataObj.hasOwnProperty(key) && isNaN(key) && value) {
                 const searchTerm = `.*"${key}"\s*:\s*"?${value}"?`;
-                filter.push({ metadata: searchTerm, connector: "AND" });
+                filter.push({ metadata: searchTerm, connector: `AND` });
             }
         });
     }
     // add search filter for locations
-    locations.forEach(e => (e !== "") && filter.push({ keyword: e, connector: "AND" }));
+    locations.forEach(e => (e !== ``) && filter.push({ keyword: e, connector: `AND` }));
     let checkedItemsCount = 0;
-    let sourceFilter = "";
+    let sourceFilter = ``;
     for (const e of Object.keys(postSources)) {
         if (postSources[e]) {
             checkedItemsCount++;
@@ -119,7 +120,7 @@ const PostsSearch = withQueryParsedURL((props) => {
         }
     }
     if (checkedItemsCount === 1)
-        filter.push({ source: sourceFilter, connector: "AND" });
+        filter.push({ source: sourceFilter, connector: `AND` });
     const handleNewData = (data) => {
         setHasMorePosts(true);
         if (data && data.getPostCustomized) {
@@ -138,7 +139,7 @@ const PostsSearch = withQueryParsedURL((props) => {
         },
         onCompleted: handleNewData,
         notifyOnNetworkStatusChange: true,
-        fetchPolicy: "cache-and-network"
+        fetchPolicy: `cache-and-network`
     });
     const scrollValue = props.scrollValue;
     const height = props.height;
@@ -186,7 +187,7 @@ const PostsSearch = withQueryParsedURL((props) => {
             metadataTerm={metadataTerm}
             isAdvancedFilterCollapsed={!queryParsedURL.expanded} />
 
-        <Margin top="1em">
+        <Margin top={`1em`}>
             <div>
                 <StyledDisplayFlexDiv>
                     <StyledFlex1CenterSpan>
@@ -203,7 +204,7 @@ const PostsSearch = withQueryParsedURL((props) => {
                     <div>
                         <label>
                             Posts per page:
-                            <FormSelect size="sm" onChange={handlePostsPerPageChange}>
+                            <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
                                 {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (<option key={i} value={e}>
                                     {e}
                                 </option>))}

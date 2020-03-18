@@ -54,6 +54,7 @@ query getTodaysTrendingPosts(
     }
 }
 `;
+
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
 let prevScrollValue = -1;
@@ -83,18 +84,18 @@ export const PostsTrendingToday = ({ scrollValue, height }) => {
         }
     };
     const filter = [];
-    filter.push({ published_on: `${TIME_24_HOURS_AGO}`, connector: "AND" });
-    filter.push({ _published_on: `${TIME_NOW}`, connector: "AND" });
+    filter.push({ published_on: `${TIME_24_HOURS_AGO}`, connector: `AND` });
+    filter.push({ _published_on: `${TIME_NOW}`, connector: `AND` });
     const { loading, error } = useQuery(TRENDING_TODAY_QUERY, {
         variables: {
             page: pageNumber,
             range: postsPerPage,
-            workingOn: ["views", "likes", "replies", "retweets", "comments", "video_views"],
+            workingOn: [`views`, `likes`, `replies`, `retweets`, `comments`, `video_views`],
             filter
         },
         onCompleted: handleNewData,
         notifyOnNetworkStatusChange: true,
-        fetchPolicy: "cache-and-network"
+        fetchPolicy: `cache-and-network`
     });
     if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
         if (prevScrollValue !== scrollValue)
@@ -117,7 +118,7 @@ export const PostsTrendingToday = ({ scrollValue, height }) => {
                 <div>
                     <label>
                         Posts per page:
-                        <FormSelect size="sm" onChange={handlePostsPerPageChange}>
+                        <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
                             {
                                 [DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (
                                     <option key={i} value={e}>

@@ -9,8 +9,8 @@ import { Router } from "@reach/router";
 const App = () => (
     <Layout>
         <Router>
-            <PrivateRoute path="/app/profile" component={Profile} />
-            <SignIn path="/app/login" />
+            <PrivateRoute path={`/app/profile`} component={Profile} />
+            <SignIn path={`/app/login`} />
         </Router>
     </Layout>
 )

@@ -96,7 +96,7 @@ const StyledP = styled.p`
 const PostsByTopic = (props) => {
     const theme = React.useContext(ThemePalletteContext);
     const [monitoredTopics, setMonitoredTopics] = React.useState({});
-    const [newTopic, setNewTopic] = React.useState("");
+    const [newTopic, setNewTopic] = React.useState(``);
     const [startTime, setStartTime] = React.useState(convertDateToInputFormat(0));
     const [endTime, setEndTime] = React.useState(convertDateToInputFormat(Date.now()));
     const [isSemanticEnabled, setIsSemanticEnabled] = React.useState(false);
@@ -116,19 +116,19 @@ const PostsByTopic = (props) => {
     const handleNewTopicKeyDown = (e) => {
         if (e.key === `Enter` || e.key === ` `) {
             removeRedundantWhitespace(newTopic).
-                split(" ").forEach((e) => {
+                split(` `).forEach((e) => {
                     if (!monitoredTopics[e])
                         monitoredTopics[e] = 1;
                 });
-            setNewTopic("");
+            setNewTopic(``);
             e.preventDefault();
         }
     };
     const filter = [];
     if (startTime)
-        filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: "AND" });
+        filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: `AND` });
     if (endTime)
-        filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: "AND" });
+        filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: `AND` });
     const monitoredTopicsList = Object.keys(monitoredTopics);
     const variables = {
         filter,
@@ -148,7 +148,7 @@ const PostsByTopic = (props) => {
             <h2>Posts Sorted using Custom Topics</h2>
             <StyledColumnDiv>
                 <StyledDisplayFlexDiv>
-                    <Margin vertical="1em" horizontal="1em">
+                    <Margin vertical={`1em`} horizontal={`1em`}>
                         <div>
                             <StyledLeftAlignDiv>
                                 <FormCheckbox toggle small checked={isSemanticEnabled} onChange={handleSemanticChange}>
@@ -161,13 +161,13 @@ const PostsByTopic = (props) => {
                                 <StyledFontSizeDiv>
                                     (Note: If semantic analysis is enabled, increasing posts count will take a very LONG time to process)
                                 </StyledFontSizeDiv>
-                                <FormInput type="number" value={maxPosts} onChange={handleMaxPostsChange} />
+                                <FormInput type={`number`} value={maxPosts} onChange={handleMaxPostsChange} />
                             </StyledLeftAlignDiv>
                         </div>
 
                         <StyledFlex1CenterDiv>
-                            Starting From: <FormInput value={startTime} onChange={handleStartTimeChange} type="date" size="sm" />
-                            Ending At: <FormInput value={endTime} onChange={handleEndTimeChange} type="date" size="sm" />
+                            Starting From: <FormInput value={startTime} onChange={handleStartTimeChange} type={`date`} size={`sm`} />
+                            Ending At: <FormInput value={endTime} onChange={handleEndTimeChange} type={`date`} size={`sm`} />
                         </StyledFlex1CenterDiv>
                     </Margin>
                 </StyledDisplayFlexDiv>
@@ -176,10 +176,10 @@ const PostsByTopic = (props) => {
                         Monitored topics
                     </div>
                     <div>
-                        <FormInput placeholder={"Add topic"} value={newTopic} onChange={handleNewTopicChange} type="text" size="sm" plaintext={false} onKeyDown={handleNewTopicKeyDown} />
+                        <FormInput placeholder={`Add topic`} value={newTopic} onChange={handleNewTopicChange} type={`text`} size={`sm`} plaintext={false} onKeyDown={handleNewTopicKeyDown} />
                     </div>
                     <div>
-                        <Margin vertical="0.5em">
+                        <Margin vertical={`0.5em`}>
                             {
                                 monitoredTopicsList.length ?
                                     monitoredTopicsList.map(e => <ButtonInterest key={e} onInterestClick={handleMonitoredTopicsClick} onInterestClose={handleMonitoredTopicsClose}>{e}</ButtonInterest>)

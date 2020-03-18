@@ -8,7 +8,7 @@ import UserInterestEntrySection from "../components/UserInterestEntrySection"
 
 const SearchPage = withQueryParsedURL(() => (
     <Layout>
-        <SEO title="Settings: Change theme, content sources, providers or add interests" />
+        <SEO title={`Settings: Change theme, content sources, providers or add interests`} />
 
         <UserInterestEntrySection />
 

@@ -8,11 +8,11 @@ import { isBrowser } from "../utils";
 
 const AuthErrorPage = withQueryParsedURL(({ queryParsedURL }) => {
   // reset url to remove params
-  isBrowser() && window.history.replaceState({}, document.title, "/auth_error")
+  isBrowser() && window.history.replaceState({}, document.title, `/auth_error`)
 
   return (
     <Layout>
-      <SEO title="Auth: Error" />
+      <SEO title={`Auth: Error`} />
       <AuthError error={queryParsedURL.error}></AuthError>
     </Layout>
   )

@@ -7,12 +7,12 @@ const PostMetadata = (props) => {
     const communityInteraction = props.communityInteraction
     if (!communityInteraction) return null
 
-    const isInstagram = props.sourceLink && props.sourceLink.includes("https://www.instagram.com")
+    const isInstagram = props.sourceLink && props.sourceLink.includes(`https://www.instagram.com`)
     const instagramBG = `linear-gradient(to right bottom, #ff512f, #dd2476)`
 
     return (
         <div>
-            <Margin left="0.5rem">
+            <Margin left={`0.5rem`}>
                 {!communityInteraction.views ? null :
                     <Badge style={{ background: `#97ceef` }} pill>
                         👁️ {Number(communityInteraction.views) / 1000} K

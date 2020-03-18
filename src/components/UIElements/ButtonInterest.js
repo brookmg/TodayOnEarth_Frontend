@@ -42,20 +42,20 @@ const ButtonInterest = (props) => {
         <span>
             <StyledInterestButton
                 {...props}
-                theme={isXButtonHovered ? "danger" : "primary"}
+                theme={isXButtonHovered ? `danger` : `primary`}
                 outline
                 pill
-                size="sm"
+                size={`sm`}
                 onMouseEnter={handleButtonMouseEnter}
                 onMouseLeave={handleButtonMouseLeave}
                 onClick={handleButtonClick}
             >
                 {props.children}
 
-                <StyledXButton type="button" style={{
+                <StyledXButton type={`button`} style={{
                     color: (isXButtonHovered || isButtonHovered) ? theme.color_text : `#007bff`,
                 }}
-                    value="x"
+                    value={`x`}
                     onMouseEnter={handleXMouseEnter}
                     onMouseLeave={handleXMouseLeave}
                     onClick={handleClick}

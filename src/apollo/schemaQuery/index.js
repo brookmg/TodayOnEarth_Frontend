@@ -12,7 +12,7 @@ const fs = require(`fs`);
 const gqlEndpoint = process.env.SCHEME_DOWNLOADER_GQL_ENDPOINT
 
 if (!gqlEndpoint) {
-  console.log("[WARNING]:", "No SCHEME_DOWNLOADER_GQL_ENDPOINT environment variable provided, will not update apollo schema definitions!")
+  console.log(`[WARNING]:`, `No SCHEME_DOWNLOADER_GQL_ENDPOINT environment variable provided, will not update apollo schema definitions!`)
   return
 }
 

@@ -52,6 +52,7 @@ query getUserInterestsPosts(
     }
 }
 `;
+
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
 let prevScrollValue = -1;
@@ -81,8 +82,8 @@ export const PostsByUserInterest = ({ scrollValue, height }) => {
         }
     };
     const filter = [];
-    filter.push({ published_on: `${TIME_A_WEEK_AGO}`, connector: "AND" });
-    filter.push({ _published_on: `${TIME_NOW}`, connector: "AND" });
+    filter.push({ published_on: `${TIME_A_WEEK_AGO}`, connector: `AND` });
+    filter.push({ _published_on: `${TIME_NOW}`, connector: `AND` });
     const { loading, error } = useQuery(POSTS_BY_USER_INTEREST_QUERY, {
         variables: {
             page: pageNumber,
@@ -91,7 +92,7 @@ export const PostsByUserInterest = ({ scrollValue, height }) => {
         },
         onCompleted: handleNewData,
         notifyOnNetworkStatusChange: true,
-        fetchPolicy: "cache-and-network"
+        fetchPolicy: `cache-and-network`
     });
     if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
         if (prevScrollValue !== scrollValue)
@@ -114,7 +115,7 @@ export const PostsByUserInterest = ({ scrollValue, height }) => {
                 <div>
                     <label>
                         Posts per page:
-                        <FormSelect size="sm" onChange={handlePostsPerPageChange}>
+                        <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
                             {
                                 [DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (
                                     <option key={i} value={e}>

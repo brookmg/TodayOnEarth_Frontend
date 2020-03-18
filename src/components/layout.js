@@ -95,17 +95,17 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                 const notificationTitle = `New Post Found`
                 const notificationBody = { body: postAdded.title }
                 if (postAdded.title) {
-                    if (!("Notification" in window)) {
+                    if (!(`Notification` in window)) {
                         toast(postAdded.title)
                     }
-                    else if (Notification.permission === "granted") {
+                    else if (Notification.permission === `granted`) {
                         // if it's okay then create a notification
                         new Notification(notificationTitle, notificationBody);
                     }
-                    else if (Notification.permission !== "denied") {
+                    else if (Notification.permission !== `denied`) {
                         Notification.requestPermission().then(function (permission) {
                             // if the user accepts, then create a notification
-                            if (permission === "granted") {
+                            if (permission === `granted`) {
                                 new Notification(notificationTitle, notificationBody);
                             } else {
                                 toast(postAdded.title)
@@ -129,7 +129,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
             <StyledFlexDirectionRowDiv style={{
                 color: theme.color_text,
                 backgroundColor: theme.color_background,
-                display: isDesktopOrLaptop ? "flex" : "block",
+                display: isDesktopOrLaptop ? `flex` : `block`,
             }}
 
                 onClick={(ev) => setMouseClickPosition({
@@ -161,8 +161,8 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                         </main>
                         <footer>
                             © {new Date().getFullYear()}, Built with
-          {` `}
-                            <a href="https://www.gatsbyjs.org">Gatsby</a>
+                            {` `}
+                            <a href={`https://www.gatsbyjs.org`}>Gatsby</a>
                         </footer>
                     </StyledHeaderDiv>
                 </StyledFlex3OverflowYDiv>

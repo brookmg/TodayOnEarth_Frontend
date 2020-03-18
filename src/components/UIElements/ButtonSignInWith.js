@@ -20,7 +20,7 @@ const ButtonSignInWith = (props) => {
             {...props}
             href={props.url}>
             <ButtonCustom borderColor={props.borderColor} backgroundColor={props.backgroundColor} color={props.color}>
-                <Margin vertical="0" horizontal="0.25em">
+                <Margin vertical={`0`} horizontal={`0.25em`}>
                     <StyledImg src={props.imgSrc} />
                     <span>
                         {props.value}

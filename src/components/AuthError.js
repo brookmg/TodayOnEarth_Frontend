@@ -10,7 +10,7 @@ const AuthError = (props) => (
         {props.error}
         </pre>
 
-        <p><Link to="/signup">Sign Up</Link> | <Link to="/app/login">Log In</Link></p>
+        <p><Link to={`/signup`}>Sign Up</Link> | <Link to={`/app/login`}>Log In</Link></p>
     </div>
 );
 

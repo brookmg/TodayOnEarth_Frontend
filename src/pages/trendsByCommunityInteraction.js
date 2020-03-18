@@ -7,7 +7,7 @@ import PostsByCommunityInteraction from "../components/PostsByCommunityInteracti
 const CommunityInteractionPage = () => {
   return (
     <Layout>
-      <SEO title="Post Trends by community interaction" />
+      <SEO title={`Post Trends by community interaction`} />
       <PostsByCommunityInteraction />
     </Layout>
   )

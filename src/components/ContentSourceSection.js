@@ -143,7 +143,7 @@ const ContentSourceSection = () => {
         }
     };
 
-    const [searchPhrase, setSearchPhrase] = React.useState("");
+    const [searchPhrase, setSearchPhrase] = React.useState(``);
 
     const { data, loading, error, refetch } = useQuery(GET_USER_PROVIDERS);
     const {
@@ -161,12 +161,12 @@ const ContentSourceSection = () => {
     const [addProvider, { loading: mutationLoading, error: mutationError }] = useMutation(ADD_PROVIDER, {
         onCompleted: (data) => {
             if (data.addProvider) {
-                toast("Added provider successfully", {
+                toast(`Added provider successfully`, {
                     type: toast.TYPE.SUCCESS,
                     delay: 1000
                 })
-                setInsertProviderText("")
-                setInsertSourceText("")
+                setInsertProviderText(``)
+                setInsertSourceText(``)
                 refetch()
             }
         }
@@ -175,12 +175,12 @@ const ContentSourceSection = () => {
     const [removeProvider, { loading: removeMutationLoading, error: removeMutationError }] = useMutation(REMOVE_PROVIDER, {
         onCompleted: (data) => {
             if (data.removeProvider) {
-                toast("Removed provider successfully", {
+                toast(`Removed provider successfully`, {
                     type: toast.TYPE.SUCCESS
                 })
 
             } else {
-                toast("Something went wrong when removing provider", {
+                toast(`Something went wrong when removing provider`, {
                     type: toast.TYPE.WARNING
                 })
             }
@@ -193,8 +193,8 @@ const ContentSourceSection = () => {
 
     const handleSearchPhraseChange = (ev) => setSearchPhrase(ev.target.value)
     const handleAddClick = (ev) => {
-        if (insertSourceText === "" || insertProviderText === "") {
-            toast("Can not insert, check if values are valid", {
+        if (insertSourceText === `` || insertProviderText === ``) {
+            toast(`Can not insert, check if values are valid`, {
                 type: toast.TYPE.ERROR
             })
             return
@@ -219,10 +219,10 @@ const ContentSourceSection = () => {
     const [checkedItems, setCheckedItems] = React.useState({});
     const userContentSources = data ? data.getProvidersForUser : []
     userContentSources.forEach((e) =>
-        (typeof checkedItems[e.provider] === "undefined") &&
+        (typeof checkedItems[e.provider] === `undefined`) &&
         (checkedItems[e.provider] = true))
     const [insertSourceText, setInsertSourceText] = React.useState(AVAILABLE_SOURCES[0]);
-    const [insertProviderText, setInsertProviderText] = React.useState("");
+    const [insertProviderText, setInsertProviderText] = React.useState(``);
     const [isInsertUrlShowing, setIsInsertUrlShowing] = React.useState(false);
 
     const allProviders = allProviderData ? allProviderData.getProviders : []
@@ -230,10 +230,10 @@ const ContentSourceSection = () => {
     if (!isLoggedIn()) return null
     return (
         <div>
-            <Margin vertical="1rem">
+            <Margin vertical={`1rem`}>
                 <ThemedCard>
                     <CardBody>
-                        <Margin bottom="1rem">
+                        <Margin bottom={`1rem`}>
                             {loading && <p>Loading Providers...</p>}
                             {error && <p>Error: {error.message}</p>}
                             {mutationLoading && <p>Adding provider...</p>}
@@ -241,13 +241,13 @@ const ContentSourceSection = () => {
                             {removeMutationLoading && <p>Removing provider...</p>}
                             {removeMutationError && <p>Error removing provider: {removeMutationError.message}</p>}
                             <div>
-                                <Margin vertical="0.5em">
+                                <Margin vertical={`0.5em`}>
 
                                     {
                                         !isInsertUrlShowing &&
                                         <StyledRelativeDiv>
-                                            <FormInput value={searchPhrase} onChange={handleSearchPhraseChange} size="sm" placeholder="Search for a provider..." />
-                                            <StyledFloatingDiv className="floatingDiv" style={{ backgroundColor: theme.color_background }}>
+                                            <FormInput value={searchPhrase} onChange={handleSearchPhraseChange} size={`sm`} placeholder={`Search for a provider...`} />
+                                            <StyledFloatingDiv className={`floatingDiv`} style={{ backgroundColor: theme.color_background }}>
                                                 <StyledDisplayCenterFlexDiv>
                                                     {
                                                         allProviderLoading && <p>Loading...</p>
@@ -260,7 +260,7 @@ const ContentSourceSection = () => {
                                                     allProviders.map(e =>
                                                         <StyledP onMouseDown={handleProviderMouseDown.bind(this, e)}>
                                                             <StyledDisplayAlignCenterFlexDiv>
-                                                                <StyledHiddenIcon className="pIcon"><AddIcon /></StyledHiddenIcon>
+                                                                <StyledHiddenIcon className={`pIcon`}><AddIcon /></StyledHiddenIcon>
                                                                 <div>
                                                                     <div>{e.provider}</div>
                                                                     <div style={{ color: theme.color_text_faded }}>{e.source}</div>
@@ -283,7 +283,7 @@ const ContentSourceSection = () => {
                                             <StyledDisplayFlexDiv>
                                                 <StyledFlex1Div>
                                                     <StyledDisplayAlignCenterFlexDiv>
-                                                        <Margin horizontal="0.25em">
+                                                        <Margin horizontal={`0.25em`}>
                                                             <StyledSelect onChange={handleSourceChange}>
                                                                 {
                                                                     AVAILABLE_SOURCES.map((source) => {
@@ -291,7 +291,7 @@ const ContentSourceSection = () => {
                                                                     })
                                                                 }
                                                             </StyledSelect>
-                                                            <FormInput value={insertProviderText} onChange={handleProviderChange} size="sm" placeholder="Insert Provider" />
+                                                            <FormInput value={insertProviderText} onChange={handleProviderChange} size={`sm`} placeholder={`Insert Provider`} />
                                                         </Margin>
                                                     </StyledDisplayAlignCenterFlexDiv>
                                                 </StyledFlex1Div>

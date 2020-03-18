@@ -51,11 +51,11 @@ mutation createPost(
 }
 `;
 const DEFAULT_PLATFORMS_TO_POST_ON = {
-    "Telegram": true,
-    "Facebook": true,
-    "Instagram": false,
-    "LinkedIn": true,
-    "Twitter": true,
+    'Telegram': true,
+    'Facebook': true,
+    'Instagram': false,
+    'LinkedIn': true,
+    'Twitter': true,
 };
 
 const StyledDisplayFlexDiv = styled.div`
@@ -89,9 +89,9 @@ const CreatePost = () => {
     const user = React.useContext(AuthContext);
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const [platformToPostOn, setPlatformToPostOn] = React.useState(DEFAULT_PLATFORMS_TO_POST_ON);
-    const [postText, setPostText] = React.useState("");
-    const [telegramChannel, setTelegramChannel] = React.useState("");
-    const [facebookPageURL, setFacebookPageURL] = React.useState("");
+    const [postText, setPostText] = React.useState(``);
+    const [telegramChannel, setTelegramChannel] = React.useState(``);
+    const [facebookPageURL, setFacebookPageURL] = React.useState(``);
     const [fileToUpload, setFileToUpload] = React.useState(null);
     const [createPost, { data }] = useMutation(CREATE_POST_MUTATION);
     const handlePostTextChange = (e) => setPostText(e.target.value);
@@ -134,12 +134,12 @@ const CreatePost = () => {
     };
     if (isBrowser() && !isLoggedIn())
         navigate(`/app/login`);
-    console.log("GQL response", data);
+    console.log(`GQL response`, data);
     return (<div>
         <h2>Create Post</h2>
         <StyledDisplayFlexDiv>
             <StyledFlex1Div>
-                <Margin vertical="1em">
+                <Margin vertical={`1em`}>
                     <div>
                         Platforms to post on:
                     </div>
@@ -148,22 +148,22 @@ const CreatePost = () => {
                     {Object.keys(platformToPostOn).map(e => <FormCheckbox inline key={e} checked={!!platformToPostOn[e]} onChange={ev => handlePostSourceChange(ev, e)}>
                         {e}
                     </FormCheckbox>)}
-                    <Margin vertical="0.25em">
+                    <Margin vertical={`0.25em`}>
                         {platformToPostOn.Telegram &&
-                            <FormInput placeholder={"Telegram channel"} onChange={handleTelegramChannelChange} />}
+                            <FormInput placeholder={`Telegram channel`} onChange={handleTelegramChannelChange} />}
                         {platformToPostOn.Facebook &&
-                            <FormInput placeholder={"Facebook page URL"} onChange={handleFacebookPageURLChange} />}
+                            <FormInput placeholder={`Facebook page URL`} onChange={handleFacebookPageURLChange} />}
                     </Margin>
                 </span>
             </StyledFlex1Div>
             <StyledFlexColumn3Div>
-                <Margin horizontal="0.5em" vertical="0.5em">
+                <Margin horizontal={`0.5em`} vertical={`0.5em`}>
                     <StyledDisplayFlex1Div>
                         <StyledFormTextarea value={postText} placeholder={`What's on your mind, ${isLoggedIn() && user.first_name}?`} rows={8} onChange={handlePostTextChange} />
                         {isDesktopOrLaptop &&
-                            <Picker title="" showPreview={true} set={`emojione`} onSelect={handleEmojiSelect} />}
+                            <Picker title={``} showPreview={true} set={`emojione`} onSelect={handleEmojiSelect} />}
                     </StyledDisplayFlex1Div>
-                    <span>Image or file to upload: <FormInput type="file" onChange={({ target: { files } }) => {
+                    <span>Image or file to upload: <FormInput type={`file`} onChange={({ target: { files } }) => {
                         const file = files[0];
                         console.log(file);
                         file && setFileToUpload(file);

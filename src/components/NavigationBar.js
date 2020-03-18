@@ -81,18 +81,18 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const user = React.useContext(AuthContext);
 
     const linksThatNeedAuth = [
-        { text: "Home", url: "/", icon: <HomeIcon /> },
-        { text: "Create a Post", url: "/create", icon: <PostAddIcon /> },
-        { text: "Discover", url: "/userInterest", icon: <ExploreIcon /> },
+        { text: `Home`, url: `/`, icon: <HomeIcon /> },
+        { text: `Create a Post`, url: `/create`, icon: <PostAddIcon /> },
+        { text: `Discover`, url: `/userInterest`, icon: <ExploreIcon /> },
     ]
     const links = [
         ...(isLoggedIn() ? linksThatNeedAuth : []),
-        { text: "Today", url: "/today", icon: <CalendarTodayIcon /> },
-        { text: "Latest Posts", url: "/latest", icon: <AnnouncementIcon /> },
-        { text: "Trending Posts", url: "/trendsByCommunityInteraction", icon: <TrendingUpIcon /> },
-        { text: "Topic Posts", url: "/trendsByTopic", icon: <VisibilityIcon /> },
-        { text: "Advanced Search", url: "/s?expanded=1", icon: <FindInPageIcon /> },
-        { text: "Settings", url: "/settings", icon: <SettingsIcon /> },
+        { text: `Today`, url: `/today`, icon: <CalendarTodayIcon /> },
+        { text: `Latest Posts`, url: `/latest`, icon: <AnnouncementIcon /> },
+        { text: `Trending Posts`, url: `/trendsByCommunityInteraction`, icon: <TrendingUpIcon /> },
+        { text: `Topic Posts`, url: `/trendsByTopic`, icon: <VisibilityIcon /> },
+        { text: `Advanced Search`, url: `/s?expanded=1`, icon: <FindInPageIcon /> },
+        { text: `Settings`, url: `/settings`, icon: <SettingsIcon /> },
     ];
 
     const handleNightModeClick = () => theme.setTheme({
@@ -112,7 +112,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     }}>
         <StyledWidthPaddingDiv>
             <StyledDisplayFlexDiv style={{ justifyContent: isDesktopOrLaptop ? `flex-start` : `flex-end` }}>
-                <StyledMarginButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
+                <StyledMarginButtonCustom className={`navbarLinkButton`} borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
                     {isColorDark(theme.color_background) ?
                         <StyledWbSunnyIcon onClick={handleLightModeClick} /> :
                         <StyledNightsStayIcon onClick={handleNightModeClick} />
@@ -121,26 +121,26 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
 
             </StyledDisplayFlexDiv>
             <StyledNoHorizontalPaddingButtonCustom borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
-                <div className="navbarTop">
-                    <p className="navbarAccountIcon">
+                <div className={`navbarTop`}>
+                    <p className={`navbarAccountIcon`}>
                         <StyledAccountCircleIcon />
                     </p>
                     {isLoggedIn() ?
-                        <div className="navbarShownOnHover" style={isMobileNavbarShowingStyle}>
+                        <div className={`navbarShownOnHover`} style={isMobileNavbarShowingStyle}>
                             <p>Hello, {user.first_name}</p>
                         </div>
                         : <>
-                            <p className="navbarShownOnHover" style={isMobileNavbarShowingStyle}>
-                                You should <AnimatedLink to="/app/login">log in</AnimatedLink> to see restricted
+                            <p className={`navbarShownOnHover`} style={isMobileNavbarShowingStyle}>
+                                You should <AnimatedLink to={`/app/login`}>log in</AnimatedLink> to see restricted
                                       content
                   </p>
 
                         </>}
                 </div>
 
-                <div className="navbarShownOnHover" style={isMobileNavbarShowingStyle}>
+                <div className={`navbarShownOnHover`} style={isMobileNavbarShowingStyle}>
                     {isLoggedIn() ? (<>
-                        <AnimatedLink to="/app/profile">Profile</AnimatedLink> | <a href="/" onClick={event => {
+                        <AnimatedLink to={`/app/profile`}>Profile</AnimatedLink> | <a href={`/`} onClick={event => {
                             event.preventDefault();
                             signOut().then(() => {
                                 user.refreshActiveUser(() => {
@@ -159,12 +159,12 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
 
         <StyledFlex1Div>
             {links.map(e => <div>
-                <Margin vertical="0.5em">
+                <Margin vertical={`0.5em`}>
                     <div>
                         <AnimatedLink to={e.url}>
-                            <StyledNoHorizontalPaddingButtonCustom className="navbarLinkButton" borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
+                            <StyledNoHorizontalPaddingButtonCustom className={`navbarLinkButton`} borderColor={theme.color_background} backgroundColor={theme.color_background} color={theme.color_text}>
                                 <StyledSpan>{e.icon}</StyledSpan>
-                                <span className="navbarBtnText" style={isMobileNavbarShowingStyle}>
+                                <span className={`navbarBtnText`} style={isMobileNavbarShowingStyle}>
                                     {e.text}
                                 </span>
                             </StyledNoHorizontalPaddingButtonCustom>

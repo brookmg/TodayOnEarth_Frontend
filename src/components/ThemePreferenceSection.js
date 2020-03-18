@@ -34,15 +34,15 @@ const ThemePreferenceSection = (props) => {
     });
     const handleThemeApplyPermanentlyClick = () => {
         if (isBrowser()) {
-            localStorage.setItem("theme", JSON.stringify(theme));
-            alert("Theme applied successfully");
+            localStorage.setItem(`theme`, JSON.stringify(theme));
+            alert(`Theme applied successfully`);
         }
     };
     return (<div>
-        <Margin vertical="1rem">
+        <Margin vertical={`1rem`}>
             <ThemedCard>
                 <CardBody>
-                    <Margin bottom="1rem">
+                    <Margin bottom={`1rem`}>
 
                         <div>
                             <ThemedCardTitle style={{
@@ -55,12 +55,12 @@ const ThemePreferenceSection = (props) => {
                                         return (<option style={{ fontFamily: font }} key={font}>{font}</option>);
                                     })}
                                 </StyledSelect>
-                                <Margin horizontal="0.5rem">
+                                <Margin horizontal={`0.5rem`}>
                                     <span>Font Style</span>
                                 </Margin>
 
-                                <FormInput value={theme.font_size} onChange={handleFontSizeChange} style={{ width: `110px`, display: `inline` }} type="number" />
-                                <Margin vertical="0.5rem" horizontal="0.5rem">
+                                <FormInput value={theme.font_size} onChange={handleFontSizeChange} style={{ width: `110px`, display: `inline` }} type={`number`} />
+                                <Margin vertical={`0.5rem`} horizontal={`0.5rem`}>
                                     <span>Font Size</span>
                                 </Margin>
                             </div>
@@ -74,20 +74,20 @@ const ThemePreferenceSection = (props) => {
                         <div>
 
                             <div>
-                                <input type="color" value={theme.color_background} onChange={handleBGColorChange} />
-                                <Margin left="0.5rem">
+                                <input type={`color`} value={theme.color_background} onChange={handleBGColorChange} />
+                                <Margin left={`0.5rem`}>
                                     <span>Background Color</span>
                                 </Margin>
                             </div>
                             <div>
-                                <input type="color" value={theme.color_text} onChange={handleTextColorChange} />
-                                <Margin left="0.5rem">
+                                <input type={`color`} value={theme.color_text} onChange={handleTextColorChange} />
+                                <Margin left={`0.5rem`}>
                                     <span>Text Color</span>
                                 </Margin>
                             </div>
                             <div>
-                                <input type="color" value={theme.color_text_faded} onChange={handleTextFadedColorChange} />
-                                <Margin left="0.5rem">
+                                <input type={`color`} value={theme.color_text_faded} onChange={handleTextFadedColorChange} />
+                                <Margin left={`0.5rem`}>
                                     <span>Text Color Faded</span>
                                 </Margin>
                             </div>
@@ -95,7 +95,7 @@ const ThemePreferenceSection = (props) => {
 
                     </div>
 
-                    <Margin vertical="0.5em">
+                    <Margin vertical={`0.5em`}>
                         <div style={{ color: theme.color_text_faded }}>
                             <i>
                                 Note: Theme will not be permanent till you apply the changes.
@@ -104,9 +104,9 @@ const ThemePreferenceSection = (props) => {
                     </Margin>
 
                     <div>
-                        <Margin horizontal="0.5rem" vertical="0.5rem">
+                        <Margin horizontal={`0.5rem`} vertical={`0.5rem`}>
                             <div>
-                                <Margin right="0.5rem" vertical="0.5em">
+                                <Margin right={`0.5rem`} vertical={`0.5em`}>
                                     <ButtonDark onClick={handleThemePreviewOriginalDayClick}>
                                         <WbSunnyIcon /> Try Day Theme
                                         </ButtonDark>

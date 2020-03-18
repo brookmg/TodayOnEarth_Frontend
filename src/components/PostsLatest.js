@@ -52,6 +52,7 @@ query getLatestPaginatedPosts(
   }
 }
 `;
+
 const POST_SUBSCRIPTION = gql`
 
 subscription getNewPosts{
@@ -88,12 +89,13 @@ subscription getNewPosts{
 }
 
 `;
+
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 const DEFAULT_POST_SOURCES = {
-    "t.me": true,
-    "facebook.com": true,
-    "instagram.com": true,
-    "twitter.com": true
+    't.me': true,
+    'facebook.com': true,
+    'instagram.com': true,
+    'twitter.com': true
 };
 let prevScrollValue = -1;
 
@@ -127,7 +129,7 @@ const PostsLatest = ({ scrollValue, height }) => {
         }
     };
     const filter = [];
-    Object.keys(postSources).forEach((e) => postSources[e] && filter.push({ source: e, connector: "OR" }));
+    Object.keys(postSources).forEach((e) => postSources[e] && filter.push({ source: e, connector: `OR` }));
     const { subscribeToMore, loading, error } = useQuery(LATEST_POSTS_QUERY, {
         variables: {
             page: pageNumber,
@@ -138,7 +140,7 @@ const PostsLatest = ({ scrollValue, height }) => {
         },
         onCompleted: handleNewData,
         notifyOnNetworkStatusChange: true,
-        fetchPolicy: "cache-and-network"
+        fetchPolicy: `cache-and-network`
     });
     React.useEffect(() => {
         subscribeToMore({
@@ -213,7 +215,7 @@ const PostsLatest = ({ scrollValue, height }) => {
             <div>
                 <label>
                     Posts per page:
-                    <FormSelect size="sm" onChange={handlePostsPerPageChange}>
+                    <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
                         {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (<option key={i} value={e}>
                             {e}
                         </option>))}
@@ -221,7 +223,7 @@ const PostsLatest = ({ scrollValue, height }) => {
                 </label>
             </div>
         </StyledDisplayFlexDiv>
-        <Margin top="1em">
+        <Margin top={`1em`}>
             <StyledP style={{
                 color: theme.color_text_faded
             }}>

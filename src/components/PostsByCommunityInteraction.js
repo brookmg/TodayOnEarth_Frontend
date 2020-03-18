@@ -101,12 +101,13 @@ query getPostsByRelativeCommunityInteraction(
     }
 }
 `;
+
 const DEFAULT_COMMUNITY_INTERACTIONS = {
-    "Views (t.me)": true,
-    "Replies (twitter.com)": true,
-    "Retweets (twitter.com)": true,
-    "Comments (facebook.com, instagram.com )": true,
-    "Likes (twitter.com, instagram.com)": true,
+    'Views (t.me)': true,
+    'Replies (twitter.com)': true,
+    'Retweets (twitter.com)': true,
+    'Comments (facebook.com, instagram.com )': true,
+    'Likes (twitter.com, instagram.com)': true,
 };
 
 const StyledFlexDiv = styled.div`
@@ -141,13 +142,13 @@ const PostsByCommunityInteraction = (props) => {
     const handleEndTimeChange = (ev) => setEndTime(ev.target.value);
     const filter = [];
     if (startTime)
-        filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: "AND" });
+        filter.push({ published_on: `${new Date(startTime).getTime()}`, connector: `AND` });
     if (endTime)
-        filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: "AND" });
+        filter.push({ _published_on: `${new Date(endTime).getTime()}`, connector: `AND` });
     const variables = {
         filter,
         range: maxPosts,
-        workingOn: Object.keys(communityInteractions).filter(e => communityInteractions[e]).map(e => e.split(" ")[0].toLowerCase()),
+        workingOn: Object.keys(communityInteractions).filter(e => communityInteractions[e]).map(e => e.split(` `)[0].toLowerCase()),
         communityInteractions,
     };
     const { loading, error, data } = useQuery(isRelativeInteraction ? RELATIVE_COMMUNITY_INTERACTION_QUERY : ABSOLUTE_COMMUNITY_INTERACTION_QUERY, {
@@ -166,7 +167,7 @@ const PostsByCommunityInteraction = (props) => {
             <h2>Posts Sorted using Community Interaction</h2>
             <StyledColumnDiv>
                 <StyledFlexDiv>
-                    <Margin vertical="1em" horizontal="1em">
+                    <Margin vertical={`1em`} horizontal={`1em`}>
                         <div>
                             <StyledLeftAlignDiv>
                                 <FormCheckbox toggle small checked={isRelativeInteraction} onChange={handleRelativeInteractionChange}>
@@ -176,13 +177,13 @@ const PostsByCommunityInteraction = (props) => {
 
                             <StyledLeftAlignDiv>
                                 Posts to process
-                            <FormInput type="number" value={maxPosts} onChange={handleMaxPostsChange} />
+                            <FormInput type={`number`} value={maxPosts} onChange={handleMaxPostsChange} />
                             </StyledLeftAlignDiv>
                         </div>
 
                         <StyledFlex1CenteredDiv>
-                            Starting From: <FormInput value={startTime} onChange={handleStartTimeChange} type="date" size="sm" />
-                            Ending At: <FormInput value={endTime} onChange={handleEndTimeChange} type="date" size="sm" />
+                            Starting From: <FormInput value={startTime} onChange={handleStartTimeChange} type={`date`} size={`sm`} />
+                            Ending At: <FormInput value={endTime} onChange={handleEndTimeChange} type={`date`} size={`sm`} />
                         </StyledFlex1CenteredDiv>
                     </Margin>
                 </StyledFlexDiv>

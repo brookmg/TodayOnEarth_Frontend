@@ -42,7 +42,7 @@ const TrendingKeywords = (props) => {
     const handleSemanticsChange = () => setSemanticEnabled(!semanticEnabled);
     const keywords = data && data.getTodaysTrendingKeywords;
     return (<>
-        <Margin horizontal="2em">
+        <Margin horizontal={`2em`}>
             <StyledBoldCenterDiv>
                 <h3>Today's trending keywords</h3>
                 <StyledLeftDiv>

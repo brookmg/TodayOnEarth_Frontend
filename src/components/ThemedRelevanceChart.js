@@ -31,7 +31,7 @@ const ThemedRelevanceChart = ({ postId }) => {
         },
         skip: !postId,
         onCompleted: data => {
-            console.log("dataa", data)
+            console.log(`dataa`, data)
 
             if (data && data.getPostRelevancePerUserInterests) {
                 const newInterests = [];
@@ -44,7 +44,7 @@ const ThemedRelevanceChart = ({ postId }) => {
                 setScore(newScores);
             }
         },
-        fetchPolicy: "cache-and-network",
+        fetchPolicy: `cache-and-network`,
         notifyOnNetworkStatusChange: true,
     });
 

@@ -12,11 +12,11 @@ const SignUpPage = withQueryParsedURL((props) => {
   const data = JSON.parse(queryParsedURL.data || `{}`).potential_user || {}
 
   // reset url to remove params
-  isBrowser() && window.history.replaceState({}, document.title, "/signup")
+  isBrowser() && window.history.replaceState({}, document.title, `/signup`)
 
   return (
     <Layout>
-      <SEO title="Sign Up" />
+      <SEO title={`Sign Up`} />
 
       <SignUp
         email={data.email}

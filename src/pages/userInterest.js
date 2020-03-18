@@ -11,7 +11,7 @@ const UserInterestPage = () => {
                 ({ scrollValue, height }) => {
                     return (
                         <>
-                            <SEO title="Posts sorted by user interest" />
+                            <SEO title={`Posts sorted by user interest`} />
                             <PostsByUserInterest scrollValue={scrollValue} height={height} />
                         </>
                     )

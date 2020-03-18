@@ -45,7 +45,7 @@ const AnchorButton = (props) => {
     const linkPreviewUrl = `${process.env.GATSBY_LINK_PREVIEWER_API}${encodeURIComponent(props.url)}`
 
     if (isHovered && !isLoading && !linkPreviewData.title) {
-        console.log("loading")
+        console.log(`loading`)
         setIsLoading(true)
         fetch(linkPreviewUrl)
             .then(data => data.json())
@@ -62,7 +62,7 @@ const AnchorButton = (props) => {
                 onMouseLeave={handleOnMouseLeave}
 
                 {...props}
-                href={props.url || ""}
+                href={props.url || ``}
                 onClick={handleShareClick}
             >
                 {props.children}
@@ -74,7 +74,7 @@ const AnchorButton = (props) => {
                             <StyledImage src={linkPreviewData.image} />
                         </StyledDisplayFlex1Div>
                         <StyledFlex3Div>
-                            <div>{!isHovered ? "Hover on url to preview" : linkPreviewData.title || (isLoading ? "Loading..." : "Error loading url preview")}</div>
+                            <div>{!isHovered ? `Hover on url to preview` : linkPreviewData.title || (isLoading ? `Loading...` : `Error loading url preview`)}</div>
                             <div>{linkPreviewData.description}</div>
                         </StyledFlex3Div>
                     </StyledDisplayFlexDiv>

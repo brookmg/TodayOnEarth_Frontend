@@ -118,7 +118,7 @@ const PostDetail = withQueryParsedURL((props) => {
         <StyledRelativeDiv>
             <StyledCenterTextDiv>
                 <StyledRoundDiv>
-                    <StyledImage src="https://www.w3schools.com/howto/img_avatar.png" />
+                    <StyledImage src={`https://www.w3schools.com/howto/img_avatar.png`} />
                 </StyledRoundDiv>
                 <p>{post.provider}</p>
             </StyledCenterTextDiv>
@@ -130,8 +130,8 @@ const PostDetail = withQueryParsedURL((props) => {
                     <PostMetadata sourceLink={post.source_link} communityInteraction={getIfAvailable(post, `metadata.community_interaction`)} />
                 </StyledDisplayMarginFlex>
 
-                <AnchorButton id="shareButton" onClick={handleShareClick}>Share 🔗</AnchorButton>
-                <Tooltip trigger="click" open={isShareTooltipOpen} target="#shareButton" toggle={toggleShareTooltipOpen}>
+                <AnchorButton id={`shareButton`} onClick={handleShareClick}>Share 🔗</AnchorButton>
+                <Tooltip trigger={`click`} open={isShareTooltipOpen} target={`#shareButton`} toggle={toggleShareTooltipOpen}>
                     URL copied to clipboard!
         </Tooltip>
             </div>
@@ -144,12 +144,12 @@ const PostDetail = withQueryParsedURL((props) => {
                 <Image src={getIfAvailable(post, `metadata.message.image.src`) || // Telegram images
                     getIfAvailable(post, `metadata.post.thumbnail_image`)} />
             </StyledDisplayFlex>
-            {post.body === "" ?
+            {post.body === `` ?
                 <>
                     <div>
                         <p>
                             <ParseLinks sourceLink={post.source_link}>
-                                {getIfAvailable(post, `title`, "")}
+                                {getIfAvailable(post, `title`, ``)}
                             </ParseLinks>
                         </p>
                     </div>
@@ -157,7 +157,7 @@ const PostDetail = withQueryParsedURL((props) => {
                 <>
 
                     <h1>
-                        {ellipsedSubstring(getIfAvailable(post, `title`, ""))}
+                        {ellipsedSubstring(getIfAvailable(post, `title`, ``))}
                     </h1>
                     <div>
                         <p>

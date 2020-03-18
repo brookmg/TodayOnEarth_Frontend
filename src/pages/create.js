@@ -8,7 +8,7 @@ import CreatePost from "../components/CreatePost";
 const CreatePage = () => {
   return (
     <Layout>
-      <SEO title="Create Post" />
+      <SEO title={`Create Post`} />
       <CreatePost />
     </Layout>
   )

@@ -49,10 +49,10 @@ const UserInterestEntry = (props) => {
     const theme = React.useContext(ThemePalletteContext)
 
 
-    const [interestInputText, setInterestInputText] = React.useState("")
+    const [interestInputText, setInterestInputText] = React.useState(``)
     const [interestScore, setInterestScore] = React.useState(0)
     const [interestMap, setInterestMap] = React.useState({})
-    const [selectedInterest, setSelectedInterest] = React.useState("")
+    const [selectedInterest, setSelectedInterest] = React.useState(``)
 
     const { loading, error, refetch } = useQuery(GET_USER_INTERESTS,
         {
@@ -72,7 +72,7 @@ const UserInterestEntry = (props) => {
     const [updateInterests, { loading: mutationLoading, error: mutationError }] = useMutation(UPDATE_USER_INTERESTS, {
         onCompleted: (data) =>
             data.cleanUpdateInterestList &&
-            toast("Applied changes successfully", {
+            toast(`Applied changes successfully`, {
                 type: toast.TYPE.SUCCESS
             })
     });
@@ -98,11 +98,11 @@ const UserInterestEntry = (props) => {
     const handleInterestKeyDown = (e) => {
         if (e.key === `Enter` || e.key === ` `) {
             removeRedundantWhitespace(interestInputText).
-                split(" ").forEach((e) => {
+                split(` `).forEach((e) => {
                     if (!interestMap[e]) interestMap[e] = 0
                 })
 
-            setInterestInputText("")
+            setInterestInputText(``)
             e.preventDefault();
         }
     }
@@ -126,39 +126,39 @@ const UserInterestEntry = (props) => {
     if (!isLoggedIn()) return null
     return (
         <div>
-            <Margin vertical="1rem">
+            <Margin vertical={`1rem`}>
                 <ThemedCard>
                     <CardBody>
-                        <Margin bottom="1rem">
+                        <Margin bottom={`1rem`}>
 
                             <div>
                                 <ThemedCardTitle>Your interests</ThemedCardTitle>
                                 <div>
 
-                                    <FormInput placeholder={"Add Interest"}
+                                    <FormInput placeholder={`Add Interest`}
                                         value={interestInputText}
                                         onChange={handleInterestChange}
-                                        type="text"
-                                        size="sm"
+                                        type={`text`}
+                                        size={`sm`}
                                         plaintext={false}
                                         onKeyDown={handleInterestKeyDown}
                                     />
 
                                     {
-                                        <Margin vertical="1em">
+                                        <Margin vertical={`1em`}>
                                             <div>
 
                                                 {selectedInterest &&
                                                     <div>
                                                         <ThemedCardTitle>How interested are you about: "{selectedInterest}"</ThemedCardTitle>
 
-                                                        <Margin horizontal="0.5em" vertical="1em">
+                                                        <Margin horizontal={`0.5em`} vertical={`1em`}>
                                                             <div>
                                                                 <Slider
                                                                     value={interestScore}
-                                                                    theme={interestScore == 1 ? "success" : interestScore < 0 ? "danger" : "primary"}
+                                                                    theme={interestScore == 1 ? `success` : interestScore < 0 ? `danger` : `primary`}
                                                                     animate={true}
-                                                                    pips={{ mode: "steps", stepped: true, density: 50 }}
+                                                                    pips={{ mode: `steps`, stepped: true, density: 50 }}
                                                                     onSlide={handleSlide}
                                                                     connect={[true, false]}
                                                                     start={[interestScore]}
@@ -168,16 +168,16 @@ const UserInterestEntry = (props) => {
 
                                                                 <StyledDiv style={{ color: theme.color_text_faded }}>
                                                                     {
-                                                                        interestScore < 0 ? "Never show me posts about this topic" :
-                                                                            interestScore === 1 ? "Always show me posts about this topic" :
-                                                                                "I'm somewhat interested in this topic"
+                                                                        interestScore < 0 ? `Never show me posts about this topic` :
+                                                                            interestScore === 1 ? `Always show me posts about this topic` :
+                                                                                `I'm somewhat interested in this topic`
                                                                     }
                                                                 </StyledDiv>
                                                             </div>
                                                         </Margin>
 
                                                     </div>}
-                                                <Margin horizontal="0.5em" vertical="0.25em">
+                                                <Margin horizontal={`0.5em`} vertical={`0.25em`}>
                                                     {
                                                         Object.keys(interestMap).map(e => e &&
                                                             <ButtonInterest
@@ -197,7 +197,7 @@ const UserInterestEntry = (props) => {
 
                         </Margin>
                         <div>
-                            <Margin horizontal="0.5rem" vertical="0.5em" >
+                            <Margin horizontal={`0.5rem`} vertical={`0.5em`} >
                                 <ButtonDark onClick={handleRevertClicked}>Revert Changes</ButtonDark>
                                 <ButtonSuccess onClick={handleUpdateClicked}>Update Interests</ButtonSuccess>
                             </Margin>

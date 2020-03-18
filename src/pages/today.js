@@ -25,7 +25,7 @@ const TodayPage = () => {
                 ({ scrollValue, height }) => {
                     return (
                         <>
-                            <SEO title="Todays Posts" />
+                            <SEO title={`Todays Posts`} />
                             <PostsTrendingToday scrollValue={scrollValue} height={height} />
                         </>
                     )

@@ -54,67 +54,67 @@ const SignIn = () => {
             <h1>Log in</h1>
             <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? `row` : `column` }}>
                 <StyledForm
-                    method="post"
+                    method={`post`}
                     onSubmit={event => handleSubmit(event)
                     }
                 >
-                    <Margin vertical="0.5em" horizontal="0.5em">
-                        <FormInput placeholder="Email" name="email" onChange={handleUpdate} />
+                    <Margin vertical={`0.5em`} horizontal={`0.5em`}>
+                        <FormInput placeholder={`Email`} name={`email`} onChange={handleUpdate} />
                         <FormInput
-                            placeholder="Password"
-                            type="password"
-                            name="password"
+                            placeholder={`Password`}
+                            type={`password`}
+                            name={`password`}
                             onChange={handleUpdate}
                         />
-                        <ButtonSuccess type="submit"> Log In </ButtonSuccess>
-                        <AnchorButton url="/signup" onClick={handleSignUp}>Dont have an account? Sign up here</AnchorButton>
+                        <ButtonSuccess type={`submit`}> Log In </ButtonSuccess>
+                        <AnchorButton url={`/signup`} onClick={handleSignUp}>Dont have an account? Sign up here</AnchorButton>
 
                     </Margin>
                 </StyledForm>
                 <StyledFlex1MarginDiv>
-                    <Margin horizontal="0.5em" vertical="0.25em">
+                    <Margin horizontal={`0.5em`} vertical={`0.25em`}>
                         <ButtonSignInWith
                             url={`${authEndpoint}/twitter`}
-                            borderColor={"#49a0e9"}
-                            backgroundColor={"#fff"}
-                            color={"#49a0e9"}
+                            borderColor={`#49a0e9`}
+                            backgroundColor={`#fff`}
+                            color={`#49a0e9`}
                             imgSrc={`https://abs.twimg.com/favicons/twitter.ico`}
-                            value="Sign in with Twitter"
+                            value={`Sign in with Twitter`}
                         />
 
                         <ButtonSignInWith
                             url={`${authEndpoint}/facebook`}
-                            borderColor={"#3b5998"}
-                            backgroundColor={"#3b5998"}
-                            color={"#fff"}
+                            borderColor={`#3b5998`}
+                            backgroundColor={`#3b5998`}
+                            color={`#fff`}
                             imgSrc={`https://upload.wikimedia.org/wikipedia/commons/4/4d/F_icon_reversed.svg`}
-                            value="Sign in with Facebook"
+                            value={`Sign in with Facebook`}
                         />
 
                         <ButtonSignInWith
                             url={`${authEndpoint}/google`}
-                            borderColor={"#eee"}
-                            backgroundColor={"#fff"}
-                            color={"#000"}
+                            borderColor={`#eee`}
+                            backgroundColor={`#fff`}
+                            color={`#000`}
                             imgSrc={`https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg`}
-                            value="Sign in with Google"
+                            value={`Sign in with Google`}
                         />
                         <ButtonSignInWith
                             url={`${authEndpoint}/github`}
-                            borderColor={"#24292e"}
-                            backgroundColor={"#fff"}
-                            color={"#24292e"}
+                            borderColor={`#24292e`}
+                            backgroundColor={`#fff`}
+                            color={`#24292e`}
                             imgSrc={`https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg`}
-                            value="Sign in with GitHub"
+                            value={`Sign in with GitHub`}
                         />
 
                         <ButtonSignInWith
                             url={`${authEndpoint}/linkedin`}
-                            borderColor={"#3577b5"}
-                            backgroundColor={"#3577b5"}
-                            color={"#fff"}
+                            borderColor={`#3577b5`}
+                            backgroundColor={`#3577b5`}
+                            color={`#fff`}
                             imgSrc={`https://static-exp1.licdn.com/scds/common/u/images/logos/favicons/v1/favicon.ico`}
-                            value="Sign in with LinkedIn"
+                            value={`Sign in with LinkedIn`}
                         />
                     </Margin>
                 </StyledFlex1MarginDiv>
