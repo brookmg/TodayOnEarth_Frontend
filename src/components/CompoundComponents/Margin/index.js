@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 /* 
 This should help keep the code clean by setting margin for 
 every single child of this component

@@ -1,6 +1,6 @@
-import React from "react"
-import AuthContext from "./Contexts/AuthContext"
-import SEO from "../components/seo"
+import React from "react";
+import AuthContext from "./Contexts/AuthContext";
+import SEO from "../components/seo";
 
 
 const Profile = () => {

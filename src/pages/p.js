@@ -1,6 +1,6 @@
-import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import React from "react";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
 import PostDetail from "../components/PostDetail";
 import BackgroundImagePlaceHolder from "../components/BackgroundImagePlaceHolder";
 

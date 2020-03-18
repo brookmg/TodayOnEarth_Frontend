@@ -10,8 +10,8 @@ import ButtonDark from "./ButtonDark";
 import ButtonSuccess from "./ButtonSuccess";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { isLoggedIn } from "../../services/auth"
-import { removeRedundantWhitespace, isBrowser } from "../../utils"
+import { isLoggedIn } from "../../services/auth";
+import { removeRedundantWhitespace, isBrowser } from "../../utils";
 import {
     CardBody,
     Button,
