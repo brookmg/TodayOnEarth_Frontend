@@ -94,7 +94,7 @@ const StyledDisplayMarginFlex = styled.div`
     margin: 1rem;
 `
 
-const PostDetail = withQueryParsedURL((props) => {
+const PostDetail = withQueryParsedURL(({queryParsedURL}) => {
     const handleShareClick = (e) => {
         navigator.clipboard.writeText(window.location.href);
     };
@@ -105,7 +105,7 @@ const PostDetail = withQueryParsedURL((props) => {
     const [postOpened] = useMutation(POST_OPENED_MUTATION)
     const { loading, error, data } = useQuery(GET_POST_DETAIL, {
         variables: {
-            postid: Number(props.queryParsedURL.id)
+            postid: Number(queryParsedURL.id)
         },
         onCompleted: (data) => {
             const post = data.getPost
@@ -124,7 +124,7 @@ const PostDetail = withQueryParsedURL((props) => {
             </StyledCenterTextDiv>
             <div>
                 <div>
-                    <ThemedRelevanceChart postId={Number(props.queryParsedURL.id)} />
+                    <ThemedRelevanceChart postId={Number(queryParsedURL.id)} />
                 </div>
                 <StyledDisplayMarginFlex>
                     <PostMetadata sourceLink={post.source_link} communityInteraction={getIfAvailable(post, `metadata.community_interaction`)} />

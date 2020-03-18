@@ -8,7 +8,7 @@ const AuthContext = React.createContext({
     refreshActiveUser: () => { }
 })
 
-export const AuthProvider = (props) => {
+export const AuthProvider = ({ children }) => {
     const getActiveUser = (callback) => {
         getUser().then(e => {
             setAuthenticatedUser({ ...e.data.getUser })
@@ -23,7 +23,7 @@ export const AuthProvider = (props) => {
 
     return (
         <AuthContext.Provider value={{ ...authenticatedUser, refreshActiveUser: getActiveUser }}>
-            {props.children}
+            {children}
         </AuthContext.Provider>
     )
 }

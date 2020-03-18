@@ -13,12 +13,12 @@ const ThemePalletteContext = React.createContext({
     setTheme: () => { }
 })
 
-export const ThemeProvider = (props) => {
+export const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = React.useState({ ...themeToUse });
 
     return (
         <ThemePalletteContext.Provider value={{ ...theme, setTheme }}>
-            {props.children}
+            {children}
         </ThemePalletteContext.Provider>
     )
 }

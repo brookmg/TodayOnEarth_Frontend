@@ -10,7 +10,6 @@ import ThemedCard from "./ThemedCard";
 import ThemedCardTitle from "./ThemedCardTitle";
 import ButtonDark from "./ButtonDark";
 import PostInteraction from "./PostInteraction";
-import ThemedRelevanceChart from "../ThemedRelevanceChart";
 import { Link } from "gatsby";
 import {
     CardBody,
@@ -41,34 +40,34 @@ const StyledImage = styled(Image)`
     min-height: 100%;
 `
 
-const PostHolderCard = (props) => {
+const PostHolderCard = ({ imgSrc, id, title, body, sourceLink, metadata }) => {
     const theme = React.useContext(ThemePalletteContext)
 
     return (
         <Margin vertical={`1rem`}>
             <StyledThemedCard style={{
-                borderTopLeftRadius: props.imgSrc && `5rem`,
+                borderTopLeftRadius: imgSrc && `5rem`,
             }}>
                 <Link
-                    to={`/p?id=${props.id}`}
+                    to={`/p?id=${id}`}
                     style={{
                         color: theme.color_text,
                     }}
                 >
                     <StyledDiv>
-                        <StyledImage src={props.imgSrc} />
+                        <StyledImage src={imgSrc} />
                     </StyledDiv>
                     {
-                        (props.title || props.body) &&
+                        (title || body) &&
                         <CardBody>
-                            {props.title && <ThemedCardTitle>
-                                <ParseLinks sourceLink={props.sourceLink}>{props.title}</ParseLinks>
+                            {title && <ThemedCardTitle>
+                                <ParseLinks sourceLink={sourceLink}>{title}</ParseLinks>
                             </ThemedCardTitle>}
-                            {props.body &&
+                            {body &&
                                 <>
                                     <p>
-                                        <ParseLinks sourceLink={props.sourceLink}>
-                                            {props.body}
+                                        <ParseLinks sourceLink={sourceLink}>
+                                            {body}
                                         </ParseLinks>
                                     </p>
 
@@ -79,11 +78,11 @@ const PostHolderCard = (props) => {
                     }
                 </Link>
 
-                <PostInteraction postid={props.id} />
+                <PostInteraction postid={id} />
 
                 <Margin left={`1rem`} bottom={`0.5rem`}>
                     <div>
-                        <PostMetadata sourceLink={props.sourceLink} communityInteraction={props.metadata.community_interaction} />
+                        <PostMetadata sourceLink={sourceLink} communityInteraction={metadata.community_interaction} />
                     </div>
                 </Margin>
 
@@ -93,15 +92,15 @@ const PostHolderCard = (props) => {
                 }}>
                     <StyledFlexDiv>
                         <StyledA
-                            href={props.sourceLink}
+                            href={sourceLink}
                             style={{
                                 color: theme.color_text_faded,
                             }}
                             target={`_blank`}
                         >
-                            {props.sourceLink}
+                            {sourceLink}
                         </StyledA>
-                        
+
                     </StyledFlexDiv>
                 </CardFooter>
             </StyledThemedCard>

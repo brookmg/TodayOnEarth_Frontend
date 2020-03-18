@@ -6,9 +6,7 @@ import SignUp from "../components/SignUp";
 import { isBrowser } from "../utils";
 
 
-const SignUpPage = withQueryParsedURL((props) => {
-  const queryParsedURL = props.queryParsedURL
-
+const SignUpPage = withQueryParsedURL(({ queryParsedURL }) => {
   const data = JSON.parse(queryParsedURL.data || `{}`).potential_user || {}
 
   // reset url to remove params

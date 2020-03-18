@@ -78,8 +78,7 @@ const StyledP = styled.p`
     text-align: center;
 `
 
-const PostsSearch = withQueryParsedURL((props) => {
-    const queryParsedURL = props.queryParsedURL;
+const PostsSearch = withQueryParsedURL(({ queryParsedURL, scrollValue, height }) => {
     const searchTerm = queryParsedURL.search_term;
     const metadataTerm = queryParsedURL.metadata_term || ``;
     const locations = (queryParsedURL.locations || ``).split(`,`);
@@ -141,8 +140,6 @@ const PostsSearch = withQueryParsedURL((props) => {
         notifyOnNetworkStatusChange: true,
         fetchPolicy: `cache-and-network`
     });
-    const scrollValue = props.scrollValue;
-    const height = props.height;
     if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
         if (prevScrollValue !== scrollValue)
             setPageNumber(pageNumber + 1);

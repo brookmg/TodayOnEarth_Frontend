@@ -3,22 +3,22 @@ import AnchorButton from "./AnchorButton";
 import { isBrowser } from "../../utils";
 
 
-const ParseLinks = (props) => {
-    if (!props.children) return null
+const ParseLinks = ({ children, sourceLink }) => {
+    if (!children) return null
 
     const openLink = (url) => isBrowser() && window.open(url, `_blank`)
     const handleURLClick = (e) => { openLink(e.target.href) }
     const handleHashTagClick = (e) => { openLink(e.target.href) }
     const handleUsernameClick = (e) => { openLink(e.target.href) }
     const getUserNameUrl = (usernameWithoutAt) => (
-        props.sourceLink &&
-            props.sourceLink.includes(`instagram.com`) ?
+        sourceLink &&
+            sourceLink.includes(`instagram.com`) ?
             `https://www.instagram.com/${usernameWithoutAt}` :
             `https://www.twitter.com/${usernameWithoutAt}`
     )
 
     const usernameRegex = /(@[a-zA-Z0-9_.]+)/gi;
-    let parts = props.children.split(usernameRegex);
+    let parts = children.split(usernameRegex);
 
     for (let i = 0; i < parts.length; i++) {
         let part = parts[i]

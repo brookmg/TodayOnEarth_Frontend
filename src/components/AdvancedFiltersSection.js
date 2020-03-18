@@ -17,7 +17,7 @@ const StyledFlex1Div = styled.div`
     flex: 1;
 `
 
-const AdvancedFiltersSection = (props) => {
+const AdvancedFiltersSection = ({ locations: pLocations, isAdvancedFilterCollapsed, searchTerm, metadataTerm, startTime: sTime, endTime: eTime }) => {
     const handleAdvancedFilterButtonClick = () => {
         setAdvancedFiltersCollapsed(!isAdvancedFiltersCollapsed);
     };
@@ -41,14 +41,14 @@ const AdvancedFiltersSection = (props) => {
     };
     const locations = [`Africa`, `Europe`, `Asia`,];
     const initialCheckedItems = {};
-    if (props.locations)
-        props.locations.forEach(e => initialCheckedItems[e] = true);
-    const [isAdvancedFiltersCollapsed, setAdvancedFiltersCollapsed] = React.useState(props.isAdvancedFilterCollapsed);
-    const [searchFilterSearchBar, setFilterSearchBar] = React.useState(props.searchTerm);
-    const [metadataFilter, setMetadataFilter] = React.useState(props.metadataTerm);
+    if (pLocations)
+        pLocations.forEach(e => initialCheckedItems[e] = true);
+    const [isAdvancedFiltersCollapsed, setAdvancedFiltersCollapsed] = React.useState(isAdvancedFilterCollapsed);
+    const [searchFilterSearchBar, setFilterSearchBar] = React.useState(searchTerm);
+    const [metadataFilter, setMetadataFilter] = React.useState(metadataTerm);
     const [checkedItems, setCheckedItems] = React.useState(initialCheckedItems);
-    const [startTime, setStartTime] = React.useState(convertDateToInputFormat(props.startTime));
-    const [endTime, setEndTime] = React.useState(convertDateToInputFormat(props.endTime || Date.now()));
+    const [startTime, setStartTime] = React.useState(convertDateToInputFormat(sTime));
+    const [endTime, setEndTime] = React.useState(convertDateToInputFormat(eTime || Date.now()));
     return (<div>
 
         <Button onClick={handleAdvancedFilterButtonClick}>

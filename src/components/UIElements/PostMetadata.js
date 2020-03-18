@@ -3,11 +3,10 @@ import Margin from "../CompoundComponents/Margin";
 import { Badge } from "shards-react";
 
 
-const PostMetadata = (props) => {
-    const communityInteraction = props.communityInteraction
+const PostMetadata = ({ communityInteraction, sourceLink }) => {
     if (!communityInteraction) return null
 
-    const isInstagram = props.sourceLink && props.sourceLink.includes(`https://www.instagram.com`)
+    const isInstagram = sourceLink && sourceLink.includes(`https://www.instagram.com`)
     const instagramBG = `linear-gradient(to right bottom, #ff512f, #dd2476)`
 
     return (
