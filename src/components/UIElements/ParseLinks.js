@@ -1,6 +1,6 @@
-import React from 'react';
-import AnchorButton from './AnchorButton';
-import { isBrowser } from '../../utils';
+import React from "react";
+import AnchorButton from "./AnchorButton";
+import { isBrowser } from "../../utils";
 
 
 const ParseLinks = (props) => {

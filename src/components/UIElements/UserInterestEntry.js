@@ -1,15 +1,15 @@
 import React from "react";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 import styled from "styled-components";
 import Margin from "../CompoundComponents/Margin";
 import ThemePalletteContext from "../Contexts/ThemePalletteContext";
-import ButtonInterest from './ButtonInterest';
-import ThemedCard from './ThemedCard';
+import ButtonInterest from "./ButtonInterest";
+import ThemedCard from "./ThemedCard";
 import ThemedCardTitle from "./ThemedCardTitle";
 import ButtonDark from "./ButtonDark";
 import ButtonSuccess from "./ButtonSuccess";
 import { toast } from "react-toastify";
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { isLoggedIn } from "../../services/auth";
 import { removeRedundantWhitespace, isBrowser } from "../../utils";
 import {

@@ -1,9 +1,9 @@
 import React from "react";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 import styled from "styled-components";
 import ThemePalletteContext from "./Contexts/ThemePalletteContext";
-import { useQuery } from '@apollo/react-hooks';
-import { Radar } from 'react-chartjs-2';
+import { useQuery } from "@apollo/react-hooks";
+import { Radar } from "react-chartjs-2";
 
 
 const GET_POST_RELEVANCE = gql`

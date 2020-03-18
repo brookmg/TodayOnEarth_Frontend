@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React from "react";
 import ThemePalletteContext from "../Contexts/ThemePalletteContext";
 import { Card } from "shards-react";
 

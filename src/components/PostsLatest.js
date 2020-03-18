@@ -1,13 +1,13 @@
 import React from "react";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 import styled from "styled-components";
-import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
-import PostHolderCard from './UIElements/PostHolderCard';
+import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
+import PostHolderCard from "./UIElements/PostHolderCard";
 import Margin from "./CompoundComponents/Margin";
 import ThemePalletteContext from "./Contexts/ThemePalletteContext";
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from "@apollo/react-hooks";
 import { FormSelect, FormCheckbox } from "shards-react";
-import { getIfAvailable, ellipsedSubstring } from '../utils';
+import { getIfAvailable, ellipsedSubstring } from "../utils";
 
 
 const LATEST_POSTS_QUERY = gql`

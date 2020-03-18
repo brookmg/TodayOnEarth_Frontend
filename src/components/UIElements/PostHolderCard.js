@@ -1,16 +1,16 @@
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext";
-import Margin from '../CompoundComponents/Margin';
-import Image from './Image';
+import Margin from "../CompoundComponents/Margin";
+import Image from "./Image";
 import PostMetadata from "./PostMetadata";
-import ParseLinks from './ParseLinks';
-import ThemedCard from './ThemedCard';
-import ThemedCardTitle from './ThemedCardTitle';
-import ButtonDark from './ButtonDark';
-import PostInteraction from './PostInteraction';
-import ThemedRelevanceChart from '../ThemedRelevanceChart';
+import ParseLinks from "./ParseLinks";
+import ThemedCard from "./ThemedCard";
+import ThemedCardTitle from "./ThemedCardTitle";
+import ButtonDark from "./ButtonDark";
+import PostInteraction from "./PostInteraction";
+import ThemedRelevanceChart from "../ThemedRelevanceChart";
 import { Link } from "gatsby";
 import {
     CardBody,

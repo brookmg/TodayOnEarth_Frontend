@@ -1,5 +1,5 @@
 import React from "react";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 import styled from "styled-components";
 import AnchorButton from "./UIElements/AnchorButton";
 import withQueryParsedURL from "./HOCs/withQueryParsedURL";
@@ -9,7 +9,7 @@ import ParseLinks from "./UIElements/ParseLinks";
 import ThemedRelevanceChart from "./ThemedRelevanceChart";
 import PostInteraction from "./UIElements/PostInteraction";
 import { Tooltip } from "shards-react";
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../utils";
 
 

@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import gql from 'graphql-tag';
-import AddIcon from '@material-ui/icons/Add';
+import gql from "graphql-tag";
+import AddIcon from "@material-ui/icons/Add";
 import Margin from "./CompoundComponents/Margin";
 import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
 import ButtonCustom from "./UIElements/ButtonCustom";
 import ThemePalletteContext from "./Contexts/ThemePalletteContext";
 import AnchorButton from "./UIElements/AnchorButton";
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { CardBody, FormCheckbox, FormInput, FormSelect } from "shards-react";
 import { toast } from "react-toastify";
 import { isLoggedIn } from "../services/auth";

@@ -1,13 +1,13 @@
 import React from "react";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 import styled from "styled-components";
-import EmojiEmotionsSharpIcon from '@material-ui/icons/EmojiEmotionsSharp';
+import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "./UIElements/PostHolderCard";
 import withQueryParsedURL from "./HOCs/withQueryParsedURL";
 import Margin from "./CompoundComponents/Margin";
 import AdvancedFiltersSection from "./AdvancedFiltersSection";
 import { FormCheckbox, FormSelect } from "shards-react";
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../utils";
 
 
