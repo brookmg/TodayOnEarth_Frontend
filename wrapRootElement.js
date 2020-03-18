@@ -1,8 +1,8 @@
 import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { AuthProvider } from "./src/components/Contexts/AuthContext";
-import { ThemeProvider } from "./src/components/Contexts/ThemePalletteContext";
-import { ScreenSizeProvider } from "./src/components/Contexts/ScreenSizeContext";
+import { AuthProvider } from "./src/contexts/AuthContext";
+import { ThemeProvider } from "./src/contexts/ThemePalletteContext";
+import { ScreenSizeProvider } from "./src/contexts/ScreenSizeContext";
 import { client } from "./src/apollo/client";
 
 

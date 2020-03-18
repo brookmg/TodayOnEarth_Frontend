@@ -3,14 +3,14 @@ import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import styled from "styled-components";
 import Margin from "./CompoundComponents/Margin";
-import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import ButtonDark from "./UIElements/ButtonDark";
 import ButtonSuccess from "./UIElements/ButtonSuccess";
 import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
 import { CardBody, FormInput, FormSelect } from "shards-react";
 import { isBrowser } from "../utils";
-import DefaultThemeDefinition, { availableFonts } from "./Contexts/ThemePalletteContext/DefaultThemeDefinition";
+import DefaultThemeDefinition, { availableFonts } from "../contexts/ThemePalletteContext/DefaultThemeDefinition";
 
 
 

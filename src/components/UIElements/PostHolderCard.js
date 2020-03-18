@@ -1,7 +1,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import Margin from "../CompoundComponents/Margin";
 import Image from "./Image";
 import PostMetadata from "./PostMetadata";

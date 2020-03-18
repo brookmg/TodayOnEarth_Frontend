@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultThemeDefinition from "./DefaultThemeDefinition";
-import { isBrowser } from "../../../utils";
+import { isBrowser } from "../../utils";
 
 
 const localStorageTheme = JSON.parse(!isBrowser() ? `{}` : localStorage.getItem(`theme`) || `{}`)

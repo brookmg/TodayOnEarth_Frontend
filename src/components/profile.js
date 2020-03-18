@@ -1,5 +1,5 @@
 import React from "react";
-import AuthContext from "./Contexts/AuthContext";
+import AuthContext from "../contexts/AuthContext";
 import SEO from "../components/seo";
 
 

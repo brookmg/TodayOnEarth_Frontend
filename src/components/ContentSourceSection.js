@@ -6,7 +6,7 @@ import Margin from "./CompoundComponents/Margin";
 import ThemedCard from "./UIElements/ThemedCard";
 import ThemedCardTitle from "./UIElements/ThemedCardTitle";
 import ButtonCustom from "./UIElements/ButtonCustom";
-import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import AnchorButton from "./UIElements/AnchorButton";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { CardBody, FormCheckbox, FormInput, FormSelect } from "shards-react";

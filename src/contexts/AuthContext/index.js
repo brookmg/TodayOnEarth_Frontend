@@ -1,6 +1,6 @@
 import React from "react";
 import userSchemaDefinition from "./userSchemaDefinition";
-import { getUser } from "../../../services/auth";
+import { getUser } from "../../services/auth";
 
 
 const AuthContext = React.createContext({

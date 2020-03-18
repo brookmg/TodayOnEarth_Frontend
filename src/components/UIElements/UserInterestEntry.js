@@ -2,7 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Margin from "../CompoundComponents/Margin";
-import ThemePalletteContext from "../Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import ButtonInterest from "./ButtonInterest";
 import ThemedCard from "./ThemedCard";
 import ThemedCardTitle from "./ThemedCardTitle";

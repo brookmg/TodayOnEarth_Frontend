@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
 import { Radar } from "react-chartjs-2";
 

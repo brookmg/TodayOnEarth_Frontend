@@ -1,6 +1,6 @@
 
 import React from "react";
-import ThemePalletteContext from "../Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import { CardTitle } from "shards-react";
 
 

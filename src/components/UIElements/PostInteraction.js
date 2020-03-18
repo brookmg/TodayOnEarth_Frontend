@@ -4,7 +4,7 @@ import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import gql from "graphql-tag";
 import ButtonCustom from "./ButtonCustom";
-import ThemePalletteContext from "../../components/Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import AnchorButton from "./AnchorButton";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";

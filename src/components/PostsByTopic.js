@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PostHolderCard from "./UIElements/PostHolderCard";
 import Margin from "./CompoundComponents/Margin";
 import ButtonInterest from "./UIElements/ButtonInterest";
-import ThemePalletteContext from "./Contexts/ThemePalletteContext";
+import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
 import { FormCheckbox, FormInput } from "shards-react";
 import {
