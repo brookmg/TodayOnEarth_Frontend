@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import AuthContext from "../contexts/AuthContext";
-import ButtonSignInWith from "./UIElements/ButtonSignInWith";
+import ButtonSignInWith from "./ButtonSignInWith";
 import Margin from "./CompoundComponents/Margin";
-import AnchorButton from "./UIElements/AnchorButton";
-import ButtonSuccess from "./UIElements/ButtonSuccess";
+import AnchorButton from "./AnchorButton";
+import ButtonSuccess from "./ButtonSuccess";
 import ScreenSizeContext from "../contexts/ScreenSizeContext";
 import { FormInput } from "shards-react";
 import { navigate } from "gatsby";

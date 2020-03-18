@@ -1,4 +1,4 @@
-import { isBrowser } from "../../utils";
+import { isBrowser } from "../utils";
 
 export const intializeClickEffect = (canvasRef, mouseClickPosition) => {
     if (!isBrowser()) return

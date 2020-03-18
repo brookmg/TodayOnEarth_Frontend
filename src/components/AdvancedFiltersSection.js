@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Margin from "./CompoundComponents/Margin";
-import ThemedCard from "./UIElements/ThemedCard";
-import ThemedCardTitle from "./UIElements/ThemedCardTitle";
-import ButtonSuccess from "./UIElements/ButtonSuccess";
+import ThemedCard from "./ThemedCard";
+import ThemedCardTitle from "./ThemedCardTitle";
+import ButtonSuccess from "./ButtonSuccess";
 import { navigate } from "gatsby";
 import { Collapse, CardBody, Button, FormInput, FormCheckbox } from "shards-react";
 import { convertDateToInputFormat } from "../utils";

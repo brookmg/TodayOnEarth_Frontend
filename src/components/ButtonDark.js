@@ -1,9 +1,9 @@
 import React from "react";
-import ThemePalletteContext from "../../contexts/ThemePalletteContext";
+import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import { Button } from "shards-react";
 
 
-const ButtonSuccess = (props) => {
+const ButtonDark = (props) => {
     const theme = React.useContext(ThemePalletteContext)
 
     return (
@@ -11,8 +11,10 @@ const ButtonSuccess = (props) => {
             style={{
                 ...props.style,
                 color: theme.color_background,
-            }} theme={`success`}> {props.children} </Button>
+                backgroundColor: theme.color_text,
+                borderColor: theme.color_text
+            }}> {props.children} </Button>
     );
 }
 
-export default ButtonSuccess;
+export default ButtonDark;

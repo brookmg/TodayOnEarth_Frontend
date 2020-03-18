@@ -12,7 +12,7 @@ import ScreenSizeContext from "../contexts/ScreenSizeContext";
 import { useStaticQuery, graphql } from "gatsby";
 import { ToastContainer, toast } from "react-toastify";
 import { useSubscription } from "@apollo/react-hooks";
-import { intializeClickEffect } from "./UIElements/ClickEffect";
+import { intializeClickEffect } from "./ClickEffect";
 import { isBrowser } from "../utils";
 
 

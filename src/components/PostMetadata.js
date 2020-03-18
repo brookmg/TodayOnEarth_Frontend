@@ -1,5 +1,5 @@
 import React from "react";
-import Margin from "../CompoundComponents/Margin";
+import Margin from "./CompoundComponents/Margin";
 import { Badge } from "shards-react";
 
 

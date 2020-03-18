@@ -1,5 +1,5 @@
 import React from "react";
-import ThemePalletteContext from "../../contexts/ThemePalletteContext";
+import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import styled from "styled-components";
 import { Button, } from "shards-react";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import PostHolderCard from "./UIElements/PostHolderCard";
+import PostHolderCard from "./PostHolderCard";
 import Margin from "./CompoundComponents/Margin";
 import { FormCheckbox, FormInput } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";

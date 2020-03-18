@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
-import PostHolderCard from "./UIElements/PostHolderCard";
+import PostHolderCard from "./PostHolderCard";
 import { FormSelect, FormCheckbox } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../utils";

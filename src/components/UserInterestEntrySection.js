@@ -1,4 +1,4 @@
-import UserInterestEntry from "./UIElements/UserInterestEntry";
+import UserInterestEntry from "./UserInterestEntry";
 
 
 export default UserInterestEntry

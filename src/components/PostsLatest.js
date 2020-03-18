@@ -2,7 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
-import PostHolderCard from "./UIElements/PostHolderCard";
+import PostHolderCard from "./PostHolderCard";
 import Margin from "./CompoundComponents/Margin";
 import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";

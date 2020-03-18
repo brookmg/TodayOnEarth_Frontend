@@ -1,9 +1,9 @@
 import React from "react";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import PostHolderCard from "./UIElements/PostHolderCard";
+import PostHolderCard from "./PostHolderCard";
 import Margin from "./CompoundComponents/Margin";
-import ButtonInterest from "./UIElements/ButtonInterest";
+import ButtonInterest from "./ButtonInterest";
 import ThemePalletteContext from "../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
 import { FormCheckbox, FormInput } from "shards-react";

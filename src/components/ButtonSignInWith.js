@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ButtonCustom from "./ButtonCustom";
-import Margin from "../CompoundComponents/Margin";
+import Margin from "./CompoundComponents/Margin";
 
 
 const StyledAnchor = styled.a`
