@@ -1,7 +1,8 @@
 import React from "react";
-import { isLoggedIn } from "../services/auth";
+import withRunTimeLoaded from "../components/HOCs/withRunTimeLoaded";
 import { navigate } from "gatsby";
 import { isBrowser } from "../utils";
+import { isLoggedIn } from "../services/auth";
 
 
 const IndexPage = () => {
