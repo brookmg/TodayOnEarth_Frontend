@@ -26,7 +26,7 @@ const ContentSourceSection = () => {
         setCheckedItems({ ...checkedItems, [providerName]: checkedResult });
 
         if (!checkedResult) {
-            removeProvider({ variables: { provider: providerName, source: providerSource } })
+            removeProvider({ variables: { provider: providerName, source: providerSource.toLowerCase() } })
         }
     };
 
@@ -40,7 +40,7 @@ const ContentSourceSection = () => {
     } = useQuery(GET_ALL_PROVIDERS,
         {
             variables: {
-                str: searchPhrase
+                str: searchPhrase.toLowerCase()
             },
             skip: !searchPhrase
         }
@@ -89,7 +89,7 @@ const ContentSourceSection = () => {
 
         addProvider({
             variables: {
-                source: insertSourceText,
+                source: insertSourceText.toLowerCase(),
                 provider: insertProviderText,
             }
         })
@@ -99,7 +99,7 @@ const ContentSourceSection = () => {
     const handleProviderMouseDown = (provider) => addProvider({
         variables: {
             provider: provider.provider,
-            source: provider.source,
+            source: provider.source.toLowerCase(),
         }
     })
 
@@ -150,7 +150,7 @@ const ContentSourceSection = () => {
                                                                 <StyledHiddenIcon className={`pIcon`}><AddIcon /></StyledHiddenIcon>
                                                                 <div>
                                                                     <div>{e.provider}</div>
-                                                                    <div style={{ color: theme.color_text_faded }}>{e.source}</div>
+                                                                    <div style={{ color: theme.color_text_faded }}>{`${e.source[0].toUpperCase()}${e.source.substring(1)}`}</div>
                                                                 </div>
                                                             </StyledDisplayAlignCenterFlexDiv>
                                                         </StyledP>)
@@ -200,7 +200,7 @@ const ContentSourceSection = () => {
                                             userContentSources.map(e => (<FormCheckbox inline key={e.provider} checked={checkedItems[e.provider]} onChange={ev => handleCheckBoxChange(ev, e)}>
                                                 <div>
                                                     <div>{e.provider}</div>
-                                                    <div style={{ color: theme.color_text_faded }}>{e.source}</div>
+                                                    <div style={{ color: theme.color_text_faded }}>{`${e.source[0].toUpperCase()}${e.source.substring(1)}`}</div>
                                                 </div>
                                             </FormCheckbox>))}
                                     </div>
