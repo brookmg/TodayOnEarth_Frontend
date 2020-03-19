@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
 import { FormCheckbox, FormInput } from "shards-react";
@@ -7,100 +6,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { convertDateToInputFormat } from "../../utils";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
 import { StyledColumnDiv, StyledFlexDiv, StyledLeftAlignDiv, StyledFlex1CenteredDiv, StyledFlex1CenteredSpan } from "./styles";
+import { RELATIVE_COMMUNITY_INTERACTION_QUERY, ABSOLUTE_COMMUNITY_INTERACTION_QUERY } from "./queries";
 
-
-const ABSOLUTE_COMMUNITY_INTERACTION_QUERY = gql`
-
-query getPostsByAbsoluteCommunityInteraction(
-  $filter: [FilterQuery!]!
-  $range: Int
-  $semantics: Boolean
-  $workingOn: [String!]!
-) {
-  getPostsSortedByCommunityInteraction(
-    page: 0
-    jsonQuery: $filter
-    range: $range
-    semantics: $semantics
-    workingOn: $workingOn
-  ) {
-      postid,
-      title,
-      provider,
-      source_link,
-      published_on,
-      metadata {
-        community_interaction {
-          views
-          likes
-          replies
-          retweets
-          comments
-          video_views
-        }
-      
-        ... on TelegramMetadata{
-          message{
-            image{
-              src
-            }
-          }
-        }
-          ... on InstagramMetadata{
-          post{
-            thumbnail_image
-          }
-        }
-      },
-    }
-}
-`;
-const RELATIVE_COMMUNITY_INTERACTION_QUERY = gql`
-
-query getPostsByRelativeCommunityInteraction(
-  $filter: [FilterQuery!]!
-  $range: Int
-  $semantics: Boolean
-  $workingOn: [String!]!
-) {
-  getPostsSortedByRelativeCommunityInteraction(
-    page: 0
-    jsonQuery: $filter
-    range: $range
-    semantics: $semantics
-    workingOn: $workingOn
-  ) {
-      postid,
-      title,
-      provider,
-      source_link,
-      published_on,
-      metadata {
-        community_interaction {
-          views
-          likes
-          replies
-          retweets
-          comments
-          video_views
-        }
-      
-        ... on TelegramMetadata{
-          message{
-            image{
-              src
-            }
-          }
-        }
-          ... on InstagramMetadata{
-          post{
-            thumbnail_image
-          }
-        }
-      },
-    }
-}
-`;
 
 const DEFAULT_COMMUNITY_INTERACTIONS = {
     'Views (t.me)': true,

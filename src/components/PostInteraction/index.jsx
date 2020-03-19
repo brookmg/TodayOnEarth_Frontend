@@ -1,43 +1,11 @@
 import React from "react";
-import gql from "graphql-tag";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import AnchorButton from "../AnchorButton";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";
 import { StyledDiv, StyledMarginButtonCustom, StyledNotInterestedIcon, StyledAddAlertIcon } from "./styles";
+import { POST_UNLIKED_MUTATION, POST_UNDISLIKED_MUTATION, POST_LIKED_MUTATION, POST_DISLIKED_MUTATION } from "./queries";
 
-
-const POST_LIKED_MUTATION = gql`
-
-mutation setPostLiked($postid: Int){
-  postLiked(postId:$postid)
-}
-
-`;
-
-const POST_UNLIKED_MUTATION = gql`
-
-mutation setUnPostLiked($postid: Int){
-  postUnLiked(postId:$postid)
-}
-
-`;
-
-const POST_DISLIKED_MUTATION = gql`
-
-mutation setPostDisLiked($postid: Int){
-  postDisLiked(postId:$postid)
-}
-
-`;
-
-const POST_UNDISLIKED_MUTATION = gql`
-
-mutation setPostUnDisLiked($postid: Int){
-  postUnDisLiked(postId:$postid)
-}
-
-`;
 
 const PostInteraction = ({ postid }) => {
     const theme = React.useContext(ThemePalletteContext);

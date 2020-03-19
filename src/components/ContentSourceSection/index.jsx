@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import AddIcon from "@material-ui/icons/Add";
 import Margin from "../CompoundComponents/Margin";
 import ThemedCard from "../ThemedCard";
@@ -11,55 +10,8 @@ import { CardBody, FormCheckbox, FormInput } from "shards-react";
 import { toast } from "react-toastify";
 import { isLoggedIn } from "../../services/auth";
 import { StyledRelativeDiv, StyledFloatingDiv, StyledDisplayCenterFlexDiv, StyledP, StyledDisplayAlignCenterFlexDiv, StyledHiddenIcon, StyledDisplayFlexDiv, StyledFlex1Div, StyledSelect, StyledMarginButtonCustom } from "./styles";
+import { GET_USER_PROVIDERS, GET_ALL_PROVIDERS, ADD_PROVIDER, REMOVE_PROVIDER } from "./queries";
 
-
-const GET_USER_PROVIDERS = gql`
-
-{
-  getProvidersForUser{
-    provider
-    source
-  }
-}
-`
-
-const ADD_PROVIDER = gql`
-
-mutation addProvider($source: String!,$provider: String!){
-  addProvider(provider: { provider: $provider, source: $source, frequency: "" }) {
-    provider
-  }
-}
-`
-
-const REMOVE_PROVIDER = gql`
-
-mutation removeProvider($provider: String!, $source: String!){
-  removeProvider(provider:{
-    provider:$provider,
-    source:$source,
-    frequency:""
-  })
-}
-`
-
-const GET_ALL_PROVIDERS = gql`
-
-query getAllProviders($str: String){
-  getProviders(
-    page:0,
-    range: 10,
-    order: "ASC",
-    orderBy: "source",
-    filters:[
-      {provider:$str, connector: "OR"},
-      {source:$str, connector: "OR"},
-    ]){
-    source
-    provider
-  }
-}
-`
 
 const AVAILABLE_SOURCES = [`Facebook`, `Instagram`, `Telegram`, `Twitter`]
 

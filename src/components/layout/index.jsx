@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import Header from "../header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
@@ -14,16 +13,8 @@ import { useSubscription } from "@apollo/react-hooks";
 import { intializeClickEffect } from "../ClickEffect";
 import { isBrowser } from "../../utils";
 import { StyledToastContainer, StyledCanvas, StyledFlexDirectionRowDiv, StyledFlex3OverflowYDiv, StyledHeaderDiv } from "./styles";
+import { POSTS_SUBSCRIPTION } from "./queries";
 
-
-const POSTS_SUBSCRIPTION = gql`
-
-subscription{
-  postAdded{
-    title
-  }
-}
-`;
 
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)

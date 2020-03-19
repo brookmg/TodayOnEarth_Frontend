@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
@@ -8,87 +7,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { FormSelect, FormCheckbox } from "shards-react";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
 import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
+import { LATEST_POSTS_QUERY, POST_SUBSCRIPTION } from "./queries";
 
-
-const LATEST_POSTS_QUERY = gql`
-
-query getLatestPaginatedPosts(
-  $page: Int
-  $postsPerPage: Int
-  $filter: [FilterQuery!]!,
-  $orderBy: String,
-  $order: String
-) {
-  getPostCustomized(page: $page, range: $postsPerPage, jsonQuery: $filter, orderBy: $orderBy, order: $order) {
-    postid,
-    title,
-    provider,
-    source_link,
-    published_on,
-    metadata {
-      community_interaction {
-        views
-        likes
-        replies
-        retweets
-        comments
-        video_views
-      }
-    
-      ... on TelegramMetadata{
-        message{
-          image{
-            src
-          }
-        }
-      }
-       ... on InstagramMetadata{
-        post{
-          thumbnail_image
-        }
-      }
-      
-    },
-  }
-}
-`;
-
-const POST_SUBSCRIPTION = gql`
-
-subscription getNewPosts{
-  postAdded{
-    postid,
-    title,
-    provider,
-    source_link,
-    published_on,
-    metadata {
-      community_interaction {
-        views
-        likes
-        replies
-        retweets
-        comments
-        video_views
-      }
-    
-      ... on TelegramMetadata{
-        message{
-          image{
-            src
-          }
-        }
-      }
-       ... on InstagramMetadata{
-        post{
-          thumbnail_image
-        }
-      }
-    },
-  }
-}
-
-`;
 
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 const DEFAULT_POST_SOURCES = {

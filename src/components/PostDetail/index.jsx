@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import AnchorButton from "../AnchorButton";
 import withQueryParsedURL from "../HOCs/withQueryParsedURL";
 import Image from "../Image";
@@ -11,55 +10,8 @@ import { Tooltip } from "shards-react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
 import { StyledRelativeDiv, StyledCenterTextDiv, StyledRoundDiv, StyledImage, StyledDisplayMarginFlex, StyledDisplayFlex } from "./styles";
+import { POST_OPENED_MUTATION, GET_POST_DETAIL } from "./queries";
 
-
-const GET_POST_DETAIL = gql`
-
-query fetchPostDetail($postid: Int!) {
-  getPost(id: $postid) {
-    postid
-    title
-    body,
-    provider,
-    source_link
-    published_on
-    metadata{
-      community_interaction {
-        views
-        likes
-        replies
-        retweets
-        comments
-        video_views
-      }
-      ... on TelegramMetadata{
-        message{
-          image{
-            src
-          }
-        }
-      }
-      ... on InstagramMetadata{
-        post{
-          thumbnail_image
-        }
-      }
-    }
-    keywords{
-      keyword
-    }
-  }
-}
-
-`;
-
-const POST_OPENED_MUTATION = gql`
-
-mutation setPostOpened($postid: Int){
-  postOpened(postId:$postid)
-}
-
-`;
 
 const PostDetail = withQueryParsedURL(({queryParsedURL}) => {
     const handleShareClick = (e) => {

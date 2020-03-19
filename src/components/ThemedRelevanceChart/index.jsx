@@ -1,21 +1,10 @@
 import React from "react";
-import gql from "graphql-tag";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
 import { Radar } from "react-chartjs-2";
 import { StyledDiv } from "./styles";
+import { GET_POST_RELEVANCE } from "./queries";
 
-
-const GET_POST_RELEVANCE = gql`
-
-query getPostRelevance($postId:Int!){
-    getPostRelevancePerUserInterests(postId:$postId, semantics:true){
-    interest
-    score
-  }
-}
-
-`;
 
 const ThemedRelevanceChart = ({ postId }) => {
     const theme = React.useContext(ThemePalletteContext);

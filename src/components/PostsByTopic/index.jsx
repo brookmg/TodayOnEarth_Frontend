@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
 import ButtonInterest from "../ButtonInterest";
@@ -13,55 +12,8 @@ import {
     convertDateToInputFormat
 } from "../../utils";
 import { StyledColumnDiv, StyledDisplayFlexDiv, StyledLeftAlignDiv, StyledFontSizeDiv, StyledFlex1CenterDiv, StyledFlex1CenterFullWidthDiv, StyledP } from "./styles";
+import { GET_POSTS_BY_TOPIC_QUERY } from "./queries";
 
-
-const GET_POSTS_BY_TOPIC_QUERY = gql`
-
-
-query getPostsByTopic(
-  $filter: [FilterQuery!]!
-  $range: Int
-  $semantics: Boolean
-  $keywords: [String!]!
-) {
-  getPostsSortedByCustomKeywords(
-    page: 0
-    jsonQuery: $filter
-    range: $range
-    semantics: $semantics
-    keywords: $keywords
-  ) {
-    postid
-    title
-    provider
-    source_link
-    published_on
-    metadata {
-      community_interaction {
-        views
-        likes
-        replies
-        retweets
-        comments
-        video_views
-      }
-
-      ... on TelegramMetadata {
-        message {
-          image {
-            src
-          }
-        }
-      }
-      ... on InstagramMetadata {
-        post {
-          thumbnail_image
-        }
-      }
-    }
-  }
-}
-`;
 
 const PostsByTopic = (props) => {
     const theme = React.useContext(ThemePalletteContext);

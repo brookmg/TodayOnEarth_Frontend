@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import withQueryParsedURL from "../HOCs/withQueryParsedURL";
@@ -9,51 +8,8 @@ import { FormCheckbox, FormSelect } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
 import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
+import { GET_POSTS_FILTERED } from "./queries";
 
-
-const GET_POSTS_FILTERED = gql`
-
-query getPaginatedPostsFiltered(
-  $page: Int
-  $postsPerPage: Int
-  $filter: [FilterQuery!]!
-) {
-  getPostCustomized(page: $page, range: $postsPerPage, jsonQuery: $filter) {
-    postid
-    title
-    body,
-    provider,
-    source_link
-    published_on
-    metadata{
-      community_interaction {
-        views
-        likes
-        replies
-        retweets
-        comments
-        video_views
-      }
-      ... on TelegramMetadata{
-        message{
-          image{
-            src
-          }
-        }
-      }
-      ... on InstagramMetadata{
-        post{
-          thumbnail_image
-        }
-      }
-    }
-    keywords{
-      keyword
-    }
-  }
-}
-
-`;
 
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 const DEFAULT_POST_SOURCES = {

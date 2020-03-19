@@ -1,21 +1,10 @@
 import React from "react";
-import gql from "graphql-tag";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
 import { Radar } from "react-chartjs-2";
 import { StyledDiv } from "./styles";
+import { GET_POST_TOPICS } from "./queries";
 
-
-const GET_POST_TOPICS = gql`
-
-query getPostTopics($postId:Int){
-  getPostTopics(postId:$postId, semantics:true){
-    interest
-    score
-  }
-}
-
-`;
 
 const ThemedTopicChart = ({ postId }) => {
     const theme = React.useContext(ThemePalletteContext);

@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import ButtonSuccess from "../ButtonSuccess";
 import Margin from "../CompoundComponents/Margin";
 import AuthContext from "../../contexts/AuthContext";
@@ -11,45 +10,9 @@ import { navigate } from "gatsby";
 import { isLoggedIn } from "../../services/auth";
 import { isBrowser } from "../../utils";
 import { StyledDisplayFlexDiv, StyledFlex1Div, StyledFlexColumn3Div, StyledDisplayFlex1Div, StyledFormTextarea, StyledFlexRowReverseDiv } from "./styles";
+import { CREATE_POST_MUTATION } from "./queries";
 
 
-//TODO: remove un-needed console.log()
-const CREATE_POST_MUTATION = gql`
-
-mutation createPost(
-  $text: String!
-  $upload: Upload
-  $telegram: Boolean
-  $linkedin: Boolean
-  $twitter: Boolean
-  $channel: String
-  $facebook: Boolean
-  $pageUrl: String  
-) {
-  postOnToSocials(
-    text: $text
-    upload: $upload
-    telegram: $telegram
-    linkedin: $linkedin
-    facebook: $facebook
-    pageUrl: $pageUrl  
-    twitter: $twitter
-    channel: $channel
-  ){
-    text
-    facebook
-    telegram
-    linkedin
-    twitter
-    errors {
-        facebook
-        telegram
-        linkedin
-        twitter
-    }  
-  }
-}
-`;
 const DEFAULT_PLATFORMS_TO_POST_ON = {
     'Telegram': true,
     'Facebook': true,
@@ -107,7 +70,7 @@ const CreatePost = () => {
     };
     if (isBrowser() && !isLoggedIn())
         navigate(`/app/login`);
-    console.log(`GQL response`, data);
+
     return (<div>
         <h2>Create Post</h2>
         <StyledDisplayFlexDiv>
@@ -138,7 +101,6 @@ const CreatePost = () => {
                     </StyledDisplayFlex1Div>
                     <span>Image or file to upload: <FormInput type={`file`} onChange={({ target: { files } }) => {
                         const file = files[0];
-                        console.log(file);
                         file && setFileToUpload(file);
                     }} /></span>
                     <StyledFlexRowReverseDiv>

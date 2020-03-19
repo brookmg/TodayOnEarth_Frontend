@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import Margin from "../CompoundComponents/Margin";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import ButtonInterest from "../ButtonInterest";
@@ -18,28 +17,8 @@ import {
     FormInput
 } from "shards-react";
 import { StyledDiv } from "./styles";
+import { GET_USER_INTERESTS, UPDATE_USER_INTERESTS } from "./queries";
 
-
-const GET_USER_INTERESTS = gql`
-
-query getUserInterests{
-  getUser{
-    interests{
-      interest
-      score
-    }
-  }
-}
-
-`;
-
-const UPDATE_USER_INTERESTS = gql`
-
-mutation updateInterests($interests:[IInterest]!){
-    cleanUpdateInterestList(interests:$interests)
-}
-
-`;
 
 const UserInterestEntry = (props) => {
     const theme = React.useContext(ThemePalletteContext)

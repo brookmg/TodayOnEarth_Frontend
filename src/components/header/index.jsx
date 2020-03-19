@@ -2,62 +2,15 @@ import React from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
-import styled from "styled-components";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import AnchorButton from "../AnchorButton";
 import AnimatedLink from "../AnimatedLink";
-import NavigationBar from "../NavigationBar";
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { navigate } from "gatsby";
-import { FormInput, Fade } from "shards-react";
+import { FormInput } from "shards-react";
 import { isBrowser } from "../../utils";
+import { StyledHeader, StyledNavigationBar, StyledOverlayDiv, StyledTitleDiv, StyledDisplayFlexDiv, StyledFlex1Margin0H1, StyledAnimatedLink, StyledDisplayFlexCenterTextDiv, StyledFade } from "./styles";
 
-
-const StyledHeader = styled.header`
-    margin-bottom: 1.45rem;
-`
-
-const StyledNavigationBar = styled(NavigationBar)`
-    box-shadow: none;
-    width: 256px;
-    transition: left 0.2s linear;
-`
-
-const StyledOverlayDiv = styled.div`
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 11;
-    display: unset;
-`
-
-const StyledTitleDiv = styled.div`
-    margin: 0 auto;
-    max-width: 960;
-    padding: 1.45rem 1.0875rem;
-`
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledFlex1Margin0H1 = styled.h1`
-    flex: 1;
-    margin: 0;
-`
-
-const StyledDisplayFlexCenterTextDiv = styled(StyledDisplayFlexDiv)`
-    align-items: center;
-`
-
-const StyledFade = styled(Fade)`
-    flex: 1
-`
-
-const StyledAnimatedLink = styled(AnimatedLink)`
-    text-decoration: none;
-`
 
 const Header = ({ siteTitle }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)

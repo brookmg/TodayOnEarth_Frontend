@@ -1,59 +1,12 @@
 import React from "react";
-import gql from "graphql-tag";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import { useQuery } from "@apollo/react-hooks";
 import { FormSelect } from "shards-react";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
 import { StyledDisplayFlexDiv, StyledP } from "./styles";
+import { TRENDING_TODAY_QUERY } from "./queries";
 
-
-const TRENDING_TODAY_QUERY = gql`
-
-query getTodaysTrendingPosts(
-  $page: Int,
-  $range: Int,
-  $filter: [FilterQuery!]!
-  $workingOn: [String!]!
-) {
-  getPostsSortedByCommunityInteraction(
-    page: $page
-    jsonQuery: $filter
-    range: $range
-    semantics: false
-    workingOn: $workingOn
-  ) {
-      postid,
-      title,
-      provider,
-      source_link,
-      published_on,
-      metadata {
-        community_interaction {
-          views
-          likes
-          replies
-          retweets
-          comments
-          video_views
-        }
-      
-        ... on TelegramMetadata{
-          message{
-            image{
-              src
-            }
-          }
-        }
-          ... on InstagramMetadata{
-          post{
-            thumbnail_image
-          }
-        }
-      },
-    }
-}
-`;
 
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
