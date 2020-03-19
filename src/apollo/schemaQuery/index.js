@@ -6,19 +6,19 @@
  * 
  */
 
-const fetch = require('node-fetch');
-const fs = require('fs');
+const fetch = require(`node-fetch`);
+const fs = require(`fs`);
 
 const gqlEndpoint = process.env.SCHEME_DOWNLOADER_GQL_ENDPOINT
 
 if (!gqlEndpoint) {
-  console.log("[WARNING]:", "No SCHEME_DOWNLOADER_GQL_ENDPOINT environment variable provided, will not update apollo schema definitions!")
+  console.log(`[WARNING]:`, `No SCHEME_DOWNLOADER_GQL_ENDPOINT environment variable provided, will not update apollo schema definitions!`)
   return
 }
 
 fetch(`http://localhost:3400/graphql`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+  method: `POST`,
+  headers: { 'Content-Type': `application/json` },
   body: JSON.stringify({
     variables: {},
     query: `
@@ -43,11 +43,11 @@ fetch(`http://localhost:3400/graphql`, {
       type => type.possibleTypes !== null,
     );
     result.data.__schema.types = filteredData;
-    fs.writeFileSync('./src/apollo/schemaQuery/fragmentTypes.json', JSON.stringify(result.data), err => {
+    fs.writeFileSync(`./src/apollo/schemaQuery/fragmentTypes.json`, JSON.stringify(result.data), err => {
       if (err) {
-        console.error('Error writing fragmentTypes file', err);
+        console.error(`Error writing fragmentTypes file`, err);
       } else {
-        console.log('Fragment types successfully extracted!');
+        console.log(`Fragment types successfully extracted!`);
       }
     });
   });

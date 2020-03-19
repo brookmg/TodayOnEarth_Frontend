@@ -6,12 +6,12 @@
  * @param {any} defaultValue 
  * @returns the value for the attribute you requested, or the defaultValue
  */
-export const getIfAvailable = (obj, attribute = "", defaultValue) => {
+export const getIfAvailable = (obj, attribute = ``, defaultValue) => {
 
-    const keys = attribute.split(".")
+    const keys = attribute.split(`.`)
     while (keys.length !== 0) {
         obj = obj[keys.shift()]
-        if (typeof obj === "undefined")
+        if (typeof obj === `undefined`)
             return defaultValue
     }
 
@@ -25,16 +25,16 @@ export const ellipsedSubstring = (str, maxChars = 50) => {
     return str
 }
 
-export const isBrowser = () => typeof window !== "undefined"
+export const isBrowser = () => typeof window !== `undefined`
 
 export const removeRedundantWhitespace = (str) => {
-    return str.replace(/\s+/g, ' ')
+    return str.replace(/\s+/g, ` `)
 }
 
 export const convertDateToInputFormat = (d) => {
     const date = new Date(d)
     try {
-        return date.toISOString().split('T')[0]
+        return date.toISOString().split(`T`)[0]
     }
     catch (e) {
         console.error(e)
@@ -54,8 +54,8 @@ export const isColorDark = (color) => {
         b = color[3];
     } else {
         // If RGB --> Convert it to HEX: http://gist.github.com/983661
-        color = +("0x" + color.slice(1).replace(
-            color.length < 5 && /./g, '$&$&'
+        color = +(`0x` + color.slice(1).replace(
+            color.length < 5 && /./g, `$&$&`
         )
         );
 

@@ -35,6 +35,7 @@ module.exports = {
         precachePages: [`/*`],
       },
     },
-    `gatsby-plugin-transition-link`
+    `gatsby-plugin-transition-link`,
+    `gatsby-plugin-styled-components`
   ],
 }

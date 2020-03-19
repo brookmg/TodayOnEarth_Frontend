@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
-import cookie from 'react-cookies';
+import gql from "graphql-tag";
+import cookie from "react-cookies";
 import { client } from "../apollo/client";
 import { isBrowser } from "../utils";
 
@@ -50,13 +50,13 @@ query getUserInfo{
 
 `
 
-const sessionCookieName = "userId"
+const sessionCookieName = `userId`
 
-export const getToken = () => !isBrowser() ? "" : cookie.load(sessionCookieName)
+export const getToken = () => !isBrowser() ? `` : cookie.load(sessionCookieName)
 
 export const getUser = () => client.query({
     query: GET_USER,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: `no-cache`
 })
 
 export const handleSignIn = (user) => {
@@ -70,7 +70,7 @@ export const handleSignIn = (user) => {
                 }
             }).then(e => {
                 cookie.save(sessionCookieName, e.data.signIn.token,
-                    { path: '/' }
+                    { path: `/` }
                 )
                 client.resetStore()
                 resolve(e)
@@ -89,7 +89,7 @@ export const signOut = () => {
                 mutation: SIGN_OUT_USER,
             }).then(e => {
                 client.resetStore()
-                cookie.remove(sessionCookieName, { path: '/' })
+                cookie.remove(sessionCookieName, { path: `/` })
                 resolve(e)
             }).catch(e => reject(e))
     })
