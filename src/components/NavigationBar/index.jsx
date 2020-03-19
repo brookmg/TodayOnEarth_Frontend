@@ -28,7 +28,7 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const user = React.useContext(AuthContext);
 
     const linksThatNeedAuth = [
-        { text: `Home`, url: `/`, icon: <HomeIcon /> },
+        { text: `Home`, url: `/home`, icon: <HomeIcon /> },
         { text: `Create a Post`, url: `/create`, icon: <PostAddIcon /> },
         { text: `Discover`, url: `/userInterest`, icon: <ExploreIcon /> },
     ]

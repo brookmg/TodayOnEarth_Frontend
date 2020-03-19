@@ -1,23 +1,19 @@
 import React from "react";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import PostsFromUserProvider from "../components/PostsFromUserProvider";
+import { isLoggedIn } from "../services/auth";
+import { navigate } from "gatsby";
+import { isBrowser } from "../utils";
 
 
 const IndexPage = () => {
-    return (
-        <Layout
-            render={
-                ({ scrollValue, height }) => {
-                    return (
-                        <>
-                            <SEO title={`Home`} />
-                            <PostsFromUserProvider scrollValue={scrollValue} height={height} />
-                        </>
-                    )
-                }}>
-        </Layout>
-    )
+
+    if (isBrowser()) {
+        if (isLoggedIn())
+            navigate('/home')
+        else
+            navigate('/today')
+    }
+
+    return(<></>)
 }
 
 export default IndexPage
