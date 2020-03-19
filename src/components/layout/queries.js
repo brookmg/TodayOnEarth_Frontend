@@ -5,6 +5,7 @@ export const POSTS_SUBSCRIPTION = gql`
 
 subscription{
   postAdded{
+    postid
     title
   }
 }
