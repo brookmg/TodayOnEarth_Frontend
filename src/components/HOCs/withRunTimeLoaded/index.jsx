@@ -8,7 +8,7 @@ const withRunTimeLoaded = ComponentToWrap => props => {
 
     const [isMounted, setIsMounted] = React.useState(false);
     React.useEffect(() => {
-        setIsMounted(false)
+        setIsMounted(true)
     }, [])
 
     return (
