@@ -32,7 +32,8 @@ export const PostsFromUserProvider = ({ scrollValue, height }) => {
         variables: {
             page: pageNumber,
             range: postsPerPage,
-            fruitPunch: isFruitPunch
+            fruitPunch: isFruitPunch,
+            fruitLimit: isFruitPunch ? 10 : 0
         },
         onCompleted: handleNewData,
         notifyOnNetworkStatusChange: true,

@@ -6,13 +6,14 @@ export const POSTS_FROM_USER_PROVIDER_QUERY = gql`
 query getPostsFromUserProvider(
   $page: Int,
   $range: Int,
-  $fruitPunch: Boolean
+  $fruitPunch: Boolean,
+  $fruitLimit: Int
 ) {
     getPostsForUser(
     page: $page
     range: $range
     fruitPunch: $fruitPunch
-    fruitLimit: 10
+    fruitLimit: $fruitLimit
   ) {
       postid,
       title,
