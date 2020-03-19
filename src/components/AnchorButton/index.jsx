@@ -1,33 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import Image from "../Image";
+import { StyledA, StyledPaddedDiv, StyledDisplayFlexDiv, StyledDisplayFlex1Div, StyledImage, StyledFlex3Div } from "./styles";
 
-
-const StyledA = styled.a`
-    text-decoration: none;
-`
-
-const StyledPaddedDiv = styled.div`
-    padding: 1em;
-`
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledDisplayFlex1Div = styled(StyledDisplayFlexDiv)`
-    display: flex;
-    flex: 1;
-`
-
-const StyledImage = styled(Image)`
-    margin: 0;
-`
-
-const StyledFlex3Div = styled.div`
-    padding: 0.5em;
-    flex: 3;
-`
 
 const AnchorButton = (props) => {
     const handleShareClick = (e) => {

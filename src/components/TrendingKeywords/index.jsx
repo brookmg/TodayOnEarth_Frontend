@@ -1,10 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import gql from "graphql-tag";
 import Margin from "../CompoundComponents/Margin";
 import ParseLinks from "../ParseLinks";
 import { FormCheckbox } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";
+import { StyledBoldCenterDiv, StyledLeftDiv, StyledLeftP } from "./styles";
 
 
 const GET_TODAYS_TRENDING_KEYWORDS = gql`
@@ -17,20 +17,6 @@ query getTodaysTrendingKeywords($semantics: Boolean){
 }
 
 `;
-
-const StyledBoldCenterDiv = styled.div`
-    text-align: center; 
-    font-weight: bold;
-`
-
-const StyledLeftDiv = styled.div`
-    text-align: left; 
-`
-
-const StyledLeftP = styled.div`
-    text-align: left; 
-    margin: 0;
-`
 
 const TrendingKeywords = (props) => {
     const [semanticEnabled, setSemanticEnabled] = React.useState(false);

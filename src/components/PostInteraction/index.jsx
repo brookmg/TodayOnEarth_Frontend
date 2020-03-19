@@ -1,13 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-import NotInterestedIcon from "@material-ui/icons/NotInterested";
-import AddAlertIcon from "@material-ui/icons/AddAlert";
 import gql from "graphql-tag";
-import ButtonCustom from "../ButtonCustom";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import AnchorButton from "../AnchorButton";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";
+import { StyledDiv, StyledMarginButtonCustom, StyledNotInterestedIcon, StyledAddAlertIcon } from "./styles";
 
 
 const POST_LIKED_MUTATION = gql`
@@ -41,28 +38,6 @@ mutation setPostUnDisLiked($postid: Int){
 }
 
 `;
-
-const StyledMarginButtonCustom = styled(ButtonCustom)`
-    overflow: hidden;
-    padding: 0;
-    margin: 0.5em;
-`
-
-const StyledNotInterestedIcon = styled(NotInterestedIcon)`
-    width: 28px;
-    height: 28px;
-`
-
-const StyledAddAlertIcon = styled(AddAlertIcon)`
-    width: 28px;
-    height: 28px;
-`
-
-const StyledDiv = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
 
 const PostInteraction = ({ postid }) => {
     const theme = React.useContext(ThemePalletteContext);

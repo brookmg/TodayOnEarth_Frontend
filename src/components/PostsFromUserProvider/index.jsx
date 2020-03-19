@@ -1,11 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import gql from "graphql-tag";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import { FormSelect, FormCheckbox } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
+import { StyledDisplayFlexDiv, StyledP } from "./styles";
 
 
 const POSTS_FROM_USER_PROVIDER_QUERY = gql`
@@ -56,14 +56,6 @@ query getPostsFromUserProvider(
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
 let prevScrollValue = -1;
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledP = styled.p`
-    text-align: center;
-`
 
 export const PostsFromUserProvider = ({ scrollValue, height }) => {
     const [pageNumber, setPageNumber] = React.useState(0);

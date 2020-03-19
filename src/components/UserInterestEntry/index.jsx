@@ -1,6 +1,5 @@
 import React from "react";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import Margin from "../CompoundComponents/Margin";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import ButtonInterest from "../ButtonInterest";
@@ -18,6 +17,7 @@ import {
     Slider,
     FormInput
 } from "shards-react";
+import { StyledDiv } from "./styles";
 
 
 const GET_USER_INTERESTS = gql`
@@ -40,10 +40,6 @@ mutation updateInterests($interests:[IInterest]!){
 }
 
 `;
-
-const StyledDiv = styled.div`
-    text-align: center;
-`
 
 const UserInterestEntry = (props) => {
     const theme = React.useContext(ThemePalletteContext)

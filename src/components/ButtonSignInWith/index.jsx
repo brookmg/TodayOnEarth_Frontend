@@ -1,18 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import ButtonCustom from "../ButtonCustom";
 import Margin from "../CompoundComponents/Margin";
+import { StyledAnchor, StyledImg } from "./styles";
 
-
-const StyledAnchor = styled.a`
-    display: inline-block
-`
-
-const StyledImg = styled.img`
-    width: 16px;
-    height: 16px;
-    margin: 0;
-`
 
 const ButtonSignInWith = (props) => {
     return (

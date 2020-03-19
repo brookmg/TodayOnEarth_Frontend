@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import gql from "graphql-tag";
 import Header from "../header";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,10 +9,11 @@ import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import NavigationBar from "../NavigationBar";
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { useStaticQuery, graphql } from "gatsby";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useSubscription } from "@apollo/react-hooks";
 import { intializeClickEffect } from "../ClickEffect";
 import { isBrowser } from "../../utils";
+import { StyledToastContainer, StyledCanvas, StyledFlexDirectionRowDiv, StyledFlex3OverflowYDiv, StyledHeaderDiv } from "./styles";
 
 
 const POSTS_SUBSCRIPTION = gql`
@@ -24,37 +24,6 @@ subscription{
   }
 }
 `;
-
-const StyledToastContainer = styled(ToastContainer)`
-  height: 100vh;
-`
-
-const StyledCanvas = styled.canvas`
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-`
-
-const StyledFlexDirectionRowDiv = styled.div`
-    flex-direction: row;
-`
-
-const StyledFlex3OverflowYDiv = styled.div`
-    flex: 3;
-    overflow-y: auto;
-    height: 100vh;
-`
-
-const StyledHeaderDiv = styled.div`
-    margin: 0 auto;
-    max-width: 960;
-    padding: 0 1.0875rem 1.45rem;
-`
 
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)

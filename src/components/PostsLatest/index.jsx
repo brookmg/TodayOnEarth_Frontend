@@ -1,6 +1,5 @@
 import React from "react";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
@@ -8,6 +7,7 @@ import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
 import { FormSelect, FormCheckbox } from "shards-react";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
+import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
 
 
 const LATEST_POSTS_QUERY = gql`
@@ -98,19 +98,6 @@ const DEFAULT_POST_SOURCES = {
     'twitter.com': true
 };
 let prevScrollValue = -1;
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledFlex1CenterSpan = styled.span`
-    flex: 1;
-    align-self: center;
-`
-
-const StyledP = styled.p`
-    text-align: center;
-`
 
 const PostsLatest = ({ scrollValue, height }) => {
     const theme = React.useContext(ThemePalletteContext);

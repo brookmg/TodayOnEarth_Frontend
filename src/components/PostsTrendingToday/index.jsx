@@ -1,11 +1,11 @@
 import React from "react";
 import gql from "graphql-tag";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
-import styled from "styled-components";
 import PostHolderCard from "../PostHolderCard";
 import { useQuery } from "@apollo/react-hooks";
 import { FormSelect } from "shards-react";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
+import { StyledDisplayFlexDiv, StyledP } from "./styles";
 
 
 const TRENDING_TODAY_QUERY = gql`
@@ -60,14 +60,6 @@ const DEFAULT_POST_COUNT_PER_PAGE = 5;
 let prevScrollValue = -1;
 const TIME_NOW = Date.now();
 const TIME_24_HOURS_AGO = TIME_NOW - (1 * 24 * 60 * 60 * 1000);
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledP = styled.p`
-    text-align: center;
-`
 
 export const PostsTrendingToday = ({ scrollValue, height }) => {
     const [pageNumber, setPageNumber] = React.useState(0);

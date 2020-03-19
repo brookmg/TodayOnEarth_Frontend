@@ -1,22 +1,17 @@
 import React from "react";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
-import styled from "styled-components";
 import Margin from "../CompoundComponents/Margin";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import ButtonDark from "../ButtonDark";
 import ButtonSuccess from "../ButtonSuccess";
 import ThemedCard from "../ThemedCard";
 import ThemedCardTitle from "../ThemedCardTitle";
-import { CardBody, FormInput, FormSelect } from "shards-react";
+import { CardBody, FormInput } from "shards-react";
 import { isBrowser } from "../../utils";
 import DefaultThemeDefinition, { availableFonts } from "../../contexts/ThemePalletteContext/DefaultThemeDefinition";
+import { StyledSelect } from "./styles";
 
-
-
-const StyledSelect = styled(FormSelect)`
-    width: auto;
-`
 
 const ThemePreferenceSection = (props) => {
     const theme = React.useContext(ThemePalletteContext);

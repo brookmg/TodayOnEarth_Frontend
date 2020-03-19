@@ -1,22 +1,6 @@
 import React from "react";
-import ContentLoader from "react-content-loader";
-import styled from "styled-components";
+import { StyledImagePlaceHolder, StyledContentLoader, StyledParagraph } from "./styles";
 
-
-const StyledImagePlaceHolder = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const StyledContentLoader = styled(ContentLoader)`
-    min-width: 100%;
-    min-height: 100%;
-`
-
-const StyledParagraph = styled.p`
-    position: absolute;
-`
 
 const ImagePlaceHolder = ({isErrorFound,}) => <StyledImagePlaceHolder>
     <StyledContentLoader title={isErrorFound && `Error Loading`} animate={isErrorFound} speed={5}>

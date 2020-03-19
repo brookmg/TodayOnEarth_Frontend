@@ -1,12 +1,9 @@
 
 import React from "react";
-import styled from "styled-components";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import Margin from "../CompoundComponents/Margin";
-import Image from "../Image";
 import PostMetadata from "../PostMetadata";
 import ParseLinks from "../ParseLinks";
-import ThemedCard from "../ThemedCard";
 import ThemedCardTitle from "../ThemedCardTitle";
 import ButtonDark from "../ButtonDark";
 import PostInteraction from "../PostInteraction";
@@ -15,30 +12,8 @@ import {
     CardBody,
     CardFooter,
 } from "shards-react";
+import { StyledThemedCard, StyledDiv, StyledImage, StyledFlexDiv, StyledA } from "./styles";
 
-
-const StyledThemedCard = styled(ThemedCard)`
-    overflow: hidden;
-`
-
-const StyledDiv = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const StyledFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledA = styled.a`
-    flex: 1;
-`
-
-const StyledImage = styled(Image)`
-    min-width: 100%;
-    min-height: 100%;
-`
 
 const PostHolderCard = ({ imgSrc, id, title, body, sourceLink, metadata }) => {
     const theme = React.useContext(ThemePalletteContext)

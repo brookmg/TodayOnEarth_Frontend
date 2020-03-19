@@ -1,6 +1,5 @@
 import React from "react";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
 import ButtonInterest from "../ButtonInterest";
@@ -13,6 +12,7 @@ import {
     removeRedundantWhitespace,
     convertDateToInputFormat
 } from "../../utils";
+import { StyledColumnDiv, StyledDisplayFlexDiv, StyledLeftAlignDiv, StyledFontSizeDiv, StyledFlex1CenterDiv, StyledFlex1CenterFullWidthDiv, StyledP } from "./styles";
 
 
 const GET_POSTS_BY_TOPIC_QUERY = gql`
@@ -62,36 +62,6 @@ query getPostsByTopic(
   }
 }
 `;
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex; 
-`
-
-const StyledColumnDiv = styled(StyledDisplayFlexDiv)`
-    display: flex; 
-    flex-direction: column;
-`
-
-const StyledLeftAlignDiv = styled.div`
-    text-align: left;
-`
-
-const StyledFontSizeDiv = styled.div`
-    font-size: 0.5em;
-`
-
-const StyledFlex1CenterDiv = styled.div`
-    flex: 1;
-    align-self: center;
-`
-
-const StyledFlex1CenterFullWidthDiv = styled(StyledFlex1CenterDiv)`
-    width: 100%;
-`
-
-const StyledP = styled.p`
-    text-align: center;
-`
 
 const PostsByTopic = (props) => {
     const theme = React.useContext(ThemePalletteContext);

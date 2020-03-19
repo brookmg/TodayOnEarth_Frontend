@@ -1,6 +1,5 @@
 import React from "react";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import AnchorButton from "../AnchorButton";
 import withQueryParsedURL from "../HOCs/withQueryParsedURL";
 import Image from "../Image";
@@ -11,6 +10,7 @@ import PostInteraction from "../PostInteraction";
 import { Tooltip } from "shards-react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
+import { StyledRelativeDiv, StyledCenterTextDiv, StyledRoundDiv, StyledImage, StyledDisplayMarginFlex, StyledDisplayFlex } from "./styles";
 
 
 const GET_POST_DETAIL = gql`
@@ -60,39 +60,6 @@ mutation setPostOpened($postid: Int){
 }
 
 `;
-
-const StyledRelativeDiv = styled.div`
-    position: relative;
-    top: -100px;
-`
-
-const StyledCenterTextDiv = styled.div`
-    text-align: center;
-`
-
-const StyledRoundDiv = styled.div`
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto;
-    max-width: 200px;
-    max-height: 200px;
-`
-
-const StyledImage = styled(Image)`
-    height: 200px;
-    width: 200px;
-`
-
-const StyledDisplayFlex = styled.div`
-    display: flex;
-    justify-content: center;
-`
-
-const StyledDisplayMarginFlex = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 1rem;
-`
 
 const PostDetail = withQueryParsedURL(({queryParsedURL}) => {
     const handleShareClick = (e) => {

@@ -1,11 +1,11 @@
 import React from "react";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import { FormSelect } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
+import { StyledDisplayFlexDiv, StyledP } from "./styles";
 
 
 const POSTS_BY_USER_INTEREST_QUERY = gql`
@@ -58,14 +58,6 @@ const DEFAULT_POST_COUNT_PER_PAGE = 5;
 let prevScrollValue = -1;
 const TIME_NOW = Date.now();
 const TIME_A_WEEK_AGO = TIME_NOW - (7 * 24 * 60 * 60 * 1000);
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledP = styled.p`
-    text-align: center;
-`
 
 export const PostsByUserInterest = ({ scrollValue, height }) => {
     const [pageNumber, setPageNumber] = React.useState(0);

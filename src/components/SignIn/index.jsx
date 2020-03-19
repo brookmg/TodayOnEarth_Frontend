@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import AuthContext from "../../contexts/AuthContext";
 import Margin from "../CompoundComponents/Margin";
 import AnchorButton from "../AnchorButton";
@@ -9,20 +8,8 @@ import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { handleSignIn, isLoggedIn } from "../../services/auth";
 import { FormInput } from "shards-react";
 import { navigate } from "gatsby";
+import { StyledDisplayFlexDiv, StyledForm, StyledFlex1MarginDiv } from "./styles";
 
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledForm = styled.form`
-    flex: 1;
-`
-
-const StyledFlex1MarginDiv = styled.div`
-    flex: 1;
-    margin-left: 0.5em;
-`
 
 const SignIn = () => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)

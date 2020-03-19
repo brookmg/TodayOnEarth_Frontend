@@ -1,6 +1,5 @@
 import React from "react";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import withQueryParsedURL from "../HOCs/withQueryParsedURL";
@@ -9,6 +8,7 @@ import AdvancedFiltersSection from "../AdvancedFiltersSection";
 import { FormCheckbox, FormSelect } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
+import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
 
 
 const GET_POSTS_FILTERED = gql`
@@ -63,20 +63,6 @@ const DEFAULT_POST_SOURCES = {
     'twitter.com': true
 };
 let prevScrollValue = -1;
-
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledFlex1CenterSpan = styled.span`
-    flex: 1;
-    align-self: center;
-`
-
-const StyledP = styled.p`
-    text-align: center;
-`
 
 const PostsSearch = withQueryParsedURL(({ queryParsedURL, scrollValue, height }) => {
     const searchTerm = queryParsedURL.search_term;

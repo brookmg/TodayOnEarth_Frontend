@@ -1,21 +1,7 @@
 import React from "react";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
-import styled from "styled-components";
-import { Button, } from "shards-react";
+import { StyledInterestButton, StyledXButton } from "./styles";
 
-
-const StyledXButton = styled.input`
-    border-radius: 50%;
-    height: 24px;
-    width: 24px;
-    background: transparent;
-    border: none;
-`
-
-const StyledInterestButton = styled(Button)`
-    padding-right: 0.5em;
-    position: relative;
-`
 
 const ButtonInterest = (props) => {
     const theme = React.useContext(ThemePalletteContext)

@@ -1,17 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 import gql from "graphql-tag";
 import AddIcon from "@material-ui/icons/Add";
 import Margin from "../CompoundComponents/Margin";
 import ThemedCard from "../ThemedCard";
 import ThemedCardTitle from "../ThemedCardTitle";
-import ButtonCustom from "../ButtonCustom";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import AnchorButton from "../AnchorButton";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { CardBody, FormCheckbox, FormInput, FormSelect } from "shards-react";
+import { CardBody, FormCheckbox, FormInput } from "shards-react";
 import { toast } from "react-toastify";
 import { isLoggedIn } from "../../services/auth";
+import { StyledRelativeDiv, StyledFloatingDiv, StyledDisplayCenterFlexDiv, StyledP, StyledDisplayAlignCenterFlexDiv, StyledHiddenIcon, StyledDisplayFlexDiv, StyledFlex1Div, StyledSelect, StyledMarginButtonCustom } from "./styles";
 
 
 const GET_USER_PROVIDERS = gql`
@@ -60,70 +59,6 @@ query getAllProviders($str: String){
     provider
   }
 }
-`
-
-const StyledMarginButtonCustom = styled(ButtonCustom)`
-    overflow: hidden;
-    padding: 0;
-    margin: 0.5em;
-`
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledDisplayCenterFlexDiv = styled(StyledDisplayFlexDiv)`
-    justify-content: center;
-`
-
-const StyledDisplayAlignCenterFlexDiv = styled(StyledDisplayFlexDiv)`
-    align-items: center;
-`
-
-const StyledRelativeDiv = styled.div`
-    position: relative;
-    &:focus-within {
-        .floatingDiv{
-            display: unset;
-        }
-    }
-`
-
-const StyledFloatingDiv = styled.div`
-    position: absolute;
-    z-index: 1;
-    max-height: 10em;
-    overflow-y: auto;
-    left: 0;
-    right: 0;
-    padding: 1em;
-    display: none;
-    border-color:#007bff;
-    border-bottom-right-radius: 50%;
-    box-shadow:0 .313rem .719rem rgba(0,123,255,.1),0 .156rem .125rem rgba(0,0,0,.06);
-`
-
-const StyledP = styled.p`
-    margin: 0.5em;
-    
-    &:hover {
-        color: #007bff;
-        .pIcon {
-            display: unset;
-        }
-    }
-`
-
-const StyledHiddenIcon = styled.span`
-    display: none;
-`
-
-const StyledFlex1Div = styled.div`
-    flex: 1;
-`
-
-const StyledSelect = styled(FormSelect)`
-    width: auto;
 `
 
 const AVAILABLE_SOURCES = [`Facebook`, `Instagram`, `Telegram`, `Twitter`]

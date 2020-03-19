@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SettingsIcon from "@material-ui/icons/Settings";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import AnnouncementIcon from "@material-ui/icons/Announcement";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import NightsStayIcon from "@material-ui/icons/NightsStay";
-import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ExploreIcon from "@material-ui/icons/Explore";
@@ -17,62 +14,12 @@ import DefaultThemeDefinition from "../../contexts/ThemePalletteContext/DefaultT
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import AuthContext from "../../contexts/AuthContext";
 import AnimatedLink from "../AnimatedLink";
-import ButtonCustom from "../ButtonCustom";
 import Margin from "../CompoundComponents/Margin";
 import { navigate } from "gatsby";
 import { isLoggedIn, signOut } from "../../services/auth";
 import { isColorDark } from "../../utils";
+import { StyledWidthPaddingDiv, StyledDisplayFlexDiv, StyledMarginButtonCustom, StyledWbSunnyIcon, StyledNightsStayIcon, StyledNoHorizontalPaddingButtonCustom, StyledAccountCircleIcon, StyledFlex1Div, StyledSpan } from "./styles";
 
-
-const StyledWidthPaddingDiv = styled.div`
-    width: 100%;
-    padding: 0.5em;
-`
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex
-`
-
-const StyledMarginButtonCustom = styled(ButtonCustom)`
-    overflow: hidden;
-    padding: 0;
-    margin: 0.5em;
-`
-
-const StyledNoHorizontalPaddingButtonCustom = styled(ButtonCustom)`
-    width: 100%;
-    overflow: hidden;
-    padding-right: 0;
-    padding-left: 0;
-`
-
-const StyledWbSunnyIcon = styled(WbSunnyIcon)`
-    width: 28px;
-    height: 28px;
-`
-
-const StyledNightsStayIcon = styled(NightsStayIcon)`
-    width: 28px;
-    height: 28px;
-`
-
-const StyledAccountCircleIcon = styled(AccountCircleIcon)`
-    width: 16px;
-    height: 16px;
-    margin: 0;
-`
-
-const StyledFlex1Div = styled.div`
-    flex: 1;
-    width: 100%;
-    padding: 0.5em;
-`
-
-const StyledSpan = styled.span`
-    width: 16px;
-    height: 16px;
-    margin: 0.5em;
-`
 
 const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)

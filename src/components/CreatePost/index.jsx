@@ -1,16 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 import gql from "graphql-tag";
 import ButtonSuccess from "../ButtonSuccess";
 import Margin from "../CompoundComponents/Margin";
 import AuthContext from "../../contexts/AuthContext";
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
-import { FormTextarea, FormCheckbox, FormInput } from "shards-react";
+import { FormCheckbox, FormInput } from "shards-react";
 import { Picker } from "emoji-mart";
 import { useMutation } from "@apollo/react-hooks";
 import { navigate } from "gatsby";
 import { isLoggedIn } from "../../services/auth";
 import { isBrowser } from "../../utils";
+import { StyledDisplayFlexDiv, StyledFlex1Div, StyledFlexColumn3Div, StyledDisplayFlex1Div, StyledFormTextarea, StyledFlexRowReverseDiv } from "./styles";
 
 
 //TODO: remove un-needed console.log()
@@ -57,33 +57,6 @@ const DEFAULT_PLATFORMS_TO_POST_ON = {
     'LinkedIn': true,
     'Twitter': true,
 };
-
-const StyledDisplayFlexDiv = styled.div`
-    display: flex;
-`
-
-const StyledFlex1Div = styled.div`
-    flex: 1;
-`
-
-const StyledDisplayFlex1Div = styled(StyledDisplayFlexDiv)`
-    flex: 1;
-`
-
-const StyledFlexColumn3Div = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex: 3;
-`
-
-const StyledFormTextarea = styled(FormTextarea)`
-    font-family: emoji
-`
-
-const StyledFlexRowReverseDiv = styled.div`
-    display: flex;
-    flex-direction: row-reverse;
-`
 
 const CreatePost = () => {
     const user = React.useContext(AuthContext);

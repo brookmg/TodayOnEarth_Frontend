@@ -1,15 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import ImagePlaceHolder from "../ImagePlaceHolder";
+import { StyledImg } from "./styles";
 
-
-const StyledImg = styled.img`
-    object-fit: contain;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-`
 
 const Image = (props) => {
     const handleImageErrored = () => setIsImageLoadedError(true)

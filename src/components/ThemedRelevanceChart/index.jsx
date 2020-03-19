@@ -1,9 +1,9 @@
 import React from "react";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
 import { Radar } from "react-chartjs-2";
+import { StyledDiv } from "./styles";
 
 
 const GET_POST_RELEVANCE = gql`
@@ -16,10 +16,6 @@ query getPostRelevance($postId:Int!){
 }
 
 `;
-
-const StyledDiv = styled.div`
-    text-align: center;
-`
 
 const ThemedRelevanceChart = ({ postId }) => {
     const theme = React.useContext(ThemePalletteContext);
