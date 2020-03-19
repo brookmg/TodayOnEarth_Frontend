@@ -6,7 +6,7 @@ const ScreenSizeContext = React.createContext(true)
 
 export const ScreenSizeProvider = ({ children }) => {
     const isDesktopOrLaptop = useMediaQuery({
-        query: `(min-device-width: 1224px)`
+        query: `(min-width: 1224px)`
     })
 
     return (
