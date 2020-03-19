@@ -52,28 +52,35 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
             if (postData) {
                 const postAdded = postData.postAdded[0]
 
+                const handleNotificationClick = () => {
+                    if (isBrowser()) window.location.href = `/p?id=${postAdded.postid}`
+                }
+
+
                 const notificationTitle = `New Post Found`
                 const notificationBody = { body: postAdded.title }
                 if (postAdded.title) {
                     if (!(`Notification` in window)) {
-                        toast(postAdded.title)
+                        toast(postAdded.title, { onClick: handleNotificationClick })
                     }
                     else if (Notification.permission === `granted`) {
                         // if it's okay then create a notification
-                        new Notification(notificationTitle, notificationBody);
+                        const notif = new Notification(notificationTitle, notificationBody)
+                        notif.onclick = handleNotificationClick
                     }
                     else if (Notification.permission !== `denied`) {
                         Notification.requestPermission().then(function (permission) {
                             // if the user accepts, then create a notification
                             if (permission === `granted`) {
-                                new Notification(notificationTitle, notificationBody);
+                                const notif = new Notification(notificationTitle, notificationBody)
+                                notif.onclick = handleNotificationClick;
                             } else {
-                                toast(postAdded.title)
+                                toast(postAdded.title, { onClick: handleNotificationClick })
                             }
                         });
                     }
                     else {
-                        toast(postAdded.title)
+                        toast(postAdded.title, { onClick: handleNotificationClick })
                     }
                 }
             }

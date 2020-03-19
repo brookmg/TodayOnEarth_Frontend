@@ -11,10 +11,12 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
 import { StyledRelativeDiv, StyledCenterTextDiv, StyledRoundDiv, StyledImage, StyledDisplayMarginFlex, StyledDisplayFlex } from "./styles";
 import { POST_OPENED_MUTATION, GET_POST_DETAIL } from "./queries";
+import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 
 
 const PostDetail = withQueryParsedURL(
     ({ queryParsedURL }) => {
+        const theme = React.useContext(ThemePalletteContext)
         const handleShareClick = (e) => {
             navigator.clipboard.writeText(window.location.href);
         };
@@ -89,6 +91,17 @@ const PostDetail = withQueryParsedURL(
                     </>
                 }
                 {post.postid && <PostInteraction postid={post.postid} />}
+                <StyledCenterTextDiv>
+                    <a
+                        href={post.source_link}
+                        style={{
+                            color: theme.color_text_faded,
+                        }}
+                        target={`_blank`}
+                    >
+                        {post.source_link}
+                    </a>
+                </StyledCenterTextDiv>
             </StyledRelativeDiv>
         );
     }
