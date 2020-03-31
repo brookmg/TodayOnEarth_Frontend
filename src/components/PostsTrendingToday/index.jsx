@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/today" page
+ */
 import React from "react";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
@@ -8,13 +11,20 @@ import { StyledDisplayFlexDiv, StyledP } from "./styles";
 import { TRENDING_TODAY_QUERY } from "./queries";
 
 
+/* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
-let prevScrollValue = -1;
+/* Previous frame's isBottomReached value */
+let prevIsBottomReached = false
+
 const TIME_NOW = Date.now();
 const TIME_24_HOURS_AGO = TIME_NOW - (1 * 24 * 60 * 60 * 1000);
 
-export const PostsTrendingToday = ({ scrollValue, height }) => {
+/**
+ * 
+ * @param {boolean} isBottomReached Will be set to true if bottom of page is reached
+ */
+export const PostsTrendingToday = ({ isBottomReached }) => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [postsPerPage, setPostsPerPage] = React.useState(DEFAULT_POST_COUNT_PER_PAGE);
     const [hasMorePosts, setHasMorePosts] = React.useState(true);
@@ -42,11 +52,12 @@ export const PostsTrendingToday = ({ scrollValue, height }) => {
         notifyOnNetworkStatusChange: true,
         fetchPolicy: `cache-and-network`
     });
-    if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
-        if (prevScrollValue !== scrollValue)
-            setPageNumber(pageNumber + 1);
-        prevScrollValue = scrollValue;
+
+    if (posts.length && prevIsBottomReached !== isBottomReached && isBottomReached && hasMorePosts) {
+        setPageNumber(pageNumber + 1);
     }
+    prevIsBottomReached = isBottomReached
+
     const resetPosts = () => {
         setPageNumber(0);
         setPosts([]);

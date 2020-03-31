@@ -1,5 +1,14 @@
+/**
+ * This component is responsible for creating and rendering the paint explosion click effect
+ */
 import { isBrowser } from "../../utils";
 
+
+/**
+ * 
+ * @param {React.RefObject} canvasRef The canvas to play the click effect on
+ * @param {object} mouseClickPosition {x,y} of where to play the animation, this is usually the location the canvas was clicked 
+ */
 export const intializeClickEffect = (canvasRef, mouseClickPosition) => {
     if (!isBrowser()) return
 

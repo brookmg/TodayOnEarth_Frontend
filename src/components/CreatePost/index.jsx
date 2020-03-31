@@ -1,3 +1,8 @@
+/**
+ * This component is used to create posts
+ * 
+ * Note: User needs to be logged in for this page to work as intended
+ */
 import React from "react";
 import ButtonSuccess from "../ButtonSuccess";
 import Margin from "../CompoundComponents/Margin";
@@ -13,6 +18,7 @@ import { StyledDisplayFlexDiv, StyledFlex1Div, StyledFlexColumn3Div, StyledDispl
 import { CREATE_POST_MUTATION } from "./queries";
 
 
+/* What platforms are available to post on by default */
 const DEFAULT_PLATFORMS_TO_POST_ON = {
     'Telegram': true,
     'Facebook': true,

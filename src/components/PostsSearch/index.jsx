@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/s" page
+ */
 import React from "react";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
@@ -11,17 +14,26 @@ import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
 import { GET_POSTS_FILTERED } from "./queries";
 
 
+/* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
+
+/* Previous frame's isBottomReached value */
+let prevIsBottomReached = false
+
 const DEFAULT_POST_SOURCES = {
     't.me': true,
     'facebook.com': true,
     'instagram.com': true,
     'twitter.com': true
 };
-let prevScrollValue = -1;
 
+/**
+ * 
+ * @param {object} queryParsedURL The parsed query string of the current URL
+ * @param {boolean} isBottomReached Will be set to true if bottom of page is reached
+ */
 const PostsSearch = withQueryParsedURL(
-    ({ queryParsedURL, scrollValue, height }) => {
+    ({ queryParsedURL, isBottomReached }) => {
         const searchTerm = queryParsedURL.search_term;
         const metadataTerm = queryParsedURL.metadata_term || ``;
         const locations = (queryParsedURL.locations || ``).split(`,`);
@@ -83,11 +95,12 @@ const PostsSearch = withQueryParsedURL(
             notifyOnNetworkStatusChange: true,
             fetchPolicy: `cache-and-network`
         });
-        if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
-            if (prevScrollValue !== scrollValue)
-                setPageNumber(pageNumber + 1);
-            prevScrollValue = scrollValue;
+
+        if (posts.length && prevIsBottomReached !== isBottomReached && isBottomReached && hasMorePosts) {
+            setPageNumber(pageNumber + 1);
         }
+        prevIsBottomReached = isBottomReached
+
         const resetPosts = () => {
             setPosts([]);
             setPageNumber(0);
@@ -118,14 +131,14 @@ const PostsSearch = withQueryParsedURL(
             resetPosts();
             setPostSources(newSources);
         };
-        return (<div scrollValue={scrollValue} height={height}>
+        return (<div isBottomReached={isBottomReached}>
             <AdvancedFiltersSection
                 searchTerm={searchTerm}
                 locations={locations}
                 startTime={startTime}
                 endTime={endTime}
                 metadataTerm={metadataTerm}
-                isAdvancedFilterCollapsed={!queryParsedURL.expanded} />
+                isAdvancedFilterCollapsed={!Number(queryParsedURL.expanded)} />
 
             <Margin top={`1em`}>
                 <div>

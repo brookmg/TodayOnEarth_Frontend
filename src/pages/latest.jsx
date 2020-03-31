@@ -1,3 +1,9 @@
+/**
+ * This page shows the newest posts first. 
+ * 
+ * This page is also connected to a gql subscription for real-time
+ * updates
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -9,11 +15,11 @@ const LatestPage = withRunTimeLoaded(
   () => {
     return (
       <Layout render={
-        ({ scrollValue, height }) => {
+        (isBottomReached) => {
           return (
             <>
               <SEO title={`Latest Posts`} />
-              <PostsLatest scrollValue={scrollValue} height={height} />
+              <PostsLatest isBottomReached={isBottomReached} />
             </>
           )
         }}>

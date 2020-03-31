@@ -1,3 +1,8 @@
+/**
+ * This page allows users to search for posts
+ * 
+ * Note: This is a dynamic page
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -9,11 +14,11 @@ const SearchPage = withRunTimeLoaded(
     () => {
         return (
             <Layout render={
-                ({ scrollValue, height }) => {
+                (isBottomReached) => {
                     return (
                         <>
                             <SEO title={`Search Post`} />
-                            <PostsSearch scrollValue={scrollValue} height={height} />
+                            <PostsSearch isBottomReached={isBottomReached} />
                         </>
                     )
                 }}>

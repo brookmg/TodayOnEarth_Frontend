@@ -1,3 +1,6 @@
+/**
+ * This file contains styles for withRunTimeLoaded component
+ */
 import styled from "styled-components";
 
 

@@ -1,3 +1,6 @@
+/**
+ * This component shows a posts relevance to a users interests
+ */
 import React from "react";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import { useQuery } from "@apollo/react-hooks";
@@ -6,6 +9,10 @@ import { StyledDiv } from "./styles";
 import { GET_POST_RELEVANCE } from "./queries";
 
 
+/**
+ * 
+ * @param {number} postId 
+ */
 const ThemedRelevanceChart = ({ postId }) => {
     const theme = React.useContext(ThemePalletteContext);
     const [relevance, setRelevance] = React.useState([]);

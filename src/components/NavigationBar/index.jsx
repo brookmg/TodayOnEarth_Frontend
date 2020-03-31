@@ -1,3 +1,6 @@
+/**
+ * This component is used for holding links to other gatsby pages
+ */
 import React from "react";
 import styled from "styled-components";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -21,7 +24,12 @@ import { isColorDark } from "../../utils";
 import { StyledWidthPaddingDiv, StyledDisplayFlexDiv, StyledMarginButtonCustom, StyledWbSunnyIcon, StyledNightsStayIcon, StyledNoHorizontalPaddingButtonCustom, StyledAccountCircleIcon, StyledFlex1Div, StyledSpan } from "./styles";
 
 
-const UnStyledNavigationBar = React.forwardRef((props, ref) => {
+/**
+ * 
+ * @param {boolean} isMobileNavbarShowing Used only on mobile layout, set to true if the navbar is shown
+ * @param {React.StyleHTMLAttributes} style This component's style 
+ */
+const UnStyledNavigationBar = React.forwardRef(({ isMobileNavbarShowing, style, ...rest }, ref) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
     const theme = React.useContext(ThemePalletteContext);
@@ -50,10 +58,10 @@ const UnStyledNavigationBar = React.forwardRef((props, ref) => {
     })
     const handleLightModeClick = () => theme.setTheme({ ...DefaultThemeDefinition })
 
-    const isMobileNavbarShowingStyle = props.isMobileNavbarShowing ? { display: `unset`, visibility: `unset` } : {}
+    const isMobileNavbarShowingStyle = isMobileNavbarShowing ? { display: `unset`, visibility: `unset` } : {}
 
-    return (<div {...props} ref={ref} style={{
-        ...props.style,
+    return (<div {...rest} ref={ref} style={{
+        ...style,
         backgroundColor: theme.color_background,
         fontFamily: theme.font_family,
     }}>

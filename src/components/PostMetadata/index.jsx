@@ -1,8 +1,16 @@
+/**
+ * This component is used to display post meta data information (likes, comments, etc..)
+ */
 import React from "react";
 import Margin from "../CompoundComponents/Margin";
 import { Badge } from "shards-react";
 
 
+/**
+ * 
+ * @param {object} communityInteraction An object containing community interaction info (likes, views, etc..)
+ * @param {string} sourceLink URL to use as context. This is useful when parsing comments where a decision needs to be made whether this is a twitter or instagram comment
+ */
 const PostMetadata = ({ communityInteraction, sourceLink }) => {
     if (!communityInteraction) return null
 

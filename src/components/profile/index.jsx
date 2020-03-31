@@ -1,3 +1,8 @@
+/**
+ * This component shows information about the logged in user
+ * 
+ * Note: User needs to be logged in for this page to work as intended
+ */
 import React from "react";
 import AuthContext from "../../contexts/AuthContext";
 import SEO from "../seo";

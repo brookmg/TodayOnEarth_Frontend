@@ -1,4 +1,7 @@
 
+/**
+ * This component is used to hold basic post information
+ */
 import React from "react";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import Margin from "../CompoundComponents/Margin";
@@ -8,13 +11,19 @@ import ThemedCardTitle from "../ThemedCardTitle";
 import ButtonDark from "../ButtonDark";
 import PostInteraction from "../PostInteraction";
 import { Link } from "gatsby";
-import {
-    CardBody,
-    CardFooter,
-} from "shards-react";
+import { CardBody, CardFooter } from "shards-react";
 import { StyledThemedCard, StyledDiv, StyledImage, StyledFlexDiv, StyledA } from "./styles";
 
 
+/**
+ * 
+ * @param {string} imgSrc URL of image to display
+ * @param {number} id Post ID
+ * @param {string} title Post title
+ * @param {string} body Post body
+ * @param {string} sourceLink Post original link
+ * @param {object} metadata Object containing metadata information
+ */
 const PostHolderCard = ({ imgSrc, id, title, body, sourceLink, metadata }) => {
     const theme = React.useContext(ThemePalletteContext)
 

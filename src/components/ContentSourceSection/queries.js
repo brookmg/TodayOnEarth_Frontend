@@ -1,3 +1,6 @@
+/**
+ * This file contains queries for ContentSourceSection component
+ */
 import gql from "graphql-tag";
 
 
@@ -10,6 +13,7 @@ export const GET_USER_PROVIDERS = gql`
   }
 }
 `;
+
 export const ADD_PROVIDER = gql`
 
 mutation addProvider($source: String!,$provider: String!){
@@ -18,6 +22,7 @@ mutation addProvider($source: String!,$provider: String!){
   }
 }
 `;
+
 export const REMOVE_PROVIDER = gql`
 
 mutation removeProvider($provider: String!, $source: String!){
@@ -28,6 +33,7 @@ mutation removeProvider($provider: String!, $source: String!){
   })
 }
 `;
+
 export const GET_ALL_PROVIDERS = gql`
 
 query getAllProviders($str: String){

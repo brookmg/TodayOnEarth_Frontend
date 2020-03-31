@@ -1,3 +1,6 @@
+/**
+ * This page shows posts that are related to a set of topics
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";

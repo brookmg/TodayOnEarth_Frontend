@@ -1,3 +1,6 @@
+/**
+ * This file contains queries for UserInterestEntry component
+ */
 import gql from "graphql-tag";
 
 
@@ -13,6 +16,7 @@ query getUserInterests{
 }
 
 `;
+
 export const UPDATE_USER_INTERESTS = gql`
 
 mutation updateInterests($interests:[IInterest]!){

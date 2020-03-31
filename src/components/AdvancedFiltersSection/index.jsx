@@ -1,3 +1,6 @@
+/**
+ * This component is used for inputting advanced search parameters
+ */
 import React from "react";
 import Margin from "../CompoundComponents/Margin";
 import ThemedCard from "../ThemedCard";
@@ -9,6 +12,15 @@ import { convertDateToInputFormat } from "../../utils";
 import { StyledDisplayFlexDiv, StyledFlex1Div } from "./styles";
 
 
+/**
+ * 
+ * @param {string} pLocations {THIS PARAMETER IS NOT USED IN THE BACKEND SINCE MOST POSTS DON'T HAVE LOCATION DATA, IT EXISTS SOLELY FOR FUTURE IMPLEMENTATION} A comma separated list of locations
+ * @param {boolean} isAdvancedFilterCollapsed Provide false to hide the advanced filter section, true will show it
+ * @param {string} searchTerm The term you want to search
+ * @param {string} metadataTerm Data in metadata you want to search (regex can be used here)
+ * @param {string} startTime Start of timeframe to start searching for posts
+ * @param {string} endTime End of timeframe to stop searching for posts
+ */
 const AdvancedFiltersSection = ({ locations: pLocations, isAdvancedFilterCollapsed, searchTerm, metadataTerm, startTime: sTime, endTime: eTime }) => {
     const handleAdvancedFilterButtonClick = () => {
         setAdvancedFiltersCollapsed(!isAdvancedFiltersCollapsed);

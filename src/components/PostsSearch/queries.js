@@ -1,3 +1,6 @@
+/**
+ * This file contains queries for PostsSearch component
+ */
 import gql from "graphql-tag";
 
 

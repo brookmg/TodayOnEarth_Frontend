@@ -1,3 +1,6 @@
+/**
+ * This file contains styles for ThemedRelevanceChart component
+ */
 import styled from "styled-components";
 
 

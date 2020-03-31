@@ -1,3 +1,7 @@
+/**
+ * This page redirects signed in users to their home page, but for guests, it redirects
+ * them to the /today page
+ */
 import React from "react";
 import { navigate } from "gatsby";
 import { isBrowser } from "../utils";

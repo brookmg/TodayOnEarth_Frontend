@@ -1,3 +1,6 @@
+/**
+ * This component is used to mark posts as interesting or uninteresting
+ */
 import React from "react";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import AnchorButton from "../AnchorButton";
@@ -7,6 +10,10 @@ import { StyledDiv, StyledMarginButtonCustom, StyledNotInterestedIcon, StyledAdd
 import { POST_UNLIKED_MUTATION, POST_UNDISLIKED_MUTATION, POST_LIKED_MUTATION, POST_DISLIKED_MUTATION } from "./queries";
 
 
+/**
+ * 
+ * @param {number} postid Post ID to apply the interactions to
+ */
 const PostInteraction = ({ postid }) => {
     const theme = React.useContext(ThemePalletteContext);
 
@@ -68,8 +75,6 @@ const PostInteraction = ({ postid }) => {
                 postid
             }
         })
-        console.log(`not interested clicked on:`, postid)
-
     };
     const handleInterestedClick = () => {
         postLiked({
@@ -77,8 +82,6 @@ const PostInteraction = ({ postid }) => {
                 postid
             }
         })
-
-        console.log(`interested clicked on:`, postid)
     };
     return (
         <StyledDiv>

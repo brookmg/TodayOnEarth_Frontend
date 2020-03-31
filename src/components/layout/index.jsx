@@ -1,3 +1,8 @@
+/**
+ * This component is the responsive main layout. It's used in every page and serves to 
+ * structure the layout elements (header, navbar, footer). Additionally it's also used to 
+ * hold the click effect canvas and toast layout.
+ */
 import React from "react";
 import Header from "../header";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,6 +21,16 @@ import { StyledToastContainer, StyledCanvas, StyledFlexDirectionRowDiv, StyledFl
 import { POSTS_SUBSCRIPTION } from "./queries";
 
 
+/* Previous frame's scroll position */
+let prevScrollValue = -1;
+
+/**
+ * 
+ * @param {function} render Render function to use. This is used to pass the scroll state to the children. If this is provided, children will not be rendered
+ * @param {React.ElementType} children This component's children, will be ignored if render prop is available
+ * @param {React.ElementType} rightSideDesktopComponent Component to show on the right side of the layout. This is available only on desktop
+ * @param {React.ElementType} leftSideDesktopComponent Component to show on the left side of the layout. This is available only on desktop
+ */
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 
@@ -31,7 +46,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
     const theme = React.useContext(ThemePalletteContext)
     const scrollDivRef = React.createRef()
     const canvasRef = React.createRef()
-    const [scrollDivState, setScrollDivState] = React.useState({ scrollValue: 0, height: 0 })
+    const [isBottomReached, setIsBottomReached] = React.useState(false)
     const [mouseClickPosition, setMouseClickPosition] = React.useState({ x: 0, y: 0 })
 
     React.useEffect(() => {
@@ -39,10 +54,18 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
     }, [mouseClickPosition])
 
     const handleOnScroll = () => {
-        setScrollDivState({
-            scrollValue: scrollDivRef.current.scrollTop + scrollDivRef.current.offsetHeight,
-            height: scrollDivRef.current.scrollHeight
-        })
+        const scrollValue = scrollDivRef.current.scrollTop + scrollDivRef.current.offsetHeight
+        const height = scrollDivRef.current.scrollHeight
+
+        if (prevScrollValue !== scrollValue && scrollValue !== 0 && scrollValue >= height) {
+            console.log("is bottom reached true")
+            setIsBottomReached(true)
+        } else {
+            console.log("is bottom reached false")
+
+            setIsBottomReached(false)
+        }
+        prevScrollValue = scrollValue
     }
 
     useSubscription(
@@ -121,7 +144,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                             {
                                 (
                                     render &&
-                                    render(scrollDivState)
+                                    render(isBottomReached)
                                 ) ||
                                 children
                             }

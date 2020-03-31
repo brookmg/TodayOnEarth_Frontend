@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/signup" page
+ */
 import React from "react";
 import AuthContext from "../../contexts/AuthContext";
 import ButtonSignInWith from "../ButtonSignInWith";
@@ -11,6 +14,19 @@ import { signUp } from "../../services/auth";
 import { StyledDisplayFlexDiv, StyledFlex1Div } from "./styles";
 
 
+/**
+ * 
+ * @param {string} email 
+ * @param {string} first_name 
+ * @param {string} last_name 
+ * @param {string} username 
+ * @param {string} google_id 
+ * @param {string} facebook_id 
+ * @param {string} twitter_id 
+ * @param {string} github_id 
+ * @param {string} linkedin_id 
+ * @param {string} telegram_id 
+ */
 const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id, twitter_id, github_id, linkedin_id, telegram_id }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const auth = React.useContext(AuthContext);
@@ -24,7 +40,7 @@ const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id
             .then(() => auth.refreshActiveUser(() => navigate(`/app/profile`)))
             .catch(e => alert(`Error signing up: ${e.message}`));
     };
-    const handleSignIn = () => { navigate(`/app/login`); };
+    const handleSignInClick = () => { navigate(`/app/login`); };
     const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT;
     return (<>
         <h1>Sign up</h1>
@@ -99,7 +115,7 @@ const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id
 
             <Margin vertical={`1em`} right={`1em`}>
                 <ButtonSuccess type={`submit`}>Sign Up</ButtonSuccess><br />
-                <AnchorButton url={`/app/login`} onClick={handleSignIn}>Already have an account? Log in here</AnchorButton>
+                <AnchorButton url={`/app/login`} onClick={handleSignInClick}>Already have an account? Log in here</AnchorButton>
             </Margin>
         </form>
     </>);

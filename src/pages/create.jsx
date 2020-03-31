@@ -1,3 +1,8 @@
+/**
+ * This page provides posts relevant to the user
+ * 
+ * Note: User needs to be logged in for this page to work as intended
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";

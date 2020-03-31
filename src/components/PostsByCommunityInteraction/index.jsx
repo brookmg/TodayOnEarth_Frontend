@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/trendsByCommunityInteraction" page
+ */
 import React from "react";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
@@ -9,15 +12,16 @@ import { StyledColumnDiv, StyledFlexDiv, StyledLeftAlignDiv, StyledFlex1Centered
 import { RELATIVE_COMMUNITY_INTERACTION_QUERY, ABSOLUTE_COMMUNITY_INTERACTION_QUERY } from "./queries";
 
 
+/* This are the initial parameters to search on the server */
 const DEFAULT_COMMUNITY_INTERACTIONS = {
     'Views (t.me)': true,
     'Replies (twitter.com)': true,
     'Retweets (twitter.com)': true,
-    'Comments (facebook.com, instagram.com )': true,
+    'Comments (facebook.com, instagram.com, twitter.com)': true,
     'Likes (twitter.com, instagram.com)': true,
 };
 
-const PostsByCommunityInteraction = (props) => {
+const PostsByCommunityInteraction = () => {
     const [communityInteractions, setCommunityInteractions] = React.useState(DEFAULT_COMMUNITY_INTERACTIONS);
     const [startTime, setStartTime] = React.useState(convertDateToInputFormat(0));
     const [endTime, setEndTime] = React.useState(convertDateToInputFormat(Date.now()));
