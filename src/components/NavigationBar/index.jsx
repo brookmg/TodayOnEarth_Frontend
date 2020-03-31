@@ -12,6 +12,7 @@ import PostAddIcon from "@material-ui/icons/PostAdd";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ExploreIcon from "@material-ui/icons/Explore";
 import HomeIcon from "@material-ui/icons/Home";
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import DefaultThemeDefinition from "../../contexts/ThemePalletteContext/DefaultThemeDefinition";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
@@ -42,6 +43,7 @@ const UnStyledNavigationBar = React.forwardRef(({ isMobileNavbarShowing, style, 
     ]
     const links = [
         ...(isLoggedIn() ? linksThatNeedAuth : []),
+        { text: `Archives`, url: `/archives`, icon: <BusinessCenterIcon /> },
         { text: `Today`, url: `/today`, icon: <CalendarTodayIcon /> },
         { text: `Latest Posts`, url: `/latest`, icon: <AnnouncementIcon /> },
         { text: `Trending Posts`, url: `/trendsByCommunityInteraction`, icon: <TrendingUpIcon /> },
