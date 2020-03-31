@@ -1,3 +1,6 @@
+/**
+ * This context is used for passing auth data across the components
+ */
 import React from "react";
 import userSchemaDefinition from "./userSchemaDefinition";
 import { getUser } from "../../services/auth";

@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/s" page
+ */
 import React from "react";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
@@ -11,15 +14,25 @@ import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
 import { GET_POSTS_FILTERED } from "./queries";
 
 
+/* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
+
+/* Previous frame's scroll position */
+let prevScrollValue = -1;
+
 const DEFAULT_POST_SOURCES = {
     't.me': true,
     'facebook.com': true,
     'instagram.com': true,
     'twitter.com': true
 };
-let prevScrollValue = -1;
 
+/**
+ * 
+ * @param {object} queryParsedURL The parsed query string of the current URL
+ * @param {number} scrollValue The y-scroll position the page is currently in
+ * @param {number} height The total y-scroll available
+ */
 const PostsSearch = withQueryParsedURL(
     ({ queryParsedURL, scrollValue, height }) => {
         const searchTerm = queryParsedURL.search_term;
@@ -125,7 +138,7 @@ const PostsSearch = withQueryParsedURL(
                 startTime={startTime}
                 endTime={endTime}
                 metadataTerm={metadataTerm}
-                isAdvancedFilterCollapsed={!queryParsedURL.expanded} />
+                isAdvancedFilterCollapsed={!Number(queryParsedURL.expanded)} />
 
             <Margin top={`1em`}>
                 <div>

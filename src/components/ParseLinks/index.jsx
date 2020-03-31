@@ -1,8 +1,18 @@
+/**
+ * This component takes in a string and returns clickable hashtags, usernames and links.
+ * It's used heavily throughout the whole website and is without a doubt the most important
+ * component in the whole project.
+ */
 import React from "react";
 import AnchorButton from "../AnchorButton";
 import { isBrowser } from "../../utils";
 
 
+/**
+ * 
+ * @param {React.ElementType} children This component's children
+ * @param {string} sourceLink URL to use as context. This is useful when parsing usernames starting with '@' where a decision needs to be made whether this is a twitter or instagram username
+ */
 const ParseLinks = ({ children, sourceLink }) => {
     if (!children) return null
 
@@ -79,8 +89,6 @@ const ParseLinks = ({ children, sourceLink }) => {
         }
     }
     parts = parts.flat()
-
-
 
 
     return <>{parts}</>;

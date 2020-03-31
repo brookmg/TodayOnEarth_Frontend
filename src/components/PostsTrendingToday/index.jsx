@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/today" page
+ */
 import React from "react";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
@@ -8,12 +11,20 @@ import { StyledDisplayFlexDiv, StyledP } from "./styles";
 import { TRENDING_TODAY_QUERY } from "./queries";
 
 
+/* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
+/* Previous frame's scroll position */
 let prevScrollValue = -1;
+
 const TIME_NOW = Date.now();
 const TIME_24_HOURS_AGO = TIME_NOW - (1 * 24 * 60 * 60 * 1000);
 
+/**
+ * 
+ * @param {number} scrollValue The y-scroll position the page is currently in
+ * @param {number} height The total y-scroll available
+ */
 export const PostsTrendingToday = ({ scrollValue, height }) => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [postsPerPage, setPostsPerPage] = React.useState(DEFAULT_POST_COUNT_PER_PAGE);

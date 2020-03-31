@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/userInterest" page
+ */
 import React from "react";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
@@ -8,12 +11,21 @@ import { StyledDisplayFlexDiv, StyledP } from "./styles";
 import { POSTS_BY_USER_INTEREST_QUERY } from "./queries";
 
 
+/* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
+/* Previous frame's scroll position */
 let prevScrollValue = -1;
+
+/* Time values used to filter the posts */
 const TIME_NOW = Date.now();
 const TIME_A_WEEK_AGO = TIME_NOW - (7 * 24 * 60 * 60 * 1000);
 
+/**
+ * 
+ * @param {number} scrollValue The y-scroll position the page is currently in
+ * @param {number} height The total y-scroll available
+ */
 export const PostsByUserInterest = ({ scrollValue, height }) => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [postsPerPage, setPostsPerPage] = React.useState(DEFAULT_POST_COUNT_PER_PAGE);

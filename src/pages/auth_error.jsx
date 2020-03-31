@@ -1,3 +1,6 @@
+/**
+ * User is redirected to this page if an error occurred either while signing in or signing up
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";

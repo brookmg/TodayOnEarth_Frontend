@@ -1,17 +1,25 @@
+/**
+ * This component is used to indicate positive actions (accept, apply, etc.)
+ */
 import React from "react";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import { Button } from "shards-react";
 
 
-const ButtonSuccess = (props) => {
+/**
+ * 
+ * @param {React.StyleHTMLAttributes} style This component's style 
+ * @param {React.ElementType} children This component's children
+ */
+const ButtonSuccess = ({ style, children, ...rest }) => {
     const theme = React.useContext(ThemePalletteContext)
 
     return (
-        <Button {...props}
+        <Button {...rest}
             style={{
-                ...props.style,
+                ...style,
                 color: theme.color_background,
-            }} theme={`success`}> {props.children} </Button>
+            }} theme={`success`}> {children} </Button>
     );
 }
 

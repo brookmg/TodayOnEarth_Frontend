@@ -1,12 +1,22 @@
+/**
+ * This component is responsible for providing an customized anchor tag that allows users to
+ * hover and preview the url
+ */
 import React from "react";
 import { StyledA, StyledPaddedDiv, StyledDisplayFlexDiv, StyledDisplayFlex1Div, StyledImage, StyledFlex3Div } from "./styles";
 
 
-const AnchorButton = (props) => {
+/**
+ *
+ * @param {string} url Url to use on this component
+ * @param {boolean} isPreviewable Set to true to allow the url to be previewable
+ * @param {function} onClick Callback to execute when this item is clicked
+ * @param {React.ElementType} children The anchor components children 
+ */
+const AnchorButton = ({ isPreviewable, url, onClick, children, ...rest }) => {
     const handleShareClick = (e) => {
         e.preventDefault();
     }
-    const isPreviewable = props.isPreviewable
 
     const [isHovered, setIsHovered] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
@@ -15,7 +25,7 @@ const AnchorButton = (props) => {
     const handleOnMouseEnter = () => isPreviewable && setIsHovered(true)
     const handleOnMouseLeave = () => { } //setIsHovered(false)
 
-    const linkPreviewUrl = `${process.env.GATSBY_LINK_PREVIEWER_API}${encodeURIComponent(props.url)}`
+    const linkPreviewUrl = `${process.env.GATSBY_LINK_PREVIEWER_API}${encodeURIComponent(url)}`
 
     if (isHovered && !isLoading && !linkPreviewData.title) {
         console.log(`loading`)
@@ -29,16 +39,15 @@ const AnchorButton = (props) => {
 
 
     return (
-        <span onClick={props.onClick}>
+        <span onClick={onClick}>
             <StyledA
                 onMouseEnter={handleOnMouseEnter}
                 onMouseLeave={handleOnMouseLeave}
-
-                {...props}
-                href={props.url || ``}
+                {...rest}
+                href={url || ``}
                 onClick={handleShareClick}
             >
-                {props.children}
+                {children}
             </StyledA>
             {isPreviewable &&
                 <StyledPaddedDiv>

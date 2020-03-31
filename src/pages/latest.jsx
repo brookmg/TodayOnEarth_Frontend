@@ -1,3 +1,9 @@
+/**
+ * This page shows the newest posts first. 
+ * 
+ * This page is also connected to a gql subscription for real-time
+ * updates
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";

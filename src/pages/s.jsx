@@ -1,3 +1,8 @@
+/**
+ * This page allows users to search for posts
+ * 
+ * Note: This is a dynamic page
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";

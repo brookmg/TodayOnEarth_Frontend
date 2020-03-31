@@ -1,3 +1,6 @@
+/**
+ * This file contains styles for Image component
+ */
 import styled from "styled-components";
 
 

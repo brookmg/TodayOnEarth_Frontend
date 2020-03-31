@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/latest" page
+ */
 import React from "react";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
@@ -10,15 +13,25 @@ import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
 import { LATEST_POSTS_QUERY, POST_SUBSCRIPTION } from "./queries";
 
 
+/* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
+
+/* Previous frame's scroll position */
+let prevScrollValue = -1;
+
+/* Post sources available by default */
 const DEFAULT_POST_SOURCES = {
     't.me': true,
     'facebook.com': true,
     'instagram.com': true,
     'twitter.com': true
 };
-let prevScrollValue = -1;
 
+/**
+ * 
+ * @param {number} scrollValue The y-scroll position the page is currently in
+ * @param {number} height The total y-scroll available
+ */
 const PostsLatest = ({ scrollValue, height }) => {
     const theme = React.useContext(ThemePalletteContext);
     const [pageNumber, setPageNumber] = React.useState(0);

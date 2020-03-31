@@ -1,3 +1,6 @@
+/**
+ * This component is a fancy shimmering background used in the post detail page ("/p")
+ */
 import React from "react";
 import { StyledContentLoader } from "./styles";
 

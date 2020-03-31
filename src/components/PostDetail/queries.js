@@ -1,3 +1,6 @@
+/**
+ * This file contains queries for PostDetail component
+ */
 import gql from "graphql-tag";
 
 
@@ -40,6 +43,7 @@ query fetchPostDetail($postid: Int!) {
 }
 
 `;
+
 export const POST_OPENED_MUTATION = gql`
 
 mutation setPostOpened($postid: Int){

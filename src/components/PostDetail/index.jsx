@@ -1,3 +1,6 @@
+/**
+ * This component shows a posts details, for logged in users it will also show the relevance chart
+ */
 import React from "react";
 import AnchorButton from "../AnchorButton";
 import withQueryParsedURL from "../HOCs/withQueryParsedURL";
@@ -14,6 +17,10 @@ import { POST_OPENED_MUTATION, GET_POST_DETAIL } from "./queries";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 
 
+/**
+ * 
+ * @param {object} queryParsedURL The parsed query string of the current URL
+ */
 const PostDetail = withQueryParsedURL(
     ({ queryParsedURL }) => {
         const theme = React.useContext(ThemePalletteContext)

@@ -1,3 +1,6 @@
+/**
+ * This file contains queries for PostsLatest component
+ */
 import gql from "graphql-tag";
 
 
@@ -43,6 +46,7 @@ query getLatestPaginatedPosts(
   }
 }
 `;
+
 export const POST_SUBSCRIPTION = gql`
 
 subscription getNewPosts{

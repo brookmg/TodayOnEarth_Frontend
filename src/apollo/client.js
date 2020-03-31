@@ -1,3 +1,6 @@
+/**
+ * This file holds the apollo client used throughout the whole app
+ */
 import ApolloClient from "apollo-client";
 import fetch from "isomorphic-fetch";
 import ws from "ws";

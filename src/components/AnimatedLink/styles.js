@@ -1,3 +1,6 @@
+/**
+ * This file contains styles for AnimatedLink component
+ */
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import styled from "styled-components";
 

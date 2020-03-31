@@ -1,3 +1,6 @@
+/**
+ * This file contains queries for PostsByCommunityInteraction component
+ */
 import gql from "graphql-tag";
 
 
@@ -47,6 +50,7 @@ query getPostsByAbsoluteCommunityInteraction(
     }
 }
 `;
+
 export const RELATIVE_COMMUNITY_INTERACTION_QUERY = gql`
 
 query getPostsByRelativeCommunityInteraction(

@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/trendsByTopic" page
+ */
 import React from "react";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
@@ -15,7 +18,7 @@ import { StyledColumnDiv, StyledDisplayFlexDiv, StyledLeftAlignDiv, StyledFontSi
 import { GET_POSTS_BY_TOPIC_QUERY } from "./queries";
 
 
-const PostsByTopic = (props) => {
+const PostsByTopic = () => {
     const theme = React.useContext(ThemePalletteContext);
     const [monitoredTopics, setMonitoredTopics] = React.useState({});
     const [newTopic, setNewTopic] = React.useState(``);

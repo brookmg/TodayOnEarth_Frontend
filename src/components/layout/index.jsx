@@ -1,3 +1,8 @@
+/**
+ * This component is the responsive main layout. It's used in every page and serves to 
+ * structure the layout elements (header, navbar, footer). Additionally it's also used to 
+ * hold the click effect canvas and toast layout.
+ */
 import React from "react";
 import Header from "../header";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,6 +21,13 @@ import { StyledToastContainer, StyledCanvas, StyledFlexDirectionRowDiv, StyledFl
 import { POSTS_SUBSCRIPTION } from "./queries";
 
 
+/**
+ * 
+ * @param {function} render Render function to use. This is used to pass the scroll state to the children. If this is provided, children will not be rendered
+ * @param {React.ElementType} children This component's children, will be ignored if render prop is available
+ * @param {React.ElementType} rightSideDesktopComponent Component to show on the right side of the layout. This is available only on desktop
+ * @param {React.ElementType} leftSideDesktopComponent Component to show on the left side of the layout. This is available only on desktop
+ */
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 

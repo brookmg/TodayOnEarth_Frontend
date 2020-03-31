@@ -1,3 +1,6 @@
+/**
+ * This component enables user to input their theme preferences
+ */
 import React from "react";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
@@ -13,7 +16,7 @@ import DefaultThemeDefinition, { availableFonts } from "../../contexts/ThemePall
 import { StyledSelect } from "./styles";
 
 
-const ThemePreferenceSection = (props) => {
+const ThemePreferenceSection = () => {
     const theme = React.useContext(ThemePalletteContext);
     const handleBGColorChange = (e) => theme.setTheme({ ...theme, color_background: e.target.value });
     const handleTextColorChange = (e) => theme.setTheme({ ...theme, color_text: e.target.value });

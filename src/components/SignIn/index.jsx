@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/signin" page
+ */
 import React from "react";
 import AuthContext from "../../contexts/AuthContext";
 import Margin from "../CompoundComponents/Margin";

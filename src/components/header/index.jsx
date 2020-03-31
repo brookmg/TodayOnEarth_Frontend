@@ -1,3 +1,6 @@
+/**
+ * This component is the responsive top bar used in all pages
+ */
 import React from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import SearchIcon from "@material-ui/icons/Search";
@@ -12,6 +15,10 @@ import { isBrowser } from "../../utils";
 import { StyledHeader, StyledNavigationBar, StyledOverlayDiv, StyledTitleDiv, StyledDisplayFlexDiv, StyledFlex1Margin0H1, StyledAnimatedLink, StyledDisplayFlexCenterTextDiv, StyledFade } from "./styles";
 
 
+/**
+ * 
+ * @param {string} siteTitle Title to display on header
+ */
 const Header = ({ siteTitle }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
 

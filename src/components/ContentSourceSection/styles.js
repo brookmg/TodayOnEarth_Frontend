@@ -1,3 +1,6 @@
+/**
+ * This file contains styles for ContentSourceSection component
+ */
 import styled from "styled-components";
 import ButtonCustom from "../ButtonCustom";
 import { FormSelect } from "shards-react";
@@ -8,15 +11,19 @@ export const StyledMarginButtonCustom = styled(ButtonCustom)`
     padding: 0;
     margin: 0.5em;
 `;
+
 export const StyledDisplayFlexDiv = styled.div`
     display: flex;
 `;
+
 export const StyledDisplayCenterFlexDiv = styled(StyledDisplayFlexDiv)`
     justify-content: center;
 `;
+
 export const StyledDisplayAlignCenterFlexDiv = styled(StyledDisplayFlexDiv)`
     align-items: center;
 `;
+
 export const StyledRelativeDiv = styled.div`
     position: relative;
     &:focus-within {
@@ -25,6 +32,7 @@ export const StyledRelativeDiv = styled.div`
         }
     }
 `;
+
 export const StyledFloatingDiv = styled.div`
     position: absolute;
     z-index: 1;
@@ -38,6 +46,7 @@ export const StyledFloatingDiv = styled.div`
     border-bottom-right-radius: 50%;
     box-shadow:0 .313rem .719rem rgba(0,123,255,.1),0 .156rem .125rem rgba(0,0,0,.06);
 `;
+
 export const StyledP = styled.p`
     margin: 0.5em;
     
@@ -48,12 +57,15 @@ export const StyledP = styled.p`
         }
     }
 `;
+
 export const StyledHiddenIcon = styled.span`
     display: none;
 `;
+
 export const StyledFlex1Div = styled.div`
     flex: 1;
 `;
+
 export const StyledSelect = styled(FormSelect)`
     width: auto;
 `;

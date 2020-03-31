@@ -3,7 +3,8 @@
  * The schema definition is needed when using non-static data types such as fragments or unions.
  * 
  * More info: https://medium.com/commutatus/whats-going-on-with-the-heuristic-fragment-matcher-in-graphql-apollo-client-e721075e92be
- * 
+ *
+ * Note: This script is not used in the React code, but it should be executed on the development machine
  */
 
 const fetch = require(`node-fetch`);

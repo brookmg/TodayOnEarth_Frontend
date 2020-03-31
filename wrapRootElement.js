@@ -1,3 +1,6 @@
+/**
+ * This component is the root element wrapper for both SSR and browser renders
+ */
 import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { AuthProvider } from "./src/contexts/AuthContext";

@@ -1,3 +1,8 @@
+/**
+ * This component lets users modify their interests
+ * 
+ * Note: User needs to be logged in for this page to work as intended
+ */
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Margin from "../CompoundComponents/Margin";
@@ -13,6 +18,7 @@ import { StyledRelativeDiv, StyledFloatingDiv, StyledDisplayCenterFlexDiv, Style
 import { GET_USER_PROVIDERS, GET_ALL_PROVIDERS, ADD_PROVIDER, REMOVE_PROVIDER } from "./queries";
 
 
+/* This is a list of providers the server can process */
 const AVAILABLE_SOURCES = [`Facebook`, `Instagram`, `Telegram`, `Twitter`]
 
 const ContentSourceSection = () => {

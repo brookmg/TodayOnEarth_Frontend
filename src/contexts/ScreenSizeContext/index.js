@@ -1,3 +1,6 @@
+/**
+ * This context is used for passing screen size to some responsive components
+ */
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 

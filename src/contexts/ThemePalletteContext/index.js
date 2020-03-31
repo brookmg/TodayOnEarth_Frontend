@@ -1,3 +1,6 @@
+/**
+ * This context is used for passing theme information to various components
+ */
 import React from "react";
 import DefaultThemeDefinition from "./DefaultThemeDefinition";
 import { isBrowser } from "../../utils";

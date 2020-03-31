@@ -1,3 +1,13 @@
+/**
+ * This page allows a user (both signed in and guest) to customize the system
+ * 
+ * Settings available for authenticated users:
+ *  - User Interest Entry
+ *  - Content Sources
+ * 
+ * Settings available for all users:
+ *  - Theme
+ */
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";

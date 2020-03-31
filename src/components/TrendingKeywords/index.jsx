@@ -1,3 +1,7 @@
+/**
+ * This component is refactored from the "/latest" page. 
+ * It shows a list of keywords that are trending today
+ */
 import React from "react";
 import Margin from "../CompoundComponents/Margin";
 import ParseLinks from "../ParseLinks";
@@ -7,7 +11,7 @@ import { StyledBoldCenterDiv, StyledLeftDiv, StyledDiv, StyledLeftP } from "./st
 import { GET_TODAYS_TRENDING_KEYWORDS } from "./queries";
 
 
-const TrendingKeywords = (props) => {
+const TrendingKeywords = () => {
     const [semanticEnabled, setSemanticEnabled] = React.useState(false);
     const { loading, error, data } = useQuery(GET_TODAYS_TRENDING_KEYWORDS, {
         variables: {

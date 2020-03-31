@@ -1,3 +1,6 @@
+/**
+ * This file contains queries for PostInteraction component
+ */
 import gql from "graphql-tag";
 
 
@@ -8,6 +11,7 @@ mutation setPostLiked($postid: Int){
 }
 
 `;
+
 export const POST_UNLIKED_MUTATION = gql`
 
 mutation setUnPostLiked($postid: Int){
@@ -15,6 +19,7 @@ mutation setUnPostLiked($postid: Int){
 }
 
 `;
+
 export const POST_DISLIKED_MUTATION = gql`
 
 mutation setPostDisLiked($postid: Int){
@@ -22,6 +27,7 @@ mutation setPostDisLiked($postid: Int){
 }
 
 `;
+
 export const POST_UNDISLIKED_MUTATION = gql`
 
 mutation setPostUnDisLiked($postid: Int){

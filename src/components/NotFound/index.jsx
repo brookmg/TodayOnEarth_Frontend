@@ -1,3 +1,6 @@
+/**
+ * This component is refactored from the "/404" page
+ */
 import React from "react";
 
 
