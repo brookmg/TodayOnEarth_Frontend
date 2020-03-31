@@ -23,8 +23,6 @@ const ThemedRelevanceChart = ({ postId }) => {
         },
         skip: !postId,
         onCompleted: data => {
-            console.log(`dataa`, data)
-
             if (data && data.getPostRelevancePerUserInterests) {
                 const newInterests = [];
                 const newScores = [];
