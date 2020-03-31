@@ -58,11 +58,8 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
         const height = scrollDivRef.current.scrollHeight
 
         if (prevScrollValue !== scrollValue && scrollValue !== 0 && scrollValue >= height) {
-            console.log("is bottom reached true")
             setIsBottomReached(true)
         } else {
-            console.log("is bottom reached false")
-
             setIsBottomReached(false)
         }
         prevScrollValue = scrollValue
