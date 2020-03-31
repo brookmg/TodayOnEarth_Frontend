@@ -44,9 +44,9 @@ export const PostsByProvider = ({ isBottomReached }) => {
                 setHasMorePosts(false);
         }
     };
-    const loadPostsWithHooks = (optionalPageCount) => loadPosts({
+    const loadPostsWithHooks = (optionalPageCount, optionalPageNumber) => loadPosts({
         variables: {
-            page: pageNumber,
+            page: optionalPageNumber || pageNumber,
             range: optionalPageCount || postsPerPage,
             filter
         },
@@ -70,7 +70,9 @@ export const PostsByProvider = ({ isBottomReached }) => {
     });
 
     if (posts.length && prevIsBottomReached !== isBottomReached && isBottomReached && hasMorePosts) {
-        setPageNumber(pageNumber + 1);
+        const newPageNumber = pageNumber + 1
+        setPageNumber(newPageNumber);
+        loadPostsWithHooks(false, newPageNumber)
     }
     prevIsBottomReached = isBottomReached
 
