@@ -17,8 +17,8 @@ import { GET_POSTS_FILTERED } from "./queries";
 /* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
-/* Previous frame's scroll position */
-let prevScrollValue = -1;
+/* Previous frame's isBottomReached value */
+let prevIsBottomReached = false
 
 const DEFAULT_POST_SOURCES = {
     't.me': true,
@@ -30,11 +30,10 @@ const DEFAULT_POST_SOURCES = {
 /**
  * 
  * @param {object} queryParsedURL The parsed query string of the current URL
- * @param {number} scrollValue The y-scroll position the page is currently in
- * @param {number} height The total y-scroll available
+ * @param {boolean} isBottomReached Will be set to true if bottom of page is reached
  */
 const PostsSearch = withQueryParsedURL(
-    ({ queryParsedURL, scrollValue, height }) => {
+    ({ queryParsedURL, isBottomReached }) => {
         const searchTerm = queryParsedURL.search_term;
         const metadataTerm = queryParsedURL.metadata_term || ``;
         const locations = (queryParsedURL.locations || ``).split(`,`);
@@ -96,11 +95,12 @@ const PostsSearch = withQueryParsedURL(
             notifyOnNetworkStatusChange: true,
             fetchPolicy: `cache-and-network`
         });
-        if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
-            if (prevScrollValue !== scrollValue)
-                setPageNumber(pageNumber + 1);
-            prevScrollValue = scrollValue;
+
+        if (posts.length && prevIsBottomReached !== isBottomReached && isBottomReached && hasMorePosts) {
+            setPageNumber(pageNumber + 1);
         }
+        prevIsBottomReached = isBottomReached
+
         const resetPosts = () => {
             setPosts([]);
             setPageNumber(0);
@@ -131,7 +131,7 @@ const PostsSearch = withQueryParsedURL(
             resetPosts();
             setPostSources(newSources);
         };
-        return (<div scrollValue={scrollValue} height={height}>
+        return (<div isBottomReached={isBottomReached}>
             <AdvancedFiltersSection
                 searchTerm={searchTerm}
                 locations={locations}

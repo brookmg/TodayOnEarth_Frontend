@@ -16,11 +16,11 @@ const UserInterestPage = withRunTimeLoaded(
         return (
             <Layout
                 render={
-                    ({ scrollValue, height }) => {
+                    (isBottomReached) => {
                         return (
                             <>
                                 <SEO title={`Posts sorted by user interest`} />
-                                <PostsByUserInterest scrollValue={scrollValue} height={height} />
+                                <PostsByUserInterest isBottomReached={isBottomReached} />
                             </>
                         )
                     }}>

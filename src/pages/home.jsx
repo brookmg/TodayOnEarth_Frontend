@@ -15,11 +15,11 @@ const HomePage = withRunTimeLoaded(
         return (
             <Layout
                 render={
-                    ({ scrollValue, height }) => {
+                    (isBottomReached) => {
                         return (
                             <>
                                 <SEO title={`Home`} />
-                                <PostsFromUserProvider scrollValue={scrollValue} height={height} />
+                                <PostsFromUserProvider isBottomReached={isBottomReached} />
                             </>
                         )
                     }}>

@@ -14,8 +14,8 @@ import { POSTS_BY_USER_INTEREST_QUERY } from "./queries";
 /* How many posts to show initially */
 const DEFAULT_POST_COUNT_PER_PAGE = 5;
 
-/* Previous frame's scroll position */
-let prevScrollValue = -1;
+/* Previous frame's isBottomReached value */
+let prevIsBottomReached = false
 
 /* Time values used to filter the posts */
 const TIME_NOW = Date.now();
@@ -23,10 +23,9 @@ const TIME_A_WEEK_AGO = TIME_NOW - (7 * 24 * 60 * 60 * 1000);
 
 /**
  * 
- * @param {number} scrollValue The y-scroll position the page is currently in
- * @param {number} height The total y-scroll available
+ * @param {boolean} isBottomReached Will be set to true if bottom of page is reached
  */
-export const PostsByUserInterest = ({ scrollValue, height }) => {
+export const PostsByUserInterest = ({ isBottomReached }) => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [postsPerPage, setPostsPerPage] = React.useState(DEFAULT_POST_COUNT_PER_PAGE);
     const [hasMorePosts, setHasMorePosts] = React.useState(true);
@@ -53,11 +52,12 @@ export const PostsByUserInterest = ({ scrollValue, height }) => {
         notifyOnNetworkStatusChange: true,
         fetchPolicy: `cache-and-network`
     });
-    if (posts.length && scrollValue !== 0 && scrollValue >= height && hasMorePosts) {
-        if (prevScrollValue !== scrollValue)
-            setPageNumber(pageNumber + 1);
-        prevScrollValue = scrollValue;
+
+    if (posts.length && prevIsBottomReached !== isBottomReached && isBottomReached && hasMorePosts) {
+        setPageNumber(pageNumber + 1);
     }
+    prevIsBottomReached = isBottomReached
+
     const resetPosts = () => {
         setPageNumber(0);
         setPosts([]);

@@ -15,11 +15,11 @@ const LatestPage = withRunTimeLoaded(
   () => {
     return (
       <Layout render={
-        ({ scrollValue, height }) => {
+        (isBottomReached) => {
           return (
             <>
               <SEO title={`Latest Posts`} />
-              <PostsLatest scrollValue={scrollValue} height={height} />
+              <PostsLatest isBottomReached={isBottomReached} />
             </>
           )
         }}>

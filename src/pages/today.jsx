@@ -20,11 +20,11 @@ const TodayPage = withRunTimeLoaded(
                     <TrendingKeywords />
                 )}
                 render={
-                    ({ scrollValue, height }) => {
+                    (isBottomReached) => {
                         return (
                             <>
                                 <SEO title={`Todays Posts`} />
-                                <PostsTrendingToday scrollValue={scrollValue} height={height} />
+                                <PostsTrendingToday isBottomReached={isBottomReached} />
                             </>
                         )
                     }}>

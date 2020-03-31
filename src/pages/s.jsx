@@ -14,11 +14,11 @@ const SearchPage = withRunTimeLoaded(
     () => {
         return (
             <Layout render={
-                ({ scrollValue, height }) => {
+                (isBottomReached) => {
                     return (
                         <>
                             <SEO title={`Search Post`} />
-                            <PostsSearch scrollValue={scrollValue} height={height} />
+                            <PostsSearch isBottomReached={isBottomReached} />
                         </>
                     )
                 }}>
