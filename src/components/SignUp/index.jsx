@@ -34,7 +34,7 @@ const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id
     const handleUpdate = event => {
         setUser({ ...user, [event.target.name]: event.target.value });
     };
-    const handleSubmit = event => {
+    const handleSignUpClick = event => {
         event.preventDefault();
         signUp(user)
             .then(() => auth.refreshActiveUser(() => navigate(`/app/profile`)))
@@ -44,9 +44,7 @@ const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id
     const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT;
     return (<>
         <h1>Sign up</h1>
-        <form method={`post`} onSubmit={event => {
-            handleSubmit(event);
-        }}>
+        <div>
             <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? `row` : `column` }}>
                 <StyledFlex1Div>
                     <Margin horizontal={`0.5em`} vertical={`0.25em`}>
@@ -114,10 +112,10 @@ const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id
 
 
             <Margin vertical={`1em`} right={`1em`}>
-                <ButtonSuccess type={`submit`}>Sign Up</ButtonSuccess><br />
+                <ButtonSuccess onClick={handleSignUpClick}>Sign Up</ButtonSuccess><br />
                 <AnchorButton url={`/app/login`} onClick={handleSignInClick}>Already have an account? Log in here</AnchorButton>
             </Margin>
-        </form>
+        </div>
     </>);
 };
 export default SignUp
