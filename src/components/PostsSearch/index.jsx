@@ -7,10 +7,11 @@ import PostHolderCard from "../PostHolderCard";
 import withQueryParsedURL from "../HOCs/withQueryParsedURL";
 import Margin from "../CompoundComponents/Margin";
 import AdvancedFiltersSection from "../AdvancedFiltersSection";
+import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { FormCheckbox, FormSelect } from "shards-react";
 import { useQuery } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
-import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
+import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP, StyledFlex1Div, StyledFlex2Div } from "./styles";
 import { GET_POSTS_FILTERED } from "./queries";
 
 
@@ -34,6 +35,7 @@ const DEFAULT_POST_SOURCES = {
  */
 const PostsSearch = withQueryParsedURL(
     ({ queryParsedURL, isBottomReached }) => {
+        const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
         const searchTerm = queryParsedURL.search_term;
         const metadataTerm = queryParsedURL.metadata_term || ``;
         const locations = (queryParsedURL.locations || ``).split(`,`);
@@ -45,7 +47,7 @@ const PostsSearch = withQueryParsedURL(
         const [posts, setPosts] = React.useState([]);
         const [postSources, setPostSources] = React.useState(DEFAULT_POST_SOURCES);
         const filter = []; // built dynamically, according to params provided by user
-        if (searchTerm !== ``) {
+        if (searchTerm && searchTerm !== ``) {
             filter.push({ title: searchTerm, connector: `AND` });
             filter.push({ keyword: searchTerm, connector: `AND` });
         }
@@ -91,6 +93,7 @@ const PostsSearch = withQueryParsedURL(
                 postsPerPage: postsPerPage,
                 filter
             },
+            skip: (!searchTerm || searchTerm === ""),
             onCompleted: handleNewData,
             notifyOnNetworkStatusChange: true,
             fetchPolicy: `cache-and-network`
@@ -131,41 +134,62 @@ const PostsSearch = withQueryParsedURL(
             resetPosts();
             setPostSources(newSources);
         };
-        return (<div isBottomReached={isBottomReached}>
-            <AdvancedFiltersSection
-                searchTerm={searchTerm}
-                locations={locations}
-                startTime={startTime}
-                endTime={endTime}
-                metadataTerm={metadataTerm}
-                isAdvancedFilterCollapsed={!Number(queryParsedURL.expanded)} />
-
-            <Margin top={`1em`}>
-                <div>
-                    <StyledDisplayFlexDiv>
-                        <StyledFlex1CenterSpan>
+        return (
+            <StyledDisplayFlexDiv isBottomReached={isBottomReached} style={{ flexDirection: isDesktopOrLaptop ? `row-reverse` : `column` }}>
+                <StyledFlex1Div>
+                    <Margin horizontal={`1em`}>
+                        <div style={
+                            isDesktopOrLaptop ? {
+                                position: `fixed`,
+                                height: `80%`,
+                                padding: `1em`,
+                                overflowY: `auto`,
+                                bottom: 0,
+                                right: 0,
+                                width: `30vw`
+                            } : {}
+                        }>
                             <div>
-                                Feed sources
-                        </div>
-                            <span>
-                                {Object.keys(postSources).map(e => <FormCheckbox inline key={e} checked={!!postSources[e]} onChange={ev => handlePostSourceChange(ev, e)}>
-                                    {e}
-                                </FormCheckbox>)}
-                            </span>
-                        </StyledFlex1CenterSpan>
+                                <StyledDisplayFlexDiv>
+                                    <StyledFlex1CenterSpan>
+                                        <div>
+                                            Feed sources
+                                    </div>
+                                        <span>
+                                            {Object.keys(postSources).map(e => <FormCheckbox inline key={e} checked={!!postSources[e]} onChange={ev => handlePostSourceChange(ev, e)}>
+                                                {e}
+                                            </FormCheckbox>)}
+                                        </span>
+                                    </StyledFlex1CenterSpan>
 
-                        <div>
-                            <label>
-                                Posts per page:
-                            <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
-                                    {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (<option key={i} value={e}>
-                                        {e}
-                                    </option>))}
-                                </FormSelect>
-                            </label>
+                                    <div>
+                                        <label>
+                                            Posts per page:
+                                        <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
+                                                {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (<option key={i} value={e}>
+                                                    {e}
+                                                </option>))}
+                                            </FormSelect>
+                                        </label>
+                                    </div>
+                                </StyledDisplayFlexDiv>
+                            </div>
+                            <AdvancedFiltersSection
+                                searchTerm={searchTerm}
+                                locations={locations}
+                                startTime={startTime}
+                                endTime={endTime}
+                                metadataTerm={metadataTerm}
+                                isAdvancedFilterCollapsed={!Number(queryParsedURL.expanded)} />
                         </div>
-                    </StyledDisplayFlexDiv>
-                    <h2>Search results for: "{queryParsedURL.search_term}"</h2>
+                    </Margin>
+                </StyledFlex1Div>
+                <StyledFlex2Div>
+                    {
+                        (searchTerm && searchTerm !== "") ?
+                            <h2>Search results for: "{searchTerm}"</h2> :
+                            <h2>Type in a search term and click "Refine Search" </h2>
+                    }
                     {posts &&
                         (posts.length === 0 && !loading && !hasMorePosts) ?
                         <p>Nothing found :(</p>
@@ -180,9 +204,9 @@ const PostsSearch = withQueryParsedURL(
                             You have seen all the posts <EmojiEmotionsSharpIcon />
                         </StyledP>
                     }
-                </div>
-            </Margin>
-        </div>);
+                </StyledFlex2Div>
+            </StyledDisplayFlexDiv>
+        );
     }
 );
 
