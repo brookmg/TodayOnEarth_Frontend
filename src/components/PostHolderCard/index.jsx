@@ -13,6 +13,7 @@ import PostInteraction from "../PostInteraction";
 import { Link } from "gatsby";
 import { CardBody, CardFooter } from "shards-react";
 import { StyledThemedCard, StyledDiv, StyledImage, StyledFlexDiv, StyledA } from "./styles";
+import { isLoggedIn } from "../../services/auth";
 
 
 /**
@@ -28,7 +29,7 @@ const PostHolderCard = ({ imgSrc, id, title, body, sourceLink, metadata }) => {
     const theme = React.useContext(ThemePalletteContext)
 
     return (
-        <Margin vertical={`1rem`}>
+        <Margin vertical={`1rem`} horizontal={`auto`}>
             <StyledThemedCard style={{
                 borderTopLeftRadius: imgSrc && `5rem`,
             }}>
@@ -62,8 +63,10 @@ const PostHolderCard = ({ imgSrc, id, title, body, sourceLink, metadata }) => {
                     }
                 </Link>
 
-                <PostInteraction postid={id} />
-
+                {
+                    isLoggedIn() &&
+                    <PostInteraction postid={id} />
+                }
                 <Margin left={`1rem`} bottom={`0.5rem`}>
                     <div>
                         <PostMetadata sourceLink={sourceLink} communityInteraction={metadata.community_interaction} />

@@ -6,6 +6,7 @@ import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
 import ButtonInterest from "../ButtonInterest";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
+import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { useQuery } from "@apollo/react-hooks";
 import { FormCheckbox, FormInput } from "shards-react";
 import {
@@ -14,12 +15,13 @@ import {
     removeRedundantWhitespace,
     convertDateToInputFormat
 } from "../../utils";
-import { StyledColumnDiv, StyledDisplayFlexDiv, StyledLeftAlignDiv, StyledFontSizeDiv, StyledFlex1CenterDiv, StyledFlex1CenterFullWidthDiv, StyledP } from "./styles";
+import { StyledColumnDiv, StyledDisplayFlexDiv, StyledLeftAlignDiv, StyledFontSizeDiv, StyledFlex1CenterDiv, StyledFlex1CenterFullWidthDiv, StyledP, StyledFlex1Div, StyledFlex2Div } from "./styles";
 import { GET_POSTS_BY_TOPIC_QUERY } from "./queries";
 
 
 const PostsByTopic = () => {
     const theme = React.useContext(ThemePalletteContext);
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const [monitoredTopics, setMonitoredTopics] = React.useState({});
     const [newTopic, setNewTopic] = React.useState(``);
     const [startTime, setStartTime] = React.useState(convertDateToInputFormat(0));
@@ -69,64 +71,86 @@ const PostsByTopic = () => {
     const handleMaxPostsChange = (ev) => setMaxPosts(Number(ev.target.value));
     const posts = data && data.getPostsSortedByCustomKeywords || [];
     return (
-        <div>
-            <h2>Posts Sorted using Custom Topics</h2>
-            <StyledColumnDiv>
-                <StyledDisplayFlexDiv>
-                    <Margin vertical={`1em`} horizontal={`1em`}>
-                        <div>
-                            <StyledLeftAlignDiv>
-                                <FormCheckbox toggle small checked={isSemanticEnabled} onChange={handleSemanticChange}>
-                                    Enable Semantic Analysis
+        <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? `row-reverse` : `column` }}>
+            <StyledFlex1Div>
+                <Margin horizontal={`1em`}>
+                    <div style={
+                        isDesktopOrLaptop ? {
+                            position: `fixed`,
+                            height: `80%`,
+                            padding: `1em`,
+                            overflowY: `auto`,
+                            bottom: 0,
+                            right: 0,
+                            width: `30vw`
+                        } : {}
+                    }>
+                        <h2>Posts Sorted using Custom Topics</h2>
+                        <StyledColumnDiv>
+                            <StyledDisplayFlexDiv style={
+                                isDesktopOrLaptop ? {
+                                    flexDirection: `column`,
+                                } : {}
+                            }>
+                                <Margin vertical={`1em`} horizontal={`1em`}>
+                                    <div>
+                                        <StyledLeftAlignDiv>
+                                            <FormCheckbox toggle small checked={isSemanticEnabled} onChange={handleSemanticChange}>
+                                                Enable Semantic Analysis
                                 </FormCheckbox>
-                            </StyledLeftAlignDiv>
+                                        </StyledLeftAlignDiv>
 
-                            <StyledLeftAlignDiv>
-                                Posts to process
+                                        <StyledLeftAlignDiv>
+                                            Posts to process
                                 <StyledFontSizeDiv>
-                                    (Note: If semantic analysis is enabled, increasing posts count will take a very LONG time to process)
+                                                (Note: If semantic analysis is enabled, increasing posts count will take a very LONG time to process)
                                 </StyledFontSizeDiv>
-                                <FormInput type={`number`} value={maxPosts} onChange={handleMaxPostsChange} />
-                            </StyledLeftAlignDiv>
-                        </div>
+                                            <FormInput type={`number`} value={maxPosts} onChange={handleMaxPostsChange} />
+                                        </StyledLeftAlignDiv>
+                                    </div>
 
-                        <StyledFlex1CenterDiv>
-                            Starting From: <FormInput value={startTime} onChange={handleStartTimeChange} type={`date`} size={`sm`} />
+                                    <StyledFlex1CenterDiv style={isDesktopOrLaptop ? { alignSelf: `auto` } : {}}>
+                                        Starting From: <FormInput value={startTime} onChange={handleStartTimeChange} type={`date`} size={`sm`} />
                             Ending At: <FormInput value={endTime} onChange={handleEndTimeChange} type={`date`} size={`sm`} />
-                        </StyledFlex1CenterDiv>
-                    </Margin>
-                </StyledDisplayFlexDiv>
-                <StyledFlex1CenterFullWidthDiv>
-                    <div>
-                        Monitored topics
-                    </div>
-                    <div>
-                        <FormInput placeholder={`Add topic`} value={newTopic} onChange={handleNewTopicChange} type={`text`} size={`sm`} plaintext={false} onKeyDown={handleNewTopicKeyDown} />
-                    </div>
-                    <div>
-                        <Margin vertical={`0.5em`}>
-                            {
-                                monitoredTopicsList.length ?
-                                    monitoredTopicsList.map(e => <ButtonInterest key={e} onInterestClick={handleMonitoredTopicsClick} onInterestClose={handleMonitoredTopicsClose}>{e}</ButtonInterest>)
-                                    : <StyledP style={{
-                                        color: theme.color_text_faded,
-                                    }}>
-                                        You are not monitoring any topics
+                                    </StyledFlex1CenterDiv>
+                                </Margin>
+                            </StyledDisplayFlexDiv>
+                            <StyledFlex1CenterFullWidthDiv>
+                                <div>
+                                    Monitored topics
+                                </div>
+
+                                <div>
+                                    <FormInput placeholder={`Add topic`} value={newTopic} onChange={handleNewTopicChange} type={`text`} size={`sm`} plaintext={false} onKeyDown={handleNewTopicKeyDown} />
+                                </div>
+                                <div>
+                                    <Margin vertical={`0.5em`} horizontal={`0.1em`}>
+                                        {
+                                            monitoredTopicsList.length ?
+                                                monitoredTopicsList.map(e => <ButtonInterest key={e} onInterestClick={handleMonitoredTopicsClick} onInterestClose={handleMonitoredTopicsClose}>{e}</ButtonInterest>)
+                                                : <StyledP style={{
+                                                    color: theme.color_text_faded,
+                                                }}>
+                                                    You are not monitoring any topics
                                 </StyledP>
-                            }
-                        </Margin>
+                                        }
+                                    </Margin>
+                                </div>
+                            </StyledFlex1CenterFullWidthDiv>
+
+                        </StyledColumnDiv>
                     </div>
-                </StyledFlex1CenterFullWidthDiv>
+                </Margin>
+            </StyledFlex1Div>
+            <StyledFlex2Div>
+                {loading && <p>Loading Posts...</p>}
+                {error && <p>Error: ${error.message}</p>}
 
-            </StyledColumnDiv>
-            {loading && <p>Loading Posts...</p>}
-            {error && <p>Error: ${error.message}</p>}
-
-            {!loading && posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
-                getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
-            } metadata={p.metadata} />)}
-
-        </div>
+                {!loading && posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
+                    getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
+                } metadata={p.metadata} />)}
+            </StyledFlex2Div>
+        </StyledDisplayFlexDiv>
     );
 };
 export default PostsByTopic

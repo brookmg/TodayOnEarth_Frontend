@@ -10,7 +10,7 @@ import PostsFromUserProvider from "../components/PostsFromUserProvider";
 import withRunTimeLoaded from "../components/HOCs/withRunTimeLoaded";
 
 
-const HomePage = withRunTimeLoaded(
+const UserFeedPage = withRunTimeLoaded(
     () => {
         return (
             <Layout
@@ -18,7 +18,7 @@ const HomePage = withRunTimeLoaded(
                     (isBottomReached) => {
                         return (
                             <>
-                                <SEO title={`Home`} />
+                                <SEO title={`User Feed`} />
                                 <PostsFromUserProvider isBottomReached={isBottomReached} />
                             </>
                         )
@@ -28,4 +28,4 @@ const HomePage = withRunTimeLoaded(
     }
 )
 
-export default HomePage
+export default UserFeedPage

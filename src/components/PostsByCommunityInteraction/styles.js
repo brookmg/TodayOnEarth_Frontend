@@ -4,11 +4,19 @@
 import styled from "styled-components";
 
 
-export const StyledFlexDiv = styled.div`
+export const StyledDisplayFlexDiv = styled.div`
   display: flex;
 `;
 
-export const StyledColumnDiv = styled(StyledFlexDiv)`
+export const StyledFlex1Div = styled.div`
+    flex: 1;
+`;
+
+export const StyledFlex2Div = styled.div`
+    flex: 2;
+`;
+
+export const StyledColumnDiv = styled(StyledDisplayFlexDiv)`
   flex-direction: column;
 `;
 

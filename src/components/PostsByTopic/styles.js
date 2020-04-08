@@ -5,7 +5,15 @@ import styled from "styled-components";
 
 
 export const StyledDisplayFlexDiv = styled.div`
-    display: flex; 
+    display: flex;
+`;
+
+export const StyledFlex1Div = styled.div`
+    flex: 1;
+`;
+
+export const StyledFlex2Div = styled.div`
+    flex: 2;
 `;
 
 export const StyledColumnDiv = styled(StyledDisplayFlexDiv)`

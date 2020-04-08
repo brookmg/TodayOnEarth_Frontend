@@ -9,7 +9,7 @@ import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import AnnouncementIcon from "@material-ui/icons/Announcement";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import PostAddIcon from "@material-ui/icons/PostAdd";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import DnsIcon from "@material-ui/icons/Dns";
 import ExploreIcon from "@material-ui/icons/Explore";
 import HomeIcon from "@material-ui/icons/Home";
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
@@ -37,14 +37,14 @@ const UnStyledNavigationBar = React.forwardRef(({ isMobileNavbarShowing, style, 
     const user = React.useContext(AuthContext);
 
     const linksThatNeedAuth = [
-        { text: `Home`, url: `/home`, icon: <HomeIcon /> },
+        { text: `My Feeds`, url: `/userFeed`, icon: <DnsIcon /> },
         { text: `Create a Post`, url: `/create`, icon: <PostAddIcon /> },
         { text: `Discover`, url: `/userInterest`, icon: <ExploreIcon /> },
     ]
     const links = [
+        { text: `Home`, url: `/today`, icon: <HomeIcon /> },
         ...(isLoggedIn() ? linksThatNeedAuth : []),
         { text: `Archives`, url: `/archives`, icon: <BusinessCenterIcon /> },
-        { text: `Today`, url: `/today`, icon: <CalendarTodayIcon /> },
         { text: `Latest Posts`, url: `/latest`, icon: <AnnouncementIcon /> },
         { text: `Trending Posts`, url: `/trendsByCommunityInteraction`, icon: <TrendingUpIcon /> },
         { text: `Topic Posts`, url: `/trendsByTopic`, icon: <VisibilityIcon /> },

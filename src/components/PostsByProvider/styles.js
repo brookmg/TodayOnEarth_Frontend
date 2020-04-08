@@ -10,6 +10,14 @@ export const StyledDisplayFlexDiv = styled.div`
     display: flex;
 `;
 
+export const StyledFlex1Div = styled.div`
+    flex: 1;
+`;
+
+export const StyledFlex2Div = styled.div`
+    flex: 2;
+`;
+
 export const StyledP = styled.p`
     text-align: center;
 `;
@@ -25,5 +33,8 @@ export const StyledSelect = styled(FormSelect)`
 export const StyledMarginButtonCustom = styled(ButtonCustom)`
     overflow: hidden;
     padding: 0;
-    margin: 0.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    min-width: fit-content;
+    height: 2.5em;
 `;

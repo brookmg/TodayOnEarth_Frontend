@@ -8,6 +8,14 @@ import ThemedCard from "../ThemedCard";
 
 export const StyledThemedCard = styled(ThemedCard)`
     overflow: hidden;
+    transition: box-shadow 0.5s ease-in-out;
+    max-width: 620px;
+    &:hover {
+        box-shadow: 0px 0px 20px 0px #387bfe66;
+    }
+    &:active {
+        box-shadow: 0px 0px 20px 0px #387bfeee;
+    }
 `;
 
 export const StyledDiv = styled.div`

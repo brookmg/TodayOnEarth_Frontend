@@ -9,12 +9,14 @@ import PostMetadata from "../PostMetadata";
 import ParseLinks from "../ParseLinks";
 import ThemedRelevanceChart from "../ThemedRelevanceChart";
 import PostInteraction from "../PostInteraction";
+import ThemePalletteContext from "../../contexts/ThemePalletteContext";
+import Margin from "../CompoundComponents/Margin";
 import { Tooltip } from "shards-react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
 import { StyledRelativeDiv, StyledCenterTextDiv, StyledRoundDiv, StyledImage, StyledDisplayMarginFlex, StyledDisplayFlex } from "./styles";
 import { POST_OPENED_MUTATION, GET_POST_DETAIL } from "./queries";
-import ThemePalletteContext from "../../contexts/ThemePalletteContext";
+import { isLoggedIn } from "../../services/auth";
 
 
 /**
@@ -52,9 +54,6 @@ const PostDetail = withQueryParsedURL(
                     <p>{post.provider}</p>
                 </StyledCenterTextDiv>
                 <div>
-                    <div>
-                        <ThemedRelevanceChart postId={Number(queryParsedURL.id)} />
-                    </div>
                     <StyledDisplayMarginFlex>
                         <PostMetadata sourceLink={post.source_link} communityInteraction={getIfAvailable(post, `metadata.community_interaction`)} />
                     </StyledDisplayMarginFlex>
@@ -97,7 +96,10 @@ const PostDetail = withQueryParsedURL(
                         </div>
                     </>
                 }
-                {post.postid && <PostInteraction postid={post.postid} />}
+                {
+                    post.postid && isLoggedIn() &&
+                    <PostInteraction postid={post.postid} />
+                }
                 <StyledCenterTextDiv>
                     <a
                         href={post.source_link}
@@ -109,6 +111,11 @@ const PostDetail = withQueryParsedURL(
                         {post.source_link}
                     </a>
                 </StyledCenterTextDiv>
+                <Margin top={`1em`}>
+                    <div>
+                        <ThemedRelevanceChart postId={Number(queryParsedURL.id)} />
+                    </div>
+                </Margin>
             </StyledRelativeDiv>
         );
     }

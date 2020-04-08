@@ -49,16 +49,12 @@ const PostInteraction = ({ postid }) => {
     }
     const handleLike = (data) => {
         if (data.postLiked)
-            toast(<UndoMessage text={`Added post to your interests`} onUndo={handleLikeUndo} />, {
-                hideProgressBar: false,
-            })
+            toast(<UndoMessage text={`Added post to your interests`} onUndo={handleLikeUndo} />)
     }
 
     const handleDisLike = (data) => {
         if (data.postDisLiked)
-            toast(<UndoMessage text={`Will not show you posts like this`} onUndo={handleDisLikeUndo} />, {
-                hideProgressBar: false,
-            })
+            toast(<UndoMessage text={`Will not show you posts like this`} onUndo={handleDisLikeUndo} />)
     }
     const [postLiked] = useMutation(POST_LIKED_MUTATION, { onCompleted: handleLike })
     const [postDisLiked] = useMutation(POST_DISLIKED_MUTATION, { onCompleted: handleDisLike })

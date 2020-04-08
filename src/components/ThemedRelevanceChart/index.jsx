@@ -26,7 +26,12 @@ const ThemedRelevanceChart = ({ postId }) => {
             if (data && data.getPostRelevancePerUserInterests) {
                 const newInterests = [];
                 const newScores = [];
-                for (const e of data.getPostRelevancePerUserInterests) {
+
+                const topInterests = data.getPostRelevancePerUserInterests
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 50)
+                    .sort(() => Math.random() - 0.5) // Randomize interest placement on chart
+                for (const e of topInterests) {
                     newInterests.push(e.interest);
                     newScores.push(e.score);
                 }

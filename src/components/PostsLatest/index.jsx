@@ -6,10 +6,11 @@ import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
 import PostHolderCard from "../PostHolderCard";
 import Margin from "../CompoundComponents/Margin";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
+import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { useQuery } from "@apollo/react-hooks";
 import { FormSelect, FormCheckbox } from "shards-react";
 import { getIfAvailable, ellipsedSubstring } from "../../utils";
-import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP } from "./styles";
+import { StyledDisplayFlexDiv, StyledFlex1CenterSpan, StyledP, StyledFlex1Div, StyledFlex2Div } from "./styles";
 import { LATEST_POSTS_QUERY, POST_SUBSCRIPTION } from "./queries";
 
 
@@ -33,6 +34,7 @@ const DEFAULT_POST_SOURCES = {
  */
 const PostsLatest = ({ isBottomReached }) => {
     const theme = React.useContext(ThemePalletteContext);
+    const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const [pageNumber, setPageNumber] = React.useState(0);
     const [postsPerPage, setPostsPerPage] = React.useState(DEFAULT_POST_COUNT_PER_PAGE);
     const [hasMorePosts, setHasMorePosts] = React.useState(true);
@@ -118,50 +120,70 @@ const PostsLatest = ({ isBottomReached }) => {
         resetPosts();
         setPostSources(newSources);
     };
-    return (<div>
-        <h2>Latest Posts</h2>
-        <StyledDisplayFlexDiv>
-            <StyledFlex1CenterSpan>
-                <div>
-                    Feed sources
+    return (
+        <StyledDisplayFlexDiv style={{ flexDirection: isDesktopOrLaptop ? `row-reverse` : `column` }}>
+            <StyledFlex1Div>
+                <Margin horizontal={`1em`}>
+                    <div style={
+                        isDesktopOrLaptop ? {
+                            position: `fixed`,
+                            height: `80%`,
+                            padding: `1em`,
+                            overflowY: `auto`,
+                            bottom: 0,
+                            right: 0,
+                            width: `30vw`
+                        } : {}
+                    }>
+                        <h2>Latest Posts</h2>
+                        <StyledDisplayFlexDiv>
+                            <StyledFlex1CenterSpan>
+                                <div>
+                                    Feed sources
                 </div>
-                <span>
-                    {Object.keys(postSources).map(e => <FormCheckbox inline key={e} checked={!!postSources[e]} onChange={ev => handlePostSourceChange(ev, e)}>
-                        {e}
-                    </FormCheckbox>)}
-                </span>
-            </StyledFlex1CenterSpan>
+                                <span>
+                                    {Object.keys(postSources).map(e => <FormCheckbox inline key={e} checked={!!postSources[e]} onChange={ev => handlePostSourceChange(ev, e)}>
+                                        {e}
+                                    </FormCheckbox>)}
+                                </span>
+                            </StyledFlex1CenterSpan>
 
-            <div>
-                <label>
-                    Posts per page:
+                            <div>
+                                <label>
+                                    Posts per page:
                     <FormSelect size={`sm`} onChange={handlePostsPerPageChange}>
-                        {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (<option key={i} value={e}>
-                            {e}
-                        </option>))}
-                    </FormSelect>
-                </label>
-            </div>
-        </StyledDisplayFlexDiv>
-        <Margin top={`1em`}>
-            <StyledP style={{
-                color: theme.color_text_faded
-            }}>
-                - New posts will be displayed here in real-time -
+                                        {[DEFAULT_POST_COUNT_PER_PAGE, 10, 20, 100].map((e, i) => (<option key={i} value={e}>
+                                            {e}
+                                        </option>))}
+                                    </FormSelect>
+                                </label>
+                            </div>
+                        </StyledDisplayFlexDiv>
+                    </div>
+                </Margin>
+            </StyledFlex1Div>
+            <StyledFlex2Div>
+                <Margin top={`1em`}>
+                    <StyledP style={{
+                        color: theme.color_text_faded
+                    }}>
+                        - New posts will be displayed here in real-time -
         </StyledP>
-        </Margin>
+                </Margin>
 
-        {posts && posts.length !== 0 &&
-            posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
-                getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
-            } metadata={p.metadata} />)}
-        {loading && <p>Loading Posts...</p>}
-        {error && <p>Error: ${error.message}</p>}
-        {!hasMorePosts &&
-            <StyledP>
-                You have seen all the posts <EmojiEmotionsSharpIcon />
-            </StyledP>}
-    </div>);
+                {posts && posts.length !== 0 &&
+                    posts.map(p => <PostHolderCard key={p.source_link} id={p.postid} title={ellipsedSubstring(p.title, 200)} body={p.body} sourceLink={p.source_link} imgSrc={getIfAvailable(p, `metadata.message.image.src`) || // Telegram images
+                        getIfAvailable(p, `metadata.post.thumbnail_image`) // Instagram images
+                    } metadata={p.metadata} />)}
+                {loading && <p>Loading Posts...</p>}
+                {error && <p>Error: ${error.message}</p>}
+                {!hasMorePosts &&
+                    <StyledP>
+                        You have seen all the posts <EmojiEmotionsSharpIcon />
+                    </StyledP>}
+            </StyledFlex2Div>
+        </StyledDisplayFlexDiv>
+    );
 };
 
 export default PostsLatest
