@@ -107,14 +107,15 @@ const SignUp = ({ email, first_name, last_name, username, google_id, facebook_id
                         Password
                         <FormInput type={`password`} name={`password`} onChange={handleUpdate} />
                     </div>
+                    <div>
+                        <Margin vertical={`1em`} right={`1em`}>
+                            <ButtonSuccess onClick={handleSignUpClick}>Sign Up</ButtonSuccess><br />
+                            <AnchorButton url={`/app/login`} onClick={handleSignInClick}>Already have an account? Log in here</AnchorButton>
+                        </Margin>
+                    </div>
                 </StyledFlex1Div>
             </StyledDisplayFlexDiv>
 
-
-            <Margin vertical={`1em`} right={`1em`}>
-                <ButtonSuccess onClick={handleSignUpClick}>Sign Up</ButtonSuccess><br />
-                <AnchorButton url={`/app/login`} onClick={handleSignInClick}>Already have an account? Log in here</AnchorButton>
-            </Margin>
         </div>
     </>);
 };
