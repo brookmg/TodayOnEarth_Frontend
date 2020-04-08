@@ -25,5 +25,8 @@ export const StyledSelect = styled(FormSelect)`
 export const StyledMarginButtonCustom = styled(ButtonCustom)`
     overflow: hidden;
     padding: 0;
-    margin: 0.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    min-width: fit-content;
+    height: 2.5em;
 `;
