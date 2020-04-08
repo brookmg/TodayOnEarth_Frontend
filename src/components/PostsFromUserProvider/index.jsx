@@ -1,5 +1,5 @@
 /**
- * This component is refactored from the "/home" page
+ * This component is refactored from the "/userFeed" page
  */
 import React from "react";
 import EmojiEmotionsSharpIcon from "@material-ui/icons/EmojiEmotionsSharp";
