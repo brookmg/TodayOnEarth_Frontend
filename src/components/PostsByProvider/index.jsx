@@ -53,7 +53,7 @@ export const PostsByProvider = ({ isBottomReached }) => {
     })
     const handleSourceChange = (ev) => setSourceText(ev.target.value)
     const handleProviderChange = (ev) => setProviderText(ev.target.value)
-    const handleSearchClick = () => {
+    const handleSearch = () => {
         resetPosts()
         loadPostsWithHooks()
     }
@@ -86,6 +86,12 @@ export const PostsByProvider = ({ isBottomReached }) => {
         setPostsPerPage(count);
         loadPostsWithHooks(count)
     };
+    const handleKeyDown = (e) => {
+        if (e.key === `Enter` || e.key === ` `) {
+            handleSearch()
+            e.preventDefault();
+        }
+    };
     return (
         <div>
             <h2>Posts by Provider</h2>
@@ -98,9 +104,9 @@ export const PostsByProvider = ({ isBottomReached }) => {
                             })
                         }
                     </StyledSelect>
-                    <FormInput value={providerText} onChange={handleProviderChange} size={`sm`} placeholder={`Provider Name`} />
+                    <FormInput value={providerText} onKeyDown={handleKeyDown} onChange={handleProviderChange} size={`sm`} placeholder={`Provider Name`} />
                     <StyledMarginButtonCustom
-                        onClick={handleSearchClick}
+                        onClick={handleSearch}
                         borderColor={theme.color_background}
                         backgroundColor={theme.color_background}
                         color={theme.color_text}>
