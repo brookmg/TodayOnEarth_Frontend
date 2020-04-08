@@ -3,10 +3,12 @@
  */
 import React from "react";
 import { navigate } from "gatsby";
+import { isBrowser } from "../utils";
 
 
 const IndexPage = () => {
-    navigate(`/today`)
+    if (isBrowser())
+        navigate(`/today`)
     return (<></>)
 }
 
