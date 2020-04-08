@@ -29,7 +29,7 @@ const PostHolderCard = ({ imgSrc, id, title, body, sourceLink, metadata }) => {
     const theme = React.useContext(ThemePalletteContext)
 
     return (
-        <Margin vertical={`1rem`}>
+        <Margin vertical={`1rem`} horizontal={`auto`}>
             <StyledThemedCard style={{
                 borderTopLeftRadius: imgSrc && `5rem`,
             }}>
