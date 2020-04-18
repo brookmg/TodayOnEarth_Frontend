@@ -12,13 +12,16 @@ import "react-toastify/dist/ReactToastify.css";
 import ThemePalletteContext from "../../contexts/ThemePalletteContext";
 import NavigationBar from "../NavigationBar";
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
+import AnchorButton from "../AnchorButton";
+import AuthContext from "../../contexts/AuthContext";
 import { useStaticQuery, graphql } from "gatsby";
+import { useMutation } from "@apollo/react-hooks";
 import { toast } from "react-toastify";
 import { useSubscription } from "@apollo/react-hooks";
 import { intializeClickEffect } from "../ClickEffect";
 import { isBrowser } from "../../utils";
-import { StyledToastContainer, StyledCanvas, StyledFlexDirectionRowDiv, StyledFlex3OverflowYDiv, StyledHeaderDiv } from "./styles";
-import { POSTS_SUBSCRIPTION } from "./queries";
+import { StyledToastContainer, StyledCanvas, StyledFlexDirectionRowDiv, StyledFlex3OverflowYDiv, StyledHeaderDiv, StyledRedTextDiv } from "./styles";
+import { POSTS_SUBSCRIPTION, RESEND_VERIFICATION_EMAIL } from "./queries";
 
 
 /* Previous frame's scroll position */
@@ -33,6 +36,7 @@ let prevScrollValue = -1;
  */
 const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopComponent }) => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext)
+    const [resendVerificationEmail] = useMutation(RESEND_VERIFICATION_EMAIL)
 
     const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -44,6 +48,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
     }
   `)
     const theme = React.useContext(ThemePalletteContext)
+    const user = React.useContext(AuthContext);
     const scrollDivRef = React.createRef()
     const canvasRef = React.createRef()
     const [isBottomReached, setIsBottomReached] = React.useState(false)
@@ -76,7 +81,6 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                     if (isBrowser()) window.location.href = `/p?id=${postAdded.postid}`
                 }
 
-
                 const notificationTitle = `New Post Found`
                 const notificationBody = { body: postAdded.title }
                 if (postAdded.title) {
@@ -108,6 +112,16 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
     }
     );
 
+    const handleResendEmailClick = async () => {
+        if (!isBrowser()) return
+        await resendVerificationEmail()
+            .then(e => toast(`Verification message resent`, {
+                type: toast.TYPE.SUCCESS
+            }))
+            .catch(err =>
+                window.alert(`Could not resend verification email:\n\n${err.message}`))
+    }
+    const isUserVerified = user.is_verified
 
     return (
         <>
@@ -138,6 +152,14 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                         }}
                     >
                         <main>
+                            {
+                                (user && !isUserVerified) &&
+                                <StyledRedTextDiv>
+                                    <p>You have not verified your email address!{" "}
+                                        <AnchorButton onClick={handleResendEmailClick}>Click here to resend email</AnchorButton>
+                                    </p>
+                                </StyledRedTextDiv>
+                            }
                             {
                                 (
                                     render &&

@@ -59,6 +59,7 @@ query getUserInfo{
     github_id
     linkedin_id
     telegram_id
+    is_verified
   }
 }
 

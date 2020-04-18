@@ -13,3 +13,10 @@ subscription{
   }
 }
 `;
+
+export const RESEND_VERIFICATION_EMAIL = gql`
+
+mutation{
+  sendVerification
+}
+`;
