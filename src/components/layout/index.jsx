@@ -19,6 +19,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { toast } from "react-toastify";
 import { useSubscription } from "@apollo/react-hooks";
 import { intializeClickEffect } from "../ClickEffect";
+import { isLoggedIn } from "../../services/auth";
 import { isBrowser } from "../../utils";
 import { StyledToastContainer, StyledCanvas, StyledFlexDirectionRowDiv, StyledFlex3OverflowYDiv, StyledHeaderDiv, StyledRedTextDiv } from "./styles";
 import { POSTS_SUBSCRIPTION, RESEND_VERIFICATION_EMAIL } from "./queries";
@@ -153,7 +154,7 @@ const Layout = ({ render, children, rightSideDesktopComponent, leftSideDesktopCo
                     >
                         <main>
                             {
-                                (user && !isUserVerified) &&
+                                (isLoggedIn() && !isUserVerified) &&
                                 <StyledRedTextDiv>
                                     <p>You have not verified your email address!{" "}
                                         <AnchorButton onClick={handleResendEmailClick}>Click here to resend email</AnchorButton>
