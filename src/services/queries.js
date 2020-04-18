@@ -54,6 +54,11 @@ query getUserInfo{
     phone_number
     country
     last_location
+    facebook_id
+    twitter_id
+    github_id
+    linkedin_id
+    telegram_id
   }
 }
 
