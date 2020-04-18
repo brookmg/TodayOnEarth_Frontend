@@ -18,19 +18,16 @@ import { StyledDisplayFlexDiv, StyledFlex1Div, StyledFlexColumn3Div, StyledDispl
 import { CREATE_POST_MUTATION } from "./queries";
 
 
-/* What platforms are available to post on by default */
-const DEFAULT_PLATFORMS_TO_POST_ON = {
-    'Telegram': true,
-    'Facebook': true,
-    'Instagram': false,
-    'LinkedIn': true,
-    'Twitter': true,
-};
-
 const CreatePost = () => {
     const user = React.useContext(AuthContext);
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
-    const [platformToPostOn, setPlatformToPostOn] = React.useState(DEFAULT_PLATFORMS_TO_POST_ON);
+    const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
+    const [platformToPostOn, setPlatformToPostOn] = React.useState({
+        'Telegram': user.telegram_id,
+        'Facebook': user.facebook_id,
+        'LinkedIn': user.linkedin_id,
+        'Twitter': user.twitter_id,
+    });
     const [postText, setPostText] = React.useState(``);
     const [telegramChannel, setTelegramChannel] = React.useState(``);
     const [facebookPageURL, setFacebookPageURL] = React.useState(``);
@@ -56,6 +53,18 @@ const CreatePost = () => {
     const handleEmojiSelect = (emoji) => setPostText(`${postText}${emoji.native}`);
     const handlePostSourceChange = (ev, name) => {
         const isChecked = platformToPostOn[name];
+        const platformLowerCase = name.toLowerCase()
+        if (isBrowser() && !isChecked && !user[`${platformLowerCase}_id`]) {
+            // Before this gets checked, prompt user to connect social media
+            const wantsToConnectNow = window.confirm(`You can't post on platforms you didn't connect to!\n\nWould you like to connect your "${name}" account now?`)
+
+            if (wantsToConnectNow) {
+                const authUrl = `${authEndpoint}/${platformLowerCase}`
+                window.open(authUrl, `_blank`)
+            }
+
+            return
+        }
         const newSources = { ...platformToPostOn, [name]: !isChecked };
         const currentKeys = Object.keys(newSources);
         if (currentKeys.length === 0)
