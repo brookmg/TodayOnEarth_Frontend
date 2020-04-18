@@ -38,10 +38,10 @@ const SignIn = () => {
     const handleSignUp = () => { navigate(`/signup`) }
     const handleForgotPass = async () => {
         if (isBrowser()) {
-            const email = window.prompt("Forgot Password?\n\nWhat email should password recovery instructions be sent to?", user.email)
+            const email = window.prompt(`Forgot Password?\n\nWhat email should password recovery instructions be sent to?`, user.email)
             if (email)
                 await resetPassword({ variables: { email } })
-                    .then(() => window.alert("Password reset instructions sent successfully!"))
+                    .then(() => window.alert(`Password reset instructions sent successfully!`))
                     .catch(err => window.alert(`Password reset failed!\n\n${err.message}`))
 
         }
