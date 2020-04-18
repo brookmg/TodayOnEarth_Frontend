@@ -123,7 +123,7 @@ export const PostsByProvider = ({ isBottomReached }) => {
                                 borderColor={theme.color_background}
                                 backgroundColor={theme.color_background}
                                 color={theme.color_text}>
-                                <Margin vertical="0.25em" horizontal="0.25em">
+                                <Margin vertical={`0.25em`} horizontal={`0.25em`}>
                                     <div>
                                         Search
                             </div>

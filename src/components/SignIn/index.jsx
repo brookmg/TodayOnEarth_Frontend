@@ -8,10 +8,13 @@ import AnchorButton from "../AnchorButton";
 import ButtonSignInWith from "../ButtonSignInWith";
 import ButtonSuccess from "../ButtonSuccess";
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
+import { useMutation } from "@apollo/react-hooks";
 import { handleSignIn, isLoggedIn } from "../../services/auth";
 import { FormInput } from "shards-react";
 import { navigate } from "gatsby";
 import { StyledDisplayFlexDiv, StyledForm, StyledFlex1MarginDiv } from "./styles";
+import { isBrowser } from "../../utils";
+import { RESET_PASSWORD } from "./queries";
 
 
 const SignIn = () => {
@@ -19,6 +22,7 @@ const SignIn = () => {
 
     const auth = React.useContext(AuthContext)
     const [user, setUser] = React.useState({})
+    const [resetPassword] = useMutation(RESET_PASSWORD);
 
     const handleUpdate = event =>
         setUser({ ...user, [event.target.name]: event.target.value, })
@@ -32,6 +36,16 @@ const SignIn = () => {
             .catch(e => alert(e.message))
     }
     const handleSignUp = () => { navigate(`/signup`) }
+    const handleForgotPass = async () => {
+        if (isBrowser()) {
+            const email = window.prompt(`Forgot Password?\n\nWhat email should password recovery instructions be sent to?`, user.email)
+            if (email)
+                await resetPassword({ variables: { email } })
+                    .then(() => window.alert(`Password reset instructions sent successfully!`))
+                    .catch(err => window.alert(`Password reset failed!\n\n${err.message}`))
+
+        }
+    }
 
     if (isLoggedIn()) {
         navigate(`/app/profile`)
@@ -57,7 +71,9 @@ const SignIn = () => {
                             onChange={handleUpdate}
                         />
                         <ButtonSuccess type={`submit`}> Log In </ButtonSuccess>
-                        <AnchorButton url={`/signup`} onClick={handleSignUp}>Dont have an account? Sign up here</AnchorButton>
+                        <AnchorButton onClick={handleForgotPass}>Forgot Password?</AnchorButton>
+                        <span> | </span>
+                        <AnchorButton url={`/signup`} onClick={handleSignUp}>Don't have an account? Sign up here</AnchorButton>
 
                     </Margin>
                 </StyledForm>
