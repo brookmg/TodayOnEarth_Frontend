@@ -39,7 +39,7 @@ const PasswordReset = ({ token }) => {
         <div>
             <StyledCenteredDiv>
                 <h1>Password Reset</h1>
-                <FormInput type="password" placeholder={`New Password`} onChange={handleNewPasswordChange} />
+                <FormInput type={`password`} placeholder={`New Password`} onChange={handleNewPasswordChange} />
                 <Margin vertical={`1rem`}>
                     <ButtonSuccess onClick={handleChangePasswordClicked}>Change Password</ButtonSuccess>
                 </Margin>
