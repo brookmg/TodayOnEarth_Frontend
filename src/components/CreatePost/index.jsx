@@ -23,10 +23,10 @@ const CreatePost = () => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
     const [platformToPostOn, setPlatformToPostOn] = React.useState({
-        'Telegram': user.telegram_id,
-        'Facebook': user.facebook_id,
-        'LinkedIn': user.linkedin_id,
-        'Twitter': user.twitter_id,
+        'Telegram': Boolean(user.telegram_id),
+        'Facebook': Boolean(user.facebook_id),
+        'LinkedIn': Boolean(user.linkedin_id),
+        'Twitter': Boolean(user.twitter_id),
     });
     const [postText, setPostText] = React.useState(``);
     const [telegramChannel, setTelegramChannel] = React.useState(``);
@@ -48,7 +48,9 @@ const CreatePost = () => {
                 channel: telegramChannel,
                 pageUrl: facebookPageURL,
             }
-        });
+        })
+            .then(e => alert(`Posted successfully!`))
+            .catch(err => alert(`Posting failed!\n\n${err}`))
     };
     const handleEmojiSelect = (emoji) => setPostText(`${postText}${emoji.native}`);
     const handlePostSourceChange = (ev, name) => {
