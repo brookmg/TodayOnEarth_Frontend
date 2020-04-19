@@ -64,3 +64,16 @@ query getUserInfo{
 }
 
 `;
+
+/**
+ * Query used to fetch auth token. Will return null for non-logged in users
+ */
+export const GET_AUTH_TOKEN = gql`
+
+query getToken {
+  getCurrentUserToken {
+    token
+  }
+}
+
+`;

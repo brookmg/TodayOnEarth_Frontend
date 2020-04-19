@@ -9,7 +9,7 @@ import ButtonSignInWith from "../ButtonSignInWith";
 import ButtonSuccess from "../ButtonSuccess";
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { useMutation } from "@apollo/react-hooks";
-import { handleSignIn, isLoggedIn } from "../../services/auth";
+import { handleSignIn, isLoggedIn, refreshToken } from "../../services/auth";
 import { FormInput } from "shards-react";
 import { navigate } from "gatsby";
 import { StyledDisplayFlexDiv, StyledForm, StyledFlex1MarginDiv } from "./styles";
@@ -47,9 +47,13 @@ const SignIn = () => {
         }
     }
 
-    if (isLoggedIn()) {
-        navigate(`/app/profile`)
-    }
+    // Redirect to profile page if GQL session is established. 
+    // This is typically used during 3rd party auth
+    refreshToken().then(e => {
+        if (isLoggedIn()) {
+            navigate(`/app/profile`)
+        }
+    })
 
     const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
 
