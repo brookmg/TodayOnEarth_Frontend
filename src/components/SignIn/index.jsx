@@ -9,6 +9,7 @@ import ButtonSignInWith from "../ButtonSignInWith";
 import ButtonSuccess from "../ButtonSuccess";
 import ScreenSizeContext from "../../contexts/ScreenSizeContext";
 import { useMutation } from "@apollo/react-hooks";
+import { toast } from "react-toastify";
 import { handleSignIn, isLoggedIn, refreshToken } from "../../services/auth";
 import { FormInput } from "shards-react";
 import { navigate } from "gatsby";
@@ -50,6 +51,7 @@ const SignIn = () => {
     // Redirect to profile page if GQL session is established. 
     // This is typically used during 3rd party auth
     React.useEffect(() => {
+        toast(`Loading...`)
         refreshToken().then(e => {
             if (isLoggedIn()) {
                 navigate(`/app/profile`)
