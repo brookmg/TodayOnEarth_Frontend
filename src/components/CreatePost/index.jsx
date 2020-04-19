@@ -68,21 +68,6 @@ const CreatePost = () => {
             return
         }
         const newSources = { ...platformToPostOn, [name]: !isChecked };
-        const currentKeys = Object.keys(newSources);
-        if (currentKeys.length === 0)
-            return;
-        let isSomethingChecked = false;
-        for (const e of currentKeys) {
-            if (newSources[e]) {
-                isSomethingChecked = true;
-                break;
-            }
-        }
-        if (!isSomethingChecked) {
-            for (const e of currentKeys)
-                if (e !== name)
-                    newSources[e] = true;
-        }
         setPlatformToPostOn(newSources);
     };
     if (isBrowser() && !isLoggedIn())
