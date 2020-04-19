@@ -4,7 +4,7 @@
 import cookie from "react-cookies";
 import { client } from "../apollo/client";
 import { isBrowser } from "../utils";
-import { GET_USER, SIGN_IN_USER, SIGN_OUT_USER, SIGN_UP_USER } from "./queries";
+import { GET_USER, SIGN_IN_USER, SIGN_OUT_USER, SIGN_UP_USER, GET_AUTH_TOKEN } from "./queries";
 
 /** Cookie used for session info */
 const sessionCookieName = `userId`
