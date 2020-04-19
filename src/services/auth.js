@@ -49,6 +49,25 @@ export const handleSignIn = ({ email, password }) => {
 }
 
 /**
+ * Fetches current the current session's auth token and saves it in a cookie  
+ * @returns {Promise} Resolves with auth token successful
+ */
+export const refreshToken = () => {
+    return new Promise((resolve, reject) => {
+        client
+            .query({
+                query: GET_AUTH_TOKEN
+            }).then(e => {
+                cookie.save(sessionCookieName, e.data.getCurrentUserToken.token,
+                    { path: `/` }
+                )
+                client.resetStore()
+                resolve(e)
+            }).catch(e => reject(e))
+    })
+}
+
+/**
  * Checks if user is logged in.
  * Note: For the sake of speed and UX, the check is done on just the client side (without server-side verification)
  * @returns {boolean} True if user is logged in
