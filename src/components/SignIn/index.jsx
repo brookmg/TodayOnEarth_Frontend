@@ -49,11 +49,13 @@ const SignIn = () => {
 
     // Redirect to profile page if GQL session is established. 
     // This is typically used during 3rd party auth
-    refreshToken().then(e => {
-        if (isLoggedIn()) {
-            navigate(`/app/profile`)
-        }
-    })
+    React.useEffect(() => {
+        refreshToken().then(e => {
+            if (isLoggedIn()) {
+                navigate(`/app/profile`)
+            }
+        })
+    }, [])
 
     const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
 
