@@ -1,7 +1,8 @@
 /**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
+ * Enables dynamic routes for the following pages:
+ * 1. /p - single post detail
+ * 2. /search - search filters can be shared
+ * 3. /app - parent for auth protected routes
  */
 
 
@@ -11,15 +12,15 @@ exports.onCreatePage = async ({ page, actions }) => {
     const dynamicRoutes = [
         {
             routeMatchTestRegEx: /^\/p/,
-            routeMatchPathRegEx: "/p/*"
+            routeMatchPathRegEx: `/p/*`
         },
         {
             routeMatchTestRegEx: /^\/search/,
-            routeMatchPathRegEx: "/search/*"
+            routeMatchPathRegEx: `/search/*`
         },
         {
             routeMatchTestRegEx: /^\/app/,
-            routeMatchPathRegEx: "/app/*"
+            routeMatchPathRegEx: `/app/*`
         },
     ]
 

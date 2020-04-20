@@ -3,6 +3,6 @@
  *
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
-import wrapRootElement from "./wrapRootElement"
+import wrapRootElement from "./wrapRootElement";
 
 export {wrapRootElement}
