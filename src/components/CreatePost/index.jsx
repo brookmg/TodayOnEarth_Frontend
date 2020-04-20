@@ -23,29 +23,26 @@ const CreatePost = () => {
     const isDesktopOrLaptop = React.useContext(ScreenSizeContext);
     const authEndpoint = process.env.GATSBY_AUTH_ENDPOINT
     const [platformToPostOn, setPlatformToPostOn] = React.useState({
-        'Telegram': Boolean(user.telegram_id),
         'Facebook': Boolean(user.facebook_id),
         'LinkedIn': Boolean(user.linkedin_id),
         'Twitter': Boolean(user.twitter_id),
     });
     const [postText, setPostText] = React.useState(``);
-    const [telegramChannel, setTelegramChannel] = React.useState(``);
     const [facebookPageURL, setFacebookPageURL] = React.useState(``);
     const [fileToUpload, setFileToUpload] = React.useState(null);
     const [createPost, { data }] = useMutation(CREATE_POST_MUTATION);
     const handlePostTextChange = (e) => setPostText(e.target.value);
-    const handleTelegramChannelChange = (e) => setTelegramChannel(e.target.value);
     const handleFacebookPageURLChange = (e) => setFacebookPageURL(e.target.value);
     const handlePostClick = () => {
         createPost({
             variables: {
                 text: postText,
                 upload: fileToUpload,
-                telegram: platformToPostOn.Telegram,
+                telegram: false,
                 linkedin: platformToPostOn.LinkedIn,
                 twitter: platformToPostOn.Twitter,
                 facebook: platformToPostOn.Facebook,
-                channel: telegramChannel,
+                channel: "",
                 pageUrl: facebookPageURL,
             }
         })
@@ -87,8 +84,6 @@ const CreatePost = () => {
                         {e}
                     </FormCheckbox>)}
                     <Margin vertical={`0.25em`}>
-                        {platformToPostOn.Telegram &&
-                            <FormInput placeholder={`Telegram channel`} onChange={handleTelegramChannelChange} />}
                         {platformToPostOn.Facebook &&
                             <FormInput placeholder={`Facebook page URL`} onChange={handleFacebookPageURLChange} />}
                     </Margin>
